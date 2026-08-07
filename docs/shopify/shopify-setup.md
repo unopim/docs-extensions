@@ -68,7 +68,9 @@ You need to enable **read and write** access for the following. Use the copy but
   { name: 'Sales Channel', permissions: ['write_channels', 'read_channels'] },
   { name: 'Location', permissions: ['write_locations', 'read_locations'] },
   { name: 'Publications', permissions: ['write_publications', 'read_publications'] },
-  { name: 'Files', permissions: ['write_files', 'read_files'] }
+  { name: 'Files', permissions: ['write_files', 'read_files'] },
+  { name: 'Metaobject definitions', permissions: ['write_metaobject_definitions', 'read_metaobject_definitions'] },
+  { name: 'Metaobjects', permissions: ['write_metaobjects', 'read_metaobjects'] }
 ]" />
 
 ![Shopify select scopes](./images/read-write.png)

@@ -8,7 +8,7 @@ Once the connector is installed, the next step is to connect your Shopify store 
 
 After installation, you'll notice a new **Shopify icon** in the left sidebar of your UnoPim dashboard. Click on it to open the connector.
 
-![Shopify Connector Icon](./images/Shopify-installed.png)
+![Shopify Connector Icon](./images/verify-installation.png)
 
 ---
 
