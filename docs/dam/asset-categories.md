@@ -18,7 +18,7 @@ Navigate to the category you want to add assets to. In the category edit screen,
 
 Click the **Add Assets** button. The asset picker will open, showing all the assets available across your directories.
 
-![Asset Picker](./assets/category-asset/assign.png)
+![Asset Picker](./assets/product-asset/asset-picker-new.png)
 
 You can:
 

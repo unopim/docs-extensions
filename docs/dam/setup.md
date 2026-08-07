@@ -34,6 +34,23 @@ User permissions control what actions each user can perform within UnoPim DAM.
 
 **Tip:** Create different roles for different user types (e.g., Admin, Editor, Viewer) to manage access control effectively.
 
+### Available DAM Permissions
+
+| Group | Permissions |
+|---|---|
+| **Asset** | View, Edit, Update, Upload, Re-Upload, Delete, Mass Delete, Download, Download Zip, Rename, Move, Share |
+| **Property** | View, Create, Update, Delete |
+| **Comment** | View, Create, Edit, Delete |
+| **Embedded Meta Info** | Controls whether the [Metadata tab](./asset-preview.md#metadata) is visible |
+| **Linked Resources** | View the products and categories an asset is used on |
+| **Directory** | View, Create, Rename, Delete, Copy Directory Structure, Download Zip, Move, Share |
+| **Shared Links** | View, Revoke, Delete — see [Shared Links](./shared-links.md) |
+| **Tags** | Create, Update, Delete — see [Managing Tags](./tags.md) |
+| **DAM Configuration** | View, Edit — see [Configuration](./configuration.md) |
+
+> [!TIP]
+> Permissions control **what** a role can do. To control **where** — restricting a role to particular folders — see [Directory Permissions](./directory-permissions.md). The directory permissions panel appears on this same role screen, but only when the permission type is set to **Custom**.
+
 ---
 
 ## Create Product Asset Attribute
@@ -106,9 +123,7 @@ Category asset fields allow you to attach digital assets to your product categor
 
 5. When creating categories, you will now find the new category asset field available for use
 
-
 ![Category Asset Field](./assets/setup/categoryAsset.png)
-
 
 **Once created:** You can use the category asset field to attach digital assets directly to your product categories.
 

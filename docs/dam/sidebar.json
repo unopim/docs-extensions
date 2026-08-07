@@ -4,44 +4,83 @@
     "items": [
       { "text": "Overview", "link": "/dam/" },
       { "text": "Installation", "link": "/dam/installation" },
-      { "text": "Setup DAM", "link": "/dam/setup" }
+      { "text": "Upgrading DAM", "link": "/dam/upgrading" },
+      { "text": "Setup DAM", "link": "/dam/setup" },
+      { "text": "Configuration", "link": "/dam/configuration" }
     ]
   },
 
   {
-    "text" : "Managing Directories and Assets",
+    "text": "Managing Directories and Assets",
     "items": [
       { "text": "Directory & Asset Management", "link": "/dam/directory-and-asset-management" },
-      {"text" : "Asset Products" , "link": "/dam/asset-products" },
-      {"text" : "Asset Categories" , "link": "/dam/asset-categories" }
+      { "text": "Uploading Assets", "link": "/dam/uploading-assets" },
+      { "text": "Previewing Assets", "link": "/dam/asset-preview" },
+      { "text": "Image Editor", "link": "/dam/image-editor" },
+      { "text": "Managing Tags", "link": "/dam/tags" },
+      { "text": "Explorer View", "link": "/dam/explorer" },
+      { "text": "Background Operations", "link": "/dam/background-operations" }
     ]
   },
 
   {
-    "text" : "Export Assets",
+    "text": "Sharing and Permissions",
     "items": [
-      {"text" : "Exporting Assets with Product & Categories" , "link": "/dam/export-assets" },
-      {"text" : "DAM Asset Migration to AWS S3" , "link": "/dam/dam-asset-migration-to-aws-s3" }
+      { "text": "Shared Links", "link": "/dam/shared-links" },
+      { "text": "Directory Permissions", "link": "/dam/directory-permissions" }
     ]
   },
 
   {
-"text" : "DAM API Resources",
-"items": [
-  {"text" : "API Reference" , "link": "/dam/api-reference" },
-  {"text" : "Assets" , "link": "/dam/assets" },
-  {"text" : "Directories", "link": "/dam/directories" },
-  {"text" : "Comments", "link": "/dam/comments" },
-  {"text" : "Properties", "link": "/dam/property" },
-  {"text" : "Tag", "link": "/dam/tag" },
-  {"text" : "Linked Resources", "link": "/dam/linked-resources" }
-]
+    "text": "Assets in the Catalog",
+    "items": [
+      { "text": "Asset Products", "link": "/dam/asset-products" },
+      { "text": "Asset Categories", "link": "/dam/asset-categories" },
+      { "text": "Product Bulk Edit", "link": "/dam/product-bulk-edit" }
+    ]
   },
 
   {
-    "text" : "Support",
+    "text": "Import, Export & Migration",
     "items": [
-      {"text" : "Contact Support" , "link": "/dam/contact-support" }
+      { "text": "Importing Products & Categories with Assets", "link": "/dam/import-assets" },
+      { "text": "Exporting Assets with Product & Categories", "link": "/dam/export-assets" },
+      { "text": "DAM Asset Migration to AWS S3", "link": "/dam/dam-asset-migration-to-aws-s3" }
+    ]
+  },
+
+  {
+    "text": "Command Line",
+    "items": [
+      { "text": "Artisan Commands", "link": "/dam/commands" }
+    ]
+  },
+
+  {
+    "text": "DAM API Resources",
+    "items": [
+      { "text": "API Reference", "link": "/dam/api-reference" },
+      { "text": "Assets", "link": "/dam/assets" },
+      { "text": "Directories", "link": "/dam/directories" },
+      { "text": "Comments", "link": "/dam/comments" },
+      { "text": "Properties", "link": "/dam/property" },
+      { "text": "Tag", "link": "/dam/tag" },
+      { "text": "Shares", "link": "/dam/shares" },
+      { "text": "Linked Resources", "link": "/dam/linked-resources" }
+    ]
+  },
+
+  {
+    "text": "Developers",
+    "items": [
+      { "text": "Extending DAM", "link": "/dam/extending-dam" }
+    ]
+  },
+
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support" , "link": "/dam/contact-support" }
     ]
   }
 ]

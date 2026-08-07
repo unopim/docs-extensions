@@ -5,6 +5,8 @@
   "type": "module",
   "description": "Centralized documentation site for Unopim extensions",
   "scripts": {
+    "test": "node --test tests/",
+    "docs:check": "npm run docs:build && npm test",
     "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
