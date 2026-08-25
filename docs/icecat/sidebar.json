@@ -2,7 +2,10 @@
   {
     "text": "Icecat",
     "items": [
-      { "text": "Overview", "link": "/icecat/" }
+      { "text": "Overview",     "link": "/icecat/" },
+      { "text": "Installation", "link": "/icecat/installation" },
+      { "text": "Configuration","link": "/icecat/configuration" },
+      { "text": "Usage",        "link": "/icecat/usage" }
     ]
   }
 ]
