@@ -205,8 +205,12 @@
 }
 
 
-.VPFeature.link[data-v-549c013f]:hover {
+.VPFeature.link:hover {
   border-color: var(--vp-c-brand) !important;
+}
+
+.link-text-value {
+  color: var(--vp-c-brand) !important;
 }
 
 

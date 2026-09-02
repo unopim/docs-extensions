@@ -32,6 +32,7 @@ const projects = [
   { slug: 'erpnext', label: 'ERPNext' },
   { slug: 'google-shopping', label: 'Google Shopping' },
   { slug: 'history-preview', label: 'History Preview' },
+  { slug: 'icecat', label: 'Icecat' },
   { slug: 'job-scheduler', label: 'Job Scheduler' },
   { slug: 'maker-checker-workflow', label: 'Maker Checker Workflow' },
   { slug: 'magento2', label: 'Magento 2' },

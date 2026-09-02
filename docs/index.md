@@ -80,6 +80,10 @@ features:
     details: View and compare previous versions of product data directly within UnoPim.
     link: /history-preview/
     linkText: Read docs
+  - title: Icecat
+    details: Enrich product data automatically with Icecat's global product content library.
+    link: /icecat/
+    linkText: Read docs
   - title: Job Scheduler
     details: Automate import and export tasks.
     link: /job-scheduler/
