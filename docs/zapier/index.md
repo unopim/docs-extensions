@@ -1,6 +1,6 @@
 # Zapier Connector
 
-The **UnoPim Zapier Connector** puts your catalog on [Zapier](https://zapier.com). A product, category, attribute or family change in UnoPim starts a workflow in any of the thousands of apps Zapier integrates with - Slack, Google Sheets, Shopify, Asana, Mailchimp, HubSpot, Airtable - without writing an integration per tool.
+The **UnoPim Zapier Connector** puts your catalog on [Zapier](https://zapier.com/apps/unopim/integrations). A product, category, attribute or family change in UnoPim starts a workflow in any of the thousands of apps Zapier integrates with - Slack, Google Sheets, Shopify, Asana, Mailchimp, HubSpot, Airtable - without writing an integration per tool.
 
 Every trigger is an **instant REST Hook**. UnoPim pushes the moment a record changes, so there is no polling interval to tune and no delay to explain.
 
