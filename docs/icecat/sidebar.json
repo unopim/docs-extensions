@@ -2,10 +2,34 @@
   {
     "text": "Icecat",
     "items": [
-      { "text": "Overview",     "link": "/icecat/" },
-      { "text": "Installation", "link": "/icecat/installation" },
-      { "text": "Configuration","link": "/icecat/configuration" },
-      { "text": "Usage",        "link": "/icecat/usage" }
+      { "text": "Overview",              "link": "/icecat/" },
+      { "text": "Installation",          "link": "/icecat/installation" },
+      { "text": "Setup Icecat Credentials", "link": "/icecat/setup-credentials" }
+    ]
+  },
+
+  {
+    "text": "Configuration",
+    "items": [
+      { "text": "Attribute Mapping", "link": "/icecat/attribute-mapping" },
+      { "text": "Locale Mapping",    "link": "/icecat/locale-mapping" }
+    ]
+  },
+
+  {
+    "text": "Import Jobs",
+    "items": [
+      { "text": "Feature Mapping Import", "link": "/icecat/import-feature-mapping" },
+      { "text": "Attribute Import",       "link": "/icecat/import-attributes" },
+      { "text": "Enrich Product Import",  "link": "/icecat/import-enrich-product" },
+      { "text": "Single Product Fetch",   "link": "/icecat/fetch-product" }
+    ]
+  },
+
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact & Support", "link": "/icecat/contact" }
     ]
   }
 ]

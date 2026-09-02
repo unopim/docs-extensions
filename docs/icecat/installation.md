@@ -21,10 +21,15 @@ Unzip the extension package and merge the `packages/` folder into your UnoPim pr
 
 ### 2. Register the service provider
 
-Open `config/app.php` and add the following line inside the `providers` array:
+Open `bootstrap/providers.php` and add the following entry:
 
 ```php
-Webkul\Icecat\Providers\IcecatServiceProvider::class,
+use Webkul\Icecat\Providers\IcecatServiceProvider;
+
+return [
+    // ... existing providers ...
+    IcecatServiceProvider::class,
+];
 ```
 
 ### 3. Register PSR-4 autoload
@@ -68,4 +73,4 @@ Open the UnoPim admin panel and confirm the following:
 
 If any menu entries are missing, run `php artisan optimize:clear` and reload the admin panel.
 
-Continue to [Configuration](./configuration) once the menu items appear.
+Continue to [Setup Credentials](./setup-credentials) once the menu items appear.
