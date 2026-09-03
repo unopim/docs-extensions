@@ -7,5 +7,11 @@
       { "text": "Configuration",                "link": "/ai-product-feed-openai/configuration" },
       { "text": "Generating & Submitting Feed", "link": "/ai-product-feed-openai/feed-generation" }
     ]
+  },
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support", "link": "/ai-product-feed-openai/contact-support" }
+    ]
   }
 ]

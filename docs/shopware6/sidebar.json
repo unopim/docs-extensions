@@ -1,8 +1,40 @@
 [
   {
-    "text": "Shopware6",
+    "text": "Shopware 6",
     "items": [
-      { "text": "Overview", "link": "/shopware6/" }
+      { "text": "Overview", "link": "/shopware6/" },
+      { "text": "Shopware Setup", "link": "/shopware6/shopware-setup" },
+      { "text": "Installation", "link": "/shopware6/installation" }
+    ]
+  },
+
+  {
+    "text": "Configuration",
+    "items": [
+      { "text": "Setup Credentials", "link": "/shopware6/credentials" },
+      { "text": "Attribute Mapping", "link": "/shopware6/attribute-mapping" },
+      { "text": "Custom Fields Mapping", "link": "/shopware6/custom-mapping" },
+      { "text": "Other Mapping", "link": "/shopware6/other-mapping" },
+      { "text": "Category Field Mapping", "link": "/shopware6/category-mapping" }
+    ]
+  },
+
+  {
+    "text": "Export Jobs",
+    "items": [
+      { "text": "Attribute Export", "link": "/shopware6/attribute-export" },
+      { "text": "Attribute Options Export", "link": "/shopware6/attribute-options-export" },
+      { "text": "Category Export", "link": "/shopware6/category-export" },
+      { "text": "Product Tags Export", "link": "/shopware6/product-tags-export" },
+      { "text": "Simple Product Export", "link": "/shopware6/product-export" },
+      { "text": "Configurable Product Export", "link": "/shopware6/configurable-product-export" }
+    ]
+  },
+
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support", "link": "/shopware6/contact-support" }
     ]
   }
 ]

@@ -2,11 +2,24 @@
 
 Follow the steps below to install the **Akeneo to UnoPim Migration** plugin. You'll need terminal access to your UnoPim server before getting started.
 
+> [!NOTE]
+> Already running an older build of this plugin? Read [What's New & Upgrading](./upgrading) first — version 1.1.0 requires UnoPim 3.0.0.
+
 ## Requirements
 
-- **UnoPim 2.1.0**
-- **PHP 8.3+**
-- An **Akeneo** account with REST API (Connection) credentials
+| Requirement | Version |
+|---|---|
+| **UnoPim** | 3.0.0 |
+| **PHP** | 8.4.1+ |
+| **Laravel** | 13 |
+| **Database** | MySQL 8.0 or PostgreSQL 16 |
+| **Elasticsearch** | 8.17 *(optional — works with search on or off)* |
+| **Akeneo API client** | `akeneo/api-php-client` ^11.4 |
+
+You will also need an **Akeneo** account with REST API (Connection) credentials.
+
+> [!TIP]
+> The [UnoPim DAM extension](https://packagist.org/packages/unopim/dam) (`unopim/dam`) is optional. Install it and the plugin adds a **DAM Assets** entity to the migration. Without it, the plugin runs normally and simply does not offer that entity.
 
 ## Step 1 — Add the Package Files
 
@@ -54,9 +67,12 @@ Webkul\AkeneoMigration\Providers\ModuleServiceProvider::class,
 Install the Akeneo PHP API client and refresh the autoloader:
 
 ```bash
-composer require akeneo/api-php-client
+composer require akeneo/api-php-client:^11.4
 composer dump-autoload
 ```
+
+> [!WARNING]
+> Pin the client to `^11.4`. Higher constraints such as `^13.0` have no published release and will fail to resolve.
 
 ## Step 6 — Run the Install Command
 
@@ -68,9 +84,17 @@ This command creates the package tables, publishes the sidebar-icon assets, and 
 
 | Command | Purpose |
 |---|---|
-| `composer require akeneo/api-php-client` | Installs the Akeneo PHP REST API client the plugin uses to read from Akeneo. |
+| `composer require akeneo/api-php-client:^11.4` | Installs the Akeneo PHP REST API client the plugin uses to read from Akeneo. |
 | `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the new namespace. |
 | `php artisan akeneo-migration:install` | Creates the package tables, publishes assets, and refreshes caches so the menu, ACL, and routes load. |
+
+The install command creates three tables:
+
+| Table | What it holds |
+|---|---|
+| `akeneo_credentials` | Your Akeneo connections. The Client ID, Secret, and Password columns are **encrypted at rest**. |
+| `akeneo_mappings` | The recorded Akeneo↔UnoPim record mappings, reused on every later run. |
+| `akeneo_migration_runs` | The Migration History — one row per run you start. |
 
 ## Verify the Installation
 
@@ -92,3 +116,4 @@ Add a connection, test it, and run your first import:
 
 - [Create and test an Akeneo connection](./create-connection)
 - [Run a migration](./run-migration)
+- [Artisan commands reference](./commands)

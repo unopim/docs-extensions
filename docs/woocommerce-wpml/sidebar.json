@@ -2,11 +2,33 @@
   {
     "text": "WooCommerce WPML",
     "items": [
-      { "text": "Overview",       "link": "/woocommerce-wpml/" },
-      { "text": "Installation",   "link": "/woocommerce-wpml/installation" },
-      { "text": "Configuration",  "link": "/woocommerce-wpml/configuration" },
-      { "text": "Author Guide",   "link": "/woocommerce-wpml/author-guide" },
-      { "text": "Operator Guide", "link": "/woocommerce-wpml/operator-guide" }
+      { "text": "Overview",          "link": "/woocommerce-wpml/" },
+      { "text": "Installation",      "link": "/woocommerce-wpml/installation" },
+      { "text": "Configuration",     "link": "/woocommerce-wpml/configuration" },
+      { "text": "Setup Credentials", "link": "/woocommerce-wpml/setup-credentials" },
+      { "text": "Attribute Mapping", "link": "/woocommerce-wpml/attribute-mapping" }
+    ]
+  },
+  {
+    "text": "Export Jobs",
+    "items": [
+      { "text": "Category Export",   "link": "/woocommerce-wpml/category-export" },
+      { "text": "Attribute Export",  "link": "/woocommerce-wpml/attribute-export" },
+      { "text": "Product Export",    "link": "/woocommerce-wpml/product-export" }
+    ]
+  },
+  {
+    "text": "Import Jobs",
+    "items": [
+      { "text": "Category Import",   "link": "/woocommerce-wpml/category-import" },
+      { "text": "Attribute Import",  "link": "/woocommerce-wpml/attribute-import" },
+      { "text": "Product Import",    "link": "/woocommerce-wpml/product-import" }
+    ]
+  },
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support", "link": "/woocommerce-wpml/contact-support" }
     ]
   }
 ]

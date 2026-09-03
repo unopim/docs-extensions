@@ -2,7 +2,6 @@
 
 The Dashboard is the home page for the DAM NextCloud module. It summarizes connection health, recent sync activity, and trash backlog at a glance.
 
-![Dashboard](./images/dashboard.webp)
 
 ## Cards
 

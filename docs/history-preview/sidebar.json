@@ -1,0 +1,45 @@
+[
+  {
+    "text": "History Preview & Restore",
+    "items": [
+      {
+        "text": "Overview",
+        "link": "/history-preview/"
+      },
+      {
+        "text": "Installation",
+        "link": "/history-preview/installation"
+      },
+      {
+        "text": "Permissions",
+        "link": "/history-preview/permissions"
+      }
+    ]
+  },
+  {
+    "text": "Features",
+    "items": [
+      {
+        "text": "File Preview",
+        "link": "/history-preview/file-preview"
+      },
+      {
+        "text": "Restoring Versions",
+        "link": "/history-preview/restore"
+      },
+      {
+        "text": "Purging Old History",
+        "link": "/history-preview/purge"
+      }
+    ]
+  },
+  {
+    "text": "Support",
+    "items": [
+      {
+        "text": "Contact Support",
+        "link": "/history-preview/contact-support"
+      }
+    ]
+  }
+]

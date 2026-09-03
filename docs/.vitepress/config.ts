@@ -18,7 +18,7 @@ function loadSidebar(project: string): DefaultTheme.SidebarItem[] {
 
 const projects = [
   { slug: 'akeneo-migration', label: 'Akeneo Migration' },
-  // { slug: 'ai-product-feed-openai', label: 'AI Product Feed (OpenAI)' },
+  { slug: 'ai-product-feed-openai', label: 'AI Product Feed (OpenAI)' },
   { slug: 'auto-sku-generator', label: 'Auto SKU Generator' },
   { slug: 'aws-integration', label: 'AWS Integration' },
   { slug: 'bagisto', label: 'Bagisto' },
@@ -27,24 +27,26 @@ const projects = [
   { slug: 'cloudflare-r2-integration', label: 'Cloudflare R2 Integration' },
   { slug: 'cs-cart', label: 'CS-Cart' },
   { slug: 'dam', label: 'DAM' },
-  // { slug: 'dam-webdav', label: 'DAM NextCloud' },
+  { slug: 'dam-webdav', label: 'DAM NextCloud' },
   { slug: 'deepl', label: 'DeepL Translator' },
   { slug: 'erpnext', label: 'ERPNext' },
   { slug: 'google-shopping', label: 'Google Shopping' },
-  // { slug: 'icecat', label: 'Icecat' },
+  { slug: 'history-preview', label: 'History Preview' },
+  { slug: 'icecat', label: 'Icecat' },
   { slug: 'job-scheduler', label: 'Job Scheduler' },
   { slug: 'maker-checker-workflow', label: 'Maker Checker Workflow' },
   { slug: 'magento2', label: 'Magento 2' },
   { slug: 'odoo-erp', label: 'Odoo ERP' },
   { slug: 'pdf-generator', label: 'PDF Generator' },
-  // { slug: 'prestashop', label: 'PrestaShop' },
+  { slug: 'prestashop', label: 'PrestaShop' },
   { slug: 'public-image-url', label: 'Public Image URL' },
   { slug: 'shopify', label: 'Shopify' },
-  // { slug: 'shopware6', label: 'Shopware 6' },
-  // { slug: 'starter-pack', label: 'Starter Pack' },
+  { slug: 'shopware6', label: 'Shopware 6' },
   { slug: 'supplier-data-portal', label: 'Supplier Data Portal' },
   { slug: 'woocommerce', label: 'WooCommerce' },
-  // { slug: 'xml-connector', label: 'XML Connector' },
+  { slug: 'xml-connector', label: 'XML Connector' },
+  { slug: 'woocommerce-wpml', label: 'WooCommerce WPML' },
+  { slug: 'zapier', label: 'Zapier' },
 ] as const
 
 export default defineConfig({
@@ -61,16 +63,7 @@ export default defineConfig({
       light: '/logo.svg',
       dark: '/dark_logo.svg',
     },
-    nav: [
-      { text: 'Home', link: '/' },
-      {
-        text: 'Extensions',
-        items: projects.map(p => ({ text: p.label, link: `/${p.slug}/` })),
-      },
-      { text: 'User Guide', link: 'https://docs.unopim.com/' },
-      {text: 'Dev Doc', link: 'https://devdocs.unopim.com/'}, 
-      { text: 'Contact Us', link: 'https://unopim.com/en/contacts/' },
-    ],
+    
     sidebar: Object.fromEntries(
       projects.map(p => [`/${p.slug}/`, loadSidebar(p.slug)])
     ),

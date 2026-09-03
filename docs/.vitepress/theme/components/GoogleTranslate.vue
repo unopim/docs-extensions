@@ -26,6 +26,7 @@
         <path fill="currentColor"
           d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
       </svg>
+      <span class="vp-gt-label">Translate</span>
     </button>
 
     <Transition name="vp-gt-fade">
@@ -72,6 +73,7 @@ const languages = [
 const open = ref(false)
 const current = ref<string>('en')
 let scriptLoaded = false
+let openedByHover = false
 
 function readCookie(name: string): string | null {
   if (typeof document === 'undefined') return null
@@ -89,10 +91,12 @@ function writeCookie(name: string, value: string) {
 }
 
 function detectCurrent() {
-  // Format is `/auto/<lang>` once GT has translated.
+  // We write /auto/<lang>; GT may rewrite to /<src>/<lang> after translating.
+  // The target language is always the last path segment.
   const c = readCookie('googtrans') || ''
-  const m = c.match(/^\/auto\/([a-z]{2})$/i)
-  current.value = m ? m[1] : 'en'
+  const m = c.match(/\/([a-z]{2,8})$/i)
+  const lang = m ? m[1].toLowerCase() : 'en'
+  current.value = lang === 'auto' ? 'en' : lang
 }
 
 function loadGoogleTranslate() {
@@ -139,11 +143,19 @@ function switchTo(lang: string) {
   // Keep the cookie in sync so a page reload (or other components reading
   // it) see the current target language.
   if (lang === 'en') {
-    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'
+    const expired = 'expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'
     const host = location.hostname
-    if (host.indexOf('.') >= 0) {
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.${host}`
+    const domains: string[] = ['', host, `.${host}`]
+    const parts = host.split('.')
+    if (parts.length > 2) {
+      const parent = parts.slice(-2).join('.')
+      domains.push(parent, `.${parent}`)
     }
+    for (const d of domains) {
+      const domainPart = d ? `; domain=${d}` : ''
+      document.cookie = `googtrans=; ${expired}${domainPart}`
+    }
+    try { localStorage.removeItem('googtrans') } catch (_) {}
   } else {
     writeCookie('googtrans', '/auto/' + lang)
   }
@@ -156,12 +168,20 @@ function switchTo(lang: string) {
 }
 
 function toggle() {
+  if (open.value && openedByHover) {
+    // Menu was opened by hover — clicking the trigger should keep it open
+    // so the user can select a language without the menu closing on them.
+    openedByHover = false
+    return
+  }
   open.value = !open.value
+  openedByHover = false
   if (open.value) loadGoogleTranslate()
 }
 
 function close() {
   open.value = false
+  openedByHover = false
 }
 
 // Hover support — opens immediately on mouseenter, closes after a short
@@ -173,6 +193,7 @@ function onHoverOpen() {
   if (closeTimer) { clearTimeout(closeTimer); closeTimer = null }
   if (!open.value) {
     open.value = true
+    openedByHover = true
     loadGoogleTranslate()
   }
 }
@@ -181,6 +202,7 @@ function onHoverClose() {
   if (closeTimer) clearTimeout(closeTimer)
   closeTimer = setTimeout(() => {
     open.value = false
+    openedByHover = false
     closeTimer = null
   }, 180)
 }
@@ -202,21 +224,18 @@ onBeforeUnmount(() => {
     Google Translate custom styles
     ======================================== */
 
-/** Container for the translate button and menu flyout */
 .vp-gt {
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-/** Translate trigger button */
 .vp-gt-trigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 2rem;
+  gap: 5px;
   height: 2rem;
-  padding: 0.25rem;
+  padding: 0.25rem 0rem;
   border: none;
   border-radius: 9999px;
   background-color: transparent;
@@ -225,6 +244,12 @@ onBeforeUnmount(() => {
   font-family: inherit;
   font-size: 1rem;
   transition: background-color 0.25s;
+}
+
+.vp-gt-label {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .vp-gt-trigger:hover,
@@ -239,7 +264,6 @@ onBeforeUnmount(() => {
   outline-offset: 2px;
 }
 
-/** Menu (flyout) container */
 .vp-gt-menu {
   position: absolute;
   top: calc(100% + 0.25rem);
@@ -255,7 +279,6 @@ onBeforeUnmount(() => {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
-/** Menu items (language buttons) */
 .vp-gt-menu-item {
   display: flex;
   align-items: center;
@@ -283,7 +306,6 @@ onBeforeUnmount(() => {
   font-weight: 500;
 }
 
-/** Flag emoji in menu item */
 .vp-gt-menu-flag {
   display: inline-block;
   width: 1rem;
@@ -293,12 +315,10 @@ onBeforeUnmount(() => {
   line-height: 1;
 }
 
-/** Language label in menu item */
 .vp-gt-menu-label {
   flex: 1;
 }
 
-/** Checkmark (active indicator) in menu item */
 .vp-gt-menu-check {
   display: inline-block;
   margin-left: 0.5rem;
@@ -306,12 +326,10 @@ onBeforeUnmount(() => {
   font-weight: bold;
 }
 
-/** Hidden host for Google Translate widget (we hide it visually) */
 .vp-gt-hidden-host {
   display: none;
 }
 
-/** Transition animations */
 .vp-gt-fade-enter-active,
 .vp-gt-fade-leave-active {
   transition: all 0.2s ease;
@@ -323,19 +341,16 @@ onBeforeUnmount(() => {
   transform: translateY(-0.5rem);
 }
 
-/** Utility to prevent Google Translate from translating */
 .notranslate {
   --disable-google-translate: true;
 }
 
-/* Directive for v-click-outside - close on outside click */
 [v-click-outside] {
-  /* no additional styles needed */
+ 
 }
 </style>
 
 <style>
-/* Global styles to hide Google Translate's native UI */
 .goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate,
 .goog-te-gadget-simple,
@@ -354,10 +369,23 @@ iframe.skiptranslate,
   width: 0 !important;
 }
 
-html,
-body {
+html {
   top: 0 !important;
-  min-height: 0 !important;
+  position: static !important;
+}
+
+html.translated-ltr,
+html.translated-rtl {
+  margin-top: 0 !important;
+  top: 0 !important;
+  position: static !important;
+}
+
+html.translated-ltr body,
+html.translated-rtl body {
+  top: 0 !important;
+  margin-top: 0 !important;
+  position: static !important;
 }
 
 .goog-text-highlight {
@@ -365,7 +393,6 @@ body {
   box-shadow: none !important;
 }
 
-/* Hide the dropdown menu when it appears */
 .goog-te-menu-frame {
   display: none !important;
 }

@@ -4,9 +4,29 @@ A **connection** holds the Akeneo REST API credentials the plugin uses to read y
 
 ## Open the Connections List
 
-In the admin sidebar, open **Akeneo Migration → Connections**. This lists every connection you have created, with its name, base URL, username, and status (**Enabled** / **Disabled**). Click **Create Connection** to add a new one.
+In the admin sidebar, open **Akeneo Migration → Connections**. This lists every connection you have created, with its name, base URL, username, and status (**Enabled** / **Disabled**).
+
+<br>
+
+<div align="center">
+  <img src="./assets/overview/package-view.png" alt="The Connections listing" width="100%" style="border-radius:8px;" />
+</div>
+
+<br>
+
+It is a standard UnoPim datagrid, so search, filters, pagination, and mass delete all work the way they do everywhere else in the admin — and it follows your theme, dark mode included.
 
 ## Enter the Connection Details
+
+Click **Create Connection**. The form opens as a **modal** on the listing — you never leave the page.
+
+<br>
+
+<div align="center">
+  <img src="./assets/connection/create-form.png" alt="Create Connection modal" width="100%" style="border-radius:8px;" />
+</div>
+
+<br>
 
 Fill in your Akeneo REST API (Connection) credentials:
 
@@ -17,14 +37,6 @@ Fill in your Akeneo REST API (Connection) credentials:
 | **Secret** | The Secret from your Akeneo API connection. |
 | **Username** | The Akeneo API user's username. |
 | **Password** | The Akeneo API user's password. |
-
-<br>
-
-<div align="center">
-  <img src="./assets/connection/create-form.png" alt="Create Connection form" width="100%" style="border-radius:8px;" />
-</div>
-
-<br>
 
 > [!TIP]
 > On create, the connection is **enabled** automatically and **named from its base URL**. You can rename it later from the connection's edit page.
@@ -49,7 +61,7 @@ If the test fails, the connection is **not** saved and a clear reason is shown s
 
 ## Edit a Connection
 
-From a connection's edit page you can rename it, update its details, and enable or disable it. The edit page has three tabs:
+From a connection's edit page you can rename it, update its details, enable or disable it, and choose which entities to migrate. The page has three tabs:
 
 - **Connection** — the connection details and the **Run a Migration** controls.
 - **History** — field-level changes made to this connection over time.
@@ -63,8 +75,31 @@ From a connection's edit page you can rename it, update its details, and enable 
 
 <br>
 
+### Saving your changes
+
+Change anything on this page and UnoPim's **global save bar** slides in at the bottom, telling you how many fields were modified:
+
+- **Save changes** posts the update over AJAX. The connection is re-validated against Akeneo, a success message appears, and the page stays exactly where it is — no reload.
+- **Discard** reverts everything you changed on the form, after asking you to confirm.
+
+<br>
+
+<div align="center">
+  <img src="./assets/connection/discard-changes.png" alt="Discard changes confirmation" width="100%" style="border-radius:8px;" />
+</div>
+
+<br>
+
+If you try to navigate away with unsaved changes, UnoPim asks before letting them go.
+
 > [!NOTE]
-> For security, the stored **Secret** and **Password** are never shown in plain text — on edit they appear as a masked length. Leave them blank to keep the stored value, or type a new value to replace it.
+> For security, the stored **Secret** and **Password** are never shown in plain text — on edit they appear as a masked length. Leave them as they are to keep the stored value, or type a new value to replace it. Both, along with the Client ID, are also **encrypted in the database**.
+
+## Delete a Connection
+
+Use the delete action on the listing to remove a single connection, or tick several rows and delete them together.
+
+Deleting a connection also removes the mappings recorded under it, so a later migration on a new connection starts fresh.
 
 ## Next Steps
 

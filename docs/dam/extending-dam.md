@@ -124,6 +124,68 @@ Paths are validated against directory traversal — any path containing `..` is 
 
 ---
 
+## Working With AJAX Navigation
+
+From UnoPim 3.0 the admin navigates over AJAX rather than reloading — see [A Single-Page Experience](./index.md#a-single-page-experience). DAM runs inside that shell, so any JavaScript you add to a DAM screen has to survive pages being swapped in and out.
+
+### What a visit actually does
+
+A visit fetches the destination with an `X-Ajax-Nav: true` header, then replaces **only the `#app` subtree**. The Vue app is unmounted before the swap and remounted after it, inline page scripts are re-executed, and `document.title`, `<html lang>`, and `dir` are synced from the response. History is pushed with `pushState`, and `popstate` drives back and forward.
+
+Anything you attach **outside** `#app` — a `window` listener, a global timer — survives the swap and will therefore run twice unless you clean it up.
+
+### Events
+
+Three events fire on `document`:
+
+| Event | When | Notes |
+|---|---|---|
+| `unopim:navigate:before` | Before the fetch | **Cancelable.** Calling `preventDefault()` makes UnoPim do a full page load instead |
+| `unopim:navigate:success` | After the new page has mounted | The place to re-initialise anything scoped to a page |
+| `unopim:navigate:error` | The visit failed | UnoPim then falls back to a full page load |
+
+```js
+document.addEventListener('unopim:navigate:success', (event) => {
+    // event.detail.url — the page that just mounted
+    initialiseMyDamWidget();
+});
+```
+
+### Blocking a visit
+
+Register a guard to stop navigation — this is exactly how the unsaved-changes prompt works. Return `false` (or a promise resolving to `false`) to cancel:
+
+```js
+window.unopim.registerNavigationGuard(async (url) => {
+    if (! hasUnsavedWork()) {
+        return true;
+    }
+
+    return await confirmDiscard();
+});
+```
+
+### Navigating programmatically
+
+```js
+window.unopim.visit('/admin/dam/assets');
+```
+
+### Opting a link out
+
+Some links must not be intercepted — a file download, or a route that has to boot fresh:
+
+```html
+<a href="/admin/dam/export" data-no-ajax-nav>Download</a>
+```
+
+Links are also left alone automatically when they carry `download`, point at another origin, target anything other than `_self`, or are clicked with <kbd>Ctrl</kbd>/<kbd>Cmd</kbd>/<kbd>Shift</kbd>/<kbd>Alt</kbd> or the middle button.
+
+> [!TIP]
+> If a DAM screen of yours works on first load but breaks after navigating to it, the cause is almost always initialisation that ran once on `DOMContentLoaded`. Move it to `unopim:navigate:success` — or into the Vue component's own lifecycle — so it runs on every visit.
+
+---
+
 ## Localisation
 
 DAM ships **33 UI locales**:

@@ -1,5 +1,16 @@
 # Installation
 
+::: warning Install the WooCommerce Connector first
+This add-on requires the UnoPim **WooCommerce Connector** to already be installed, configured, and connected to your store. If you have not done that yet, complete the WooCommerce Connector setup before continuing here.
+
+**WooCommerce Connector setup:**
+1. [Install the WooCommerce Connector](/woocommerce/installation)
+2. [Generate WooCommerce API Credentials](/woocommerce/api-credentials)
+3. [Setup Credentials in UnoPim](/woocommerce/setup-credentials)
+
+Return to this page only after the WooCommerce Connector is working end-to-end.
+:::
+
 The WooCommerce WPML add-on is installed **on top of** an already-working Unopim WooCommerce connector. Make sure WooCommerce is installed and connected to Unopim before starting these steps.
 
 ## Requirements

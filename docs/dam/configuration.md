@@ -4,10 +4,25 @@ DAM has a settings page at **DAM → Configuration** for changing how the media 
 
 ![DAM > Configuration page showing the Interface Settings and Directory Settings cards with their toggles](./assets/configuration/configuration-page.png)
 
-Change what you need and click **Save**. You will see *"Configuration saved successfully."* The relevant caches are cleared for you automatically.
+Change what you need and click **Save changes**. You will see *"Configuration saved successfully."* The relevant caches are cleared for you automatically.
 
 > [!NOTE]
 > Viewing the page requires `dam.configuration.index`; saving requires `dam.configuration.update`. Without the update permission the form is shown read-only.
+
+---
+
+## Unsaved Changes
+
+Nothing on this page is applied until you save it. As soon as you move a toggle, a bar appears along the bottom telling you how many fields you have changed:
+
+![Configuration page with the unsaved-changes bar showing "You have unsaved changes — 1 field modified", with Discard and Save changes buttons](./assets/configuration/unsaved-changes-bar.png)
+
+| Action | What it does |
+|---|---|
+| **Save changes** | Applies every pending toggle and clears the caches |
+| **Discard** | Puts every toggle back to the last saved state |
+
+If you try to leave with changes still pending, you are asked to confirm first, so a half-made change cannot be lost by accident. This covers both cases: clicking a link elsewhere in the admin — which no longer reloads the page, see [A Single-Page Experience](./index.md#a-single-page-experience) — and closing or reloading the tab outright.
 
 ---
 
@@ -91,6 +106,26 @@ DAM_UPLOAD_RESUME_MAX_BYTES=524288000
 DAM_UPLOAD_RESUME_STALE_HOURS=24
 ```
 
+### Asset bundle imports (env only)
+
+These bound what a ZIP uploaded to a product or category import may expand to — see [Importing an asset bundle](./import-assets.md#importing-an-asset-bundle-zip). The defaults are deliberately wide, because a bundle legitimately carries video and other large binaries; they are a guard against a malicious archive, not a limit on your assets.
+
+| Env var | Default | What it caps |
+|---|---|---|
+| `DAM_IMPORT_BUNDLE_MAX_ENTRY_SIZE` | `524288000` (500 MB) | The largest single file in the archive |
+| `DAM_IMPORT_BUNDLE_MAX_TOTAL_SIZE` | `5368709120` (5 GB) | The total size everything expands to |
+| `DAM_IMPORT_BUNDLE_MAX_ENTRIES` | `50000` | How many files the archive may contain |
+| `DAM_IMPORT_BUNDLE_MAX_COMPRESSION_RATIO` | `200` | How far one entry may expand before it is treated as a zip bomb |
+
+```ini
+DAM_IMPORT_BUNDLE_MAX_ENTRY_SIZE=524288000
+DAM_IMPORT_BUNDLE_MAX_TOTAL_SIZE=5368709120
+DAM_IMPORT_BUNDLE_MAX_ENTRIES=50000
+DAM_IMPORT_BUNDLE_MAX_COMPRESSION_RATIO=200
+```
+
+An import that trips one of these stops with a message naming the limit, for example *"The archive expands to more than 5120 MB."*
+
 Remember to clear config cache after editing `.env`:
 
 ```bash
@@ -103,4 +138,5 @@ php artisan config:clear
 
 - [Explorer View](./explorer.md) — what the Explorer toggle turns on
 - [Uploading Assets](./uploading-assets.md) — the upload behaviour these settings tune
+- [Importing Assets](./import-assets.md) — where the bundle limits apply
 - [Setup](./setup.md) — granting the Configuration permission

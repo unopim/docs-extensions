@@ -8,6 +8,8 @@ import FeatureCard from './components/FeatureCard.vue'
 import VideoEmbed from './components/VideoEmbed.vue'
 import GoogleTranslate from './components/GoogleTranslate.vue'
 import ScopeTable from './components/ScopeTable.vue'
+import ExtensionsMegaMenu from './components/ExtensionsMegaMenu.vue'
+import NavIconsMore from './components/NavIconsMore.vue'
 import './custom.css'
 
 export default {
@@ -21,6 +23,8 @@ export default {
     app.component('VideoEmbed', VideoEmbed)
     app.component('GoogleTranslate', GoogleTranslate)
     app.component('ScopeTable', ScopeTable)
+    app.component('ExtensionsMegaMenu', ExtensionsMegaMenu)
+    app.component('NavIconsMore', NavIconsMore)
 
     app.directive('click-outside', {
       mounted(el, binding) {

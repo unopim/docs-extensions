@@ -1,0 +1,31 @@
+[
+  {
+    "text": "Setup",
+    "items": [
+      { "text": "Overview",                    "link": "/zapier/" },
+      { "text": "Installation",                "link": "/zapier/installation" },
+      { "text": "Connect UnoPim in Zapier",    "link": "/zapier/credentials" }
+    ]
+  },
+  {
+    "text": "Building Zaps",
+    "items": [
+      { "text": "Triggers",                    "link": "/zapier/triggers" },
+      { "text": "Actions and searches",        "link": "/zapier/actions" }
+    ]
+  },
+  {
+    "text": "Operating it",
+    "items": [
+      { "text": "Connected Zaps and logs",     "link": "/zapier/delivery-logs" },
+      { "text": "Configuration",               "link": "/zapier/configuration" },
+      { "text": "Troubleshooting",             "link": "/zapier/troubleshooting" }
+    ]
+  },
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support",             "link": "/zapier/contact-support" }
+    ]
+  }
+]

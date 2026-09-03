@@ -19,8 +19,12 @@ Choose the method that best fits your project setup.
 
 | Requirement | Version |
 |---|---|
-| **UnoPim** | v2.1.x |
-| **PHP** | 8.3 or higher |
+| **DAM** | v3.0.1 |
+| **UnoPim** | v3.0.x |
+| **PHP** | 8.4.1 or higher |
+
+> [!IMPORTANT]
+> DAM v3.x targets **UnoPim v3.0** and PHP **8.4**. Composer will refuse to install it on an UnoPim 2.x site or on PHP 8.3. Confirm your core version with `php artisan --version` and `composer show unopim/unopim` before installing.
 
 ### Optional server tools
 

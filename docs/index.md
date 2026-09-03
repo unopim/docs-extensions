@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: Browse extensions
-      link: /auto-sku-generator/
+      link: /ai-product-feed-openai/
     - theme: alt
       text: GitHub
       link: https://github.com/unopim/docs-extensions
@@ -20,10 +20,10 @@ hero:
       link: https://store.webkul.com/unopim.html
 
 features:
-  # - title: AI Product Feed (OpenAI)
-  #   details: AI product feed for ChatGPT / OpenAI Search.
-  #   link: /ai-product-feed-openai/
-  #   linkText: Read docs
+  - title: AI Product Feed (OpenAI)
+    details: AI product feed for ChatGPT / OpenAI Search.
+    link: /ai-product-feed-openai/
+    linkText: Read docs
   - title: Akeneo Migration
     details: Migrate catalog data from Akeneo into UnoPim.
     link: /akeneo-migration/
@@ -60,6 +60,10 @@ features:
     details: Digital Asset Management for images and media.
     link: /dam/
     linkText: Read docs
+  - title: DAM NextCloud
+    details: Mount your UnoPim DAM as a Nextcloud-compatible WebDAV drive. Share scoped, revocable folders with external users.
+    link: /dam-webdav/
+    linkText: Read docs
   - title: DeepL Translation
     details: Automatically generate translations from one locale to other locales.
     link: /deepl/
@@ -72,10 +76,14 @@ features:
     details: Export product data from UnoPim to Google Shopping and Merchant Center.
     link: /google-shopping/
     linkText: Read docs
-  # - title: Icecat
-  #   details: Connect PIM with the Icecat catalog.
-  #   link: /icecat/
-  #   linkText: Read docs
+  - title: History Preview
+    details: View and compare previous versions of product data directly within UnoPim.
+    link: /history-preview/
+    linkText: Read docs
+  - title: Icecat
+    details: Enrich product data automatically with Icecat's global product content library.
+    link: /icecat/
+    linkText: Read docs
   - title: Job Scheduler
     details: Automate import and export tasks.
     link: /job-scheduler/
@@ -96,10 +104,10 @@ features:
     details: Custom PDF templates with dynamic fields.
     link: /pdf-generator/
     linkText: Read docs
-  # - title: PrestaShop
-  #   details: Link PrestaShop stores with Unopim (coming soon).
-  #   link: /prestashop/
-  #   linkText: Read docs
+  - title: PrestaShop
+    details: Link PrestaShop stores with Unopim (coming soon).
+    link: /prestashop/
+    linkText: Read docs
   - title: Public Image URL
     details: Link product media via public URLs.
     link: /public-image-url/
@@ -108,14 +116,10 @@ features:
     details: Sync products, attributes, and inventory between Unopim and Shopify.
     link: /shopify/
     linkText: Read docs
-  # - title: Shopware 6
-  #   details: Sync product data between Unopim and Shopware 6.
-  #   link: /shopware6/
-  #   linkText: Read docs
-  # - title: Starter Pack
-  #   details: Bundled starter pack for Unopim PIM.
-  #   link: /starter-pack/
-  #   linkText: Read docs
+  - title: Shopware 6
+    details: Sync product data between Unopim and Shopware 6.
+    link: /shopware6/
+    linkText: Read docs
   - title: Supplier Data Portal
     details: Manage supplier product data.
     link: /supplier-data-portal/
@@ -124,8 +128,16 @@ features:
     details: Export and import product data with WooCommerce stores.
     link: /woocommerce/
     linkText: Read docs
-  # - title: XML Connector
-  #   details: Streamlined XML imports with validation and mapping.
-  #   link: /xml-connector/
-  #   linkText: Read docs
+  - title: Zapier
+    details: Trigger workflows in thousands of apps the moment a product, category, attribute or family changes.
+    link: /zapier/
+    linkText: Read docs
+  - title: XML Connector
+    details: Streamlined XML imports with validation and mapping.
+    link: /xml-connector/
+    linkText: Read docs
+  - title: WPML Integration
+    details: Connect Unopim with WPML for multilingual product catalogs.
+    link: /woocommerce-wpml/
+    linkText: Read docs
 ---

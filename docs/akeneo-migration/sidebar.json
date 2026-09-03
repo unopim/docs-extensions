@@ -3,7 +3,8 @@
     "text": "Getting Started",
     "items": [
       { "text": "Overview", "link": "/akeneo-migration/" },
-      { "text": "Installation", "link": "/akeneo-migration/installation" }
+      { "text": "Installation", "link": "/akeneo-migration/installation" },
+      { "text": "What's New & Upgrading", "link": "/akeneo-migration/upgrading" }
     ]
   },
 
@@ -18,6 +19,7 @@
     "text": "Migration",
     "items": [
       { "text": "Run a Migration", "link": "/akeneo-migration/run-migration" },
+      { "text": "Entity Mapping", "link": "/akeneo-migration/entity-mapping" },
       { "text": "Migration History", "link": "/akeneo-migration/migration-history" }
     ]
   },
@@ -25,6 +27,7 @@
   {
     "text": "Reference",
     "items": [
+      { "text": "Artisan Commands", "link": "/akeneo-migration/commands" },
       { "text": "Permissions", "link": "/akeneo-migration/permissions" }
     ]
   },

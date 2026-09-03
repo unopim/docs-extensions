@@ -1,86 +1,121 @@
 # Configuration
 
-Navigate to **Admin Panel → OpenAI Product Feed → Settings** to configure the extension. Settings are split into sections.
+Navigate to **Admin Panel → OpenAI Feed → Configuration** to open the settings form. All settings are saved when you click **Save** at the bottom.
+
+![Configuration page — General section and OpenAI Commerce Flags panel](./images/configuration-general.png)
+
+---
 
 ## General
 
 | Field | Description |
 |---|---|
-| **Status** | Enable or disable feed generation. The public feed URL returns a 403 while disabled. |
-| **Channel** | The Unopim channel whose products are included in the feed. |
-| **Locale** | The locale used for product names, descriptions, and other translatable attributes. |
-| **Currency** | 3-letter ISO currency code (e.g., `USD`, `EUR`) used for product prices. |
+| **Feed Enabled** | Toggle the feed on or off. The public URL returns a 403 when the feed is disabled. |
+| **Feed Security Token** | A 48-character hex token appended to the public feed URL. Click **Generate Token** to create one. Leave blank to make the feed fully public (not recommended for production). |
+| **Format** | Output format: **TSV** (recommended by OpenAI) or **JSON**. |
+| **Channel** | The UnoPim channel whose products are included in the feed. |
+| **Currencies** | One or more currencies. Each product is priced in the first currency it has a price for. Products with no price in any selected currency are excluded from the feed. |
+| **Locale** | Locale used for translatable attributes (product name, description, etc.). |
 
-## Seller Info
+---
 
-This information is included in the feed for attribution and return policy.
+## Store / Brand Information
+
+This information is embedded in every row of the feed for attribution and return policy purposes.
+
+![Store/Brand Information and Attribute Mapping sections](./images/configuration-seller.png)
 
 | Field | Description |
 |---|---|
-| **Seller Name** | Your store or brand name (max 70 characters). |
-| **Seller URL** | The homepage URL of your store. |
+| **Seller Name** | Your store or brand name. Maximum 70 characters. |
+| **Seller URL** | The homepage URL of your store (e.g. `https://mystore.com`). |
+
+---
+
+## OpenAI Commerce Flags
+
+Controls where your products appear in ChatGPT.
+
+| Field | Description |
+|---|---|
+| **Eligible for ChatGPT Search** | When on, products can surface in ChatGPT conversational search responses. |
+| **Eligible for ChatGPT Checkout** | When on, users can purchase directly from within ChatGPT. Requires `is_eligible_search` to also be enabled. |
+
+---
+
+## Return Policy
+
+OpenAI includes return policy details on product pages shown to ChatGPT users.
+
+| Field | Description |
+|---|---|
 | **Accepts Returns** | Toggle on if your store accepts returns. |
-| **Return Deadline (days)** | Number of days a customer has to return a product. |
-| **Return Policy URL** | Direct link to your return policy page (optional). |
+| **Return Policy URL** | Direct link to your return policy page. Required by OpenAI for product feeds. |
+| **Return Window (Days)** | Number of days a customer has to initiate a return (default: 30). |
 | **Accepts Exchanges** | Toggle on if your store accepts exchanges. |
 
-## Product Scope
+---
+
+## Geography & Targeting
 
 | Field | Description |
 |---|---|
-| **Only Enabled Products** | When on, skips products marked as disabled in Unopim. |
-| **Product Limit** | Maximum number of products to include. Set to `0` for no limit. |
-| **Product URL Template** | Template for building product URLs. Use `{sku}` as a placeholder if your URLs are SKU-based. |
-| **Image Base URL** | Base URL prepended to image paths if your images use relative paths. |
-| **Target Countries** | Comma-separated list of ISO country codes where products are available. |
-| **Store Country** | The country your store is based in. |
+| **Target Countries** | Comma-separated ISO 3166-1 alpha-2 country codes where your products are available (e.g. `US,CA,GB`). |
+| **Store Country** | The country your store is based in (e.g. `US`). |
 
-## Performance
-
-| Field | Description |
-|---|---|
-| **Batch Size** | Number of products processed per batch (10–5000). Reduce if you hit memory limits on large catalogs. |
-| **Cron Interval (hours)** | How often the feed regenerates automatically (1–168 hours). Default is every 12 hours. |
-
-## Format
-
-Choose the output format for the feed file:
-
-- **TSV** — recommended for ChatGPT; tab-separated values.
-- **JSON** — machine-readable, useful for custom integrations.
-
-## Security (Token)
-
-The feed URL is protected by a cryptographically secure token. Without it, the endpoint returns a 403.
-
-1. Click **Generate Token** — a new 48-character hex token is created and saved immediately.
-2. The full feed URL is displayed: `https://your-domain.com/openai-feed/products?token=<token>`.
-3. Copy this URL — you will submit it to `chatgpt.com/merchants`.
-
-To rotate the token, click **Generate Token** again. The old URL will stop working immediately.
+---
 
 ## Attribute Mapping
 
-Map your Unopim product attributes to the fields OpenAI expects. Only the codes you select here are exported.
+Map each OpenAI feed field to the UnoPim attribute that holds that data in your catalog.
 
-| OpenAI Field | Default Unopim Attribute |
+![Attribute Mapping section with all 15 mapping fields](./images/configuration-attribute-mapping.png)
+
+| OpenAI Field | Description | Required |
+|---|---|---|
+| **Product Title** | Product name shown in ChatGPT results. | Yes |
+| **Description** | Product description (HTML stripped, max 5,000 characters). | Yes |
+| **Brand** | Brand or manufacturer name. | Yes |
+| **Price** | Regular selling price. | Yes |
+| **Sale / Special Price** | Discounted price, if applicable. | — |
+| **Image / Gallery Attribute** | Main product image or gallery attribute. | Yes |
+| **Weight** | Product weight value. | — |
+| **Weight Unit** | Unit for weight (e.g. `kg`, `lb`). Defaults to `kg`. | — |
+| **Color** | Color super-attribute for configurable products. Used to build `variant_dict`. | For variants |
+| **Size** | Size super-attribute for configurable products. Used to build `variant_dict`. | For variants |
+| **Material** | Product material attribute. | — |
+| **GTIN / EAN / UPC** | Global trade item number (barcode). Strongly recommended. | — |
+| **Manufacturer Part No.** | MPN for the product. | — |
+| **Gender** | Target gender (e.g. `male`, `female`, `unisex`). | — |
+| **Age Group** | Target age group (e.g. `adult`, `kids`). | — |
+
+> [!TIP]
+> For configurable products, map **Color** and **Size** to your actual super-attribute codes. These are used to populate the `variant_dict` field that ChatGPT uses to show variant selectors on product listings.
+
+Any field left unmapped is omitted from the feed output.
+
+---
+
+## Product Filters
+
+| Field | Description |
 |---|---|
-| Title | `name` |
-| Description | `description` |
-| Brand | `brand` |
-| Price | `price` |
-| Sale Price | `special_price` |
-| Weight | `weight` |
-| Weight Unit | `kg` |
-| Color | `color` |
-| Size | `size` |
-| Material | `material` |
-| GTIN | `ean` |
-| MPN | `mpn` |
-| Gender | `gender` |
-| Age Group | `age_group` |
-| Image | `image` |
+| **Only Enabled Products** | When on, products with status = disabled are excluded from the feed. |
+| **Product Limit** | Maximum number of parent products in the feed. Set to `0` for no limit. Configurable products still emit one row per variant regardless of this limit. |
+| **Product URL Template** | Template for building product page URLs. Use `{sku}` or `{id}` as placeholders (e.g. `https://mystore.com/products/{sku}`). |
 
-Use the dropdowns to select the correct attribute for each field. Any field left blank is omitted from the feed.
+---
+
+## Performance & Schedule
+
+| Field | Description |
+|---|---|
+| **Batch Size** | Number of products loaded per database query (10–5,000). Default is 500. Lower this value if you see memory errors on large catalogs. |
+| **Cron Interval (hours)** | How often the feed regenerates automatically via the Laravel scheduler (1–168 hours). Default is 6 hours. |
+
+> [!NOTE]
+> The extension registers its own cron entry automatically via the service provider. You do not need to edit `bootstrap/app.php`. The only server-level requirement is that `php artisan schedule:run` runs every minute — see [Automated generation](./feed-generation#automated-generation-cron).
+
+---
 
 Click **Save** to apply all settings. The next feed generation will use the updated configuration.
