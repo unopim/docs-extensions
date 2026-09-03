@@ -61,8 +61,9 @@ const extensions = [
   { slug: 'cs-cart',                   label: 'CS-Cart',     icon: '/icons/extensions/cs-cart.png'      },
   { slug: 'dam',                       label: 'DAM',              icon: '/icons/extensions/dam.png'      },
   { slug: 'dam-webdav',               label: 'DAM NextCloud',    icon: '/icons/extensions/dam-webdav.png' },
-  { slug: 'deepl',                     label: 'DeepL Translator', icon: '/icons/extensions/deepl.png'    },
-  { slug: 'erpnext',                   label: 'ERPNext',          icon: '/icons/extensions/erpnext.png'  },
+  { slug: 'deepl',                     label: 'DeepL Translator',    icon: '/icons/extensions/deepl.png'                },
+  { slug: 'pricing-rule-module',       label: 'Dynamic Pricing Rule', icon: '/icons/extensions/pricing-rule-module.png' },
+  { slug: 'erpnext',                   label: 'ERPNext',             icon: '/icons/extensions/erpnext.png'              },
   { slug: 'google-shopping',           label: 'Google Shopping',  icon: '/icons/extensions/google-shopping.png' },
   { slug: 'history-preview',           label: 'History Preview',  icon: '/icons/extensions/history-preview.svg' },
   { slug: 'icecat',                    label: 'Icecat',           icon: '/icons/extensions/icecat.svg' },
@@ -79,6 +80,7 @@ const extensions = [
   { slug: 'woocommerce',               label: 'WooCommerce',      icon: '/icons/extensions/woocommerce.png' },
   { slug: 'woocommerce-wpml',          label: 'WooCommerce WPML', icon: '/icons/extensions/woocommerce-wpml.png' },
   { slug: 'zapier',                    label: 'Zapier',           icon: '/icons/extensions/zapier.png' },
+  { slug: 'xlsx-connector',            label: 'XLSX Connector',   icon: '/icons/extensions/xlsx-connector.svg' },
   { slug: 'xml-connector',             label: 'XML Connector',    icon: '/icons/extensions/xml-connector.svg' },
 ]
 </script>

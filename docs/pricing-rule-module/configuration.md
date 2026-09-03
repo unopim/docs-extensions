@@ -1,9 +1,9 @@
 # Configuration
 
-The Pricing Rule Module does not have a dedicated settings page — its configuration lives at two places:
+The Dynamic Pricing Rule extension does not have a dedicated settings page — its configuration lives at two places:
 
-1. **Per-rule configuration** inside each rule's editor (Conditions and Actions tabs).
-2. **Permissions** assigned via admin roles, which control who can view, create, edit, delete, and mass-delete rules.
+1. **Per-rule configuration** inside each rule's editor (Condition and Action tabs).
+2. **Permissions** assigned via admin roles, which control who can view, create, edit, delete, execute, and mass-delete rules.
 
 This page covers permissions and the prerequisites the module relies on. Per-rule configuration is documented in the [Author Guide](./author-guide).
 
@@ -13,11 +13,12 @@ The module registers the following ACL keys (defined in `packages/Webkul/Pricing
 
 | Permission key | Purpose |
 |---|---|
-| `pricingrulemodule` | View the Pricing Rule listing page |
-| `pricingrulemodule.create` | Create a new rule |
-| `pricingrulemodule.edit` | Open and modify an existing rule |
+| `pricingrulemodule` | View the rule listing page and load builder data (attributes, categories, price attributes) |
+| `pricingrulemodule.create` | Create a new rule and save its conditions and actions |
+| `pricingrulemodule.edit` | Open and modify an existing rule's conditions and actions |
 | `pricingrulemodule.delete` | Delete a single rule from the grid |
 | `pricingrulemodule.mass_delete` | Delete multiple rules in one operation |
+| `pricingrulemodule.execute` | Execute or mass-execute rules and download execution logs |
 
 To grant a user access:
 
@@ -25,8 +26,8 @@ To grant a user access:
 2. Enable the required permissions under **Pricing Rule**.
 3. Assign the role to the admin user.
 
-::: warning
-There is no separate "execute" permission in the current implementation — any user who can view the listing page can run rules from the grid. Restrict access at the listing level if rule execution must be limited.
+::: tip
+The **Execute** button inside the rule editor and the play icon on each grid row are only visible when the user has the `pricingrulemodule.execute` permission. Grant this separately from edit access when you want authors who can configure rules but cannot run them in production.
 :::
 
 ## Prerequisites

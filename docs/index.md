@@ -68,6 +68,10 @@ features:
     details: Automatically generate translations from one locale to other locales.
     link: /deepl/
     linkText: Read docs
+  - title: Dynamic Pricing Rule
+    details: Assign product prices automatically from configurable conditions and actions across channels, locales, and currencies.
+    link: /pricing-rule-module/
+    linkText: Read docs
   - title: ERPNext
     details: Bidirectional sync of products, categories, attributes, and brands between Unopim and ERPNext.
     link: /erpnext/
@@ -131,6 +135,10 @@ features:
   - title: Zapier
     details: Trigger workflows in thousands of apps the moment a product, category, attribute or family changes.
     link: /zapier/
+    linkText: Read docs
+  - title: Custom XLSX Connector
+    details: Import and export products with flexible column mapping templates — works with any spreadsheet layout.
+    link: /xlsx-connector/
     linkText: Read docs
   - title: XML Connector
     details: Streamlined XML imports with validation and mapping.
