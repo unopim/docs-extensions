@@ -36,14 +36,37 @@ Choose the UnoPim attribute you want to link to this metafield. When a product i
 ### Type
 Select the data type for the metafield value. Available options are:
 
-| Type | When to use |
-|---|---|
-| **Single line text** | Short text values like a material name or colour code |
-| **Multi-line text** | Longer descriptions or notes |
-| **Color** | Hex colour values |
-| **Rating** | Numerical rating values |
-| **URL** | Links or reference URLs |
-| **JSON** | Structured or complex data |
+| Type | Shopify type | When to use |
+|---|---|---|
+| **Single line text** | `single_line_text_field` | Short text values like a material name or colour code |
+| **Multi-line text** | `multi_line_text_field` | Longer descriptions or notes |
+| **Rich text** | `rich_text_field` | Formatted text such as a styled description with headings, lists, and links |
+| **Color** | `color` | Hex colour values |
+| **Rating** | `rating` | Numerical rating values |
+| **URL** | `url` | Links or reference URLs |
+| **JSON** | `json` | Structured or complex data |
+| **ID** | `id` | A formatted identifier, optionally validated with a regex pattern |
+| **Choice list** | `single_line_text_field` | A fixed set of allowed values (from a select or multi-select attribute), stored with a choices validation |
+| **Weight** | `weight` | A weight value with its unit — for example `2.5 kg` |
+| **Volume** | `volume` | A volume value with its unit — for example `750 ml` |
+| **Dimension** | `dimension` | A length value with its unit — for example `30 cm` |
+| **Boolean** | `boolean` | A true/false flag — for example "Machine washable" |
+| **Date** | `date` | A calendar date — for example a release or expiry date |
+| **Date & time** | `date_time` | A date together with a time — for example a launch timestamp |
+| **Number** | `number_integer` / `number_decimal` | A numeric value, whole or decimal |
+| **Image (file)** | `file_reference` | An image stored in Shopify's Files — for example a size chart or a care-label graphic |
+| **File** | `file_reference` | Any non-image file — for example a PDF spec sheet or a safety datasheet |
+| **Video (file)** | `file_reference` | A video stored in Shopify's Files |
+| **Email** | `single_line_text_field` | An email address — for example a supplier or warranty contact |
+| **Link** | `link` | A text-and-URL pair, so you can store the link label alongside the address |
+| **Product reference** | `product_reference` | Points to another product — useful for "goes well with" or replacement-part relationships |
+| **Product variant reference** | `variant_reference` | Points to a specific product variant rather than the whole product |
+| **Collection reference** | `collection_reference` | Points to a Shopify collection |
+| **Metaobject reference** | `metaobject_reference` | Points to a metaobject entry — links products to reusable structured data (see [Metaobject Definitions](./metaobjects.md)) |
+
+> **Note on Image vs File:** Shopify stores both as the same underlying type (`file_reference`). The difference is a validation — **Image (file)** restricts uploads to images, while **File** accepts any file type.
+
+> **Note on Email:** Shopify has no dedicated email metafield type. An email metafield is a `single_line_text_field` with a validation rule that checks the value looks like an email address.
 
 ---
 
@@ -101,6 +124,16 @@ Enables this metafield to be read via the **Shopify Storefront API**. This is re
 **Example:** If you want to display a `custom.fabricComposition` field on your product page, you must enable this option — otherwise the Storefront API will not return it.
 
 ![Storefront Access Example](./images/add-definition-fields.png)
+
+---
+
+### Taxonomy Category
+
+Restrict the metafield to one or more **Shopify taxonomy categories**. When you pick categories here, only products that belong to those categories send this metafield on export — the rest skip it. Leave it empty to apply the metafield to every product.
+
+This mirrors how Shopify scopes category-specific metafields, and helps keep products clean by attaching a metafield only where it's relevant.
+
+> **Note:** The **Taxonomy Category** picker appears only when **Used For** is set to **Products** — variant metafields cannot be constrained by category.
 
 ---
 

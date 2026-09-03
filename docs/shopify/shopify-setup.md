@@ -56,19 +56,22 @@ Once the app is created, the version tab will appear. Scroll down and you will f
 
 ![Shopify select scopes](./images/select-scopes.png)
 
-You need to enable **read and write** access for the following:
+You need to enable **read and write** access for the following. Use the copy button on any row to copy that scope's permissions, or **Copy all** to grab every permission at once.
 
-| # | Scope | Permissions to enable |
-|---|-------|-----------------------|
-| 1 | Shop locales | `write_locales`, `read_locales` |
-| 2 | Fulfillment services | `write_fulfillments`, `read_fulfillments` |
-| 3 | Inventory | `write_inventory`, `read_inventory` |
-| 4 | Product listings | `write_product_listings`, `read_product_listings` |
-| 5 | Products | `write_products`, `read_products` |
-| 6 | Translation | `write_translations`, `read_translations` |
-| 7 | Sales Channel | `write_channels`, `read_channels` |
-| 8 | Location | `write_locations`, `read_locations` |
-| 9 | Publications | `write_Publications`, `read_Publications` |
+<ScopeTable :scopes="[
+  { name: 'Shop locales', permissions: ['write_locales', 'read_locales'] },
+  { name: 'Fulfillment services', permissions: ['write_fulfillments', 'read_fulfillments'] },
+  { name: 'Inventory', permissions: ['write_inventory', 'read_inventory'] },
+  { name: 'Product listings', permissions: ['write_product_listings', 'read_product_listings'] },
+  { name: 'Products', permissions: ['write_products', 'read_products'] },
+  { name: 'Translation', permissions: ['write_translations', 'read_translations'] },
+  { name: 'Sales Channel', permissions: ['write_channels', 'read_channels'] },
+  { name: 'Location', permissions: ['write_locations', 'read_locations'] },
+  { name: 'Publications', permissions: ['write_publications', 'read_publications'] },
+  { name: 'Files', permissions: ['write_files', 'read_files'] },
+  { name: 'Metaobject definitions', permissions: ['write_metaobject_definitions', 'read_metaobject_definitions'] },
+  { name: 'Metaobjects', permissions: ['write_metaobjects', 'read_metaobjects'] }
+]" />
 
 ![Shopify select scopes](./images/read-write.png)
 

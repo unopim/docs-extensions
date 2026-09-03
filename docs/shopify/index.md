@@ -40,6 +40,9 @@ Export both simple products and products with multiple variants (e.g., a T-shirt
 ### Send Multiple Product Images
 You can map multiple image attributes from UnoPim and send them all to Shopify as product gallery images. Both individual image attributes and gallery-type attributes are supported.
 
+### Digital Asset Management (DAM) Support
+Use UnoPim **DAM asset attributes** as an image or file source — assets are uploaded to Shopify on export, and Shopify images can be imported back into a DAM asset. Requires the UnoPim **DAM** package to be installed separately.
+
 ### Map UnoPim Attributes to Shopify Fields
 Not all product fields have the same name in every system. The connector lets you **map your UnoPim attributes to the corresponding Shopify product fields**, so the right data lands in the right place every time.
 
@@ -51,18 +54,43 @@ Shopify supports **metafields** — custom data fields that go beyond standard p
 
 - Single line text
 - Multi-line text
+- Rich text
 - Color
 - Rating
 - URL
 - JSON
+- ID
+- Choice list
 - Weight
 - Volume
 - Dimension
-- boolean
+- Boolean
 - Date
+- Date & time
 - Number
+- Image (file)
+- File
+- Video (file)
+- Email
+- Link
+- Product reference
+- Product variant reference
+- Collection reference
+- Metaobject reference
 
 These are exported without needing any additional mapping setup.
+
+### Shopify Taxonomy Category
+Assign each product to a **Shopify standard taxonomy category** using the dedicated `shopify_taxonomy` attribute type with a searchable category picker. The chosen category is exported along with the product and imported back from Shopify.
+
+### Taxonomy-Constrained Metafields
+A metafield definition can be **limited to selected Shopify taxonomy categories**, so only products that belong to those categories send that metafield — matching how Shopify scopes category-specific metafields.
+
+### Metaobject Definitions Support
+Build Shopify **metaobjects** — reusable structured data such as an Author, Brand, or Material — right inside UnoPim. Create the definition (its fields and validations) and add entries, then reference an entry from your products through a metafield. Definitions and entries are exported to Shopify and can be imported back.
+
+### Multi-Location Inventory
+Send stock to **multiple Shopify locations**. Map a quantity attribute to each location and the connector pushes location-wise inventory when the product is **first created** in Shopify. Any location you leave unmapped is skipped. Re-running the export later updates other product details but does not change the inventory quantity in Shopify.
 
 ### Multi-Language Support
 Export your product data in **multiple languages**. If you manage a multilingual catalog in UnoPim, the connector handles locale-specific content and sends it to the corresponding Shopify translations.
@@ -83,6 +111,7 @@ The connector is not just for exporting. You can also pull data **from Shopify i
 | **Shopify Family Variant Attribute Assignment** | Maps variant attributes to the correct UnoPim product families |
 | **Shopify Product** | Imports Shopify products into UnoPim |
 | **Shopify Metafield Definitions** | Imports existing Shopify metafield definitions into UnoPim |
+| **Shopify Metaobject** | Imports Shopify metaobject definitions and their entries into UnoPim |
 
 ---
 
@@ -92,8 +121,8 @@ Before you begin, make sure the following are in place:
 
 | Requirement | Detail |
 |---|---|
-| **UnoPim Version** | v2.0.0 |
-| **Shopify API Version** | 2026-01 |
+| **UnoPim Version** | v3.0.0 |
+| **Shopify API Version** | 2026-07 |
 | **Shopify Plan** | Any plan with Admin API access |
 | **Shopify Admin Access** | Needed to create a custom app and generate API credentials |
 | **Terminal / Server Access** | Required to run installation commands |

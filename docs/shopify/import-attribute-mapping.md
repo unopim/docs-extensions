@@ -16,25 +16,37 @@ On the left side of the screen, you'll see all available Shopify product fields.
 
 ## Available Field Mappings
 
-| Shopify Field | Field Code | What it does |
+| Shopify Field | Field Code | What it does | Supported attribute types |
+|---|---|---|---|
+| **Name** | `title` | The product title shown on your Shopify storefront | text |
+| **Description** | `descriptionHtml` | Full product description — supports HTML formatting | text, textarea |
+| **Price** | `price` | The selling price of the product | price |
+| **Weight** | `weight` | Product weight used for shipping calculations | number, metric |
+| **Inventory Tracked** | `inventoryTracked` | Indicates whether inventory tracking is enabled | boolean |
+| **Allow Purchase Out of Stock** | `inventoryPolicy` | Allows customers to buy the product even when stock is zero | yes/no |
+| **Vendor** | `vendor` | The brand or supplier name | text, simple select |
+| **Product Type** | `productType` | The category or type the product belongs to | text, simple select |
+| **Tags** | `tags` | Keywords used for search and filtering in Shopify | textarea, text, select, multiselect |
+| **Barcode** | `barcode` | Product barcode or unique identifier for inventory scanning | text |
+| **Compare Price** | `compareAtPrice` | The original price shown as a strikethrough to highlight a discount | price |
+| **SEO Title** | `metafields_global_title_tag` | Custom page title used by search engines | text |
+| **SEO Description** | `metafields_global_description_tag` | Meta description shown in search engine results | text, textarea |
+| **Handle** | `handle` | The URL-friendly slug for the product page (e.g. `blue-running-shoes`) | text |
+| **Taxable** | `taxable` | Marks whether tax should be applied to this product | yes/no |
+| **Cost per Item** | `cost` | Cost of goods sold (COGS) — used for profit reporting | price |
+
+---
+
+## Unit Price
+
+Below the field mappings you'll find the **Unit Price** section. This maps the attributes that Shopify uses to show a price per standard unit of measure — like "€2.50 per litre".
+
+| Field | What it does | What to choose |
 |---|---|---|
-| **Name** | `title` | The product title shown on your Shopify storefront |
-| **Description** | `descriptionHtml` | Full product description — supports HTML formatting |
-| **Price** | `price` | The selling price of the product |
-| **Weight** | `weight` | Product weight used for shipping calculations |
-| **Quantity** | `inventoryQuantity` | How many units are available in stock |
-| **Inventory Tracked** | `inventoryTracked` | Indicates whether inventory tracking is enabled |
-| **Allow Purchase Out of Stock** | `inventoryPolicy` | Allows customers to buy the product even when stock is zero |
-| **Vendor** | `vendor` | The brand or supplier name |
-| **Product Type** | `productType` | The category or type the product belongs to |
-| **Tags** | `tags` | Keywords used for search and filtering in Shopify |
-| **Barcode** | `barcode` | Product barcode or unique identifier for inventory scanning |
-| **Compare Price** | `compareAtPrice` | The original price shown as a strikethrough to highlight a discount |
-| **SEO Title** | `metafields_global_title_tag` | Custom page title used by search engines |
-| **SEO Description** | `metafields_global_description_tag` | Meta description shown in search engine results |
-| **Handle** | `handle` | The URL-friendly slug for the product page (e.g. `blue-running-shoes`) |
-| **Taxable** | `taxable` | Marks whether tax should be applied to this product |
-| **Cost per Item** | `cost` | Cost of goods sold (COGS) — used for profit reporting |
+| **Total amount** | The total quantity contained in the product | A number or decimal type attribute |
+| **Total amount unit** | The unit that the total amount is measured in | A text or select type attribute |
+
+> **Important:** The value of **Total amount unit** must match a valid Shopify unit — for example `ML`, `CL`, or `L`. Any other value is skipped.
 
 ---
 

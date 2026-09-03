@@ -8,7 +8,7 @@ Once the connector is installed, the next step is to connect your Shopify store 
 
 After installation, you'll notice a new **Shopify icon** in the left sidebar of your UnoPim dashboard. Click on it to open the connector.
 
-![Shopify Connector Icon](./images/Shopify-installed.png)
+![Shopify Connector Icon](./images/verify-installation.png)
 
 ---
 
@@ -24,11 +24,11 @@ Fill in the following details:
 |---|---|
 | **Shopify URL** | Your Shopify store URL (e.g. `mystore.myshopify.com`) |
 | **Admin API access token** | The access token you copied from your Shopify app |
-| **API Version** | Select `2026-01` |
+| **API Version** | Select `2026-07` |
 
 ![Credentials Form](./images/fill-cred.png)
 
-> **Note:** The UnoPim Shopify Connector currently supports **API version 2026-01**. Make sure you select this version.
+> **Note:** The UnoPim Shopify Connector currently supports **API version 2026-07**. Make sure you select this version.
 
 Click **Save** once all fields are filled in.
 
@@ -38,22 +38,29 @@ Click **Save** once all fields are filled in.
 
 After saving, you'll be redirected to the credential edit screen. Complete the remaining fields:
 
-![Credential Edit Screen](./images/edit-cred.png)
+![Credential Edit Screen](./images/sales.png)
 
 **Publishing (Sales Channels)**
 Select which Shopify sales channels your products should be published to once exported.
 
-**Location List**
-Choose the inventory location that will be used when syncing stock quantities.
-
 **Status**
 Set the default status for exported products — either active or draft.
 
-> **Note:** The **Sales Channels** and **Location List** options are fetched directly from your Shopify store. If you don't see them in the dropdown, make sure they have been created in Shopify first before setting up credentials here.
+> **Note:** The **Sales Channels** are fetched directly from your Shopify store. If you don't see them in the dropdown, make sure they have been created in Shopify first before setting up credentials here.
 
 ---
 
-## Step 4 — Map Your Locales
+## Step 4 — Map Your Locations
+
+Map a quantity attribute to each Shopify location to send location-wise stock. Any location you leave blank is skipped during sync.
+
+![Location Mapping](./images/location.png)
+
+> **Note:** The **Location List** is fetched directly from your Shopify store. If a location is missing from the list, create it in Shopify first.
+
+---
+
+## Step 5 — Map Your Locales
 
 If your Shopify store supports multiple languages, all available Shopify locales are fetched automatically. You just need to map each Shopify locale to the corresponding locale in UnoPim.
 
