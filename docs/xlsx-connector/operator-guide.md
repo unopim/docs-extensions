@@ -1,34 +1,38 @@
-# Operator Guide
+# Operator Guide — Import & Export Jobs
 
-A **Job Operator** is an admin user who runs import and export jobs that use the XLSX Connector. Operators don't author the column mapping themselves — they pick a saved template, point it at a file, and run the job.
+A **Job Operator** is an admin user who runs import and export jobs using the Custom XLSX Connector. Operators select a saved mapping template, point it at a file (import) or a set of product filters (export), and run the job. They do not need to author the column mapping themselves.
 
-This guide covers Steps 2 and 3 of the connector's three-step workflow. See the [Author Guide](./author-guide) for Step 1 (template creation).
+This guide covers Steps 2 and 3 of the three-step workflow. See the [Author Guide](./author-guide) for Step 1 (template creation).
 
-## Importing products from XLSX
+---
 
-### Step 1 — Open the import job creation page
+## Importing products from an XLSX file
+
+### Step 1 — Open the import job form
 
 Navigate to **Data Transfer → Imports → Create**.
 
-### Step 2 — Pick the importer
+### Step 2 — Select the importer type
 
-In the **Type** dropdown, choose **XLSX Product Import** (registered key: `xlsx_products`).
+In the **Type** dropdown, choose **XLSX Products** (registered key: `xlsx_products`).
 
 ### Step 3 — Configure the job
 
-Fill in the standard import-job fields. The connector exposes the importer with these capabilities:
+Fill in the standard import fields. The XLSX importer exposes:
 
-- `has_file_options` — **enabled**: file-handling options (e.g., update strategy) are visible.
-- `has_separator` — **disabled**: there is no CSV-style separator field for XLSX.
-- `has_images_directory_path` — **disabled**: image-folder option is not used.
+| Setting | Notes |
+|---|---|
+| **File options** | Enabled — update strategy (create/update/delete) is visible |
+| **Separator** | Not applicable — XLSX files do not use a CSV-style delimiter |
+| **Images directory path** | Not applicable — media is bundled inside the XLSX/zip from the exporter |
 
 ### Step 4 — Select the mapping template
 
-Inside the job's configuration tab, select the **XLSX Template** that matches the file you are importing. Only templates with status **Enabled** appear here.
+The **XLSX Template** field appears in the job form. Choose the template whose **Import Mapping** describes the columns in your file. Only templates with status **Enabled** appear here.
 
 ### Step 5 — Upload the XLSX file
 
-Upload the `.xlsx` file you want to import. You can download the connector's sample (`data-transfer/samples/products.csv`) from the import screen as a reference for the expected structure.
+Attach the `.xlsx` file you want to import. Click **Download Sample** to get a reference workbook if you need to verify the expected structure before uploading.
 
 ### Step 6 — Save and run
 
@@ -39,100 +43,195 @@ Operator clicks Run
         ↓
 Job dispatched to the queue
         ↓
-Queue worker reads the XLSX file
+Queue worker reads the XLSX file row by row
         ↓
-Each row is validated, then mapped to Unopim attributes via the template
+Each row is validated and transformed using the template mapping
         ↓
-Products created/updated; results recorded in the job history
+Rows outside the template's category or status scope are skipped
+        ↓
+Products are created or updated; results recorded in job history
+        ↓
+Super-attribute axes are synced for configurable products
 ```
 
-### Step 7 — Monitor
+### Step 7 — Monitor progress
 
-Open the job from the import history. You will see:
+Open the job from **Data Transfer → Imports**. You will see:
 
-- progress (rows processed / total)
-- the count of created, updated, and skipped products
-- validation errors per row, with the failing column and reason
+- progress (rows processed / total rows)
+- counts of created, updated, and skipped products
+- row-level validation errors with the failing column and reason
 
-## Exporting products to XLSX
+---
 
-### Step 1 — Open the export job creation page
+## Exporting products to an XLSX file
+
+### Step 1 — Open the export job form
 
 Navigate to **Data Transfer → Exports → Create**.
 
-### Step 2 — Pick the exporter
+### Step 2 — Select the exporter type
 
-In the **Type** dropdown, choose **XLSX Product Export** (registered key: `xlsx_products`).
+In the **Type** dropdown, choose **XLSX Products** (registered key: `xlsx_products`).
 
 ### Step 3 — Configure filters
 
-The exporter exposes one connector-specific filter:
+The XLSX exporter exposes two connector-specific filters:
 
 | Filter | Required | Notes |
 |---|---|---|
 | **File Format** | Yes | Currently only `XLSX` is offered |
+| **With Media** | No | When enabled, file, image, and gallery files are copied into the export archive alongside the workbook |
 
-Standard product filters (channel, locale, family, status, etc.) are inherited from the underlying `ProductRepository` source.
+Standard product filters (channel, locale, family, category, status) are inherited from UnoPim's product source and can also be applied.
+
+Category and product-status scope from the selected template are **also** applied on top of any job-level filters.
 
 ### Step 4 — Select the mapping template
 
-Inside the job, select the XLSX Template whose **Export Mapping** describes the columns you want in the output.
+Choose the template whose **Export Mapping** describes the columns you want in the output file. Only enabled templates appear here.
+
+When a template is selected:
+
+- column headers in the output match the **XLSX Field** names defined in the template.
+- structural columns (category, family, parent, type, status, variant structure) use the names set in the template's **Other Mapping** panel.
+- the price columns are expanded per currency: `Price (USD)`, `Price (EUR)`, etc.
+- multiselect values are joined using the template's **Attribute Value Separator**.
+
+When no template is selected, the exporter falls back to standard UnoPim attribute codes as column headers.
 
 ### Step 5 — Save and run
 
-Save and click **Run**. The export is dispatched to the queue. When the job completes, the generated `.xlsx` file becomes downloadable from the export's history row.
+Save and click **Run**. The export is dispatched to the queue:
+
+```
+Operator clicks Run
+        ↓
+Job dispatched to the queue
+        ↓
+Queue worker reads products in batches (cursor-based pagination)
+        ↓
+Each product is transformed into XLSX columns using the template mapping
+        ↓
+One row per channel/locale combination per product
+        ↓
+All currencies written as separate price columns
+        ↓
+Formula-safe values written to the workbook
+        ↓
+If With Media is on, media files are copied into the archive
+```
+
+### Step 6 — Download the file
+
+When the job completes, click the download link in **Data Transfer → Exports** to retrieve the `.xlsx` file (or a `.zip` archive if **With Media** was enabled).
+
+---
+
+## What each XLSX row contains
+
+Each product generates one row per channel/locale combination. For a catalog with two channels (each with two locales), a single product produces four rows. All rows carry the same SKU and structural fields; the attribute values vary by channel and locale.
+
+| Always present | Notes |
+|---|---|
+| `channel` | Channel code for this row |
+| `locale` | Locale code for this row |
+| SKU column | Mapped via the template or the default `sku` column |
+| Status column | `true` or `false` |
+| Type column | `simple`, `configurable`, or `variant_group` |
+| Category column | Comma-separated category codes |
+| Family column | Attribute family code |
+| Parent column | Parent SKU for variants; empty for top-level products |
+| Configurable attributes column | Comma-separated super-attribute codes for configurable products |
+| Variant structure column | Variant-structure code for configurable products |
+
+---
 
 ## Running and monitoring
 
-Both flows ride on Unopim's standard Data Transfer pipeline, so the queue worker must be active:
+Both import and export rely on UnoPim's queue. Keep a worker active:
 
 ```bash
 php artisan queue:work
 ```
 
-If a worker is not running, jobs stay in the **Pending** state and never produce results.
+If no worker is running, jobs stay in **Pending** and never produce results.
+
+---
 
 ## Troubleshooting
 
-### "XLSX Product Import" / "XLSX Product Export" not in the type dropdown
+### "XLSX Products" not in the type dropdown
 
-- Confirm the package is installed and the service provider loaded.
-- Run `php artisan optimize:clear` and re-open the page.
-- Check that your role grants Data Transfer access (the connector reuses Data Transfer's permissions for run-time access).
+- Confirm the package is installed and the service provider is registered.
+- Run `php artisan optimize:clear` and reload the page.
+- Check that your role includes Data Transfer access.
 
-### Template not visible in the job UI
+### Template not visible in the job form
 
-- The template's status is probably **Disabled** — toggle it on from **XLSX Connector → Templates**.
-- The template might map only the opposite direction (e.g., export-only template won't show in import jobs).
-- Confirm your role has at least `xlsx_connector.templates` view permission so the listing is reachable.
+- The template's status is **Disabled** — enable it from **Custom XLSX Connector → Templates**.
+- The template may only have an export mapping (not visible in import jobs) or only an import mapping (not visible in export jobs).
+- Confirm your role includes view access to the Custom XLSX Connector (contact your administrator).
 
-### Validation errors during import
+### Validation errors on import
 
-- Open the job's row-level errors panel — each error names the failing XLSX column and Unopim attribute.
-- Common causes: a required attribute (e.g., `sku`) is unmapped in the template, an attribute referenced in the template no longer exists, or a value violates the attribute's validation (numeric, options, length).
-- Always validate the XLSX file structure against the **sample file** before running large imports.
+Open the job's row-level error panel — each error names the failing column and the reason. Common causes:
 
-### Export produces an empty file
+- A required attribute (such as `sku`) is not mapped in the template.
+- A column in the file is not listed in the template mapping and not recognized as a standard UnoPim column.
+- A value violates the attribute's validation rules (wrong type, invalid option code, length limit).
+- The row's locale is not enabled on the row's channel.
+- The row's categories are outside the template's category scope.
+- The row's status does not match the template's product-status filter.
 
-- Check the product filters on the export job — they may exclude every product in your catalog.
-- Confirm the template's **Export Mapping** is populated. A template with only an Import Mapping cannot generate any columns on export.
+Always validate a small file (5–10 rows) first before running large imports.
+
+### Import skips rows unexpectedly
+
+- **Category scope** — the template has categories selected; rows whose categories do not overlap are skipped.
+- **Product-status filter** — the template is set to Enabled or Disabled only; rows with the opposite status are skipped.
+- **Channel/locale mismatch** — the row's locale is not enabled on the row's channel.
+
+### Export produces an empty or incomplete file
+
+- Check the product filters on the export job — they may exclude all products.
+- Confirm the template has an **Export Mapping** populated. A template with only an Import Mapping produces no columns on export.
+- Check the template's category scope and product-status filter — they may be narrower than expected.
+- Ensure a queue worker is running and completed the job without errors.
+
+### Configurable products are missing variant axes after import
+
+The connector syncs super-attribute axes after each import batch. If axes are still missing:
+
+- Check that the `configurable_attributes` column (or the column named in **Family Variant Field**) contains the correct attribute codes.
+- Confirm those attribute codes exist in UnoPim under **Configure → Attributes**.
+- Review the job's row-level errors for any batch-level failures.
+
+### Export file opens with formula errors in Excel
+
+This should not happen — all exported values are passed through `EscapeFormulaOperators::escapeValue()`. If you see formula output, confirm you are on connector version `2.0.x` or higher and that the export ran through the XLSX exporter (not a CSV fallback).
 
 ### Job is stuck in Pending
 
-- Verify a queue worker is running.
-- Look in `storage/logs/laravel.log` for queue exceptions.
-- Restart the worker if you recently changed code or added attributes — Octane/queue workers cache class definitions until restart.
+- Confirm a queue worker is running: `php artisan queue:work`.
+- Check `storage/logs/laravel.log` for queue exceptions.
+- Restart the worker after any code change — workers cache class definitions until restart.
 
-## What operators cannot do
-
-- Edit a template's mapping — that needs `xlsx_connector.templates.edit`.
-- Bypass validation on import — every row goes through the importer's validator.
-- Cancel a queued job from the UI — once dispatched, it runs to completion or until the worker is stopped.
+---
 
 ## Best practices
 
-1. Run a small sample file (5–10 rows) through the importer before each large import — catches template mismatches cheaply.
-2. Watch `storage/logs/laravel.log` and the queue worker output during the first run after any template change.
-3. Download an export and open it in Excel/LibreOffice to confirm column order before sharing with external partners.
-4. For recurring imports (monthly vendor feeds, ERP syncs), keep the same template selected across runs — it makes job history easier to compare.
-5. Keep queue workers under a process supervisor in production so a worker crash doesn't silently halt all transfers.
+1. **Run a sample file first** — 5–10 rows through an import job catches template mismatches cheaply before committing the full catalog.
+2. **Open the export in Excel before sharing** — verify column order, headers, and multiselect separators match what the recipient expects.
+3. **Keep the same template across recurring runs** — consistent templates make job-history comparison straightforward.
+4. **Watch logs on the first run after a template change** — `storage/logs/laravel.log` and the queue worker output show any mapping errors early.
+5. **Use With Media for full handovers** — when sending data to an external party, enable **With Media** so the archive is self-contained.
+6. **Do not cancel a queued job externally** — once dispatched, the job runs to completion or until the worker is stopped; stopping the worker mid-job leaves the database in a partial state. Wait for the job to finish or let it fail, then re-run.
+
+---
+
+## What operators cannot do
+
+- Edit a template's mapping — that requires template edit permission (contact your administrator).
+- Bypass row validation on import — every row goes through the importer's validator.
+- Select a disabled template — only enabled templates appear in the job form.

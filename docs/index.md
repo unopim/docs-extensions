@@ -132,6 +132,10 @@ features:
     details: Trigger workflows in thousands of apps the moment a product, category, attribute or family changes.
     link: /zapier/
     linkText: Read docs
+  - title: Custom XLSX Connector
+    details: Import and export products with flexible column mapping templates — works with any spreadsheet layout.
+    link: /xlsx-connector/
+    linkText: Read docs
   - title: XML Connector
     details: Streamlined XML imports with validation and mapping.
     link: /xml-connector/

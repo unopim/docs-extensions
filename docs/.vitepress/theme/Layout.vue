@@ -42,6 +42,7 @@ const extensions = [
   { slug: 'woocommerce',               label: 'WooCommerce'        },
   { slug: 'woocommerce-wpml',          label: 'WooCommerce WPML'   },
   { slug: 'zapier',                    label: 'Zapier'             },
+  { slug: 'xlsx-connector',            label: 'XLSX Connector',   icon: '/icons/extensions/xlsx-connector.svg' },
   { slug: 'xml-connector',             label: 'XML Connector',    icon: '/icons/extensions/xml-connector.svg' },
 ]
 

@@ -44,6 +44,7 @@ const projects = [
   { slug: 'shopware6', label: 'Shopware 6' },
   { slug: 'supplier-data-portal', label: 'Supplier Data Portal' },
   { slug: 'woocommerce', label: 'WooCommerce' },
+  { slug: 'xlsx-connector', label: 'Custom XLSX Connector' },
   { slug: 'xml-connector', label: 'XML Connector' },
   { slug: 'woocommerce-wpml', label: 'WooCommerce WPML' },
   { slug: 'zapier', label: 'Zapier' },

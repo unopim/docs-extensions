@@ -79,6 +79,7 @@ const extensions = [
   { slug: 'woocommerce',               label: 'WooCommerce',      icon: '/icons/extensions/woocommerce.png' },
   { slug: 'woocommerce-wpml',          label: 'WooCommerce WPML', icon: '/icons/extensions/woocommerce-wpml.png' },
   { slug: 'zapier',                    label: 'Zapier',           icon: '/icons/extensions/zapier.png' },
+  { slug: 'xlsx-connector',            label: 'XLSX Connector',   icon: '/icons/extensions/xlsx-connector.svg' },
   { slug: 'xml-connector',             label: 'XML Connector',    icon: '/icons/extensions/xml-connector.svg' },
 ]
 </script>

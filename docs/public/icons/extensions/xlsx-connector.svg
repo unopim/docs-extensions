@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="xlbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+    <filter id="xlsh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#00000033"/>
+    </filter>
+  </defs>
+
+  <!-- Card background -->
+  <rect width="48" height="48" rx="12" fill="url(#xlbg)"/>
+
+  <!-- Spreadsheet grid lines -->
+  <rect x="10" y="13" width="28" height="22" rx="2" fill="#ffffff" opacity="0.15"/>
+
+  <!-- Column divider -->
+  <line x1="22" y1="13" x2="22" y2="35" stroke="#ffffff" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- Row dividers -->
+  <line x1="10" y1="20" x2="38" y2="20" stroke="#ffffff" stroke-width="1.2" opacity="0.5"/>
+  <line x1="10" y1="27" x2="38" y2="27" stroke="#ffffff" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- Header row fill -->
+  <rect x="10" y="13" width="28" height="7" rx="2" fill="#ffffff" opacity="0.20"/>
+
+  <!-- "XL" text -->
+  <text
+    x="24" y="31"
+    font-family="'Arial', sans-serif"
+    font-size="10"
+    font-weight="700"
+    fill="#ffffff"
+    text-anchor="middle"
+    filter="url(#xlsh)"
+  >XL</text>
+</svg>
