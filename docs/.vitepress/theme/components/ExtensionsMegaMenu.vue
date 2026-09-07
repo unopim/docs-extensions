@@ -76,6 +76,7 @@ const extensions = [
   { slug: 'shopify',                   label: 'Shopify',          icon: '/icons/extensions/shopify.png'  },
   { slug: 'shopware6',                 label: 'Shopware 6',       icon: '/icons/extensions/shopware6.png' },
   { slug: 'supplier-data-portal',      label: 'Supplier Portal',  icon: '/icons/extensions/supplier-data-portal.png' },
+  { slug: 'unopim-mcp',                label: 'UnoPim MCP',       icon: '/icons/extensions/unopim-mcp.svg' },
   { slug: 'woocommerce',               label: 'WooCommerce',      icon: '/icons/extensions/woocommerce.png' },
   { slug: 'woocommerce-wpml',          label: 'WooCommerce WPML', icon: '/icons/extensions/woocommerce-wpml.png' },
   { slug: 'zapier',                    label: 'Zapier',           icon: '/icons/extensions/zapier.png' },
