@@ -1,0 +1,31 @@
+[
+  {
+    "text": "Setup",
+    "items": [
+      { "text": "Overview",                    "link": "/n8n/" },
+      { "text": "Installation",                "link": "/n8n/installation" },
+      { "text": "Connect UnoPim in n8n",       "link": "/n8n/credentials" }
+    ]
+  },
+  {
+    "text": "Building workflows",
+    "items": [
+      { "text": "Triggers",                    "link": "/n8n/triggers" },
+      { "text": "Actions",                     "link": "/n8n/actions" }
+    ]
+  },
+  {
+    "text": "Operating it",
+    "items": [
+      { "text": "Connected workflows and logs", "link": "/n8n/delivery-logs" },
+      { "text": "Configuration",               "link": "/n8n/configuration" },
+      { "text": "Troubleshooting",             "link": "/n8n/troubleshooting" }
+    ]
+  },
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support",             "link": "/n8n/contact-support" }
+    ]
+  }
+]

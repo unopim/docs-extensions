@@ -36,6 +36,7 @@ const projects = [
   { slug: 'job-scheduler', label: 'Job Scheduler' },
   { slug: 'maker-checker-workflow', label: 'Maker Checker Workflow' },
   { slug: 'magento2', label: 'Magento 2' },
+  { slug: 'n8n', label: 'n8n' },
   { slug: 'odoo-erp', label: 'Odoo ERP' },
   { slug: 'pdf-generator', label: 'PDF Generator' },
   { slug: 'prestashop', label: 'PrestaShop' },
