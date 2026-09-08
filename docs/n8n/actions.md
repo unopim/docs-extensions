@@ -120,6 +120,20 @@ That turns a request like *find every product missing a French description and w
 
 For an endpoint the node does not cover, use **Custom API Call**. It sends a raw request with your credential already attached, so you do not rebuild authentication.
 
+## A node runs once per input item
+
+This is n8n's own behaviour, and it catches people out with write operations.
+
+If a **Get Many** returning 50 products feeds into an **Update Partially**, the update runs
+50 times, once per product. That is usually what you want.
+
+It is not what you want when the write does not depend on the incoming items. A Get Many
+feeding a single delete will run that delete once per record returned, and every run after
+the first fails because the record is already gone.
+
+Put a write that should happen once after a node that produces one item, or add an
+**Aggregate** node to collapse the list first.
+
 ## Errors
 
 The node raises the API error it received, with the status code and UnoPim's message.
