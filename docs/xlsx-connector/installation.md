@@ -2,19 +2,28 @@
 
 ## Requirements
 
-- Unopim v2.0.0 or higher
-- PHP 8.3+, Laravel 12.x
-- Standard Unopim Data Transfer module (already in core)
+| Item | Value |
+|---|---|
+| UnoPim | 3.0.0 |
+| PHP | ^8.4.1 |
+| Laravel | ^13.0 |
+| Database | MySQL with JSON column support |
 
 ## Steps
 
-### 1. Merge the package files
+### 1. Place the package
 
-Unzip the extension package and place the folder at `packages/Webkul/XLSXConnector` inside your Unopim project.
+Download and unzip the extension package. Rename the folder to `XLSXConnector` and place it at:
+
+```
+packages/Webkul/XLSXConnector
+```
+
+inside the root of your UnoPim project.
 
 ### 2. Register the service provider
 
-The package's `composer.json` already declares the provider under `extra.laravel.providers`, so on most installs it auto-registers when Composer dumps the autoloader. If your project disables package discovery, add it manually to `bootstrap/providers.php`:
+Add the provider to `bootstrap/providers.php`:
 
 ```php
 use Webkul\XLSXConnector\Providers\XLSXConnectorServiceProvider;
@@ -25,6 +34,8 @@ return [
 ];
 ```
 
+The package's own `composer.json` declares the provider under `extra.laravel.providers`, so if your project has package auto-discovery enabled this entry is added automatically when you dump the autoloader.
+
 ### 3. Update Composer autoload
 
 In your project's `composer.json`, add under `autoload.psr-4`:
@@ -33,19 +44,32 @@ In your project's `composer.json`, add under `autoload.psr-4`:
 "Webkul\\XLSXConnector\\": "packages/Webkul/XLSXConnector/src"
 ```
 
-### 4. Run installation commands
+### 4. Run the installer
 
-Run these in order:
+From the project root, run:
 
 ```bash
 composer dump-autoload
-php artisan optimize:clear
-php artisan migrate
+php artisan xlsx-connector:install
 ```
 
-The migration creates the `xlsx_templates` table (`id`, `name`, `code` unique, `status` boolean, `export_mapping` JSON, `import_mapping` JSON, timestamps).
+The `xlsx-connector:install` command:
 
-### 5. Build front-end assets
+- runs the migrations (creates the `xlsx_templates` table with `id`, `name`, `code`, `status`, `export_mapping` JSON, `import_mapping` JSON, and timestamps)
+- publishes the connector's pre-built front-end assets
+- clears the application cache
+
+### 5. (Optional) Publish assets manually
+
+If you need to publish the connector assets separately:
+
+```bash
+php artisan vendor:publish --tag=xlsx-connector
+```
+
+### 6. (Optional) Rebuild front-end assets
+
+The connector ships with pre-built CSS and font assets. This step is only needed if you customise the connector's styles:
 
 ```bash
 cd packages/Webkul/XLSXConnector
@@ -53,14 +77,36 @@ npm install
 npm run build
 ```
 
-### 6. Start the queue worker
+### 7. Start the queue worker
 
-Import and export jobs are dispatched via the standard Unopim Data Transfer pipeline, which uses queued jobs. Keep a worker running:
+Import and export jobs are dispatched via UnoPim's Data Transfer pipeline, which relies on queued jobs. Keep a worker running:
 
 ```bash
 php artisan queue:work
 ```
 
-### 7. Verify
+In production, run the worker under a process supervisor (Supervisor, systemd) so it restarts after crashes or deploys.
 
-Open the Unopim admin panel — an **XLSX Connector** entry should appear in the sidebar (icon `icon-custom-xlsx`) with a **Templates** sub-link. Opening **Data Transfer → Imports** and **Data Transfer → Exports** should now show **XLSX Product Import** and **XLSX Product Export** as available job types.
+### 8. Verify
+
+Open the UnoPim admin panel. You should see:
+
+- **Custom XLSX Connector → Templates** in the sidebar (icon: `icon-custom-xlsx`).
+- **Data Transfer → Imports** listing **XLSX Products** as an available importer.
+- **Data Transfer → Exports** listing **XLSX Products** as an available exporter.
+
+### (Optional) Configure tests
+
+**In root `tests/Pest.php`:**
+
+```php
+use Webkul\XLSXConnector\Tests\XLSXConnectorTestCase;
+
+uses(XLSXConnectorTestCase::class)->in('../packages/Webkul/XLSXConnector/tests');
+```
+
+**In root `composer.json` under `autoload-dev.psr-4`:**
+
+```json
+"Webkul\\XLSXConnector\\Tests\\": "packages/Webkul/XLSXConnector/tests"
+```

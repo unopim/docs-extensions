@@ -1,56 +1,98 @@
-# XLSX Connector
+# Custom XLSX Connector
 
-The **XLSX Connector** extension lets you import products into Unopim from `.xlsx` spreadsheets and export Unopim products back out as `.xlsx` files. The mapping between Unopim product attributes and XLSX columns is captured in reusable **Templates**, so the same import/export configuration can be saved, shared, and reused across jobs.
+The **Custom XLSX Connector** lets you import products into UnoPim from `.xlsx` spreadsheets and export UnoPim products back out as `.xlsx` files — without requiring a fixed spreadsheet layout. You define **mapping templates** that translate between your spreadsheet's column headers and UnoPim attribute codes, so the connector works with the file your team or vendor already uses.
 
 ## How it works
 
 ```
-Author creates a Template (name + code)
+Author creates a Mapping Template
         ↓
-Map XLSX columns → Unopim attributes (Import Mapping)
-Map Unopim attributes → XLSX columns (Export Mapping)
+Choose XLSX column headers and map each one to a UnoPim attribute
+Set structural column names, separators, category scope, product-status scope
         ↓
 Operator opens Data Transfer → Imports / Exports
         ↓
-Pick "XLSX Product Import" or "XLSX Product Export"
+Pick "XLSX Products" as the importer or exporter type
         ↓
-Select the saved Template inside the job
+Select the saved Template in the job form
         ↓
-Run the job → file is parsed (import) or generated (export)
+Run the job → rows are parsed and mapped (import) or products are written to columns (export)
 ```
 
-Templates are stored in the `xlsx_templates` table with two JSON columns — `import_mapping` and `export_mapping` — so a single template can serve both directions or just one.
+Templates store separate `import_mapping` and `export_mapping` payloads, so the same template can serve both directions or just one.
 
 ## Key features
 
-- **Reusable mapping templates** — name + unique code, with separate import and export mapping payloads stored as JSON.
-- **Status toggle** — enable or disable a template without deleting it. Disabled templates are excluded from job dropdowns.
-- **XLSX import** — registered importer key `xlsx_products`, sample file at `data-transfer/samples/products.csv`, file-options enabled.
-- **XLSX export** — registered exporter key `xlsx_products`, with a `file_format` filter (currently `XLSX`).
-- **Mass actions on templates** — mass status update and mass delete from the listing grid.
-- **Admin grid** — searchable list of templates with code, name, status, edit, delete, and toggle actions.
-- **Multi-language UI** — translations shipped for 30+ locales (en_US, de_DE, fr_FR, es_ES, hi_IN, ja_JP, zh_CN, etc.).
-- **Permission-based access** — view, create, edit, delete, and mass-update permissions are individually controlled.
+- **Flexible mapping templates** — every XLSX column header is a name you choose; simple and configurable products can map the same column to different attributes.
+- **Full product hierarchy** — simple products, configurable products, variant groups, and their parent–child links all survive a round trip in one workbook.
+- **All channels and locales in one file** — every channel/locale combination lands on the same product row with no extra setup.
+- **Multi-currency pricing** — each currency becomes its own column (e.g. `Price (USD)`, `Price (EUR)`); the currency code in the header is parsed back on import.
+- **Category and status scope** — a template can limit both import and export to chosen categories and to enabled-only or disabled-only products.
+- **Include media** — an export toggle that copies file, image, and gallery files alongside the workbook.
+- **Default values per column** — empty cells are filled with a fallback value set on the template.
+- **Formula-injection protection** — all exported values are cleaned so Excel cannot execute formulas when the file is opened.
+- **Attribute value separator** — choose the separator used for multiselect option codes (default `,`).
+- **Status toggle and mass actions** — enable/disable or delete templates individually or in bulk.
+- **Permission-based access** — six individual ACL keys control who can view, create, edit, delete, and mass-update templates.
+- **30+ locale translations** — the admin UI ships translated for every locale UnoPim supports.
+
+## Attribute types supported
+
+| Type | How it appears in the file |
+|---|---|
+| Text | Plain value |
+| Textarea | Plain value |
+| Select | Option code |
+| Multiselect | Option codes joined by your chosen separator |
+| Boolean | `0` or `1` |
+| Checkbox | `0` or `1` |
+| Date | Date value |
+| Datetime | Date and time value |
+| Price | One column per currency — `Price (USD)`, `Price (EUR)`, etc. |
+| File | File path; file is copied when **Include Media** is on |
+| Image | Image path; file is copied when **Include Media** is on |
+| Gallery | Comma-separated image paths; files are copied when **Include Media** is on |
+
+## Supported product types
+
+| Type | Notes |
+|---|---|
+| **Simple** | All attribute values, family, categories, and status |
+| **Configurable** | Super-attribute list saved to `configurable_attributes`; axes rebuilt on import |
+| **Variant group** | Multi-level structures with a variant-structure code column |
+| **Variants** | Exported with a parent reference; same-file parents resolved on import |
 
 ## Roles
 
 | Role | Responsibilities |
 |---|---|
-| **Template Author** | Creates and maintains XLSX mapping templates (column ↔ attribute mapping) |
-| **Job Operator** | Selects a template inside an Import/Export job and runs the data transfer |
+| **Template Author** | Creates and maintains XLSX mapping templates |
+| **Job Operator** | Selects a template inside an import/export job and runs it |
 
-A user can hold both roles depending on their permissions.
+One user can hold both roles depending on their permissions.
 
 ## Requirements
 
-- Unopim v2.0.0 or higher
-- PHP 8.3+, Laravel 12.x
-- The standard Unopim Data Transfer module (already part of the core install)
-- Queue worker running (import/export jobs are dispatched as queued jobs)
+| Item | Value |
+|---|---|
+| UnoPim | 3.0.0 |
+| PHP | ^8.4.1 |
+| Laravel | ^13.0 |
+| Database | MySQL with JSON column support |
+| Data Transfer module | Included in UnoPim core |
+| Queue driver | Required for background job processing |
+
+## Version compatibility
+
+| Connector | UnoPim | PHP    | Laravel |
+|-----------|--------|--------|---------|
+| `2.0.x`   | 3.0.0  | ^8.4.1 | ^13.0   |
+| `1.2.x`   | 2.1.x  | ^8.3   | 12.x    |
+| `1.1.x`   | 2.0+   | ^8.3   | —       |
 
 ## In this guide
 
 - [Installation](./installation)
 - [Configuration](./configuration)
-- [Author Guide](./author-guide)
-- [Operator Guide](./operator-guide)
+- [Author Guide — Managing Templates](./author-guide)
+- [Operator Guide — Import & Export Jobs](./operator-guide)

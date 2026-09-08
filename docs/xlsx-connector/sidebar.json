@@ -1,12 +1,39 @@
 [
   {
-    "text": "XLSX Connector",
+    "text": "Custom XLSX Connector",
     "items": [
-      { "text": "Overview",       "link": "/xlsx-connector/" },
-      { "text": "Installation",   "link": "/xlsx-connector/installation" },
-      { "text": "Configuration",  "link": "/xlsx-connector/configuration" },
-      { "text": "Author Guide",   "link": "/xlsx-connector/author-guide" },
-      { "text": "Operator Guide", "link": "/xlsx-connector/operator-guide" }
+      { "text": "Overview",     "link": "/xlsx-connector/" },
+      { "text": "Installation", "link": "/xlsx-connector/installation" }
+    ]
+  },
+  {
+    "text": "Configuration",
+    "items": [
+      { "text": "Permissions & Setup", "link": "/xlsx-connector/configuration" }
+    ]
+  },
+  {
+    "text": "Mapping Templates",
+    "items": [
+      { "text": "Managing Templates", "link": "/xlsx-connector/author-guide" }
+    ]
+  },
+  {
+    "text": "Export Jobs",
+    "items": [
+      { "text": "XLSX Product Export", "link": "/xlsx-connector/export-job" }
+    ]
+  },
+  {
+    "text": "Import Jobs",
+    "items": [
+      { "text": "XLSX Product Import", "link": "/xlsx-connector/import-job" }
+    ]
+  },
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support", "link": "/xlsx-connector/contact-support" }
     ]
   }
 ]

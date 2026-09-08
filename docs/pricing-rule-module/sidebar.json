@@ -1,12 +1,37 @@
 [
   {
-    "text": "Pricing Rule Module",
+    "text": "Dynamic Pricing Rule",
     "items": [
-      { "text": "Overview",        "link": "/pricing-rule-module/" },
-      { "text": "Installation",    "link": "/pricing-rule-module/installation" },
-      { "text": "Configuration",   "link": "/pricing-rule-module/configuration" },
-      { "text": "Author Guide",    "link": "/pricing-rule-module/author-guide" },
-      { "text": "Operator Guide",  "link": "/pricing-rule-module/operator-guide" }
+      { "text": "Overview",     "link": "/pricing-rule-module/" },
+      { "text": "Installation", "link": "/pricing-rule-module/installation" }
+    ]
+  },
+
+  {
+    "text": "Configuration",
+    "items": [
+      { "text": "Permissions & Prerequisites", "link": "/pricing-rule-module/configuration" }
+    ]
+  },
+
+  {
+    "text": "Managing Rules",
+    "items": [
+      { "text": "Author Guide", "link": "/pricing-rule-module/author-guide" }
+    ]
+  },
+
+  {
+    "text": "Running Rules",
+    "items": [
+      { "text": "Operator Guide", "link": "/pricing-rule-module/operator-guide" }
+    ]
+  },
+
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact & Support", "link": "/pricing-rule-module/contact-support" }
     ]
   }
 ]

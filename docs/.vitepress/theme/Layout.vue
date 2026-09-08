@@ -25,6 +25,7 @@ const extensions = [
   { slug: 'dam',                       label: 'DAM'                },
   { slug: 'dam-webdav',               label: 'DAM NextCloud'      },
   { slug: 'deepl',                     label: 'DeepL Translator'   },
+  { slug: 'pricing-rule-module',       label: 'Dynamic Pricing Rule' },
   { slug: 'erpnext',                   label: 'ERPNext'            },
   { slug: 'google-shopping',           label: 'Google Shopping'    },
   { slug: 'history-preview',           label: 'History Preview',  icon: '/icons/extensions/history-preview.svg' },
@@ -42,6 +43,7 @@ const extensions = [
   { slug: 'woocommerce',               label: 'WooCommerce'        },
   { slug: 'woocommerce-wpml',          label: 'WooCommerce WPML'   },
   { slug: 'zapier',                    label: 'Zapier'             },
+  { slug: 'xlsx-connector',            label: 'XLSX Connector',   icon: '/icons/extensions/xlsx-connector.svg' },
   { slug: 'xml-connector',             label: 'XML Connector',    icon: '/icons/extensions/xml-connector.svg' },
 ]
 

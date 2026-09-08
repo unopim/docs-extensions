@@ -2,8 +2,8 @@
 
 ## Requirements
 
-- Unopim v2.0.0 or higher
-- PHP 8.3+, Laravel 12.x
+- Unopim v3.0.0
+- PHP 8.4+, Laravel 13.x, Concord ^1.16
 
 ## Steps
 
@@ -24,7 +24,20 @@ return [
 ];
 ```
 
-### 3. Update Composer autoload
+### 3. Register the Concord module
+
+Unopim 3.0 resolves models through Concord. Add the module provider to the `modules` array in `config/concord.php`:
+
+```php
+return [
+    'modules' => [
+        // ...existing modules...
+        Webkul\PricingRuleModule\Providers\ModuleServiceProvider::class,
+    ],
+];
+```
+
+### 4. Update Composer autoload
 
 In `composer.json`, add under `autoload.psr-4`:
 
@@ -32,7 +45,7 @@ In `composer.json`, add under `autoload.psr-4`:
 "Webkul\\PricingRuleModule\\": "packages/Webkul/PricingRuleModule/src"
 ```
 
-### 4. Run installation commands
+### 5. Run installation commands
 
 Run these in order:
 
@@ -42,15 +55,15 @@ php artisan optimize:clear
 php artisan migrate
 ```
 
-### 5. Build front-end assets
+### 6. Publish front-end assets
+
+The module ships with pre-built assets — no `npm install` or build step is required:
 
 ```bash
-cd packages/Webkul/PricingRuleModule
-npm install
-npm run build
+php artisan vendor:publish --tag=pricingrulemodule --force
 ```
 
-### 6. Start the queue worker
+### 7. Start the queue worker
 
 Rule execution is dispatched as queued jobs (`ApplyPriceRule`, `ApplyPriceRuleToProducts`). Keep a worker running:
 
@@ -58,6 +71,8 @@ Rule execution is dispatched as queued jobs (`ApplyPriceRule`, `ApplyPriceRuleTo
 php artisan queue:work
 ```
 
-### 7. Verify
+In production, run the worker under a process supervisor (Supervisor, systemd, etc.) so it restarts automatically.
 
-Open the Unopim admin panel — a **Pricing Rule** entry should appear in the sidebar (icon `icon-custom-price`) and clicking it should open the rule listing page.
+### 8. Verify
+
+Open the Unopim admin panel — a **Pricing Rule** entry should appear in the sidebar and clicking it should open the rule listing page.
