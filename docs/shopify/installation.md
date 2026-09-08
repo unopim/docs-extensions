@@ -93,7 +93,7 @@ php artisan optimize:clear
 
 Once either installation method is complete, log in to your UnoPim dashboard. You should see a **Shopify icon** appear in the left sidebar — that confirms the connector has been installed successfully.
 
-![Shopify icon in UnoPim sidebar](./images/Shopify-installed.png)
+![Shopify icon in UnoPim sidebar](./images/verify-installation.png)
 
 If the icon doesn't appear, try running `php artisan optimize:clear` again and refresh the page.
 

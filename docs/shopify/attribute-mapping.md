@@ -16,48 +16,57 @@ On this screen, the left side lists all available Shopify product fields. For ea
 
 ## Available Field Mappings
 
-Here's a breakdown of every Shopify field you can map, what it does, and when you'd use it:
+Here's a breakdown of every Shopify field you can map, what it does, and which UnoPim attribute types it accepts:
 
-| Shopify Field | Field Code | What it does |
-|---|---|---|
-| **Name** | `title` | The product title shown on your Shopify storefront |
-| **Description** | `descriptionHtml` | Full product description — supports HTML formatting |
-| **Price** | `price` | The selling price of the product |
-| **Weight** | `weight` | Product weight used for shipping calculations |
-| **Quantity** | `inventoryQuantity` | How many units are available in stock |
-| **Inventory Tracked** | `inventoryTracked` | Turns on inventory tracking for the product |
-| **Allow Purchase Out of Stock** | `inventoryPolicy` | Allows customers to still buy the product when stock hits zero |
-| **Vendor** | `vendor` | The brand or supplier name |
-| **Product Type** | `productType` | The category or type the product belongs to |
-| **Tags** | `tags` | Keywords used for search and filtering in Shopify |
-| **Barcode** | `barcode` | Product barcode or unique identifier for inventory scanning |
-| **Compare Price** | `compareAtPrice` | The original price — shown as a strikethrough to highlight a discount |
-| **SEO Title** | `metafields_global_title_tag` | Custom page title used by search engines |
-| **SEO Description** | `metafields_global_description_tag` | Meta description shown in search engine results |
-| **Handle** | `handle` | The URL-friendly slug for the product page (e.g. `blue-running-shoes`) |
-| **Taxable** | `taxable` | Marks whether tax should be applied to this product |
-| **Cost per Item** | `cost` | Cost of goods sold (COGS) — used for profit reporting |
+| Shopify Field | Field Code | What it does | Supported attribute types |
+|---|---|---|---|
+| **Name** | `title` | The product title shown on your Shopify storefront. This field is required. | text |
+| **Description** | `descriptionHtml` | Full product description — supports HTML formatting | text, textarea |
+| **Price** | `price` | The selling price of the product | price |
+| **Weight** | `weight` | Product weight used for shipping calculations | number, metric |
+| **Inventory Tracked** | `inventoryTracked` | Turns on inventory tracking for the product | boolean |
+| **Allow Purchase Out of Stock** | `inventoryPolicy` | Allows customers to still buy the product when stock hits zero | yes/no |
+| **Vendor** | `vendor` | The brand or supplier name | text, simple select |
+| **Product Type** | `productType` | The category or type the product belongs to | text, simple select |
+| **Tags** | `tags` | Keywords used for search and filtering in Shopify | textarea, text, select, multiselect |
+| **Barcode** | `barcode` | Product barcode or unique identifier for inventory scanning | text |
+| **Compare Price** | `compareAtPrice` | The original price — shown as a strikethrough to highlight a discount | price |
+| **SEO Title** | `metafields_global_title_tag` | Custom page title used by search engines | text |
+| **SEO Description** | `metafields_global_description_tag` | Meta description shown in search engine results | text, textarea |
+| **Handle** | `handle` | The URL-friendly slug for the product page (e.g. `blue-running-shoes`) | text |
+| **Taxable** | `taxable` | Marks whether tax should be applied to this product | yes/no |
+| **Cost per Item** | `cost` | Cost of goods sold (COGS) — used for profit reporting | price |
 
 ![Field Mapping Example](./images/export-mapping-fields.png)
 
+> **Warning:** **Handle** must be unique. If several products end up with the same handle, only the **last** one is exported — the rest are silently overwritten.
+
 ---
 
-## Using Fixed Values
+## Shopify Status
 
-Sometimes you don't want a field to pull from a UnoPim attribute — you just want every exported product to have the **same value** for that field. That's what the **Fixed Value** option is for.
+**Shopify Status** (`status`) is not an attribute mapping — it's a fixed setting. Whatever you choose here is applied to **every product you export**, not to one product at a time.
 
-**Example:** You want all exported products to have a quantity of `100` in Shopify, regardless of what's stored in UnoPim.
+| Option | What it does |
+|---|---|
+| **Active** | The product is ready to sell and can be published to your sales channels |
+| **Draft** | The product isn't ready to sell and stays hidden from customers — use this to review products before publishing |
+| **Archived** | The product is no longer being sold and isn't available on any sales channel |
+| **Unlisted** | The product is active, but customers need a **direct link** to reach it. It won't appear in search, collections, or product recommendations. |
 
-Here's how to do it:
+---
 
-1. Find the **Quantity** field in the mapping list.
-2. **Deselect** the UnoPim attribute from the dropdown — the Fixed Value input will become editable once the attribute is cleared.
-3. Type `100` in the Fixed Value field.
-4. Save your mapping.
+## Unit Price
 
-From now on, every product exported to Shopify will have its quantity set to `100` — no matter what value exists in UnoPim.
+Some markets (notably the EU) require products to show a **unit price** — the price per standard unit of measure, like "€2.50 per litre". The **Unit Price** section maps the attributes that make this work.
 
-![Fixed Value Example](./images/same-unit.png)
+| Field | What it does | What to choose |
+|---|---|---|
+| **Total amount** | The total quantity contained in the product | A number or decimal type attribute |
+| **Total amount unit** | The unit that the total amount is measured in | A text or select type attribute |
+| **Base measure** | The reference quantity the unit price is calculated against | A number you type in |
+| **Base measure unit** | The unit for the base measure | Select from the dropdown |
 
-> **Tip:** Fixed values are useful for fields like **Taxable**, **Inventory Tracked**, or **Status** where you want a consistent default across your entire catalog.
+> **Important:** The value of **Total amount unit** must match a valid Shopify unit — for example `ML`, `CL`, or `L`. Any other value is **not exported**, and the product ends up with no unit price at all.
 
+**Example:** For a 750 ml bottle priced per litre, you'd set **Total amount** to `750`, **Total amount unit** to `ML`, **Base measure** to `1`, and **Base measure unit** to `L`.

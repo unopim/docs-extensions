@@ -12,9 +12,11 @@
     "items": [
       { "text": "Setup Unopim Credentials", "link": "/shopify/setup" },
       { "text": "Export Attribute Mapping", "link": "/shopify/attribute-mapping" },
+      { "text": "Collection Attribute Mapping", "link": "/shopify/collection-attribute-mapping" },
       { "text": "Shopify Media & Unit Mapping", "link": "/shopify/media-unit-mapping" },
       {"text" : "Import Attribute Mapping", "link": "/shopify/import-attribute-mapping"},
       {"text": "Add & Manage Shopify Meta Fields & Definations", "link": "/shopify/metafields"},
+      {"text": "Add & Manage Metaobject Definitions", "link": "/shopify/metaobjects"},
       {"text": "Shopify Connector settings", "link": "/shopify/connector-settings"}
     ]
   },
