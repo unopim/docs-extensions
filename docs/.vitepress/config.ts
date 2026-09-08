@@ -43,6 +43,7 @@ const projects = [
   { slug: 'shopify', label: 'Shopify' },
   { slug: 'shopware6', label: 'Shopware 6' },
   { slug: 'supplier-data-portal', label: 'Supplier Data Portal' },
+  { slug: 'unopim-mcp', label: 'UnoPim MCP' },
   { slug: 'woocommerce', label: 'WooCommerce' },
   { slug: 'xml-connector', label: 'XML Connector' },
   { slug: 'woocommerce-wpml', label: 'WooCommerce WPML' },

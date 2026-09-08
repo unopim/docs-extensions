@@ -1,0 +1,43 @@
+[
+  {
+    "text": "Getting Started",
+    "items": [
+      { "text": "Overview",             "link": "/unopim-mcp/" },
+      { "text": "Installation",         "link": "/unopim-mcp/installation" },
+      { "text": "Connect an AI Client", "link": "/unopim-mcp/connect-a-client" }
+    ]
+  },
+
+  {
+    "text": "Claude",
+    "items": [
+      { "text": "Custom Connector Setup", "link": "/unopim-mcp/claude" }
+    ]
+  },
+
+  {
+    "text": "Working With It",
+    "items": [
+      { "text": "What You Can Ask For",  "link": "/unopim-mcp/workflows" },
+      { "text": "Tool Reference",        "link": "/unopim-mcp/tool-reference" },
+      { "text": "Skills & Custom Tools", "link": "/unopim-mcp/skills" }
+    ]
+  },
+
+  {
+    "text": "Reference",
+    "items": [
+      { "text": "Configuration",          "link": "/unopim-mcp/configuration" },
+      { "text": "Security & Permissions", "link": "/unopim-mcp/security" },
+      { "text": "Artisan Commands",       "link": "/unopim-mcp/commands" },
+      { "text": "Troubleshooting",        "link": "/unopim-mcp/troubleshooting" }
+    ]
+  },
+
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Contact Support", "link": "/unopim-mcp/contact-support" }
+    ]
+  }
+]

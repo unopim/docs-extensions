@@ -124,6 +124,10 @@ features:
     details: Manage supplier product data.
     link: /supplier-data-portal/
     linkText: Read docs
+  - title: UnoPim MCP
+    details: Let Claude, Copilot, Cursor and Windsurf work your catalog through 25 permission-aware MCP tools.
+    link: /unopim-mcp/
+    linkText: Read docs
   - title: WooCommerce
     details: Export and import product data with WooCommerce stores.
     link: /woocommerce/
