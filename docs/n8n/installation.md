@@ -7,7 +7,7 @@ The connector has two halves:
 | Half | What it is | Where it runs |
 |---|---|---|
 | `packages/Webkul/N8n` | The PHP package with subscriptions, events, delivery logging and admin pages | Inside your UnoPim application |
-| `n8n-nodes-unopim` | The node package with the UnoPim node, the UnoPim Trigger node and the credential | Inside your n8n instance |
+| [`n8n-nodes-unopim`](https://www.npmjs.com/package/n8n-nodes-unopim) | The community node package with the UnoPim node, the UnoPim Trigger node and the credential | Inside your n8n instance |
 
 Both are required. The package exposes the endpoints, and the node package is what you drag onto an n8n canvas.
 
@@ -69,7 +69,14 @@ In your project's root `composer.json`, under `autoload` → `psr-4`:
 
 ### 5. Run the install commands
 
-In this order:
+Dump autoload and run the connector install command:
+
+```bash
+composer dump-autoload
+php artisan n8n:install
+```
+
+Or execute the steps manually:
 
 ```bash
 composer dump-autoload
@@ -80,6 +87,7 @@ php artisan optimize:clear
 | Command | Purpose |
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader so the new namespace resolves. |
+| `php artisan n8n:install` | Runs migrations and clears application cache automatically. |
 | `php artisan migrate` | Creates the `n8n_subscriptions` and `n8n_delivery_logs` tables. |
 | `php artisan optimize:clear` | Clears cached config, routes and views so the new ones are picked up. |
 
@@ -114,9 +122,11 @@ Both will be empty until a workflow connects.
 
 In your n8n instance:
 
-**Settings** → **Community nodes** → **Install** → enter `n8n-nodes-unopim`
+**Settings** → **Community nodes** → **Install** → enter [`n8n-nodes-unopim`](https://www.npmjs.com/package/n8n-nodes-unopim)
 
 Accept the risk prompt and wait for the install to finish. n8n restarts the node loader by itself.
+
+The package is published on npm at [`https://www.npmjs.com/package/n8n-nodes-unopim`](https://www.npmjs.com/package/n8n-nodes-unopim).
 
 To confirm it worked, open any workflow and search the node panel for **UnoPim**. You should find three entries:
 

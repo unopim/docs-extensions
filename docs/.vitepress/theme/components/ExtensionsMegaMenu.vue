@@ -69,6 +69,7 @@ const extensions = [
   { slug: 'job-scheduler',             label: 'Job Scheduler',    icon: '/icons/extensions/job-scheduler.png' },
   { slug: 'maker-checker-workflow',    label: 'Maker Checker',    icon: '/icons/extensions/maker-checker-workflow.png' },
   { slug: 'magento2',                  label: 'Magento 2',        icon: '/icons/extensions/magento2.png' },
+  { slug: 'n8n',                       label: 'n8n',              icon: '/icons/extensions/n8n.svg' },
   { slug: 'odoo-erp',                  label: 'Odoo ERP',         icon: '/icons/extensions/odoo-erp.png' },
   { slug: 'pdf-generator',             label: 'PDF Generator',    icon: '/icons/extensions/pdf-generator.png' },
   { slug: 'prestashop',                label: 'PrestaShop',  icon: '/icons/extensions/prestashop.png'   },

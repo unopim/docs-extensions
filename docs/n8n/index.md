@@ -1,6 +1,6 @@
 # n8n Connector
 
-The **UnoPim n8n Connector** puts your catalog on [n8n](https://n8n.io). A product, category, attribute or family change in UnoPim starts a workflow, and that workflow can read and write your catalog back.
+The **UnoPim n8n Connector** puts your catalog on [n8n](https://n8n.io). A product, category, attribute or family change in UnoPim starts a workflow, and that workflow can read and write your catalog back. The connector pairs the UnoPim backend package with the community node [`n8n-nodes-unopim`](https://www.npmjs.com/package/n8n-nodes-unopim) on npm.
 
 Every trigger is an **instant webhook**. UnoPim pushes the moment a record changes, so there is no polling interval to tune and no delay to explain.
 
@@ -82,7 +82,7 @@ You need:
 3. The **n8n Connector** package installed in UnoPim. See [Installation](./installation).
 4. A **queue worker on the `n8n` queue**. Deliveries are queued, and without a worker **no trigger ever fires**.
 5. An **API key** under *Configuration → Integrations*. See [Connect UnoPim in n8n](./credentials).
-6. The **UnoPim node** installed in n8n. See [Installation](./installation).
+6. The **UnoPim node** ([`n8n-nodes-unopim`](https://www.npmjs.com/package/n8n-nodes-unopim)) installed in n8n. See [Installation](./installation).
 
 ## Requirements
 

@@ -32,6 +32,7 @@ const extensions = [
   { slug: 'job-scheduler',             label: 'Job Scheduler'      },
   { slug: 'maker-checker-workflow',    label: 'Maker Checker'      },
   { slug: 'magento2',                  label: 'Magento 2'          },
+  { slug: 'n8n',                       label: 'n8n',              icon: '/icons/extensions/n8n.svg' },
   { slug: 'odoo-erp',                  label: 'Odoo ERP'           },
   { slug: 'pdf-generator',             label: 'PDF Generator'      },
   { slug: 'prestashop',                label: 'PrestaShop'         },
