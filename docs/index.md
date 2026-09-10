@@ -100,6 +100,10 @@ features:
     details: Push enriched product data from Unopim into Magento 2 stores.
     link: /magento2/
     linkText: Read docs
+  - title: n8n Connector
+    details: Trigger workflows and sync catalog data with n8n using instant webhooks and comprehensive API nodes.
+    link: /n8n/
+    linkText: Read docs
   - title: Odoo ERP
     details: Connect Unopim with Odoo ERP for end-to-end product lifecycle.
     link: /odoo-erp/
