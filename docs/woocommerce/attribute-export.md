@@ -28,8 +28,6 @@ While creating the export job, the user needs to:
 After selecting the attribute export job type, configure the following filters as needed:
 
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
-- **Channel**: Select the channel to use for the export.
-- **Locale**: Select the required locale.
 - **Additional Attribute for Mapping**: Select the additional attribute that should be used for mapping during export.
 
 ![Attribute Export Filters](assets/jobs/attribute-fields.png)

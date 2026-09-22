@@ -30,8 +30,9 @@ After selecting the category export job type, configure the available filters as
 Typically, the user needs to select:
 
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
-- **Channel**: Select the channel to use for the export.
+- **With Media**: Enable this option if category images should also be exported.
 - **Locale**: Select the required locale.
+- **Categories**: Optionally restrict the export to specific categories.
 
 ![Category Export Filters](assets/jobs/category-filter.png)
 

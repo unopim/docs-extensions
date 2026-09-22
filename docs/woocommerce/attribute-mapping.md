@@ -64,3 +64,9 @@ For **Quick Export**, enabling auto sync is not required. The admin only needs t
 ![Quick Export Settings](assets/mapping/quick-export.png)
 
 After completing the mapping configuration, click **Save** to store the settings.
+
+## Category Attribute Mappings
+
+Under the **Category Attribute Mappings** tab, map WooCommerce category fields (**Name**, **Description**, **Image**) to the corresponding UnoPim category fields.
+
+![Category Attribute Mappings](assets/mapping/category-mapping.png)
