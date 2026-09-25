@@ -19,7 +19,7 @@ On the left side of the screen, you'll see all available Shopify product fields.
 | Shopify Field | Field Code | What it does | Supported attribute types |
 |---|---|---|---|
 | **Name** | `title` | The product title shown on your Shopify storefront | text |
-| **Description** | `descriptionHtml` | Full product description — supports HTML formatting | text, textarea |
+| **Description** | `descriptionHtml` | Full product description - supports HTML formatting | text, textarea |
 | **Price** | `price` | The selling price of the product | price |
 | **Weight** | `weight` | Product weight used for shipping calculations | number, metric |
 | **Inventory Tracked** | `inventoryTracked` | Indicates whether inventory tracking is enabled | boolean |
@@ -33,24 +33,24 @@ On the left side of the screen, you'll see all available Shopify product fields.
 | **SEO Description** | `metafields_global_description_tag` | Meta description shown in search engine results | text, textarea |
 | **Handle** | `handle` | The URL-friendly slug for the product page (e.g. `blue-running-shoes`) | text |
 | **Taxable** | `taxable` | Marks whether tax should be applied to this product | yes/no |
-| **Cost per Item** | `cost` | Cost of goods sold (COGS) — used for profit reporting | price |
+| **Cost per Item** | `cost` | Cost of goods sold (COGS) - used for profit reporting | price |
 
 ---
 
 ## Unit Price
 
-Below the field mappings you'll find the **Unit Price** section. This maps the attributes that Shopify uses to show a price per standard unit of measure — like "€2.50 per litre".
+Below the field mappings you'll find the **Unit Price** section. This maps the attributes that Shopify uses to show a price per standard unit of measure - like "€2.50 per litre".
 
 | Field | What it does | What to choose |
 |---|---|---|
 | **Total amount** | The total quantity contained in the product | A number or decimal type attribute |
 | **Total amount unit** | The unit that the total amount is measured in | A text or select type attribute |
 
-> **Important:** The value of **Total amount unit** must match a valid Shopify unit — for example `ML`, `CL`, or `L`. Any other value is skipped.
+> **Important:** The value of **Total amount unit** must match a valid Shopify unit - for example `ML`, `CL`, or `L`. Any other value is skipped.
 
 ---
 
-## Other Mapping — Family Mapping
+## Other Mapping - Family Mapping
 
 Below the field mappings, you'll find an **Other Mapping** section. This is an important setting for importing products that have variants.
 
@@ -58,7 +58,7 @@ Below the field mappings, you'll find an **Other Mapping** section. This is an i
 
 ### Family Mapping (Required for Products with Variants)
 
-When importing products from Shopify into UnoPim, you must select a **product family** that the imported products will be assigned to — for example, `Accessories`, `Clothing`, or `Electronics`.
+When importing products from Shopify into UnoPim, you must select a **product family** that the imported products will be assigned to - for example, `Accessories`, `Clothing`, or `Electronics`.
 
 This ensures that products and their variants are imported correctly and placed under the right family structure in UnoPim.
 

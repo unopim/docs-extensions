@@ -4,7 +4,7 @@ Once the connector is installed, the next step is to connect your Shopify store 
 
 ---
 
-## Step 1 — Open the Shopify Section
+## Step 1 - Open the Shopify Section
 
 After installation, you'll notice a new **Shopify icon** in the left sidebar of your UnoPim dashboard. Click on it to open the connector.
 
@@ -12,7 +12,7 @@ After installation, you'll notice a new **Shopify icon** in the left sidebar of 
 
 ---
 
-## Step 2 — Create New Credentials
+## Step 2 - Create New Credentials
 
 Go to the **Credentials** tab and click **Create Credentials**.
 
@@ -34,7 +34,7 @@ Click **Save** once all fields are filled in.
 
 ---
 
-## Step 3 — Update the Credential Settings
+## Step 3 - Update the Credential Settings
 
 After saving, you'll be redirected to the credential edit screen. Complete the remaining fields:
 
@@ -44,13 +44,13 @@ After saving, you'll be redirected to the credential edit screen. Complete the r
 Select which Shopify sales channels your products should be published to once exported.
 
 **Status**
-Set the default status for exported products — either active or draft.
+Set the default status for exported products - either active or draft.
 
 > **Note:** The **Sales Channels** are fetched directly from your Shopify store. If you don't see them in the dropdown, make sure they have been created in Shopify first before setting up credentials here.
 
 ---
 
-## Step 4 — Map Your Locations
+## Step 4 - Map Your Locations
 
 Map a quantity attribute to each Shopify location to send location-wise stock. Any location you leave blank is skipped during sync.
 
@@ -60,7 +60,7 @@ Map a quantity attribute to each Shopify location to send location-wise stock. A
 
 ---
 
-## Step 5 — Map Your Locales
+## Step 5 - Map Your Locales
 
 If your Shopify store supports multiple languages, all available Shopify locales are fetched automatically. You just need to map each Shopify locale to the corresponding locale in UnoPim.
 

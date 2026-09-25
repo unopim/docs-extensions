@@ -37,6 +37,19 @@
   },
 
   {
+    "text": "Shopify Pro",
+    "items": [
+      { "text": "What Pro Adds", "link": "/shopify/pro" },
+      { "text": "Pro Installation", "link": "/shopify/pro-installation" },
+      { "text": "Catalogs & Catalog Prices", "link": "/shopify/pro-catalogs" },
+      { "text": "Scheduled Exports", "link": "/shopify/pro-scheduled-exports" },
+      { "text": "Real-Time Sync", "link": "/shopify/pro-realtime-sync" },
+      { "text": "Advanced Export Filters", "link": "/shopify/pro-export-filters" },
+      { "text": "Advanced Mapping", "link": "/shopify/pro-mapping" }
+    ]
+  },
+
+  {
     "text": "Support",
     "items": [
       { "text": "Support", "link": "/shopify/support" }

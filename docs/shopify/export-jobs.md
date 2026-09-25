@@ -10,15 +10,15 @@ Go to **Data Transfer → Exports → Create Export**.
 
 There are three types of export jobs available:
 
-- **Shopify Category** — exports UnoPim categories to Shopify as Collections
-- **Shopify Product** — exports simple or configurable products to Shopify
-- **Shopify Metafield Definitions** — exports your metafield definitions to Shopify
+- **Shopify Category** - exports UnoPim categories to Shopify as Collections
+- **Shopify Product** - exports simple or configurable products to Shopify
+- **Shopify Metafield Definitions** - exports your metafield definitions to Shopify
 
 ---
 
 ## Export Categories
 
-Exporting categories first is a good idea — it means your products can be assigned to the right collections as soon as they land in Shopify.
+Exporting categories first is a good idea - it means your products can be assigned to the right collections as soon as they land in Shopify.
 
 1. Click **Create Export**.
 
@@ -76,7 +76,7 @@ This job handles both simple products and configurable products with variants.
 
 ![Export Progress](./images/export-pro-complete.png)
 
-The export will begin immediately. You can watch the progress in real time — once it's done, the status will update to **Completed** and you'll see a count of how many products were successfully exported.
+The export will begin immediately. You can watch the progress in real time - once it's done, the status will update to **Completed** and you'll see a count of how many products were successfully exported.
 
 Click **Download Log** to get a detailed report of everything that was exported, skipped, or flagged.
 
@@ -111,7 +111,7 @@ If you've set up metafield definitions in UnoPim and want to push them to Shopif
 
 ## Viewing Exported Products in Shopify
 
-Once the export job completes, log in to your **Shopify admin panel** and go to **Products**. You'll find all the exported products there, complete with their details, images, prices, and descriptions — exactly as they were set up in UnoPim.
+Once the export job completes, log in to your **Shopify admin panel** and go to **Products**. You'll find all the exported products there, complete with their details, images, prices, and descriptions - exactly as they were set up in UnoPim.
 
 ![Shopify Products Page](./images/shopify-product.png)
 

@@ -1,6 +1,6 @@
 # Import Jobs
 
-The UnoPim Shopify Connector works both ways. In addition to exporting products from UnoPim to Shopify, you can also **import data from Shopify back into UnoPim** — keeping both systems in sync.
+The UnoPim Shopify Connector works both ways. In addition to exporting products from UnoPim to Shopify, you can also **import data from Shopify back into UnoPim** - keeping both systems in sync.
 
 To create an import job, go to **Data Transfer → Imports** and click **Create Import**.
 
@@ -19,10 +19,10 @@ Imports products from your Shopify store into UnoPim.
 1. Enter a unique **Code** for this job.
 2. Set **Type** to `Shopify Product`.
 3. Under **Settings**, fill in:
-   - **Shopify Credentials** — select the store you want to import from
-   - **Channel** — choose the UnoPim channel to assign the products to
-   - **Locale** — select the language/locale for the imported data
-   - **Currency** — choose the currency for product pricing
+   - **Shopify Credentials** - select the store you want to import from
+   - **Channel** - choose the UnoPim channel to assign the products to
+   - **Locale** - select the language/locale for the imported data
+   - **Currency** - choose the currency for product pricing
 
 ![Product Import Settings](./images/import-fields.png)
 
@@ -85,7 +85,7 @@ This job maps Shopify variant attributes to the correct product families in UnoP
 3. Under **Settings**, select:
    - **Shopify Credentials**
    - **Locale**
-   - **Attribute Group** — choose the group the variant attributes should be assigned to
+   - **Attribute Group** - choose the group the variant attributes should be assigned to
 
 ![Family Variant Attribute Assignment Import Settings](./images/shopify-family-fields.png)
 

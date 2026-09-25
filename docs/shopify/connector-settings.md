@@ -1,4 +1,4 @@
-# Connector Settings — Tags Export
+# Connector Settings - Tags Export
 
 When you export products from UnoPim to Shopify, any tags associated with your products come along too. This settings page gives you control over **how those tags are formatted** when they appear in Shopify.
 
@@ -12,7 +12,7 @@ To access this, click the **Shopify icon** in the left sidebar and go to **Setti
 
 ### Named Tags
 
-By default, only the tag **value** is exported — for example, `Cotton`.
+By default, only the tag **value** is exported - for example, `Cotton`.
 
 If you want the exported tag to also include the **attribute name** it came from, enable the **Named Tags** option. This adds context to your tags so it's clear what each one refers to when you look at them in Shopify admin.
 
@@ -22,7 +22,7 @@ If you want the exported tag to also include the **attribute name** it came from
 
 When **Named Tags** is enabled, you'll see this second option appear.
 
-Turn this on if you want the **attribute name and value exported together as a single tag** — for example, instead of just `Cotton`, Shopify would receive `Material: Cotton` or `Material - Cotton`.
+Turn this on if you want the **attribute name and value exported together as a single tag** - for example, instead of just `Cotton`, Shopify would receive `Material: Cotton` or `Material - Cotton`.
 
 This is especially useful if you export tags from multiple attributes and want to easily tell them apart inside Shopify.
 
