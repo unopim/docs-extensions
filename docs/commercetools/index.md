@@ -49,7 +49,7 @@ Any other commercetools attribute is filled from the UnoPim attribute that has t
 The product export uses the same filters as the standard UnoPim product export: channel, locales, currencies, attributes, attribute families, categories, completeness, time condition, status, SKUs and attribute conditions. You choose exactly which products and which values are sent.
 
 ### Multi-Language Support
-Localized attributes are sent as localized values in commercetools, one value per selected locale.
+Export in as many locales as you need. Each category, product type and product is created **once** in commercetools, with its name, labels and localized attributes stored in every selected locale.
 
 ### Product Images
 Images from UnoPim image, gallery and DAM asset attributes are sent to commercetools as product images. You can turn image export on or off for each export job.

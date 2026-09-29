@@ -25,7 +25,7 @@ There are three types of import jobs available:
 | Filter | What to do |
 |---|---|
 | **Commercetools Connection** | Select the connection to import from. Only active connections are listed. |
-| **Source Channel** | Select the UnoPim channel the imported values are saved to |
+| **Source Channel** | *(Product import only)* Select the UnoPim channel the imported product values are saved to |
 | **Locales to Import** | Select the locales whose values you want to bring in |
 | **Only changed since last sync** | *(Product import only)* Tick to import only products changed since the last successful import |
 

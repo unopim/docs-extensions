@@ -25,8 +25,7 @@ Each UnoPim attribute family becomes a commercetools **product type** with the s
 | Filter | What to do |
 |---|---|
 | **Commercetools Connection** | Select the connection to export to. Only active connections are listed. |
-| **Source Channel** | Select the channel whose values you want to export |
-| **Locales to Export** | Select the locales for the attribute labels |
+| **Locales to Export** | Select the locales for the product type name and attribute labels |
 
 4. Click **Save Export**, then click **Export Now**.
 
@@ -38,10 +37,47 @@ Exporting categories before products means products can be placed in the right c
 
 1. Click **Create Export**.
 2. Enter a unique **Code** (e.g., `commercetools-category-export`) and set the **Type** to `Commercetools Category Export`.
-3. Fill in the same filters as the family export: **Commercetools Connection**, **Source Channel** and **Locales to Export**.
+3. Fill in the same filters as the family export: **Commercetools Connection** and **Locales to Export** (the category name and slug are sent in each selected locale).
 4. Click **Save Export**, then click **Export Now**.
 
 Parent categories are always created before their children, so the category tree in commercetools matches the one in UnoPim.
+
+> **Note:** A category's **slug** in commercetools is its UnoPim category **code** (e.g. `audio_electronics`), the same in every locale. UnoPim categories have no slug field of their own.
+
+---
+
+## How Multiple Locales Are Exported
+
+Selecting several locales does **not** create several copies. Each UnoPim record becomes **one** record in commercetools, and the value for every selected locale is stored inside it.
+
+| UnoPim | commercetools | What is sent per locale |
+|---|---|---|
+| 1 category | 1 category | Name |
+| 1 attribute family | 1 product type | Attribute labels and select option labels |
+| 1 product | 1 product | Name, slug, description, SEO fields and localized attributes |
+
+For example, the category `audio_electronics` exported with three locales becomes a single commercetools category:
+
+```json
+{
+  "key": "audio_electronics",
+  "name": {
+    "en-US": "Audio & Electronics",
+    "de-DE": "Audio & Elektronik",
+    "fr-FR": "Audio et électronique"
+  },
+  "slug": {
+    "en-US": "audio_electronics",
+    "de-DE": "audio_electronics",
+    "fr-FR": "audio_electronics"
+  }
+}
+```
+
+In the Merchant Center, switch the data locale at the top of the screen to see the same record in another language.
+
+- **Adding a locale later** - re-run the export with the new locale selected. The value is added to the existing record; nothing is duplicated.
+- **A missing translation** - if a category has no name in a selected locale, that locale is skipped. If it has no name in any selected locale, its code is used as the name.
 
 ---
 
