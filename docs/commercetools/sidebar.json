@@ -2,11 +2,35 @@
   {
     "text": "Commercetools",
     "items": [
-      { "text": "Overview",       "link": "/commercetools/" },
-      { "text": "Installation",   "link": "/commercetools/installation" },
-      { "text": "Configuration",  "link": "/commercetools/configuration" },
-      { "text": "Author Guide",   "link": "/commercetools/author-guide" },
-      { "text": "Operator Guide", "link": "/commercetools/operator-guide" }
+      { "text": "Overview", "link": "/commercetools/" },
+      { "text": "commercetools Setup", "link": "/commercetools/commercetools-setup" },
+      { "text": "Installation", "link": "/commercetools/installation" }
+    ]
+  },
+  {
+    "text": "Configuration",
+    "items": [
+      { "text": "Setup UnoPim Connection", "link": "/commercetools/setup" },
+      { "text": "Attribute Mapping", "link": "/commercetools/attribute-mapping" },
+      { "text": "Connector Settings", "link": "/commercetools/configuration" }
+    ]
+  },
+  {
+    "text": "Export Jobs",
+    "items": [
+      { "text": "Creating an Export Job", "link": "/commercetools/export-jobs" }
+    ]
+  },
+  {
+    "text": "Import Jobs",
+    "items": [
+      { "text": "Creating an Import Job", "link": "/commercetools/import-jobs" }
+    ]
+  },
+  {
+    "text": "Support",
+    "items": [
+      { "text": "Support", "link": "/commercetools/support" }
     ]
   }
 ]

@@ -21,6 +21,7 @@ const extensions = [
   { slug: 'bigcommerce',               label: 'BigCommerce'        },
   { slug: 'azure-integration',         label: 'Azure Integration'  },
   { slug: 'cloudflare-r2-integration', label: 'Cloudflare R2'      },
+  { slug: 'commercetools',             label: 'Commercetools'      },
   { slug: 'cs-cart',                   label: 'CS-Cart'            },
   { slug: 'dam',                       label: 'DAM'                },
   { slug: 'dam-webdav',               label: 'DAM NextCloud'      },

@@ -52,6 +52,10 @@ features:
     details: Offload product and category media to Cloudflare R2 storage with CDN delivery.
     link: /cloudflare-r2-integration/
     linkText: Read docs
+  - title: Commercetools
+    details: Export products, categories and families to commercetools, and import them back into UnoPim.
+    link: /commercetools/
+    linkText: Read docs
   - title: CS-Cart
     details: Sync your CS-Cart store with UnoPim for seamless product import, export, and catalog enrichment.
     link: /cs-cart/

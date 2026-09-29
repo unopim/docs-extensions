@@ -1,88 +1,70 @@
 # Installation
 
-## Requirements
+Follow these steps to install the UnoPim Commercetools Connector.
 
-- Unopim v2.0.0 or higher
-- PHP 8.3+, Laravel 12.x
-- Standard Unopim **Data Transfer** module (already in core)
-- A queue worker available (jobs are dispatched on the queue)
-- A commercetools project with an API client (see [Configuration](./configuration))
+---
 
-## Steps
+## Step 1 - Add the package files
 
-### 1. Merge the package files
+Download the extension ZIP file and unzip it. Rename the extracted folder to `Commercetools` and move it into the following directory inside your UnoPim project:
 
-Unzip the extension package and place the folder at `packages/Webkul/Commercetools` inside your Unopim project.
-
-### 2. Register the service provider
-
-The package's `composer.json` declares the provider under `extra.laravel.providers`, so on most installs it auto-registers when Composer rebuilds the autoloader. If your project disables package discovery, add it manually to `bootstrap/providers.php`:
-
-```php
-use Webkul\Commercetools\Providers\CommercetoolsServiceProvider;
-
-return [
-    // ...existing providers...
-    CommercetoolsServiceProvider::class,
-];
+```
+packages/Webkul/Commercetools
 ```
 
-### 3. Update Composer autoload
+## Step 2 - Register the service provider
 
-In your project's `composer.json`, add under `autoload.psr-4`:
+Open the `bootstrap/providers.php` file and add the following line to the list of providers:
+
+```php
+Webkul\Commercetools\Providers\CommercetoolsServiceProvider::class,
+```
+
+> [!NOTE]
+> This registers `CommercetoolsServiceProvider` in Laravel so the connector can load its menu, routes, jobs and database tables when UnoPim starts.
+
+## Step 3 - Update Composer autoload
+
+Open `composer.json` and add the following line under the `autoload > psr-4` section:
 
 ```json
 "Webkul\\Commercetools\\": "packages/Webkul/Commercetools/src"
 ```
 
-### 4. Run installation commands
+## Step 4 - Run the setup commands
 
-Run these in order from the project root:
+Now run the following commands in order:
 
 ```bash
 composer dump-autoload
-php artisan optimize:clear
 php artisan migrate
+php artisan optimize:clear
 ```
 
-The migration creates the following tables:
-
-| Table | Purpose |
+| Command | Purpose |
 |---|---|
-| `commercetools_connections` | One row per configured commercetools project (credentials, region, system-fields mapping). |
-| `commercetools_product_types` | Snapshot of product types imported from commercetools. |
-| `commercetools_categories` | Snapshot of categories imported from commercetools. |
-| `commercetools_product_mappings` | Maps UnoPim products to their commercetools `id` + `version`. |
-| `commercetools_sync_log` | One row per export / import operation, used for audit and the prune command. |
+| `composer dump-autoload` | Regenerates Composer's autoloader so UnoPim can find the connector's classes. |
+| `php artisan migrate` | Creates the connector's database tables. |
+| `php artisan optimize:clear` | Clears all cached files (bootstrap, configuration, routes and views) to load the new changes. |
 
-### 5. Build front-end assets
+## Step 5 - Start the queue worker
 
-The connector's Vue components are published as part of the standard admin asset pipeline. From the project root:
-
-```bash
-npm install
-npm run build
-```
-
-In development you can use `npm run dev` or `composer run dev` instead.
-
-### 6. Start the queue worker
-
-Export and import jobs are dispatched via Unopim's Data Transfer pipeline, which uses queued jobs. Keep a worker running:
+Export and import jobs run in the background, so a queue worker must be running:
 
 ```bash
 php artisan queue:work
 ```
 
-In production, run the worker under a process supervisor (Supervisor, systemd) so it restarts after crashes or deploys.
+> **Tip:** On a live server, run the queue worker under a process manager such as Supervisor, so it restarts automatically after a crash or deploy.
 
-### 7. Verify
+---
 
-Open the Unopim admin panel:
+## Verify the Installation
 
-- A **Commercetools** entry should appear in the sidebar with sub-links **Connections** and **Sync Logs**.
-- **Commercetools → Connections** should render an empty grid (or whatever connections already exist) with no console or server errors.
-- **Data Transfer → Exports → Create** should list **Commercetools — Product Export**, **Commercetools — Category Export** and **Commercetools — Family Export** as available job types.
-- **Data Transfer → Imports → Create** should list **Commercetools — Product Import**, **Commercetools — Category Import** and **Commercetools — Product Type Import**.
+Log in to your UnoPim dashboard. You should see a **Commercetools** entry with a **Connections** link in the left sidebar - that confirms the connector has been installed successfully.
 
-If any of those entries are missing, re-run `php artisan optimize:clear` and rebuild assets. Continue to [Configuration](./configuration) once the menu items render.
+![Commercetools menu in UnoPim sidebar](./images/side-menu.png)
+
+If the menu doesn't appear, run `php artisan optimize:clear` again and refresh the page.
+
+Continue to [Setup UnoPim Connection](./setup) to connect your commercetools project.
