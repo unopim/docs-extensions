@@ -69,8 +69,6 @@ A single admin user can hold both roles, depending on the ACL permissions assign
 
 - UnoPim v3.x.x
 - PHP 8.4+, Laravel 13.x
-- The core UnoPim **Data Transfer** module (already part of the standard install)
-- A Laravel queue worker running (export and AI-mapping jobs are dispatched to the queue)
 - A **Google Merchant Center** account with API access
 - A **Google Cloud OAuth client** (Client ID + Secret) with the `content` scope and a configured redirect URI
 

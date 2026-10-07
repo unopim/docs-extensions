@@ -8,8 +8,6 @@ editLink: false
 
 - UnoPim v3.x.x
 - PHP 8.4+, Laravel 13.x
-- Standard UnoPim **Data Transfer** module (already in core)
-- A queue worker available (export and AI-mapping jobs are dispatched on the queue)
 - A Google Merchant Center account and a Google Cloud OAuth client (see [Google Prerequisites](./prerequisites))
 
 ## Steps
