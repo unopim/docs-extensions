@@ -67,7 +67,7 @@ A single admin user can hold both roles, depending on the ACL permissions assign
 
 ## Requirements
 
-- UnoPim v3.0.0 or higher
+- UnoPim v3.x.x
 - PHP 8.4+, Laravel 13.x
 - The core UnoPim **Data Transfer** module (already part of the standard install)
 - A Laravel queue worker running (export and AI-mapping jobs are dispatched to the queue)

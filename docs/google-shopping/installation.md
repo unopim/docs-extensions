@@ -6,7 +6,7 @@ editLink: false
 
 ## Requirements
 
-- UnoPim v3.0.0 or higher
+- UnoPim v3.x.x
 - PHP 8.4+, Laravel 13.x
 - Standard UnoPim **Data Transfer** module (already in core)
 - A queue worker available (export and AI-mapping jobs are dispatched on the queue)
