@@ -6,7 +6,7 @@ editLink: false
 
 ## Requirements
 
-- UnoPim v3.x.x
+- UnoPim v3.1.3 or higher
 - PHP 8.4+, Laravel 13.x
 - A Google Merchant Center account and a Google Cloud OAuth client (see [Google Prerequisites](./prerequisites))
 

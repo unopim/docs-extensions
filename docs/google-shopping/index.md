@@ -67,7 +67,7 @@ A single admin user can hold both roles, depending on the ACL permissions assign
 
 ## Requirements
 
-- UnoPim v3.x.x
+- UnoPim v3.1.3 or higher
 - PHP 8.4+, Laravel 13.x
 - A **Google Merchant Center** account with API access
 - A **Google Cloud OAuth client** (Client ID + Secret) with the `content` scope and a configured redirect URI
