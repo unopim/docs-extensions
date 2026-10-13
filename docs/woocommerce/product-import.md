@@ -29,9 +29,9 @@ Under **Settings**, configure the following:
 - **Currency**: Select the currency to be used during import.
 - **Family**: Select the family to which the imported products should belong.
 - **With Media**: Enable this option if product media should also be imported.
-- **WooCommerce Product SKUs (comma separated)**: Optionally limit the import to specific products by entering their SKUs.
+- **WooCommerce Product SKUs (comma separated)**: Optionally enter the SKUs of specific products to import.
 
-![Product Import Settings](assets/jobs/product-import-filter.png)
+![Product Import Settings](assets/jobs/product-import-profile.png)
 
 After entering the required values, click **Save changes** to save the import profile.
 

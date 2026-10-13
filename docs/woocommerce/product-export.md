@@ -23,34 +23,37 @@ While creating the export job, the user needs to:
 
 ## Product Export Filters
 
-After selecting the product export job type, configure the following filters as needed:
-
-**Output**
+After selecting the product export job type, configure the following options under **Output**:
 
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
 - **With Media**: Enable this option if product images should also be exported to WooCommerce.
-- **Date Format**: Select the date format to use for date-type attribute values.
+- **Date Format**: Select the date format to use for exported date values.
 
-![Product Export Output](assets/jobs/product-fields-import-4.png)
+![Product Export Output](assets/jobs/profuct-export-filter-1.png)
 
-**Data to Export**
+Under **Data to export**, select:
 
-- **Channels**, **Locales**, **Currencies**: Select the channel, locale, and currency to export data for.
-- **Attributes**: Select the specific attributes to include in the export.
+- **Channels**: Select the channel for exporting.
+- **Locales**: Select the required locale.
+- **Currencies**: Select the required currency.
+- **Attributes**: Select the attributes to export (optional).
 
-![Product Export Data to Export](assets/jobs/product-fields-import-1.png)
+![Product Export Data](assets/jobs/product-export-filter-2.png)
 
-**Data Filters**
+Under **Data Filters**, you can narrow down which products are exported:
 
-- **Attribute Families**, **Status**, **Completeness**, **Time Condition**: Narrow down products by these criteria.
-- **Categories**: Restrict the export to products in selected categories.
+- **Attribute Families**: Export only products from the selected families.
+- **Status**: Filter products by enabled or disabled status.
+- **Completeness**: Filter products by completeness.
+- **Time Condition**: Filter products by date condition.
+- **Categories**: Select categories from the category tree.
 
-![Product Export Data Filters](assets/jobs/product-fields-import-2.png)
+![Product Export Filters](assets/jobs/product-export-filter-3.png)
 
-- **Identifiers**: Enter specific product SKUs (comma or newline separated) to export.
-- **Attribute Conditions**: Add conditions such as **Price greater than 100** to filter products by attribute values.
+- **Identifiers**: Enter the SKUs of specific products that need to be exported.
+- **Attribute Conditions**: Add conditions on attribute values (for example, **Price** less than `100000`) using **Add another attribute condition**.
 
-![Product Export Identifiers and Attribute Conditions](assets/jobs/product-fields-import-3.png)
+![Product Export Identifiers and Conditions](assets/jobs/product-filter-4.png)
 
 ## Save and Run the Export Job
 

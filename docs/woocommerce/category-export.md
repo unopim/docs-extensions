@@ -26,9 +26,14 @@ While creating the export job, the user needs to:
 After selecting the category export job type, configure the following options:
 
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
-- **With Media**: Enable this option if category images should also be exported.
-- **Locale**: Select the required locale.
-- **Categories**: Optionally restrict the export to specific categories.
+- **With Media**: Enable this option if category images should also be exported to WooCommerce.
+
+![Category Export Output](assets/jobs/category-filter-1.png)
+
+Under **Data to export** and **Data Filters**, select:
+
+- **Locales**: Select the locale to export.
+- **Categories**: Select the categories to export from the category tree. You can search by name or code.
 
 ![Category Export Filters](assets/jobs/category-filter-2.png)
 

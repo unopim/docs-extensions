@@ -71,6 +71,16 @@ After completing the mapping configuration, click **Save** to store the settings
 
 ## Category Attribute Mappings
 
-Under the **Category Attribute Mappings** tab, map WooCommerce category fields (**Name**, **Description**, **Image**) to the corresponding UnoPim category fields.
+The **Category Attribute Mappings** tab maps WooCommerce category fields to UnoPim category fields:
 
-![Category Attribute Mappings](assets/mapping/category-mapping.png)
+- **Name `[name]`**: Map a text-type UnoPim category field.
+- **Description `[description]`**: Map a textarea-type UnoPim category field.
+- **Image `[image]`**: Map an image-type UnoPim category field.
+
+![Category Attribute Mappings](assets/mapping/Category-Attribute-mapping.png)
+
+## Media Settings
+
+The **Media Settings** tab holds the **WordPress Media Sync** credentials (WordPress username and application password) used to upload images to the WordPress media library, which also helps avoid duplicate images being created on repeated exports. See [Setup Credentials](./setup-credentials) for details.
+
+![Media Settings](assets/mapping/Media-Setting-to-avoid-dublicate-images.png)

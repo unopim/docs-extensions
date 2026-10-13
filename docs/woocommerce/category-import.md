@@ -25,9 +25,9 @@ Under **Settings**, configure the following:
 
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
 - **Locale**: Select the locale to be used during import.
-- **Category Name (comma separated)**: Optionally limit the import to specific categories by name.
+- **Category Name (comma separated)**: Optionally enter the names of specific categories to import.
 
-![Category Import Settings](assets/jobs/category-import.png)
+![Category Import Settings](assets/jobs/category-imports-and-its-filters.png)
 
 After entering the required values, click **Save changes** to save the import profile.
 
