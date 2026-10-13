@@ -1,0 +1,24 @@
+need to update image and little be content as well for this connector 
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce
+
+don't rewrite every thing change only thoses things which is needed
+
+use these images /home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/assets/api-key/new
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/api-credentials.md
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/setup-credentials.md
+
+
+
+
+for this use these images : /home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/assets/jobs/new
+
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/category-export.md
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/attribute-export.md
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/category-import.md
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/attribute-import.md
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/product-export.md
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/product-import.md
+
+
+use these images : /home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/assets/mapping/new
+/home/users/sandeep.prajapati/hdd/unopim_dev/docs-extensions/docs/woocommerce/attribute-mapping.md
