@@ -1,6 +1,6 @@
-# Creating Products with Azure Media
+# Verify Migration by Creating a Product
 
-Once your Azure integration is set up and enabled, any media you attach to a product - images or PDFs - will automatically be uploaded to Azure Blob Storage. Here's how to create a product and attach media to it.
+Once your Azure integration is set up and enabled, any media you attach to a product - images or PDFs - will automatically be uploaded to Azure Blob Storage. Creating a product and attaching media is the simplest way to confirm everything is working. Here's how.
 
 ---
 
@@ -18,7 +18,8 @@ Fill in the following fields:
 | **Family** | A family named `Default` is already available - select it or choose another if you've created custom families |
 | **SKU** | Enter a unique identifier for the product |
 
-> **Note:** The SKU must be unique across all products. No two products can share the same SKU.
+> [!NOTE]
+> The SKU must be unique across all products. No two products can share the same SKU.
 
 ![Product Creation Form](./assets/verify/img-2.webp)
 
@@ -58,7 +59,8 @@ In the **File attribute field**, select a PDF file to attach to the product.
 
 ![File Upload](./assets/verify/img-5.webp)
 
-> **Note:** Before you can attach a PDF, you need to first create a **File type attribute**. See the section below for how to do this.
+> [!NOTE]
+> Before you can attach a PDF, you need to first create a **File type attribute**. See the section below for how to do this.
 
 ---
 
@@ -73,10 +75,11 @@ If you haven't already created a file attribute, follow these steps:
    - **Label / Name** - enter a display name for the attribute (e.g., `Product PDF`)
 3. Click **Save Attribute**.
 
-![Save Product Button](./assets/verify/img-7.webp)
+![Edit Attribute Form](./assets/verify/img-7.webp)
 
 
-> **Note:** The File type attribute in UnoPim currently supports **PDF files only**.
+> [!NOTE]
+> The File type attribute in UnoPim currently supports **PDF files only**.
 
 Once created, this attribute will appear on the product edit page under the file attribute section, ready for you to attach PDFs to your products.
 
@@ -86,7 +89,7 @@ Once created, this attribute will appear on the product edit page under the file
 
 Once all fields are filled in and your media is attached, click **Save Product** at the top of the page.
 
-![Create Attribute Form](./assets/verify/img-6.webp)
+![Edit Product Form](./assets/verify/img-6.webp)
 
 
 After saving, both the image and the PDF file will show an **Azure Blob Storage URL** - confirming they have been successfully uploaded to Azure and are being served from the cloud.

@@ -15,7 +15,7 @@
   {
     "text": "Import Jobs",
     "items": [
-      { "text": "XML Product Import", "link": "/xml-connector/import-job" }
+      { "text": "XML Import", "link": "/xml-connector/import-job" }
     ]
   },
   {
