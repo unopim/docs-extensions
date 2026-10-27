@@ -50,13 +50,13 @@ Before you begin, make sure the following are in place:
 
 | Requirement | Detail |
 |---|---|
-| **UnoPim** | v3.0.x (certified against v3.0.0) and running on your system |
+| **UnoPim** | v3.1.3 or higher |
 | **Laravel** | v13.x |
 | **PHP** | 8.4.1 or higher |
 | **Microsoft Azure Account** | An active Azure account with Blob Storage enabled |
 | **Azure Storage Credentials** | Your Azure **Storage Account Name** and **Access Key** - available from your Azure portal |
 
 > [!NOTE]
-> Running UnoPim 2.1.x? Stay on connector **1.2.0** - the current release targets UnoPim 3.0 only.
+> Running UnoPim 2.1.x? Stay on connector **1.2.0** - the current release targets UnoPim 3.1.3 only.
 
 

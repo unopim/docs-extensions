@@ -55,7 +55,7 @@ The XML file is uploaded during the import job itself, not stored on the templat
 
 | Requirement | Version |
 |---|---|
-| **UnoPim** | 3.0.0 or higher |
+| **UnoPim** | 3.1.3 or higher |
 | **PHP** | 8.4 or higher (< 8.5) |
 | **Laravel** | 13.x |
 
