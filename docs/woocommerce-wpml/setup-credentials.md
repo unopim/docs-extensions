@@ -20,7 +20,9 @@ Enter the following details:
 | **Consumer Key** | The key generated from WooCommerce → Settings → Advanced → REST API |
 | **Consumer Secret** | The secret generated alongside the Consumer Key |
 
-> **Need the API keys?** See [Generating WooCommerce API Credentials](/woocommerce/api-credentials) for step-by-step instructions on creating them in WordPress.
+> **Need the API keys?** See [Generating WooCommerce API Credentials](../woocommerce/api-credentials.md) for step-by-step instructions on creating them in WordPress.
+
+![WooCommerce REST API keys screen with Add key](assets/credential/generate-woocommerce-api-key-api-key.png)
 
 ![Credential Form](assets/credential/cred.png)
 

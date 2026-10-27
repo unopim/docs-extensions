@@ -18,7 +18,13 @@ Open **Data Transfer → Export → + Create Export**.
 
 ![Create export profile form](./assets/export/create_export.png)
 
-Set the **Type** to **Export Configurable Product to BigCommerce** and give it a **Code** - any short identifier, e.g. `bigcommerce_configurable_products`. Pick the **Credential** (only **active** credentials appear) - it is the only required field.
+Set the **Type** to **Export Configurable Product to BigCommerce** and give it a **Code** - any short identifier, e.g. `bigcommerce_configurable_products`.
+
+![General section with code and type](./assets/export/conf-file.png)
+
+Pick the **Credential** under **Filters** (only **active** credentials appear) - it is the only required field.
+
+![BigCommerce Credential filter](./assets/export/conf-filter.png)
 
 ![Export profile form filled](./assets/export/export-configurable-product.png)
 

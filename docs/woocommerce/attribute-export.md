@@ -28,11 +28,13 @@ After selecting the attribute export job type, configure the following options u
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
 - **Additional Attributes from mapping**: Select the additional attributes (configured in the credential's attribute mapping) that should also be exported.
 
-![Attribute Export Filters](assets/jobs/save-attribute-export.png)
+![Attribute Export Filters](assets/jobs/Fiters-attribute-import.png)
 
 ## Save and Run the Export Job
 
 After completing the required fields, click **Save changes** to create and save the export job.
+
+![Save changes](assets/jobs/save-attribute-export.png)
 
 Once the job is run, the export progress can be tracked from the **Job Tracker**.
 

@@ -5,9 +5,9 @@ This add-on requires the UnoPim **WooCommerce Connector** to already be installe
 
 **WooCommerce Connector setup:**
 
-1. [Install the WooCommerce Connector](/woocommerce/installation)
-2. [Generate WooCommerce API Credentials](/woocommerce/api-credentials)
-3. [Setup Credentials in UnoPim](/woocommerce/setup-credentials)
+1. [Install the WooCommerce Connector](../woocommerce/installation.md)
+2. [Generate WooCommerce API Credentials](../woocommerce/api-credentials.md)
+3. [Setup Credentials in UnoPim](../woocommerce/setup-credentials.md)
 
 Return to this page only after the WooCommerce Connector is working end-to-end.
 :::

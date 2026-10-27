@@ -61,7 +61,7 @@ You'll paste these into UnoPim next.
 
 In UnoPim, click **+ Create Credential** in the top-right corner.
 
-<!-- TODO: capture screenshot - bigcommerce-add-credential.png - Create BigCommerce credential form -->
+![Create BigCommerce credential form](./assets/cred/cred.png)
 
 Fill in:
 

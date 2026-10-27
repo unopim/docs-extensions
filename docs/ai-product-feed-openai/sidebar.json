@@ -1,17 +1,129 @@
 [
   {
-    "text": "AI Product Feed (OpenAI)",
+    "text": "Getting Started",
+    "collapsed": false,
     "items": [
-      { "text": "Overview",                     "link": "/ai-product-feed-openai/" },
-      { "text": "Installation",                 "link": "/ai-product-feed-openai/installation" },
-      { "text": "Configuration",                "link": "/ai-product-feed-openai/configuration" },
-      { "text": "Generating & Submitting Feed", "link": "/ai-product-feed-openai/feed-generation" }
+      {
+        "text": "Overview",
+        "link": "/ai-product-feed-openai/"
+      },
+      {
+        "text": "Quick Start",
+        "link": "/ai-product-feed-openai/quick-start"
+      },
+      {
+        "text": "Installation",
+        "link": "/ai-product-feed-openai/installation"
+      },
+      {
+        "text": "Roles & Permissions",
+        "link": "/ai-product-feed-openai/permissions"
+      },
+      {
+        "text": "Upgrading & Uninstalling",
+        "link": "/ai-product-feed-openai/upgrading"
+      }
     ]
   },
   {
-    "text": "Support",
+    "text": "Configuration",
+    "collapsed": false,
     "items": [
-      { "text": "Contact Support", "link": "/ai-product-feed-openai/contact-support" }
+      {
+        "text": "General Settings",
+        "link": "/ai-product-feed-openai/general-settings"
+      },
+      {
+        "text": "Store Information",
+        "link": "/ai-product-feed-openai/store-information"
+      },
+      {
+        "text": "Attribute Mapping",
+        "link": "/ai-product-feed-openai/attribute-mapping"
+      },
+      {
+        "text": "ChatGPT Commerce Flags",
+        "link": "/ai-product-feed-openai/commerce-flags"
+      },
+      {
+        "text": "Return Policy",
+        "link": "/ai-product-feed-openai/return-policy"
+      },
+      {
+        "text": "Geography & Targeting",
+        "link": "/ai-product-feed-openai/geography"
+      },
+      {
+        "text": "Product Filters",
+        "link": "/ai-product-feed-openai/product-filters"
+      },
+      {
+        "text": "Schedule & Performance",
+        "link": "/ai-product-feed-openai/schedule-performance"
+      },
+      {
+        "text": "SFTP Delivery",
+        "link": "/ai-product-feed-openai/sftp-delivery"
+      },
+      {
+        "text": "Settings History",
+        "link": "/ai-product-feed-openai/settings-history"
+      }
+    ],
+    "link": "/ai-product-feed-openai/configuration"
+  },
+  {
+    "text": "Using the Feed",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Generating the Feed",
+        "link": "/ai-product-feed-openai/feed-generation"
+      },
+      {
+        "text": "Feed Preview",
+        "link": "/ai-product-feed-openai/preview"
+      },
+      {
+        "text": "Generation History",
+        "link": "/ai-product-feed-openai/generation-history"
+      },
+      {
+        "text": "CLI Commands",
+        "link": "/ai-product-feed-openai/cli"
+      }
+    ]
+  },
+  {
+    "text": "Publishing to ChatGPT",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Submitting to ChatGPT",
+        "link": "/ai-product-feed-openai/submitting-to-chatgpt"
+      },
+      {
+        "text": "Feed Fields Reference",
+        "link": "/ai-product-feed-openai/feed-fields"
+      },
+      {
+        "text": "Security",
+        "link": "/ai-product-feed-openai/security"
+      }
+    ]
+  },
+  {
+    "text": "Help",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Troubleshooting & FAQ",
+        "link": "/ai-product-feed-openai/troubleshooting"
+      },
+      {
+        "text": "Contact Support",
+        "link": "/ai-product-feed-openai/contact-support"
+      }
     ]
   }
 ]

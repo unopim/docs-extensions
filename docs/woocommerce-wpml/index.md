@@ -3,9 +3,9 @@
 ::: warning Prerequisite — WooCommerce Connector Required
 This add-on **extends** the UnoPim WooCommerce Connector. You must install and fully configure the WooCommerce Connector before installing this add-on.
 
-- [WooCommerce Connector — Overview](/woocommerce/)
-- [WooCommerce Connector — Installation](/woocommerce/installation)
-- [WooCommerce Connector — Setup Credentials](/woocommerce/setup-credentials)
+- [WooCommerce Connector — Overview](../woocommerce/index.md)
+- [WooCommerce Connector — Installation](../woocommerce/installation.md)
+- [WooCommerce Connector — Setup Credentials](../woocommerce/setup-credentials.md)
 
 Do not proceed with this add-on until your WooCommerce Connector is connected and working.
 :::
@@ -36,7 +36,7 @@ A user can hold both roles depending on team setup.
 | **UnoPim**                | v3.1.*                                                                                                              |
 | **PHP**                   | 8.3 or higher                                                                                                       |
 | **Laravel**               | 13.x                                                                                                                |
-| **WooCommerce Connector** | Must be installed, credentials configured, and connection tested —[see setup guide](/woocommerce/setup-credentials) |
+| **WooCommerce Connector** | Must be installed, credentials configured, and connection tested —[see setup guide](../woocommerce/setup-credentials.md) |
 | **WPML plugin**           | Installed and configured in WordPress with all target languages added                                               |
 | **WooCommerce**           | Latest stable version                                                                                               |
 | **Queue worker**          | Must be running — export/import jobs are queued                                                                    |

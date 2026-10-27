@@ -1,151 +1,59 @@
-# Generating & Submitting the Feed
+# Generating the Feed
 
-## Dashboard
-
-Navigate to **Admin Panel → OpenAI Feed → General** to open the feed dashboard.
-
-![OpenAI Product Feed dashboard showing status cards and generation history](./images/dashboard.png)
-
-The dashboard shows:
-
-- **Feed Status** — whether the feed is currently enabled or disabled.
-- **Last Generated** — timestamp of the most recent successful generation.
-- **File Size** — size of the currently live feed file.
-- **Last Run** — timestamp of the last generation attempt (success or failure).
-- **Recent Generation History** — the last 5 generation runs with status, rows exported, duration, file size, and trigger source.
-
-The status updates automatically via polling — you can watch a generation in progress without refreshing the page.
+This page covers the day-to-day work: building the feed, checking what's in it, and watching how each run went.
 
 ---
 
-## Generating the feed
+## The dashboard
 
-### Manual generation
+Open **OpenAI Feed › General**.
 
-Click **Generate Now** on the dashboard. The job is dispatched to the queue and the history table updates in real time as it runs.
+![OpenAI Product Feed dashboard with status cards, the public feed URL and recent generation history](./images/dashboard.png)
+
+| Area | What it tells you |
+|---|---|
+| **Feed Status** | Whether the feed is enabled. |
+| **Last Generated** | When the current feed file was built, e.g. *"1 minute ago (27 Oct 2026, 06:58 AM)"*. |
+| **File Size** | Size of the current feed file. |
+| **Last Run** | Result of the most recent run: *Success*, *Running* or *Failed*. |
+| **Public Feed URL** | The address you give OpenAI, including your token. Use **Copy URL**, **Open** (view it in a new tab) or **Download** (save the file). |
+| **Recent Generation History (Top 5)** | The last five runs. **View All** opens the full history. |
+
+The buttons at the top right are **Preview Feed** and **Generate Now**. While a generation is running, **Generate Now** is disabled and reads *Generating…*, a **Stop** panel appears, and the page refreshes on its own when the run finishes.
+
+---
+
+## Generate the feed manually
+
+1. Click **Generate Now** and confirm.
+2. What happens next depends on your queue setup:
+   - **With a queue worker** (`database`/`redis`): you see *"Feed generation queued, running in the background"*. The run appears as **Running** in the history and switches to **Success** or **Failed** when it ends.
+   - **With `QUEUE_CONNECTION=sync`**: the page waits until the feed is built, then shows *"Feed generated: 177 rows written in 0.9 seconds"*.
+3. Every run, successful or not, is recorded in the history as **Manual**.
+
+If you click **Generate Now** while another run is in progress, you get *"A feed generation job is already running"*. Two runs never overlap.
 
 > [!NOTE]
-> Make sure a queue worker is running before triggering a manual generation (see [Installation → Step 6](./installation#step-6-start-the-queue-worker)). If the queue driver is set to `sync`, the generation runs inline and may time out on large catalogs.
+> The feed is written to a temporary file first and swapped in only when the run succeeds. If a run fails or is stopped, OpenAI keeps getting the **previous** complete feed. It never gets a half-written file.
 
 ---
 
-### Automated generation (cron)
+## Stop a running generation
 
-The extension registers a scheduled task automatically. To enable it, add the following line to your server's crontab:
-
-```bash
-* * * * * cd /path-to-your-unopim && php artisan schedule:run >> /dev/null 2>&1
-```
-
-The scheduler runs every minute and triggers feed regeneration at the interval you configured in **Configuration → Cron Interval**. The cron task uses `withoutOverlapping()` so a slow generation on a large catalog will never trigger a second run before the first finishes.
+Click **Stop** in the panel that appears on the dashboard while a run is in progress, and confirm. The run is marked **Failed** with the reason *"Stopped manually"*, its temporary file is deleted, and the existing feed file is left untouched. If the job was still waiting in the queue, it is skipped when a worker picks it up.
 
 ---
 
-### CLI generation
+## Automatic generation
 
-Trigger generation directly from the command line:
+Once the scheduler is running (see [Installation › Step 5](./installation.md#step-5-enable-the-scheduler)), the feed rebuilds itself on the interval you set in [Configuration › Performance & Schedule](./schedule-performance.md). Scheduled runs show **Cron** in the *Triggered By* column.
 
-```bash
-# Run inline (no queue required)
-php artisan openai-feed:generate
-
-# Dispatch to the background queue
-php artisan openai-feed:generate --queue
-
-# Preview 5 rows without writing a file
-php artisan openai-feed:generate --dry-run
-
-# Generate and print the public feed URL
-php artisan openai-feed:generate --show-url
-```
-
-| Option | Description |
-|---|---|
-| *(none)* | Runs feed generation synchronously in the terminal. |
-| `--queue` | Dispatches the generation job to the queue and returns immediately. |
-| `--dry-run` | Prints a 5-row preview table without writing the feed file. Useful for verifying attribute mapping before a full run. |
-| `--show-url` | After generation, prints the full public feed URL with your security token. |
+The schedule only runs while **Feed Enabled** is on.
 
 ---
 
-## Feed preview
+## Related
 
-Navigate to **Admin Panel → OpenAI Feed → General → Preview Feed** to browse the products that will be included in the feed.
-
-![Feed Preview showing product rows with ID, title, brand, price, availability, and variant attributes](./images/preview.png)
-
-The preview datagrid shows each product row with its mapped values — Item ID, Product Title, Brand, Price, Availability, Category, GTIN, and Variant Attributes. Click the eye icon on any row to see the full field-by-field mapping for that product or variant.
-
-Use the preview to verify your attribute mapping is correct before submitting the feed URL to ChatGPT.
-
-> [!TIP]
-> If products are missing from the preview, check **Configuration → Product Filters**. Products with no price in any selected currency are silently excluded, as are disabled products when **Only Enabled Products** is turned on.
-
----
-
-## Generation history
-
-Navigate to **Admin Panel → OpenAI Feed → General → View All** to see the full generation history.
-
-![Generation History page showing all feed runs with status, rows, duration, and trigger source](./images/logs.png)
-
-| Column | What to look for |
-|---|---|
-| **Status** | Green = success; red = failed. Expand a failed row to see the error message. |
-| **Rows** | A sudden drop in rows may indicate a filter change or products being disabled. |
-| **Duration** | Steady growth over time = catalog is growing. A spike = database slowdown. |
-| **File Size** | Useful to confirm the feed file was not truncated. |
-| **Triggered By** | `manual`, `cron`, or `api`. |
-
----
-
-## Submitting to ChatGPT
-
-Once the feed has been generated successfully:
-
-1. Run the following to get your public feed URL:
-   ```bash
-   php artisan openai-feed:generate --show-url
-   ```
-   The URL will look like:
-   ```
-   https://your-domain.com/openai-feed/products?token=<your-token>
-   ```
-
-2. Go to [chatgpt.com/merchants](https://chatgpt.com/merchants) and sign in.
-3. Add a new product feed and paste the URL.
-4. ChatGPT will fetch and index your products. Indexing may take some time after the initial submission.
-
-> [!NOTE]
-> The token in the URL is the same token shown in **Configuration → Feed Security Token**. If you regenerate the token in settings, update the URL in the ChatGPT Merchant Portal immediately — the old URL will stop working.
-
----
-
-## Feed status endpoint
-
-A lightweight status endpoint is available for uptime monitoring or integration checks:
-
-```
-GET /openai-feed/status
-```
-
-Returns JSON with the feed's enabled state, last generation time, file size, format, channel, and locale. No token is required.
-
----
-
-## Troubleshooting
-
-**Generate Now button does nothing / generation stays in "Running" indefinitely**
-Check that a queue worker is running: `php artisan queue:work --queue=system,completeness,default`. Check the Laravel log at `storage/logs/laravel.log` for job errors.
-
-**Feed URL returns 403**
-The feed is either disabled in settings, or the token in the URL does not match the one saved in **Configuration → Feed Security Token**.
-
-**Products are missing from the feed or preview**
-Check **Configuration → Product Filters**: disabled products are excluded when *Only Enabled Products* is on; products without a price in any selected currency are always excluded; the *Product Limit* may be cutting the catalog short.
-
-**Attribute values are empty in the preview**
-Open **Configuration → Attribute Mapping** and confirm each field points to an attribute that has data for your products. Use the **dry-run** CLI option to inspect a small sample without generating the full file.
-
-**Memory errors during generation on large catalogs**
-Lower the **Batch Size** in **Configuration → Performance & Schedule**. Try 100–200 for catalogs over 50,000 SKUs, and make sure the job runs via `--queue` with a worker that has a sufficient `--memory` limit.
+- [CLI Commands](./cli.md): generate from the terminal or a deploy script.
+- [Feed Preview](./preview.md): check the rows before OpenAI sees them.
+- [Generation History](./generation-history.md): every run and why it failed.

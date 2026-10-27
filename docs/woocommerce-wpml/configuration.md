@@ -1,7 +1,7 @@
 # Configuration
 
 ::: info WooCommerce Connector required
-The base WooCommerce Connector must be installed and connected before configuring this add-on. See the [WooCommerce Connector docs](/woocommerce/) if you haven't done that yet.
+The base WooCommerce Connector must be installed and connected before configuring this add-on. See the [WooCommerce Connector docs](../woocommerce/index.md) if you haven't done that yet.
 :::
 
 Configuration for the WPML add-on happens in two places:

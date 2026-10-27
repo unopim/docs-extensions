@@ -4,13 +4,6 @@ Store Link: [View on Webkul Store](https://store.webkul.com/unopim-shopware-conn
 
 The **UnoPim Shopware 6 Connector** is an export-only integration that pushes your entire product catalog from UnoPim directly into a Shopware 6 store — categories, attributes, attribute options, simple products, configurable products, and product tags — without any manual re-entry.
 
-<!-- <br>
-
-<div align="center">
-  <img src="./images/shopware-banner.png" alt="UnoPim Shopware 6 Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
-</div>
-
-<br> -->
 
 Managing product data in two separate systems is time-consuming and error-prone. The UnoPim Shopware Connector solves that — you define your catalog once in UnoPim, then publish it to Shopware with a single export job. From categories and attribute definitions to product prices, images, and variant configurations, everything flows in one direction: UnoPim → Shopware.
 

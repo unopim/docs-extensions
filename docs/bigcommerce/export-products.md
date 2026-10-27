@@ -20,6 +20,8 @@ Open **Data Transfer → Export → + Create Export**.
 
 Set the **Type** to **Export Products to BigCommerce** and give it a **Code** - any short identifier, e.g. `bigcommerce_products`. Pick the **Credential** (the BigCommerce store to push to; only **active** credentials appear) - it is the only required field.
 
+![BigCommerce Credential filter](./assets/export/product-fileter.png)
+
 ![Export profile form filled](./assets/export/simple-product-export.png)
 
 ### 2. Choose what to export
