@@ -1,13 +1,34 @@
 # Supported languages
 
-DeepL only translates between certain languages. The extension uses this list:
+DeepL only translates between certain languages. The extension asks DeepL which languages your key supports, so when DeepL adds a new language it works straight away - no update needed.
 
-`bg_BG`, `cs_CZ`, `da_DK`, `de_DE`, `el_GR`, `en_GB`, `en_US`, `es_ES`, `et_EE`, `fi_FI`, `fr_FR`, `hu_HU`, `id_ID`, `it_IT`, `ja_JP`, `ko_KR`, `lt_LT`, `lv_LV`, `nb_NO`, `nl_NL`, `pl_PL`, `pt_BR`, `pt_PT`, `ro_RO`, `ru_RU`, `sk_SK`, `sl_SI`, `sv_SE`, `tr_TR`, `uk_UA`, `zh_CN`, `zh_TW`.
+- The list is fetched with your API key and remembered for 24 hours.
+- If DeepL can't be reached, the extension falls back to a built-in list and tries DeepL again next time.
 
-Languages that aren't on this list are skipped — you'll see a message saying DeepL doesn't support that language.
+## How UnoPim languages are matched
 
-If you need a language that isn't here, check DeepL's [supported languages page](https://developers.deepl.com/docs/getting-started/supported-languages).
+Most locales are matched by their language - `fr_FR` is French, `ja_JP` is Japanese, and so on. A few regional locales are mapped to the closest DeepL variant:
+
+| UnoPim locale | Translated as |
+|--|--|
+| `en_US`, `en_PH` | English (American) |
+| `en_GB`, `en_AU`, `en_CA`, `en_IE`, `en_IN`, `en_NZ`, `en_ZA` and other English locales | English (British) |
+| `pt_BR` | Portuguese (Brazilian) |
+| `pt_PT` | Portuguese (European) |
+| `es_MX`, `es_AR`, `es_CO`, `es_US` and other Latin American Spanish locales | Spanish (Latin American) |
+| `zh_CN`, `zh_SG` | Chinese (Simplified) |
+| `zh_TW`, `zh_HK`, `zh_MO` | Chinese (Traditional) |
+| `fr_CA` | French (Canadian) |
+| `de_CH` | German (Swiss) |
+| `nb_NO`, `no_NO` | Norwegian (Bokmål) |
+
+## When a language isn't supported
+
+- **Some target languages unsupported** - those are skipped and the rest are translated. You'll see *DeepL does not support …, so they were skipped.*
+- **Source language, or every target language, unsupported** - nothing is translated. You'll see *DeepL does not support locale "…".*
+
+To see every language DeepL offers, check DeepL's [supported languages page](https://developers.deepl.com/docs/getting-started/supported-languages).
 
 ## Rich text
 
-If a field uses a rich-text editor (bold, links, headings, etc.), DeepL keeps the formatting intact when translating. You don't need to tick anything extra — the extension detects rich text on its own.
+If a field uses a rich-text editor (bold, links, headings, etc.), DeepL keeps the formatting intact when translating. You don't need to tick anything extra - the extension detects rich text on its own.

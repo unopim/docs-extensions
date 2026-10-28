@@ -21,14 +21,16 @@ Translate your product content into other languages with one click.
 
 | Requirement | Details |
 |---|---|
-| **UnoPim** | 2.0.0 or higher |
-| **PHP** | 8.2 or higher |
-| **DeepL API** | Active DeepL API key (Free or Pro) |  
+| **UnoPim** | 3.0.x |
+| **PHP** | 8.4.1 or higher |
+| **Laravel** | 13.x |
+| **Database** | MySQL 8.0 or PostgreSQL 16 |
+| **DeepL API** | Active DeepL API key (Free or Pro) |
 
 ## Before you start
 
 You need:
 
 1. A working UnoPim installation.
-2. A DeepL API key — get one from [deepl.com/pro-api](https://www.deepl.com/pro-api). Free or Pro both work.
-3. The DeepL Translation extension installed — see [Installation](./installation).
+2. A DeepL API key - get one from [deepl.com/pro-api](https://www.deepl.com/pro-api). Free or Pro both work.
+3. The DeepL Translation extension installed - see [Installation](./installation).

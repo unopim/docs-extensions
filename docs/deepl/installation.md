@@ -37,17 +37,10 @@ Webkul\DeepLTranslation\Providers\DeepLTranslationServiceProvider::class,
 > [!NOTE]
 > This registers `DeepLTranslationServiceProvider` in Laravel so the extension can bootstrap its services, routes, and package configuration during application startup.
 
-### 4. Install the DeepL SDK
+> [!WARNING]
+> Don't add the extension to `config/concord.php`. It registers itself from the provider above, so a Concord entry would load it twice.
 
-```bash
-composer require deeplcom/deepl-php:^1.18
-```
-
-| Command | Purpose |
-|---|---|
-| `composer require deeplcom/deepl-php:^1.18` | Installs the official DeepL PHP SDK dependency required by the extension. |
-
-### 5. Run the install command
+### 4. Run the install command
 
 ```bash
 composer dump-autoload
@@ -57,9 +50,14 @@ php artisan deepl:install
 | Command | Purpose |
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the newly added namespace. |
-| `php artisan deepl:install` | Runs the DeepL package installer and required setup tasks. |
+| `php artisan deepl:install` | Installs the DeepL PHP SDK (`deeplcom/deepl-php`) if it's missing, runs the migrations, and clears the view, route, and config caches. |
 
-### 6. Keep a queue worker running
+You don't need to install the DeepL SDK yourself - `deepl:install` does it for you.
+
+> [!TIP]
+> If the SDK install fails (for example, `composer` isn't on the server's `PATH`), run `composer require deeplcom/deepl-php` by hand, then run `php artisan deepl:install` again.
+
+### 5. Keep a queue worker running
 
 ```bash
 php artisan queue:work
@@ -71,23 +69,26 @@ php artisan queue:work
 
 In production use Supervisor / systemd / Horizon.
 
-### 7. Give your role permission
+### 6. Give your role permission
 
-Open **Settings → Roles**, edit the role, and tick the DeepL permissions you want them to have:
+Open **Settings > Roles**, edit the role, and tick the DeepL permissions you want them to have:
 
-- **Manage credentials** - add / edit / delete DeepL keys.
-- **Translate fields** - use the per-field button and the product wizard.
+- **Credentials** - see the DeepL menu and the credentials list.
+  - **Create** - add a DeepL key.
+  - **Edit** - change a key and its auto-translate settings.
+  - **Delete** - remove a key.
+- **Translate** - use the per-field button, the product wizard, and the AI agent tool.
 - **Bulk translate** - translate many products at once.
 
-![DeepL permissions in Settings → Roles](./images/deepl-acl-image.png)
+![DeepL permissions in Settings > Roles](./images/deepl-acl-image.png)
 
 Without these the menu and buttons stay hidden.
 
 ## Check it worked
 
 1. **Menu shows up.** Open the admin panel - a **DeepL** menu appears in the sidebar.
-2. **Add a key works.** Open **DeepL → Credentials → Add Credential** and save your key. If the key is wrong, you see a clear error.
+2. **Add a key works.** Open **DeepL > Credentials > Add Credential** and save your key. The edit page opens straight after.
 3. **Per-field button shows up.** Open any product. A **DeepL Translate** button appears next to translatable fields.
-4. **Bulk action shows up.** Open **Catalog → Products**, tick a row, and **Bulk Translate** appears in the actions menu.
+4. **Bulk action shows up.** Open **Catalog > Products**, tick a row, and **Bulk Translate** appears in the **Select Action** menu.
 
 If any of these don't work, see [Troubleshooting](./troubleshooting).

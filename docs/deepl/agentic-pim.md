@@ -11,7 +11,7 @@ If your UnoPim has the **AI Agent** extension installed, you can ask the agent t
 1. Open the AI chat.
 2. Click the **Capabilities** tab.
 3. Click the **DeepL Translate** tile.
-4. The chat opens with a starter prompt — replace `:sku` with a real SKU and send.
+4. The chat opens with a starter prompt - replace `:sku` with a real SKU and send.
 
 Example:
 
@@ -23,9 +23,9 @@ The agent can:
 
 - Translate one product by SKU or by ID.
 - Pick which fields to translate (or every text field by default).
-- **Preview only** — return a preview without saving.
+- **Preview only** - return a preview without saving.
 
-The agent never overwrites text that's already there — it only fills empty translations.
+The agent never overwrites text that's already there - it only fills empty translations.
 
 ## If the agent says *No translatable source content found*
 

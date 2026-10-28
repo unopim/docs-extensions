@@ -2,7 +2,7 @@
 
 DeepL Translate only shows up on fields you tick as translatable. This keeps fields like SKU, price, or status out of the way even though they're stored as text.
 
-**Open it from:** *Catalog → Attributes → (open the attribute) → Configuration*
+**Open it from:** *Catalog > Attributes > (open the attribute) > Configuration*
 
 ![AI Translate checkbox on the attribute edit page](./images/attribute-ai-translate-enable.png)
 
@@ -13,7 +13,7 @@ DeepL Translate only shows up on fields you tick as translatable. This keeps fie
 3. Tick **AI Translate**.
 4. Click **Save Attribute**.
 
-That's it. The DeepL button now appears on this field everywhere — product edit, bulk translate, the wizard.
+That's it. The DeepL button now appears on this field everywhere - product edit, bulk translate, the wizard.
 
 ## Which fields to tick
 
@@ -25,7 +25,7 @@ Tick fields that hold customer-facing text:
 - Meta title, meta description, meta keywords
 - Any tagline or marketing copy
 
-**Don't tick** fields like SKU, price, weight, image URLs, status, or dates — those shouldn't be translated.
+**Don't tick** fields like SKU, price, weight, image URLs, status, or dates - those shouldn't be translated.
 
 ## Notes
 

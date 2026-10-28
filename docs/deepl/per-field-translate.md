@@ -14,9 +14,9 @@ The fastest way to translate a single field on a product.
 
 A short wizard opens.
 
-![Translate one field — wizard](./images/one-field-translate-modal.png)
+![Translate one field - wizard](./images/one-field-translate-modal.png)
 
-### Step 1 — Source
+### Step 1 - Source
 
 Pick:
 
@@ -25,32 +25,32 @@ Pick:
 
 These are pre-filled with the page you're already on.
 
-Click **Next →**.
+Click **Next**.
 
-### Step 2 — Target
+### Step 2 - Target
 
 Pick:
 
-- **Target channels** — one or more.
-- **Target locales** — one or more. **Select all** picks every available language.
+- **Target channels** - one or more.
+- **Target locales** - one or more. **Select all** picks every available language.
 
 Click **DeepL Translate**.
 
-### Step 3 — Preview & save
+### Step 3 - Preview & save
 
 ![Preview translated text before saving](./images/one-field-translated-modal.png)
 
 Each target language shows the translated text in a box you can edit. Tweak anything you like.
 
-- **← Back** — go back a step.
-- **Cancel** — discard.
-- **Apply** — save into the product.
+- **Back** - go back a step.
+- **Cancel** - discard.
+- **Apply** - save into the product.
 
 You'll see *Translation saved.*
 
 ## If the button isn't showing
 
-Walk through the list — the first reason is the most common:
+Walk through the list - the first reason is the most common:
 
 1. Is **AI Translate** ticked on the field? See [Mark fields](./attribute-setup).
 2. Is the field a **Text** or **Textarea**?
