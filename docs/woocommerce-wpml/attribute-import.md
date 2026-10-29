@@ -29,7 +29,7 @@ While creating the import job, the user needs to:
 
 Under **Settings**, configure the following fields:
 
-![Attribute Import Settings](assets/import/Create-Import-for-attribute-and-it's-filter.png)
+![Attribute Import Settings](assets/import/Create-Import-for-attribute-and-its-filter.png)
 
 | Field | Type | Required | Description |
 |---|---|---|---|
