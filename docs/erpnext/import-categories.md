@@ -1,50 +1,29 @@
 # UnoPim - Import Categories from ERPNext
 
-Importing ERPNext **Item Groups** into UnoPim as categories.
-
-## Overview
-
-This import job pulls ERPNext **Item Group** records into UnoPim as categories.
+Imports ERPNext **Item Groups** into UnoPim as categories.
 
 The job type is listed as **ERPNext: Item Group → Categories**.
 
-## Prerequisites
+**Prerequisite:** set up your [credentials](./setup-credentials.md) first.
 
-Before importing, make sure you have [set up your ERPNext credentials](./setup-credentials.md) in UnoPim.
+## Steps
 
-## How to Import Categories
+1. Go to **Data Transfer → Imports** and click **Create Import**.
+2. Enter a unique **Code** and select **ERPNext: Item Group → Categories** as the type.
+3. Set the filters below, then click **Save changes**.
+4. Click **Import Now** to run the job.
 
-### Step 1: Go to Data Transfer
+![Create Import](./assets/import/Create-Import-category.png)
 
-Navigate to the **Data Transfer** section from the main menu.
+## Filters
 
-### Step 2: Open Imports
+| Setting | Purpose |
+| --- | --- |
+| **Credential** | ERPNext site to import from. *(required)* |
 
-Click on **Imports** to view the available import jobs.
 
-### Step 3: Create Import
+## Track the Job
 
-Click **Create Import**, then enter a unique **Code** for the job.
+Follow progress in **Data Transfer → Job Tracker**, which shows the created / updated counts and a downloadable log.
 
-**Example:** `erpnext_category_import_001`
-
-### Step 4: Select Type
-
-Select **ERPNext: Item Group → Categories** as the import type.
-
-### Step 5: Choose the Credential
-
-In the job settings, select the **ERPNext Credential** to import from. *(required)*
-
-### Step 6: Save Import
-
-Click **Save Import** to store the import job.
-
-### Step 7: Import Now
-
-Click **Import Now** to run the job and pull ERPNext Item Groups into UnoPim.
-
-### Step 8: Monitor Progress
-
-Track the job in the **Job Tracker**. Live **Created / Updated / Skipped** counts tick up as the job runs, and any errors appear in the log.
-
+![Job Tracker](./assets/import/Job-Tracker-category-import.png)

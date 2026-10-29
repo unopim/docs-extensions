@@ -1,50 +1,29 @@
 # UnoPim - Import Attributes from ERPNext
 
-Importing ERPNext **Item Attributes** and their values into UnoPim as attributes.
-
-## Overview
-
-This import job pulls ERPNext **Item Attributes** - along with their values - into UnoPim as attributes and attribute options.
+Imports ERPNext **Item Attributes** and their values into UnoPim as attributes and options.
 
 The job type is listed as **ERPNext: Item Attribute → Attributes**.
 
-## Prerequisites
+**Prerequisite:** set up your [credentials](./setup-credentials.md) first.
 
-Before importing, make sure you have [set up your ERPNext credentials](./setup-credentials.md) in UnoPim.
+## Steps
 
-## How to Import Attributes
+1. Go to **Data Transfer → Imports** and click **Create Import**.
+2. Enter a unique **Code** and select **ERPNext: Item Attribute → Attributes** as the type.
+3. Set the filters below, then click **Save changes**.
+4. Click **Import Now** to run the job.
 
-### Step 1: Go to Data Transfer
+![Create Import](./assets/import/Create-Import-attribute.png)
 
-Navigate to the **Data Transfer** section from the main menu.
+## Filters
 
-### Step 2: Open Imports
+| Setting | Purpose |
+| --- | --- |
+| **Credential** | ERPNext site to import from. *(required)* |
 
-Click on **Imports** to view the available import jobs.
 
-### Step 3: Create Import
+## Track the Job
 
-Click **Create Import**, then enter a unique **Code** for the job.
+Follow progress in **Data Transfer → Job Tracker**, which shows the created / updated counts and a downloadable log.
 
-**Example:** `erpnext_attribute_import_001`
-
-### Step 4: Select Type
-
-Select **ERPNext: Item Attribute → Attributes** as the import type.
-
-### Step 5: Choose the Credential
-
-In the job settings, select the **ERPNext Credential** to import from. *(required)*
-
-### Step 6: Save Import
-
-Click **Save Import** to store the import job.
-
-### Step 7: Import Now
-
-Click **Import Now** to run the job and pull ERPNext Item Attributes into UnoPim.
-
-### Step 8: Monitor Progress
-
-Track the job in the **Job Tracker**. Live **Created / Updated / Skipped** counts tick up as the job runs, and any errors appear in the log.
-
+![Job Tracker](./assets/import/Job-Tracker-attribute-import.png)

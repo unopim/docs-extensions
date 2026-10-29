@@ -1,51 +1,29 @@
 # UnoPim - Import Brands from ERPNext
 
-Importing ERPNext **Brand** records into the UnoPim brand attribute.
-
-## Overview
-
-This import job pulls ERPNext **Brand** records into UnoPim as options of your chosen brand attribute.
+Imports ERPNext **Brand** records as options of your UnoPim brand attribute.
 
 The job type is listed as **ERPNext: Brand → Brand options**.
 
-## Prerequisites
+**Prerequisites:** set up your [credentials](./setup-credentials.md) and choose the brand attribute in Brand Mapping (**ERPNext → Credentials → Edit → ERPNext Attribute Mapping**).
 
-- [Set up your ERPNext credentials](./setup-credentials.md) in UnoPim.
-- Choose which UnoPim attribute represents the brand in [Brand Mapping](./other-mappings.md#brand-mapping). Imported brands become options of that attribute.
+## Steps
 
-## How to Import Brands
+1. Go to **Data Transfer → Imports** and click **Create Import**.
+2. Enter a unique **Code** and select **ERPNext: Brand → Brand options** as the type.
+3. Set the filters below, then click **Save changes**.
+4. Click **Import Now** to run the job.
 
-### Step 1: Go to Data Transfer
+![Create Import](./assets/import/Create-Import-Brand.png)
 
-Navigate to the **Data Transfer** section from the main menu.
+## Filters
 
-### Step 2: Open Imports
+| Setting | Purpose |
+| --- | --- |
+| **Credential** | ERPNext site to import from. *(required)* |
 
-Click on **Imports** to view the available import jobs.
 
-### Step 3: Create Import
+## Track the Job
 
-Click **Create Import**, then enter a unique **Code** for the job.
+Follow progress in **Data Transfer → Job Tracker**, which shows the created / updated counts and a downloadable log.
 
-**Example:** `erpnext_brand_import_001`
-
-### Step 4: Select Type
-
-Select **ERPNext: Brand → Brand options** as the import type.
-
-### Step 5: Choose the Credential
-
-In the job settings, select the **ERPNext Credential** to import from. *(required)*
-
-### Step 6: Save Import
-
-Click **Save Import** to store the import job.
-
-### Step 7: Import Now
-
-Click **Import Now** to run the job and pull ERPNext Brands into UnoPim.
-
-### Step 8: Monitor Progress
-
-Track the job in the **Job Tracker**. Live **Created / Updated / Skipped** counts tick up as the job runs, and any errors appear in the log.
-
+![Job Tracker](./assets/import/Job-Tracker-brand-import.png)

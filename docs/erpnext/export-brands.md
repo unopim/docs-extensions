@@ -1,49 +1,31 @@
 # UnoPim - Export Brands to ERPNext
 
-Exporting the options of your UnoPim brand attribute to ERPNext as **Brand** records.
-
-## Overview
-
-This export job pushes the options of your chosen UnoPim brand attribute into ERPNext as **Brand** records.
+Exports the options of your UnoPim brand attribute to ERPNext as **Brand** records.
 
 The job type is listed as **ERPNext: Brand options → Brand**.
 
-## Prerequisites
+**Prerequisites:** set up your [credentials](./setup-credentials.md) and choose the brand attribute in Brand Mapping (**ERPNext → Credentials → Edit → ERPNext Attribute Mapping**).
 
-- [Set up your ERPNext credentials](./setup-credentials.md) in UnoPim.
-- Choose which UnoPim attribute represents the brand in [Brand Mapping](./other-mappings.md#brand-mapping). The brand export reads its options from that attribute.
+## Steps
 
-## How to Export Brands
+1. Go to **Data Transfer → Exports** and click **Create Export**.
+2. Enter a unique **Code** and select **ERPNext: Brand options → Brand** as the type.
+3. Set the filters below, then click **Save changes**.
+4. Click **Export Now** to run the job.
 
-### Step 1: Go to Data Transfer
+![Create Export](./assets/exports/Create-Export-brand.png)
 
-Navigate to the **Data Transfer** section from the main menu.
+## Filters
 
-### Step 2: Open Exports
+| Filter | Purpose |
+| --- | --- |
+| **Credential** | ERPNext site to export to. *(required)* |
 
-Click on **Exports** to view the available export jobs.
+No other filters apply - all options of the mapped brand attribute are exported.
 
-### Step 3: Create Export
 
-Click **Create Export**, then enter a unique **Code** and **Label** for the job.
+## Track the Job
 
-### Step 4: Select Type
+Follow progress in **Data Transfer → Job Tracker**, which shows the created / updated counts and a downloadable log.
 
-Select **ERPNext: Brand options → Brand** as the export type.
-
-### Step 5: Choose the Credential
-
-In the job filters, select the **ERPNext Credential** that points to the site you want to export to.
-
-### Step 6: Save
-
-Click **Save** to store the export job.
-
-### Step 7: Export Now
-
-Click **Export Now** to run the job and push your brand options to ERPNext.
-
-### Step 8: Monitor Progress
-
-Track the job in the **Job Tracker**. Live **Created / Updated / Skipped** counts tick up as the job runs, and any errors appear in the log.
-
+![Job Tracker](./assets/exports/Job-Tracker-brand-export.png)

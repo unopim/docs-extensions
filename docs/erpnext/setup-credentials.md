@@ -1,39 +1,43 @@
 # Setting Up ERPNext Credentials
 
-Once the connector is installed, the next step is to connect your ERPNext instance to UnoPim. This is done by entering your ERPNext API details inside the UnoPim dashboard.
+Connect your ERPNext instance to UnoPim by adding its API details. You can add **multiple ERPNext sites**, one credential each.
 
-You can connect **multiple ERPNext sites** by creating a separate set of credentials for each one.
+> Need an API Key and Secret? See [ERPNext Setup](./erpnext-setup.md).
 
-## Step 1 - Open the Credentials Page
+## Add a Credential
 
-Log in to your UnoPim dashboard and navigate to **ERPNext → Credentials**, then click **Add Credential**.
+1. In UnoPim, go to **ERPNext → Credentials** and click **Add Credential**.
 
-## Step 2 - Enter Your ERPNext Connection Details
+![Credentials list](./assets/import/Credentials-page.png)
 
-Fill in the following fields to establish the connection:
+2. Fill in the details and click **Save**.
 
 | Field | What to enter |
 |---|---|
-| **Name** | A unique label for this connection (e.g., `Production ERPNext`). Must be unique across credentials. |
-| **Base URL** | The full URL of your ERPNext instance (e.g., `https://your-company.erpnext.com`). |
-| **API Key** | The API Key generated for your ERPNext user. |
-| **API Secret** | The API Secret generated alongside the API Key. |
-| **UnoPim Channel** | The UnoPim channel this credential is scoped to. |
-| **UnoPim Locale** | The UnoPim locale used for this connection. |
-| **Currency** | The default currency used for this connection. |
-| **Active** | Toggle to enable or disable this credential. |
+| **Base URL** | URL of your ERPNext instance (e.g. `https://your-company.erpnext.com`). |
+| **API Key** | API Key generated for your ERPNext user. |
+| **API Secret** | API Secret generated with the key. |
+| **Active** | Enable or disable the credential. |
 
-> **Note:** Don't have your API Key and Secret yet? See [ERPNext Setup](./erpnext-setup.md) for how to generate them in ERPNext.
+![Add ERPNext Credential](./assets/credentils/create_credenetils.png)
 
-## Step 3 - Test the Connection
+## Edit a Credential
 
-Before saving, click **Test Connection**. UnoPim pings your ERPNext instance using the details you entered.
+Click the edit icon to open the credential. Leave **API Secret** blank to keep the saved value.
 
-- ✅ **Connection to ERPNext succeeded.** - your details are correct, go ahead and save.
-- ❌ **Unable to reach ERPNext** - double-check the Base URL, API Key, and API Secret, then try again.
+![Edit ERPNext Credential](./assets/credentils/Edit-ERPNext-Credential.png)
 
-## Step 4 - Save Your Credentials
+The other tabs configure mappings for this credential:
 
-Once the test passes, click **Save**. Your ERPNext instance is now connected to UnoPim and ready for export and import jobs.
+- **ERPNext Attribute Mapping** - item fields, media slots and the brand attribute.
 
-> **Tip:** When editing an existing credential, leave the **API Secret** field blank to keep the previously saved value.
+![Attribute and brand mapping](./assets/credentils/Edit-ERPNext-Credential-attribute-and-brand-mapping.png)
+
+- **Category Mapping** - map ERPNext Item Group fields to UnoPim category attributes (Item Group name is required).
+
+![Category mapping](./assets/credentils/Edit-ERPNext-Credential-category-mapping.png)
+
+- **Custom Fields** - attributes created as custom fields in ERPNext.
+- **History** - review past changes, with old and new values.
+
+![History](./assets/credentils/Edit-ERPNext-Credential-history-changes-in-credentils.png)

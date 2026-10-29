@@ -13,7 +13,7 @@
     "text": "Configuration",
     "items": [
       { "text": "Attribute Mapping", "link": "/erpnext/attribute-mapping" },
-      { "text": "Other Mappings", "link": "/erpnext/other-mappings" }
+      { "text": "Custom Fields Mapping", "link": "/erpnext/other-mappings" }
     ]
   },
 

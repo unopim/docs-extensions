@@ -1,76 +1,62 @@
 # UnoPim - Export Products to ERPNext
 
-Exporting your UnoPim product catalog to ERPNext as **Items**.
-
-## Overview
-
-This export job pushes your UnoPim products - both **simple** and **variant** products, with attributes, images, and pricing - into ERPNext as **Item** records.
+Exports UnoPim products (simple and variant, with attributes, images and pricing) to ERPNext as **Items**.
 
 The job type is listed as **ERPNext: Products → Item**.
 
-## Prerequisites
+**Prerequisites:** set up your [credentials](./setup-credentials.md), configure [Attribute Mapping](./attribute-mapping.md), and (recommended) run [Export Attributes](./export-attributes.md) and [Export Categories](./export-categories.md) first.
 
-Before exporting products, complete the following:
+## Steps
 
-1. [Set up your ERPNext credentials](./setup-credentials.md).
-2. Configure [Attribute Mapping](./attribute-mapping.md) so product data lands in the right ERPNext Item fields.
-3. (Recommended) Run the [Export Attributes](./export-attributes.md) and [Export Categories](./export-categories.md) jobs first, so variant attributes and Item Groups already exist in ERPNext.
+1. Go to **Data Transfer → Exports** and click **Create Export**.
+2. Enter a unique **Code** and select **ERPNext: Products → Item** as the type.
+3. Set the filters below, then click **Save changes**.
+4. Click **Export** to run the job.
 
-## How to Export Products
+![Create Export](./assets/exports/Create-Export-product-1.png)
 
-### Step 1: Go to Data Transfer
+## Filters
 
-Navigate to the **Data Transfer** section from the main menu.
+**Data to export**
 
-### Step 2: Open Exports
-
-Click on **Exports** to view the available export jobs.
-
-### Step 3: Create Export
-
-Click **Create Export**, then enter a unique **Code** and **Label** for the job.
-
-### Step 4: Select Type
-
-Select **ERPNext: Products → Item** as the export type.
-
-### Step 5: Set the Filters
-
-The product export gives you fine-grained control over what gets exported:
-
-| Filter | What it does |
+| Filter | Purpose |
 | --- | --- |
-| **ERPNext Credential** | Select which ERPNext site to export to. *(required)* |
-| **Channel** | Export products from a specific channel. *(required)* |
-| **Locale** | Export product data in a specific language. *(required)* |
-| **Currency** | Currency used for exported pricing. *(required)* |
-| **Product Filter (SKU)** | Optional. Export only specific products by entering their SKUs. Leave blank to export the full catalog. |
+| **Channels** / **Locales** | Channel and locale the product data is taken from. *(required)* |
+| **Currencies** | Currency used for exported prices. |
+| **Attributes** | Limit the export to selected attributes. |
 
-#### Targeted export by SKU
+**Output**
 
-To export only a few products, enter their **SKUs** in the **Product Filter (SKU)** field. This is useful for pushing a single new product or a small batch of updates without running a full catalog export.
+| Option | Purpose |
+| --- | --- |
+| **Credential** | ERPNext site to export to. *(required)* |
+| **With Media** | Also export product images. |
+| **Date Format** | Format used for date values. |
 
-### Step 6: Save
+**Data filters** - narrow down which products are exported:
 
-Click **Save** to store the export job.
+| Filter | Purpose |
+| --- | --- |
+| **Attribute Families** | Export only products of the chosen families. |
+| **Status** | Enabled / disabled products. |
+| **Completeness** | Filter by completeness condition. |
+| **Time Condition** | Filter by a date condition (e.g. recently updated). |
+| **Categories** | Tick the categories to export. |
+| **Identifiers** | Paste SKUs (comma or new-line separated) to export only those products. |
 
-### Step 7: Export Now
+![Data filters](./assets/exports/Create-Export-product-2.png)
 
-Click **Export Now** to run the job and push your products to ERPNext.
+**Attribute Conditions** - add rules on attribute values, e.g. `price` *Greater than* `10`. Use **Add another attribute condition** for more rules.
 
-### Step 8: Monitor Progress
+![Attribute conditions](./assets/exports/Edit-Export-product-3.png)
 
-Track the job in the **Job Tracker**. Live **Created / Updated / Skipped** counts tick up as the job runs, and any errors appear in the log.
+## Variants and Re-runs
 
-## Exporting Products with Variations
+- A parent product is exported as an ERPNext **Item template**; each variation becomes a **variant Item**.
+- Re-running the job updates existing Items instead of creating duplicates (last-write-wins on `modified`).
 
-Many products in UnoPim aren't single items - they come in variations such as **size**, **color**, or **material**. The **ERPNext: Products → Item** job handles these automatically:
+## Track the Job
 
-- The parent product is exported as an ERPNext **Item template** (with **Has Variants** enabled).
-- Each variation is exported as a **variant Item** linked to that template.
+Follow progress in **Data Transfer → Job Tracker**.
 
-Make sure the relevant variant attributes have been exported first (see [Export Attributes](./export-attributes.md)), so ERPNext can build the variants correctly.
-
-## Re-running an Export
-
-You can re-run a product export at any time to push the latest changes. Sync mappings keep each product's identity across runs, so re-syncs **update** existing ERPNext Items instead of creating duplicates. On conflicting updates, the connector uses a **last-write-wins** rule based on the `modified` timestamps on each side.
+![Job Tracker](./assets/exports/Job-Tracker-product-export.png)

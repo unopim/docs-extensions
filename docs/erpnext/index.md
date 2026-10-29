@@ -2,6 +2,8 @@
 
 Store Link: [View on Webkul Store](https://store.webkul.com/unopim-erpnext-connector.html)
 
+![UnoPim ERPNext Integration](./assets/overview/UnoPim%20ERPNext%20Integration%20Banner.png)
+
 The **UnoPim ERPNext Connector** bridges your **ERPNext / Frappe** instance and **UnoPim** - letting you manage your entire product catalog from one place and keep it in sync with ERPNext in both directions.
 
 Instead of maintaining products in two systems separately, you enrich everything in UnoPim - categories, products, attributes, brands, and images - and the connector takes care of pushing it into ERPNext (and pulling existing ERPNext data back) accurately and efficiently.

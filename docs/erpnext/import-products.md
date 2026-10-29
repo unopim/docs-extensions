@@ -1,62 +1,34 @@
 # UnoPim - Import Products from ERPNext
 
-Importing ERPNext **Items** into UnoPim as products.
-
-## Overview
-
-This import job pulls ERPNext **Item** records into UnoPim as products.
+Imports ERPNext **Items** into UnoPim as products. Import attributes and categories first so the products' references already exist.
 
 The job type is listed as **ERPNext: Item → Products**.
 
-## Prerequisites
+**Prerequisite:** set up your [credentials](./setup-credentials.md) first.
 
-Before importing products, complete the following:
+## Steps
 
-1. [Set up your ERPNext credentials](./setup-credentials.md).
-2. (Recommended) Run the [Import Attributes](./import-attributes.md) and [Import Categories](./import-categories.md) jobs first, so the attributes and categories the products reference already exist in UnoPim.
+1. Go to **Data Transfer → Imports** and click **Create Import**.
+2. Enter a unique **Code** and select **ERPNext: Item → Products** as the type.
+3. Set the filters below, then click **Save changes**.
+4. Click **Import Now** to run the job.
 
-## How to Import Products
+![Create Import](./assets/import/Create-Import-product.png)
 
-### Step 1: Go to Data Transfer
+## Filters
 
-Navigate to the **Data Transfer** section from the main menu.
-
-### Step 2: Open Imports
-
-Click on **Imports** to view the available import jobs.
-
-### Step 3: Create Import
-
-Click **Create Import**, then enter a unique **Code** for the job.
-
-**Example:** `erpnext_product_import_001`
-
-### Step 4: Select Type
-
-Select **ERPNext: Item → Products** as the import type.
-
-### Step 5: Configure the Settings
-
-In the job settings, configure the following:
-
-| Setting | What it does |
+| Setting | Purpose |
 | --- | --- |
-| **ERPNext Credential** | Select which ERPNext site to import from. *(required)* |
-| **Channel** | The UnoPim channel imported product data is assigned to. |
-| **Locale** | The language / locale imported product data is stored under. |
+| **Credential** | ERPNext site to import from. *(required)* |
+| **Channel** | Channel the imported products are assigned to. |
+| **Locale** | Locale the product data is stored under. |
+| **Currency** | Currency used for imported prices. |
 
-### Step 6: Save Import
+Re-running the import updates existing products instead of creating duplicates.
 
-Click **Save Import** to store the import job.
 
-### Step 7: Import Now
+## Track the Job
 
-Click **Import Now** to run the job and pull ERPNext Items into UnoPim.
+Follow progress in **Data Transfer → Job Tracker**, which shows the created / updated counts and a downloadable log.
 
-### Step 8: Monitor Progress
-
-Track the job in the **Job Tracker**. Live **Created / Updated / Skipped** counts tick up as the job runs, and any errors appear in the log.
-
-## Re-running an Import
-
-You can re-run a product import at any time. Sync mappings keep each product's identity across runs, so re-syncs **update** existing UnoPim products instead of creating duplicates. On conflicting updates, the connector uses a **last-write-wins** rule based on the `modified` timestamps on each side.
+![Job Tracker](./assets/import/Job-Tracker-product-import.png)
