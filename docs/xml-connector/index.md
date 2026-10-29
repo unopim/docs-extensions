@@ -1,5 +1,7 @@
 # UnoPim XML Connector
 
+Store Link: [View on Webkul Store](https://store.webkul.com/unopim-xml-connector.html)
+
 The **UnoPim XML Connector** lets you import data into UnoPim from any XML file. You define how the XML maps to your UnoPim data once - using a reusable **Mapping Template** - and then run import jobs using that template whenever you have new data.
 
 The connector imports four entity types, each with its own templates and import job:
@@ -53,7 +55,7 @@ The XML file is uploaded during the import job itself, not stored on the templat
 
 | Requirement | Version |
 |---|---|
-| **UnoPim** | 3.0.0 or higher |
+| **UnoPim** | 3.1.3 or higher |
 | **PHP** | 8.4 or higher (< 8.5) |
 | **Laravel** | 13.x |
 

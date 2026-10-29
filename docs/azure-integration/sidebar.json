@@ -3,24 +3,22 @@
     "text": "Azure Integration",
     "items": [
       { "text": "Overview", "link": "/azure-integration/" },
-      {"text" : "Installation", "link": "/azure-integration/installation" },
-      {"text" : "Azure Blob Storage Setup", "link": "/azure-integration/setup" }
+      { "text": "Installation", "link": "/azure-integration/installation" },
+      { "text": "Azure Blob Storage Setup", "link": "/azure-integration/setup" }
     ]
   },
-
   {
-    "text" : "Migrating Existing Files to Azure",
-    "items" : [
-      {"text" : "Move Existing Files to Azure", "link": "/azure-integration/move-existing-files" },
-      {"text" : "Remove Local Media after Migration", "link": "/azure-integration/remove-local-media-after-migration" },
-      {"text" : "Verify Migration", "link": "/azure-integration/verify-migration" }
+    "text": "Migrating Existing Files to Azure",
+    "items": [
+      { "text": "Move Existing Files to Azure", "link": "/azure-integration/move-existing-files" },
+      { "text": "Remove Local Media after Migration", "link": "/azure-integration/remove-local-media-after-migration" },
+      { "text": "Verify Migration", "link": "/azure-integration/verify-migration" }
     ]
   },
-
   {
-    "text" : "Support",
-    "items" : [
-      {"text" : "Contact & Support", "link": "/azure-integration/contact" }
+    "text": "Support",
+    "items": [
+      { "text": "Contact & Support", "link": "/azure-integration/contact" }
     ]
   }
 ]

@@ -10,7 +10,8 @@ Make sure the following is in place before running the migration command:
 
 - Your **Azure credentials are saved and enabled** in UnoPim (see [Setting Up Azure Credentials in UnoPim](./setup.md)).
 
-> **Important:** If your Azure credential is disabled, the migration command will fail. Double-check that the toggle is turned **on** before proceeding.
+> [!IMPORTANT]
+> If your Azure credential is disabled, the migration command will fail. Double-check that the toggle is turned **on** before proceeding.
 
 ---
 
@@ -36,4 +37,29 @@ Once the command completes:
 
 ---
 
-> **Tip:** Run this command during off-peak hours if you have a large media library, as migrating a high volume of files may take some time to complete.
+> [!TIP]
+> Run this command during off-peak hours if you have a large media library, as migrating a high volume of files may take some time to complete.
+
+---
+
+## Migrating DAM Assets *(DAM module only)*
+
+If the **DAM** module is installed, assets added before Azure was enabled still
+sit on local storage. A separate command migrates them to Azure Blob Storage:
+
+```bash
+# Preview what would be copied, without writing anything
+php artisan azure_integration:move_dam_assets --dry-run
+
+# Copy the assets to Azure
+php artisan azure_integration:move_dam_assets
+
+# Copy, then remove each local copy once its upload is verified
+php artisan azure_integration:move_dam_assets --delete-local
+```
+
+The command is safe to re-run - assets already present on Azure are skipped.
+
+> [!NOTE]
+> DAM asset migration requires the DAM remote-disk patch shipped with the
+> connector. Apply it before running this command.
