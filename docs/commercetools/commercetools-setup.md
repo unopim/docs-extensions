@@ -1,56 +1,53 @@
-# Before You Begin - commercetools API Client
+# commercetools API Client
 
-Before installing the UnoPim Commercetools Connector, you need to do one thing on the commercetools side: **create an API client**. This is what allows UnoPim to talk to your commercetools project securely.
+Before you connect UnoPim, create an **API client** in your commercetools project. The API client gives UnoPim the credentials it needs to read and write data in that project. It takes about five minutes.
 
-The whole process takes about 5 minutes. Just follow the steps below.
-
----
-
-## Step 1 - Open the Merchant Center
+## Step 1 — Open the Merchant Center
 
 Log in to the [commercetools Merchant Center](https://mc.commercetools.com) and open the project you want to connect.
 
-![commercetools Sign In](./images/mc-login.png)
+![commercetools Sign In](./images/commercetools-setup/mc-login.png)
 
-## Step 2 - Go to Developer Settings
+## Step 2 — Go to Developer settings
 
 In the left menu, click **Settings**, then click **Developer settings**.
 
-![Developer Settings](./images/mc-developer-settings.png)
+![Developer Settings](./images/commercetools-setup/mc-developer-settings.png)
 
-## Step 3 - Create a New API Client
+## Step 3 — Create a new API client
 
 On the **API clients** tab, click **Create new API client**.
 
-![Create New API Client](./images/mc-create-api-client.png)
+![Create New API Client](./images/commercetools-setup/mc-create-api-client.png)
 
-## Step 4 - Name Your API Client
+## Step 4 — Name the API client
 
-Enter a name for the client - something like **UnoPim Connector**.
+Enter a name for the client, for example `UnoPim Connector`.
 
-![API Client Name](./images/mc-api-client-name.png)
+![API Client Name](./images/commercetools-setup/mc-api-client-name.png)
 
-## Step 5 - Choose the Scopes
+## Step 5 — Choose the scopes
 
-Scopes decide what UnoPim is allowed to do in your project. The simplest option is to pick the **Admin client** template from the dropdown, which gives full access (`manage_project`).
+Scopes decide what UnoPim is allowed to do in your project. The simplest option is the **Admin client** template, which gives full access (`manage_project`).
 
-![Select Scopes](./images/mc-scopes.png)
+![Select Scopes](./images/commercetools-setup/mc-scopes.png)
 
 If you prefer tighter access, select only these scopes:
 
 | Scope | Why UnoPim needs it |
 |---|---|
-| `manage_products` / `view_products` | Export and import products |
+| `manage_products` / `view_products` | Export and import products and their inventory quantity |
 | `manage_categories` / `view_categories` | Export and import categories |
 | `manage_product_types` / `view_product_types` | Export attribute families and import product types |
+| `manage_types` / `view_types` | Send UnoPim category fields as commercetools custom fields (only if you use **Custom fields to sync** on the [Category Mapping](./category-mapping) tab) |
 
 > **Note:** If you only plan to export, the `manage_*` scopes are enough. If you only plan to import, the `view_*` scopes are enough.
 
 Click **Create API client**.
 
-## Step 6 - Copy Your Credentials
+## Step 6 — Copy the credentials
 
-commercetools now shows your new credentials. Copy these values and keep them somewhere safe - you'll enter them in UnoPim later:
+commercetools now shows the new credentials. Copy them and keep them somewhere safe. You will enter them in UnoPim later.
 
 | Value | Example |
 |---|---|
@@ -60,11 +57,11 @@ commercetools now shows your new credentials. Copy these values and keep them so
 | **scope** | `manage_project:my-shop` |
 | **API URL** | `https://api.europe-west1.gcp.commercetools.com` |
 
-> **Important:** The **secret** is shown **only once**. If you close this screen without copying it, you'll have to create a new API client.
+> **Important:** The **secret** is shown **only once**. If you close this screen without copying it, you have to create a new API client.
 
-## Step 7 - Find Your Region
+## Step 7 — Find your region
 
-UnoPim asks for your project's **region**. You can read it from the **API URL**: it's the part between `api.` and `.commercetools.com`.
+UnoPim asks for your project's **region**. Read it from the **API URL**: it is the part between `api.` and `.commercetools.com`.
 
 | API URL | Region |
 |---|---|
@@ -73,6 +70,7 @@ UnoPim asks for your project's **region**. You can read it from the **API URL**:
 | `https://api.eu-central-1.aws.commercetools.com` | `eu-central-1.aws` |
 | `https://api.us-east-2.aws.commercetools.com` | `us-east-2.aws` |
 
----
+## What's next
 
-You're all set on the commercetools side. Head over to [Installation](./installation) to continue setting up the connector in UnoPim.
+- [Installation](./installation) — install the connector in UnoPim.
+- [Setup Commercetools Connection](./setup) — enter these credentials in UnoPim.

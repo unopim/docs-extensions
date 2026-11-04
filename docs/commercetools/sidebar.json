@@ -2,35 +2,44 @@
   {
     "text": "Commercetools",
     "items": [
-      { "text": "Overview", "link": "/commercetools/" },
-      { "text": "commercetools Setup", "link": "/commercetools/commercetools-setup" },
-      { "text": "Installation", "link": "/commercetools/installation" }
+      { "text": "Overview",                  "link": "/commercetools/" },
+      { "text": "commercetools API Client",  "link": "/commercetools/commercetools-setup" },
+      { "text": "Installation",              "link": "/commercetools/installation" },
+      { "text": "Setup Commercetools Connection", "link": "/commercetools/setup" }
     ]
   },
+
   {
     "text": "Configuration",
     "items": [
-      { "text": "Setup UnoPim Connection", "link": "/commercetools/setup" },
-      { "text": "Attribute Mapping", "link": "/commercetools/attribute-mapping" },
+      { "text": "Attribute Mapping",  "link": "/commercetools/attribute-mapping" },
+      { "text": "Category Mapping",   "link": "/commercetools/category-mapping" },
       { "text": "Connector Settings", "link": "/commercetools/configuration" }
     ]
   },
+
   {
     "text": "Export Jobs",
     "items": [
-      { "text": "Creating an Export Job", "link": "/commercetools/export-jobs" }
+      { "text": "Family Export",   "link": "/commercetools/export-families" },
+      { "text": "Category Export", "link": "/commercetools/export-categories" },
+      { "text": "Product Export",  "link": "/commercetools/export-products" }
     ]
   },
+
   {
     "text": "Import Jobs",
     "items": [
-      { "text": "Creating an Import Job", "link": "/commercetools/import-jobs" }
+      { "text": "Family Import",   "link": "/commercetools/import-families" },
+      { "text": "Category Import", "link": "/commercetools/import-categories" },
+      { "text": "Product Import",  "link": "/commercetools/import-products" }
     ]
   },
+
   {
     "text": "Support",
     "items": [
-      { "text": "Support", "link": "/commercetools/support" }
+      { "text": "Contact & Support", "link": "/commercetools/support" }
     ]
   }
 ]

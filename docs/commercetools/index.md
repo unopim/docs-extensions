@@ -1,76 +1,72 @@
 # UnoPim Commercetools Connector
 
-## What is the UnoPim Commercetools Connector?
+The **UnoPim Commercetools Connector** connects your [commercetools](https://commercetools.com/) project with UnoPim. You keep your product information in UnoPim and send it to commercetools whenever you are ready, or bring existing commercetools data back into UnoPim so you don't have to enter it again by hand.
 
-The **UnoPim Commercetools Connector** connects your **commercetools project** with **UnoPim**, an open-source Product Information Management (PIM) system.
+The connector works in both directions. Attribute families, categories and products go from UnoPim to commercetools, and product types, categories and products come back from commercetools into UnoPim. Every sync runs as a standard UnoPim **Data Transfer** job.
 
-You keep your product information in one place (UnoPim) and send it to commercetools whenever you're ready. You can also bring existing commercetools data back into UnoPim, so you don't have to enter it again by hand.
+## How it works
 
-It works in both directions: products, categories and attribute families go from UnoPim to commercetools, and product types, categories and products come back from commercetools into UnoPim.
+```
+  commercetools API Client
+  (project key, client ID, secret, region, scopes)
+         │
+         ▼
+  Commercetools Connection
+  (checked live against commercetools on save)
+         │
+         ▼
+  Attribute Mapping & Category Mapping
+  (SKU, Key, Name, Slug, Price, Inventory, Images…)
+         │
+         ▼
+  ┌──────────────────────────────────────────┐
+  │              Data Transfer               │
+  │                                          │
+  │  Export: Families → Categories → Products│
+  │  Import: Families → Categories → Products│
+  └──────────────────────────────────────────┘
+```
 
----
+## Key features
 
-## What can it do?
-
-- **Export** products, categories and attribute families from UnoPim to commercetools.
-- **Import** product types, categories and products from commercetools into UnoPim.
-- Send product names, slugs, descriptions, SEO fields, search keywords, prices, images and custom attributes.
-- Keep commercetools up to date by re-running an export job whenever something changes in UnoPim.
-
----
-
-## Features
-
-### Export Products and Variants
-Export simple products and configurable products. A configurable product is sent to commercetools as one product with its variants. When a new variant is added in UnoPim, the next export adds it to the product in commercetools.
-
-### Export Categories
-UnoPim categories are exported as commercetools categories. Parent categories are always created before their children, so the category tree is built correctly.
-
-### Export Attribute Families as Product Types
-Each UnoPim attribute family is exported as a commercetools **product type**, with its attributes.
-
-### Import from commercetools
-Bring your existing commercetools data into UnoPim:
-
-| Import Type | What it does |
-|---|---|
-| **Commercetools Family Import** | Imports commercetools product types as UnoPim attribute families, with their attributes and options |
-| **Commercetools Category Import** | Imports the commercetools category tree as UnoPim categories |
-| **Commercetools Product Import** | Imports commercetools products and their variants, including product images |
-
-### Attribute Mapping
-Map each commercetools product field (SKU, key, name, slug, description, SEO fields, price, images) to the UnoPim attribute that holds its value. The mapping screen only lists attributes of a matching type, so a wrong type can't be picked by mistake.
-
-### Custom Attributes by Code
-Any other commercetools attribute is filled from the UnoPim attribute that has the **same code**. No extra mapping is needed.
-
-### Product Export Filters
-The product export uses the same filters as the standard UnoPim product export: channel, locales, currencies, attributes, attribute families, categories, completeness, time condition, status, SKUs and attribute conditions. You choose exactly which products and which values are sent.
-
-### Multi-Language Support
-Export in as many locales as you need. Each category, product type and product is created **once** in commercetools, with its name, labels and localized attributes stored in every selected locale.
-
-### Product Images
-Images from UnoPim image, gallery and DAM asset attributes are sent to commercetools as product images. You can turn image export on or off for each export job.
-
-### Multiple commercetools Projects
-Connect **more than one commercetools project** to the same UnoPim instance by creating a separate connection for each one. Each connection can be switched on or off on its own.
-
-### Connection History
-Every change to a connection is recorded in its **History** tab, showing who changed what and when. The client secret is never shown in history.
-
-### Sync Updates Easily
-Already exported your products? Just re-run the export job. The connector finds the product in commercetools and updates it instead of creating a duplicate.
-
----
+- **Two-way sync** — export families, categories and products to commercetools, and import product types, categories and products back.
+- **Simple and configurable products** — a configurable product is sent as one commercetools product with its variants. New variants added in UnoPim are added on the next export.
+- **Attribute families as product types** — each UnoPim attribute family is exported as a commercetools product type, with its attributes and option labels.
+- **Category tree sync** — parent categories are always created before their children, so the tree matches on both sides.
+- **Attribute mapping with fixed values** — map each commercetools product field (SKU, key, name, slug, description, SEO fields, search keywords, price, inventory, images) to a UnoPim attribute, or send a fixed value instead.
+- **Category mapping and custom fields** — choose which UnoPim category fields feed the commercetools name, slug and description, and send other category fields as commercetools custom fields.
+- **Inventory quantity** — send a stock quantity from a UnoPim attribute to commercetools inventory entries, and read it back on import.
+- **Images, galleries and DAM assets** — send images from image, gallery and (with UnoPim DAM installed) asset attributes. Image export can be switched on or off per job.
+- **Same filters as the UnoPim product export** — channel, locales, currencies, attributes, families, categories, completeness, time condition, status, SKUs and attribute conditions.
+- **Multi-language** — each record is created once in commercetools, with its values stored in every selected locale.
+- **Update instead of duplicate** — re-running an export or import updates the records it already synced.
+- **Multiple commercetools projects** — create one connection per project and switch each one on or off on its own.
+- **Change history** — every change to a connection and its mappings is recorded in the connection's **History** tab. The client secret is never stored there.
+- **Role-based access** — separate permissions for connections, testing and mappings.
 
 ## Requirements
 
-| Requirement | Detail |
+| Requirement | Version |
 |---|---|
-| **UnoPim Version** | v3.0.0 |
-| **PHP Version** | 8.4 or higher |
-| **commercetools** | A project with an API client (see [commercetools Setup](./commercetools-setup)) |
-| **Queue Worker** | A running Laravel queue worker, because export and import jobs run in the background |
-| **Terminal / Server Access** | Required to run the installation commands |
+| **UnoPim** | 3.1.x (compatible with 3.0.x) |
+| **PHP** | 8.4.1 or higher |
+| **Laravel** | 13.x |
+| **commercetools** | A project with an API client. See [commercetools API Client](./commercetools-setup). |
+| **UnoPim DAM** | Optional, only needed to map product images to a DAM asset attribute |
+
+A running queue worker is required, because export and import jobs are dispatched to the queue.
+
+## In this guide
+
+- [commercetools API Client](./commercetools-setup)
+- [Installation](./installation)
+- [Setup Commercetools Connection](./setup)
+- [Attribute Mapping](./attribute-mapping)
+- [Category Mapping](./category-mapping)
+- [Connector Settings](./configuration)
+- [Export: Families](./export-families)
+- [Export: Categories](./export-categories)
+- [Export: Products](./export-products)
+- [Import: Families](./import-families)
+- [Import: Categories](./import-categories)
+- [Import: Products](./import-products)
