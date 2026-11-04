@@ -2,26 +2,34 @@
   {
     "text": "Maker Checker Workflow",
     "items": [
-      { "text": "Overview",      "link": "/maker-checker-workflow/" },
-      { "text": "Installation",  "link": "/maker-checker-workflow/installation" }
+      { "text": "Overview",     "link": "/maker-checker-workflow/" },
+      { "text": "Installation", "link": "/maker-checker-workflow/installation" }
     ]
   },
 
   {
-    "text": "Usage | Workflow",
+    "text": "Setup",
     "items": [
-      { "text": "Access Control List | Workflow for Maker Checker", "link": "/maker-checker-workflow/workflow" },
-      { "text": "Maker End", "link": "/maker-checker-workflow/maker-end" },
-      { "text": "Checker End", "link": "/maker-checker-workflow/checker-end" },
-      { "text": "Dedicated Approval Section", "link": "/maker-checker-workflow/approval-section" },
-      { "text": "Compatible with UnoPim DAM", "link": "/maker-checker-workflow/compatible-with-unopim-dam" }
+      { "text": "Roles and Users", "link": "/maker-checker-workflow/roles-and-users" },
+      { "text": "Configuration",   "link": "/maker-checker-workflow/configuration" }
+    ]
+  },
+
+  {
+    "text": "Approval Workflow",
+    "items": [
+      { "text": "Maker: Create and Submit Drafts",  "link": "/maker-checker-workflow/maker-guide" },
+      { "text": "Checker: Review and Approve",      "link": "/maker-checker-workflow/checker-guide" },
+      { "text": "Rejecting and Resubmitting",       "link": "/maker-checker-workflow/reject-and-resubmit" },
+      { "text": "Notifications",                    "link": "/maker-checker-workflow/notifications" },
+      { "text": "DAM Asset Approvals",              "link": "/maker-checker-workflow/dam-assets" }
     ]
   },
 
   {
     "text": "Support",
     "items": [
-      { "text": "Contact Support", "link": "/maker-checker-workflow/contact-support" }
+      { "text": "Contact & Support", "link": "/maker-checker-workflow/contact-support" }
     ]
   }
 ]

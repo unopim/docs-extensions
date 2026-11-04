@@ -1,36 +1,53 @@
 # Installation
 
-### 1. Merge the package files
+Follow these steps to install the UnoPim Maker Checker Workflow extension.
 
-Unzip the extension package and merge the `packages/` folder into your Unopim project root.
+> [!IMPORTANT]
+> If you also use the **UnoPim DAM** extension, install Maker Checker first, then install DAM.
 
-### 2. Register the service provider
+---
 
-Add to `bootstrap/providers.php`:
+## Step 1 - Add the package files
 
-```php
-use Webkul\MakerChecker\Providers\MakerCheckerServiceProvider;
+Download the extension ZIP file and unzip it. Merge the `packages/` folder from the ZIP into the root of your UnoPim project, so the module ends up in:
 
-return [
-    // ...existing providers...
-    MakerCheckerServiceProvider::class,
-];
+```
+packages/Webkul/MakerChecker
 ```
 
-> [!NOTE]
-> This registers `MakerCheckerServiceProvider` in Laravel so the module can bootstrap its services, workflow bindings, and package configuration during application startup.
+## Step 2 - Register the service provider
 
-### 3. Update Composer autoload
+Open `bootstrap/providers.php` and add the following line to the list of providers:
 
-In `composer.json`, add under `autoload.psr-4`:
+```php
+Webkul\MakerChecker\Providers\MakerCheckerServiceProvider::class,
+```
+
+## Step 3 - Register the Concord module
+
+Open `config/concord.php` and add the module's provider to the `modules` array, after the other `Webkul\...\ModuleServiceProvider` entries:
+
+```php
+'modules' => [
+    // ...existing modules...
+    Webkul\MakerChecker\Providers\ModuleServiceProvider::class,
+],
+```
+
+> [!WARNING]
+> If you skip this step, **Maker Checker → Configuration** fails with the error `Target [Webkul\MakerChecker\Contracts\Configuration] is not instantiable`.
+
+## Step 4 - Update Composer autoload
+
+Open `composer.json` and add the following line under the `autoload > psr-4` section:
 
 ```json
 "Webkul\\MakerChecker\\": "packages/Webkul/MakerChecker/src"
 ```
 
-### 4. Run installation commands
+## Step 5 - Run the setup commands
 
-Run these in order:
+Run the following commands in order:
 
 ```bash
 composer dump-autoload
@@ -40,51 +57,54 @@ php artisan vendor:publish --provider="Webkul\MakerChecker\Providers\MakerChecke
 php artisan db:seed --class="Webkul\MakerChecker\Database\Seeders\MakerCheckerStagesSeeder"
 ```
 
-Command purpose:
-
-- `composer dump-autoload`: Regenerates Composer's autoloader mapping to include the newly added namespace.
-- `php artisan optimize:clear`: Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes.
-- `php artisan migrate`: Runs pending database migrations required by the package.
-- `php artisan vendor:publish --provider="Webkul\MakerChecker\Providers\MakerCheckerServiceProvider"`: Publishes Maker Checker package resources and configuration.
-- `php artisan db:seed --class="Webkul\MakerChecker\Database\Seeders\MakerCheckerStagesSeeder"`: Seeds default Maker Checker workflow stages into the database.
-
-### 5. Build front-end assets
-
-```bash
-npm install
-npm run build
-```
-
 | Command | Purpose |
 |---|---|
-| `npm install` | Installs frontend dependencies required by the Maker Checker package UI. |
-| `npm run build` | Builds Maker Checker frontend assets for production/admin usage. |
+| `composer dump-autoload` | Regenerates Composer's autoloader so UnoPim can find the module's classes. |
+| `php artisan optimize:clear` | Clears cached bootstrap, configuration, route and view files. |
+| `php artisan migrate` | Creates the Maker Checker tables (configuration, drafts, comments and stages). |
+| `php artisan vendor:publish ...` | Copies the module's compiled CSS, JS and images to `public/themes`. |
+| `php artisan db:seed ...` | Seeds the workflow stages: Draft, Waiting for Approval, Approved, Rejected and Published. |
 
-### 6. Start the queue worker
+> [!NOTE]
+> The package ships with pre-built front-end assets, which `vendor:publish` copies into place. Run `npm install && npm run build` only if you change the package's front-end source.
 
-Email notifications are dispatched as queued jobs. Keep a worker running:
+## Step 6 - Configure email
+
+Notifications are also sent by email. Add your mail settings to `.env`:
+
+```bash
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.example.com
+MAIL_PORT=587
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=pim@example.com
+```
+
+Then run `php artisan optimize:clear` again so the new settings load.
+
+## Step 7 - Start the queue worker
+
+Email notifications are queued, so a queue worker must be running:
 
 ```bash
 php artisan queue:work
 ```
 
-| Command | Purpose |
-|---|---|
-| `php artisan queue:work` | Starts a queue worker to process Maker Checker background jobs (including notifications). |
+> **Tip:** On a live server, run the queue worker under a process manager such as Supervisor, so it restarts automatically after a crash or deploy.
 
-### 7. Configure email notifications
+---
 
-Add your mail settings to `.env`:
+## Verify the installation
 
-```bash
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=your_username
-MAIL_PASSWORD=your_password
-MAIL_ENCRYPTION=tls
-```
+Log in to UnoPim as an administrator. A **Maker Checker** entry with **Configuration** and **Approval Requests** links appears in the left sidebar. That confirms the extension is installed.
 
-### 8. Verify
+![Maker Checker menu in the UnoPim sidebar](./images/side-menu.png)
 
-Open the Unopim admin panel — a **Maker Checker** section should appear in the sidebar with **Approval Requests** and **Configuration** links.
+If the menu doesn't appear, run `php artisan optimize:clear` again and refresh the page.
+
+## What's next
+
+1. [Create the maker and checker roles and users](./roles-and-users).
+2. [Enable and configure the workflow](./configuration).
