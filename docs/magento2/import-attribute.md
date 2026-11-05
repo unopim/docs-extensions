@@ -9,6 +9,8 @@ Four jobs bring the attribute structure from Magento into UnoPim.
 | **Magento Attribute Group** | Attribute groups, linked to their families. |
 | **Magento Product Attribute Mapping** | Puts attributes into the right group of each family. |
 
+The [Import Scope](./import-scope) tab limits which attributes and families these jobs bring in.
+
 Run them in this order: **Attribute**, **Attribute Set**, **Attribute Group**, then **Product Attribute Mapping**. Each step needs the one before it.
 
 ## Create a Job

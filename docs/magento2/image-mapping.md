@@ -30,9 +30,28 @@ A single image attribute lets you pick the alt text attribute and the roles. A *
 - The image file name becomes the alt text.
 - Any role you did not give to another row goes to the first gallery or asset image.
 
+## Variant Image Attributes
+
+The tab holds two tables:
+
+- **Product Image Attributes**: used by simple products and configurable parents.
+- **Variant Image Attributes**: used by the variants of a configurable product, for both import and export.
+
+Variants do **not** fall back to the product table. With an empty variant table, variants import and export without images, and the tab shows "No variant image attributes".
+
+> [!WARNING]
+> After upgrading to 3.2.0, fill the **Variant Image Attributes** table on each credential. Otherwise variants lose their images on import and export.
+
+Add rows to the variant table the same way as in the product table. The two tables follow these rules:
+
+- An attribute can sit in one table only. The list hides attributes used in the other table, and a duplicate is rejected with "Already mapped in Product Image Attributes" or "Already mapped in Variant Image Attributes".
+- Each role can be used once per table, so a variant and its parent can both have a **Base** image.
+
+On export, every variant sends its own mapped images. If you change a role in the mapping, the existing Magento entry is updated in place and the image is not uploaded again. On import, the configurable product job writes variant images into the attributes of the variant table.
+
 ## Rules
 
-- Each role can be used on one row only. A second use shows "role already assigned to another image".
+- Each role can be used on one row only per table. A second use shows "role already assigned to another image".
 - You need at least one row. With none, saving shows "No image field is added".
 - Image file names may contain only letters, numbers, underscores, spaces, and hyphens. Other names are skipped in the CSV export.
 - If the file is missing from storage, the image is skipped and the log names the path.
