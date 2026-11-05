@@ -1,107 +1,72 @@
-# Creating a Scheduled Job
+# Create a Scheduled Job
 
-Once the Job Scheduler is installed, you'll find the **Job Scheduler** option in the left sidebar of your UnoPim dashboard. Click on it to expand the menu - you'll see three sub-sections:
+A scheduled job runs one of your existing UnoPim **Import** or **Export** profiles automatically, at the time you choose.
 
-![Job Scheduler Menu](./assets/setup/job-sch.png)
-
-- **Scheduled Jobs** - view and manage all your scheduled jobs
-- **Execution History** - see a record of past job runs
-- **Execution Logs** - view detailed logs for each execution
-
-Go to the **Scheduled Jobs** section and click **Create Scheduled Job** to set up a new automated job.
+> **Before you start:** Create the import or export profile under **Data Transfer → Imports / Exports** first. The scheduler only lets you pick profiles that already exist.
 
 ---
 
-## General Settings
+## Step 1: Open the Scheduler
 
-Fill in the following fields to define the job:
+In the left sidebar, click **Job Scheduler → Scheduled Jobs**, then click **Create Scheduled Job**.
+
+![Scheduled Jobs list](./assets/setup/scheduled-jobs.webp)
+
+---
+
+## Step 2: General Details
+
+Tell the scheduler **which** job to run.
 
 | Field | What to enter |
 |---|---|
-| **Name** | A descriptive name for the job (e.g., `Daily Category Export`) |
-| **Code** | Auto-generated from the name - e.g., `daily_category_export`. You can change it if needed. |
-| **Type** | Select whether this is an **Import** or **Export** job |
-| **Entity Type** | Choose the data type the job will work with - e.g., **Products** or **Categories** |
-| **Job Instance** | Select the existing import or export job you want to schedule |
-| **Status** | Set to **Active** to enable the job, or disable it to pause scheduling without deleting it |
+| **Name** | A clear name, e.g. `Daily Product Export` |
+| **Code** | Filled in automatically from the name |
+| **Type** | **Import** or **Export** |
+| **Entity Type** | The data to process, e.g. **Products** or **Categories** |
+| **Job Instance** | The import or export profile to run |
+| **Status → Active** | Keep it on so the job runs. Turn it off to pause the job without deleting it. |
 
-![General Settings](./assets/setup/genral-settings.png)
-
-> **Important:** The **Job Instance** list only shows jobs that already exist in UnoPim. Before scheduling a job here, make sure you've already created it under **Data Transfer → Imports** or **Data Transfer → Exports**. If you don't see the job in the list, create it there first and then come back.
+![General details and status](./assets/setup/general-settings.webp)
 
 ---
 
-## Execution Settings
+## Step 3: Set the Schedule
 
-These optional settings control how the job behaves when it runs:
+Tell the scheduler **when** to run the job.
 
-| Setting | What it does |
+| Field | What to enter |
 |---|---|
-| **Retry Attempts** | How many times the job should automatically retry if it fails |
-| **Retry Delay** | How long to wait (in seconds) before retrying after a failure |
-| **Chunk Size** | How many records to process in each batch - useful for large datasets |
-| **Timeout** | Maximum time (in seconds) the job is allowed to run before it's stopped |
+| **Preset Schedules** | Pick a ready-made timing, such as *Hourly*, *Daily at Midnight* or *Weekly on Monday*. To set your own, choose **Custom**. |
+| **Cron Expression** | Filled in from the preset. With **Custom**, type your own (e.g. `0 6 * * *` = every day at 6 AM). Below the field, you'll see the time of the next run. |
+| **Timezone** | The timezone the schedule follows |
+| **Schedule Type** | **Recurring** runs again and again. **One-Time** runs only once. |
 
-![Execution Settings](./assets/setup/execution-settings.png)
+![Schedule settings](./assets/setup/schedule.webp)
+
+> **Tip:** Not sure about cron? Pick a preset. Check the green line under the field: it shows when the job will run next.
 
 ---
 
-## Schedule Settings
+## Step 4: Execution Settings (Optional)
 
-Define when and how often the job should run.
+The default values work for most stores. Change them only if you need to.
 
-### Preset Schedules
-
-Choose from a list of common schedule options:
-
-| Preset | Cron Expression |
+| Field | What it does |
 |---|---|
-| Every Minute | `* * * * *` |
-| Every 5 Minutes | `*/5 * * * *` |
-| Every 15 Minutes | `*/15 * * * *` |
-| Every 30 Minutes | `*/30 * * * *` |
-| Hourly | `0 * * * *` |
-| Daily at Midnight | `0 0 * * *` |
-| Daily at 6 AM | `0 6 * * *` |
-| Weekly on Monday | `0 0 * * 1` |
-| Monthly | `0 0 1 * *` |
-| **Custom** | Enter your own cron expression |
+| **Max Retries** | How many times a failed run is retried |
+| **Retry Delay (seconds)** | Wait time before each retry |
+| **Chunk Size** | Records processed per batch. Lower it for very large catalogs. |
+| **Timeout (seconds)** | The longest a run may take before it is stopped |
 
-### Cron Expression
-
-This field fills in automatically based on the preset you select. If you choose **Custom**, type your own cron expression directly into this field.
-
-### Timezone
-
-Select the timezone the schedule should follow. This ensures the job runs at the correct local time - especially important if your server and your team are in different time zones.
-
-### Schedule Type
-
-| Type | What it means |
-|---|---|
-| **Recurring** | The job runs repeatedly on the defined schedule - every day, every hour, etc. |
-| **One-time** | The job runs once at the scheduled time and does not repeat |
-
-![Schedule Settings](./assets/setup/schedule.png)
+![Execution settings](./assets/setup/execution-settings.webp)
 
 ---
 
-## Notification Settings
+## Step 5: Notifications and Save
 
-Set up email alerts so you always know when a job succeeds or fails.
+Enter an email address, then choose whether to get an email when a job **succeeds**, **fails**, or both. Then click **Save changes**.
 
-| Setting | What it does |
-|---|---|
-| **Notification Email** | The email address where notifications will be sent |
-| **Notify on Success** | Sends an email when the job completes successfully |
-| **Notify on Failure** | Sends an email if the job fails so you can act quickly |
+![Notifications and Save](./assets/setup/notification.webp)
 
-![Notification Settings](./assets/setup/notification.png)
-
----
-
-## Save the Job
-
-Once all settings are configured, click **Save Job**. The scheduler will now run the job automatically at the defined time without any manual action.
-
-You can view, edit, pause, or delete the job at any time from the **Scheduled Jobs** list.
+That's it. The job now runs on its own at the scheduled time. To edit, pause or delete it, use the **Scheduled Jobs** list.

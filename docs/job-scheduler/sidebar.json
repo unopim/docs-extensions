@@ -10,7 +10,7 @@
   {
     "text" : "Setup & Usage",
     "items": [
-      { "text": "Setup Schedule jobs in Unopim", "link": "/job-scheduler/setup" },
+      { "text": "Create a Scheduled Job", "link": "/job-scheduler/setup" },
       {"text" : "Execution History", "link": "/job-scheduler/execution-history"},
       {"text" : "Execution Log", "link": "/job-scheduler/execution-log"}
     ]

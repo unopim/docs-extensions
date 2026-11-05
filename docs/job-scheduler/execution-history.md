@@ -1,48 +1,30 @@
 # Execution History
 
-The **Execution History** section shows all scheduled jobs that have run in the system. It helps administrators track job activity, review execution results, and quickly identify failed or long-running jobs.
+Every time a scheduled job runs, it is recorded here. Use this page to check that your jobs are running and to spot failures quickly.
 
-Open **Job Scheduler** from the UnoPim sidebar and click **Execution History** to view the list of executed jobs.
+Go to **Job Scheduler → Execution History**.
 
-## What You Can See in Execution History
+![Execution History](./assets/history/execution-history.webp)
 
-Each row in the grid represents one job execution. The following details are available:
-
-| Column | Description |
+| Column | Meaning |
 |---|---|
-| **Job Name** | Displays the name of the scheduled job, such as `Product Export` or `Category Export`. |
-| **State** | Shows the current job status, such as **Running**, **Completed**, or **Failed**. |
-| **Trigger** | Indicates how the job was started, such as a scheduled run. |
-| **Processed** | Shows how many records were processed during the execution. |
-| **Failed** | Shows how many records failed during processing. |
-| **Duration** | Displays how long the job took to complete. |
-| **Started At** | Shows the date and time when the job started. |
+| **Job Name** | The scheduled job that ran |
+| **State** | **Running**, **Completed** or **Failed** |
+| **Trigger** | How the run started: by the schedule (**scheduled**) or by hand (**manual**) |
+| **Processed / Failed** | How many records succeeded and how many failed |
+| **Duration** | How long the run took |
+| **Started At** | When the run began |
 
-![Execution History Grid](./assets/history/job-scheduler-history.png)
+> **Stop running jobs:** Click **Cancel All Running** (top right) to stop every job that is still running, for example one that is stuck.
 
-## View Job Execution Details
+---
 
-To inspect a specific job run:
+## View a Single Run
 
-1. Go to **Job Scheduler > Execution History**.
-2. Find the job execution you want to review.
-3. Click the **View** icon under the **Actions** column.
+To see the details of a run, click the **eye icon** in the **Actions** column. The page shows:
 
-![View Icon](./assets/history/view-icon.png)
+- **Summary**: state, trigger, start/end time, duration and memory used
+- **Row counts**: processed, failed and total rows, with a progress bar
+- **Execution Logs**: each step of the run, from start to finish
 
-This opens the **Job Execution History Details** page, where you can review more information about that particular execution.
-
-![Job Execution Details](./assets/history/job-scheduler-history-details.png)
-
-## Cancel Running Jobs
-
-If one or more jobs are still in progress, you can stop them directly from the execution details page.
-
-1. Open the required job execution from **Execution History**.
-2. Click **Cancel All Running**.
-
-![Cancel All Running Button](./assets/history/cancel-all-running-jobs.png)
-
-Use this action when a job is stuck, taking too long, or needs to be stopped before completion.
-
-> **Note:** Only jobs that are currently in the **Running** state can be cancelled.
+![Execution details](./assets/history/execution-details.webp)

@@ -2,64 +2,47 @@
 
 Store Link: [View on Webkul Store](https://store.webkul.com/unopim-job-scheduler.html)
 
-The **UnoPim Job Scheduler** lets you automate your import and export jobs so they run on their own - no need to manually trigger them every time. Set a schedule once and the system handles the rest.
+The **UnoPim Job Scheduler** runs your import and export jobs automatically. Set the schedule once, for example *every day at midnight*, and UnoPim runs the job at that time without anyone clicking **Run**.
 
 <br>
 
 <div align="center">
-  <img src="./assets/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
+  <img src="./assets/intro-banner.png" alt="UnoPim Job Scheduler" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
 </div>
 
-<br> 
-
-
-Whether you need products exported to your store every morning, categories synced weekly, or a custom task running at a specific time, the Job Scheduler gives you full control from a simple admin panel inside UnoPim.
+<br>
 
 ---
 
-## What Can It Do?
+## How It Works
 
-Instead of logging in and running export or import jobs by hand, you define when they should run - daily, weekly, monthly, or at a custom time using a cron expression - and the scheduler fires them automatically at the right moment.
+1. **Create** an import or export profile in **Data Transfer** (as usual).
+2. **Schedule** it in **Job Scheduler**: choose when and how often it should run.
+3. **Relax**: the job runs on its own. Check the results in **Execution History** and **Execution Logs**.
 
 ---
 
 ## Features
 
-| Feature | Description |
+| Feature | What you get |
 |---|---|
-| **Automated Scheduling** | Run import and export jobs automatically based on a configured schedule |
-| **Cron Expression Support** | Create custom schedules using standard cron syntax for precise timing control |
-| **Admin Panel Management** | Create, edit, and manage all scheduled jobs directly from the UnoPim admin panel |
-| **Retry Attempts** | Set how many times a job should retry automatically if it fails |
-| **Cancel Running Jobs** | Stop all active jobs instantly when needed |
-| **Job History & Logs** | View a full history of past job executions and download logs for each run |
-| **Notifications** | Get notified when a job completes successfully or fails |
-| **Role-Based Access** | Control who can create or manage scheduled jobs using UnoPim's permission system |
-| **Multi-Job Management** | Manage multiple scheduled jobs from one centralised place |
-| **Simple Interface** | Easy to set up and use - no technical expertise required for common schedules |
+| **Automatic runs** | Import and export jobs run on a schedule |
+| **Easy presets** | Hourly, Daily, Weekly, Monthly, or your own cron expression |
+| **Recurring or One-Time** | Repeat a job, or run it only once |
+| **Timezone support** | Jobs run at the right local time |
+| **Auto retry** | Failed runs are retried automatically |
+| **Email alerts** | Get an email when a job succeeds or fails |
+| **History and logs** | See every run with row counts, duration and step-by-step logs |
+| **Cancel running jobs** | Stop stuck jobs with one click |
+| **Role-based access** | Choose which users can create, run or cancel jobs |
 
 ---
-
-## When Should You Use It?
-
-The Job Scheduler is ideal when:
-
-- You need to **export products to your store automatically** at a set time each day.
-- You want to **import updated data from an external platform** on a regular schedule without manual effort.
-- Your team handles **large catalogs** and running jobs manually is time-consuming.
-- You want **peace of mind** that syncs are happening in the background even when no one is logged in.
-
----
-
 
 ## Requirements
 
 | Requirement | Version |
 |---|---|
-| **PHP** | ^8.3 |
-| **UnoPim** | 2.0.1 or newer |
-| **webkul/data-transfer** | Bundled with UnoPim core |
-| **Queue Driver** | Any (database, redis, sqs, etc.) |
-
----
-
+| **UnoPim** | 3.0 or newer (tested on **3.1.3**) |
+| **PHP** | 8.4.1 or newer |
+| **Cron** | One server cron entry (see [Installation](./installation)) |
+| **Queue worker** | Any queue driver: database, redis, sqs, and so on |
