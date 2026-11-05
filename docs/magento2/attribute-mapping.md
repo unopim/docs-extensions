@@ -6,7 +6,7 @@ The **Attributes** tab tells the connector which UnoPim attribute feeds each sta
 
 ## How the Tab Works
 
-The left column lists Magento product fields with their codes, such as `name` or `short_description`. The right column holds a drop-down of UnoPim attributes that fit the field.
+The left column lists Magento product fields with their codes, such as `name` or `short_description`. The middle column holds a drop-down of UnoPim attributes that fit the field. The last column, **Variant product attribute (if different)**, is explained under [Variant Mapping](#variant-mapping).
 
 Under each field label, a short hint says which attribute type is allowed. Pick the attribute and click **Save**.
 
@@ -61,6 +61,16 @@ Two fields use codes instead of labels:
 
 Map **Quantity** `[qty]` to send stock. If you turn on **Skip inventory update for existing products** in the export job, stock is sent only for new products.
 
+## Price for Existing Products
+
+Map **Price** `[price]` (required) and, if you use it, **Special Price** `[special_price]`. To keep the prices that already live in Magento, turn on **Skip price update for existing products** in the REST product export job. Then:
+
+- Products that already exist in Magento keep their live price and special price.
+- New products are still created with their UnoPim price.
+- An existing product with no UnoPim price is no longer skipped.
+
+The switch is off by default and is only on the REST job, not the CSV job. See [Export Magento Product](./export-product#filters).
+
 ## Map More Standard Attributes
 
 Scroll to the bottom of the tab for **Map more Standard attributes**. Use it for Magento product fields that are not in the list above.
@@ -79,6 +89,24 @@ The connector checks every row when you save:
 - The UnoPim attribute must exist.
 
 You can add up to 200 rows. Click the bin icon to remove one.
+
+## Variant Mapping
+
+A variant can keep its value in a different UnoPim attribute than its parent. For each field, use **Variant product attribute (if different)** to pick that attribute. The same column exists on the rows of **Map more Standard attributes**.
+
+![Variant product attribute column](./assets/mapping/variant-mapping.png)
+
+- **Empty** (shows "Same as standard mapping"): variants use the standard mapping.
+- **Filled**: variants use this attribute instead, and every other field keeps the standard mapping.
+
+Example: simple products keep their name in `name`, but variants keep theirs in `variant_name`. Map `name` to `name` and set the variant column to `variant_name`.
+
+Saving fails in two cases:
+
+- A variant attribute equals the standard attribute of its own field. Leave it empty instead.
+- One attribute is used for two different Magento fields.
+
+Both [export](./export-product) and [import](./import-product#configurable-products-and-variants) of variants follow this column.
 
 ## Variant Attributes for Configurable Products
 

@@ -17,7 +17,8 @@
       { "text": "Image Mappings", "link": "/magento2/image-mapping" },
       { "text": "Video Mapping", "link": "/magento2/video-mapping" },
       { "text": "Category Mapping", "link": "/magento2/category-mapping" },
-      { "text": "Association Mapping", "link": "/magento2/association-mapping" }
+      { "text": "Association Mapping", "link": "/magento2/association-mapping" },
+      { "text": "Import Scope", "link": "/magento2/import-scope" }
     ]
   },
 

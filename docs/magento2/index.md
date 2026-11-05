@@ -40,6 +40,7 @@ It also helps when you start from a live Magento catalog. Import it first, enric
 - **Images and Videos**: choose image roles, alt text, visibility, and video details.
 - **Category Fields**: map category fields and add extra Magento category field codes.
 - **Associations**: match Magento related, up-sell, and cross-sell links to UnoPim association types.
+- **Import Scope**: limit imports to chosen families and attributes.
 
 ### Export Jobs
 

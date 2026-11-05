@@ -93,7 +93,7 @@ Go to **Magento2 > Credentials**, click **Add Credentials**, and choose **Login 
 
 ## Edit a Credential
 
-Click any row in the list, or its pencil icon, to open the credential. The page has nine tabs.
+Click any row in the list, or its pencil icon, to open the credential. The page has ten tabs.
 
 ![Edit Credential page with all tabs](./assets/credential-edit.png)
 
@@ -107,6 +107,7 @@ Click any row in the list, or its pencil icon, to open the credential. The page 
 | **Videos** | Video title, preview, and description. See [Video Mapping](./video-mapping). |
 | **Category Fields** | Category field mapping. See [Category Mapping](./category-mapping). |
 | **Associations** | Related, up-sell, and cross-sell links. See [Association Mapping](./association-mapping). |
+| **Import Scope** | The families and attributes that imports bring in. See [Import Scope](./import-scope). |
 | **History** | Who changed this credential and its mappings, and when. |
 
 ### Settings on the Credential Tab

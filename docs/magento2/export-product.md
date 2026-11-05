@@ -47,6 +47,7 @@ For this job you need the Magento module from the [Installation](./installation)
 | **Magento Store Views** | The views to send. Required for the REST job. |
 | **Product Types** | Simple, Configurable, or both. |
 | **Skip inventory update for existing products** | On by default. Stock is then sent only for new products. |
+| **Skip price update for existing products** | REST job, off by default. When on, products already in Magento keep their live price and special price. New products are still created with their UnoPim price. |
 | **Attribute Families** | Only products from these families. |
 | **Product Status** | Enabled, disabled, or all. |
 | **With Media** | Also sends images and videos. |
@@ -76,6 +77,8 @@ Only top-level products are selected. Variants travel with their parent.
 ## Configurable Products
 
 Variants are exported first. Then the parent is created and the variants are linked to it.
+
+Each variant sends the attributes from the variant column of the [Attributes](./attribute-mapping#variant-mapping) tab and its own images from the [Variant Image Attributes](./image-mapping#variant-image-attributes) table.
 
 Each variant attribute, such as **color** or **size**, must be on the [Custom Mapping](./custom-mapping) tab. The select options must exist in Magento. After a fresh option export, Magento can take a short time to index them. If a variant is not linked, the log says "Variant not indexed". Run the job again a few minutes later.
 
