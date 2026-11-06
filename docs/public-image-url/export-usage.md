@@ -1,78 +1,77 @@
-# Use Public Image URL in Exports
+# Export Product Media as Public URLs
 
-After the **UnoPim Public Image URL** extension is installed, you can export product media using **Public URL** or **ZIP** as the resource type.
+With the **UnoPim Public Image URL** extension, a product export can write each media value (**image**, **gallery**, and **file** attributes) as a public link instead of packing the files into a ZIP archive.
 
-This is useful when you want product media such as **image**, **gallery**, and **file** attributes to appear in the export file as publicly accessible URLs instead of bundled files.
+The extension adds a **Resource Type** option to product export profiles:
 
-## What This Export Supports
-
-UnoPim allows you to export product media for product types such as:
-
-- **Simple products**
-- **Configurable products**
-
-This export works for **Products** and not for **Categories**.
-
-## Create an Export for Media as Public URL
-
-Follow these steps to create the export:
-
-1. Go to **Data Transfer > Exports > Create Export**.
-
-![Create Export Button](./assets/export/create-exports.png)
-
-
-2. In the **General** section, enter the required fields such as **Code** and **Type**, then select **Products** as the product type.
-
-![General Export Settings](./assets/export/general.png)
-
-3. Choose the required file format, such as **CSV** or **XLSX**.
-
-![File Format Setting](./assets/export/filters.png)
-
-4. Configure the export profile settings as needed.
-
-![Export Profile Settings](./assets/export/export-now.png)
-
-![Export Profile Settings](./assets/export/export-completed.png)
-
-## Media-Related Export Settings
-
-While editing the export job profile, you can configure the media export options:
-
-| Setting | Description |
+| Resource Type | What you get |
 |---|---|
-| **Field Separator** | Choose the delimiter for the export file, such as `,` or `;`. |
-| **File Format** | Select the export format, such as **CSV**, **XLS**, or **XLSX**. |
-| **Media Option** | Enable this option to include product media in the export. |
-| **Resource Type** | Choose whether media should be exported as **Public URL** or **ZIP**. |
+| **By Public Url** | One CSV/XLS/XLSX file. Each media column contains a full public URL, such as `https://your-domain.com/storage/product/1/image/audio-01.webp`. |
+| **By Zip** | A ZIP archive with the export file plus the media files. This is UnoPim's standard behaviour. |
+
+> **Note:** Resource Type only appears for **Products** exports, and only takes effect when **With Media** is turned on. With media turned off, the export writes the stored media paths and Resource Type is ignored.
+
+## Step 1: Open the Exports page
+
+Go to **Data Transfer > Exports** and click **Create Export**.
+
+![Exports list with the Create Export button](./assets/export/exports-list.png)
+
+## Step 2: Fill in the export profile
+
+1. In **General**, enter a **Code** (for example `product_media_public_url`) and set **Type** to **Products**.
+2. Optional: use **Data to export** and **Data Filters** to limit channels, locales, attributes, families, categories, or SKUs. Leave them empty to export everything.
+3. In **Output**:
+   - Set **File Format** to **CSV**, **XLS**, or **XLSX**.
+   - Turn on **With Media**. The **Media Source** section appears below it.
+4. In **Media Source**, set **Resource Type** to **By Public Url**.
+
+![Resource Type options in the Media Source section](./assets/export/resource-type-options.png)
+
+When everything is filled in, the form looks like this:
+
+![Export profile with With Media on and Resource Type set to By Public Url](./assets/export/output-media-settings.png)
+
+5. Click **Save changes**.
+
+### Media-related settings
+
+| Setting | Where | Description |
+|---|---|---|
+| **File Format** | Output | `CSV`, `XLS`, or `XLSX`. |
+| **With Media** | Output | Must be on for media to be exported as URLs or ZIP files. |
+| **Resource Type** | Media Source | **By Public Url** writes links. **By Zip** bundles the files. |
+| **Field Separator** | Format settings | Delimiter for CSV files, for example `,` or `;`. |
+
+## Step 3: Run the export
+
+After saving, the profile summary opens. Click **Export Now**.
+
+![Export profile summary with the Export Now button](./assets/export/export-now.png)
+
+The **Job Tracker** shows the job moving through **Queued > Validating > Exporting > Complete**.
+
+> **Tip:** Exports run on the queue. If a job stays on **Queued**, make sure a queue worker is running, for example `php artisan queue:work --queue=system,default`.
+
+## Step 4: Download the file
+
+When the job finishes, click **Download Exported Files**.
+
+![Completed export job with the Download Exported Files button](./assets/export/export-completed.png)
+
+With **By Public Url**, you get a single CSV/XLSX file (no ZIP). The `image`, `gallery`, and file attribute columns (here `spec_sheet`) contain public URLs:
+
+![Exported CSV with public URLs in the image, gallery and spec_sheet columns](./assets/export/export-file.png)
+
+- **image** and **file** attributes: one URL per cell.
+- **gallery** attributes: several URLs in one cell, separated by commas.
+- URLs are built from your `APP_URL`, so set `APP_URL` in `.env` to the public domain other systems will use.
 
 ## Public URL vs ZIP
 
-### Public URL
-
-If the **Media** option is enabled and **Public URL** is selected as the resource type:
-
-- product media values are exported as public URLs,
-- the exported URLs remain accessible through the public path,
-- image, gallery, and file attributes appear in the export file as links.
-
-### ZIP
-
-If **ZIP** is selected as the resource type:
-
-- media is handled as file resources instead of public URLs,
-- the exported values will not appear as public URL links in the same way,
-- this option is useful when you want media packaged differently for download or transfer.
-
-## Result of the Export
-
-With this setup, UnoPim makes it easy to export product media along with the product data.
-
-Key benefits include:
-
-- exporting product **image**, **gallery**, and **file** attributes as public URLs,
-- support for file formats such as **CSV** and **XLSX**,
-- simpler handling of product media during external sharing or integration.
-
-> **Note:** Product media attribute values such as `image`, `file`, and `gallery` can be exported as **Public URL** values.
+| | By Public Url | By Zip |
+|---|---|---|
+| Download | Single CSV/XLS/XLSX file | ZIP archive (export file + media) |
+| Media column value | Full public URL | Relative file path inside the ZIP |
+| Best for | Feeds, marketplaces, and integrations that fetch images by URL | Moving media offline or to a system without access to your server |
+| Download size | Small | Grows with the number of media files |

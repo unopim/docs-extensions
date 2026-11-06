@@ -7,7 +7,7 @@ The **UnoPim Public Image URL** extension simplifies product media management by
 <br>
 
 <div align="center">
-  <img src="./assets/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
+  <img src="./assets/intro-banner.png" alt="UnoPim Public Image URL" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
 </div>
 
 <br> 
@@ -44,10 +44,29 @@ You can also explore these UnoPim modules:
 
 > **Note:** This module also supports returning the product media type `image` attribute value as a public URL through the API.
 
+## How to Use It
+
+1. [Install the extension](./installation).
+2. [Export product media as public URLs](./export-usage): turn on **With Media** in a product export and set **Resource Type** to **By Public Url**.
+3. [Import product media from public URLs](./import-usage): put links in the `image`, `gallery`, or file columns of a product import file.
+
 ## Requirements
 
 | Requirement | Details |
 |---|---|
-| **Version** | 1.2.0 |
-| **Compatible with UnoPim** | v2.0.0 |
+| **Latest version** | 1.5.0 |
+| **Compatible with UnoPim** | v3.x (tested on v3.1.3) |
+| **PHP** | 8.4 |
+| **Laravel** | 13.x |
+
+### Version compatibility
+
+| Extension version | UnoPim | PHP | Laravel |
+|---|---|---|---|
+| 1.5.0 | v3.1.x | 8.4 | 13.x |
+| 1.4.0 | v3.0.x | 8.4.1 | 13.x |
+| 1.3.0 | v2.1.x | 8.3 | 12.x |
+| 1.2.0 | v2.0.0 | 8.2 | 11.x |
+
+> **Note:** Versions 1.4.0 and later work only on UnoPim 3.x. On UnoPim 2.1.x, use 1.3.0.
 

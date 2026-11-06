@@ -11,8 +11,8 @@
   {
     "text" : "Usage",
     "items": [
-      {"text" : "Use Public Image URL in Exports", "link": "/public-image-url/export-usage"},
-      {"text" : "Use Public Image URL in Imports", "link": "/public-image-url/import-usage"}
+      {"text" : "Export Media as Public URLs", "link": "/public-image-url/export-usage"},
+      {"text" : "Import Media from Public URLs", "link": "/public-image-url/import-usage"}
     ]
   },
 

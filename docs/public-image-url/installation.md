@@ -19,7 +19,7 @@ use Webkul\PublicUrl\Providers\PublicUrlServiceProvider;
 
 return [
     // ...existing providers...
-PublicUrlServiceProvider::class,
+    PublicUrlServiceProvider::class,
 ];
 ```
 
@@ -50,6 +50,22 @@ php artisan optimize:clear
 | --- | --- |
 | `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the newly added namespace. |
 | `php artisan optimize:clear` | Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes. |
+
+## Step 5 - Optional: Allow Private-Network URLs
+
+By default, imports only download media from public internet addresses. To import from a server on your own network, add this to `.env` and clear the cache again:
+
+```dotenv
+PUBLIC_URL_ALLOW_PRIVATE_NETWORK=true
+```
+
+## Step 6 - Start a Queue Worker
+
+Imports and exports run as background jobs. Make sure a queue worker is running:
+
+```bash
+php artisan queue:work --queue=system,default
+```
 
 ## Installation Complete
 
