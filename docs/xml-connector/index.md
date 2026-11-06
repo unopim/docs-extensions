@@ -1,8 +1,8 @@
 # UnoPim XML Connector
 
-The **UnoPim XML Connector** lets you import data into UnoPim from any XML file. You define how the XML maps to your UnoPim data once - using a reusable **Mapping Template** - and then run import jobs using that template whenever you have new data.
+The **UnoPim XML Connector** imports data into UnoPim from any XML file. You describe how your XML maps to UnoPim once, in a reusable **Mapping Template**. After that, you run an import job with that template whenever you get a new file.
 
-The connector imports four entity types, each with its own templates and import job:
+The connector imports four entity types. Each one has its own templates and its own import job type:
 
 | Entity Type | Imports |
 |---|---|
@@ -11,55 +11,56 @@ The connector imports four entity types, each with its own templates and import 
 | **XML Attributes** | Attribute definitions |
 | **XML Attribute Options** | Options for select / multiselect attributes |
 
+![Mapping Templates listing with one template per entity type](./assets/templates/mapping-templates-list.png)
+
 ## How It Works
 
 ```
-Choose the entity type and upload a sample XML file  →  Specify the record tag name
+XML → Create Template: pick the Import Type, upload a sample XML, click Validate
         ↓
-Map each XML field to a UnoPim field
+Choose the Multiproduct Tagname (wrapper) and Product Tagname (one record) → Save
         ↓
-Activate the Mapping Template
+Map each XML field tag to a UnoPim field → Save changes (the template is now Enabled)
         ↓
-Go to Data Transfer → Imports → Create Import
+Data Transfer → Imports → Create Import
         ↓
-Select the XML import type, choose your template, and upload the XML file to import
+Pick the XML import type, upload the XML data file, choose the template and filters
         ↓
-Run the job - records are created or updated in UnoPim
+Save changes → Import Now → follow the progress in the Job Tracker
 ```
 
-The XML file is uploaded during the import job itself, not stored on the template. Any XML file whose fields match the template's mapped fields can reuse the same template - so one template can drive imports of many different files that share the same structure.
+The template only stores the structure and the field mapping. The XML data file is uploaded on the import job, so one template can drive imports of many files with the same structure.
 
 ## Features
 
-- **Four entity types** - import products, categories, attributes, and attribute options, each with its own template and import job.
-- **Mapping Templates** - upload a sample XML file and map its tags to UnoPim fields. Templates are reusable across multiple import jobs.
-- **Auto-suggested mapping** - the editor pre-selects a UnoPim field when its name or code matches the XML tag.
-- **Default attribute value** - give a mapped field a fixed value applied to every record instead of reading it from the XML; a required field can be satisfied by its default value.
-- **Flexible XML structure** - configure the record tag name and the parent wrapper tag to match any XML schema.
-- **Full attribute mapping** - for products, map XML tags to any UnoPim attribute (text, select, multiselect, boolean, price, etc.).
-- **Category tree import** - import and update the UnoPim category tree (code, parent, locale, and active category fields) from XML.
-- **Category assignment for products** - map an XML field to the product's category path to assign imported products to categories.
-- **Automatic record creation** - during product import, missing categories and missing select / multiselect option values are created automatically.
-- **Media from URL** - map XML fields to image, gallery, and file attributes; the connector downloads the media from the URLs in the file.
-- **Multi-value delimiter** - choose comma, semicolon, pipe, tab, or colon as the separator for multi-value fields.
-- **File validation** - uploaded files are checked against the template mapping, with warnings for tags that are ignored or do not match.
-- **Template activation control** - templates must be activated before they can be used in import jobs. Inactive templates, and templates of the wrong entity type, are excluded from job dropdowns.
-- **Mass actions** - mass activate/deactivate and mass delete templates from the listing grid.
-- **Error report** - failed rows are collected into a downloadable XLSX report with a per-row error message.
-- **Change history** - full audit trail of template mapping changes.
-- **Role-based access control** - granular permissions for create, edit, update, rename, delete, mass update, mass delete, and toggle status.
+- **Four entity types**: products, categories, attributes, and attribute options, each with its own template and import job.
+- **Reusable Mapping Templates**: upload a sample XML file, map its tags to UnoPim fields, and reuse the template in any number of import jobs.
+- **Auto-suggested mapping**: when an XML tag matches a UnoPim attribute code or name, the editor selects it for you.
+- **Default attribute value**: set a fixed value for a mapped field, applied to every record instead of the XML value.
+- **Any XML structure**: choose the record tag and the wrapper tag from the tags found in your file.
+- **Full attribute mapping for products**: text, textarea, select, multiselect, boolean, price, date, image, gallery, and file attributes.
+- **Category assignment**: map an XML tag to the product's category. Missing categories are created automatically.
+- **Media from URL**: image, gallery, and file attributes are downloaded from the URLs in the XML file.
+- **Multi-value delimiter**: comma, semicolon, pipe, tab, or colon.
+- **Validation before import**: malformed XML, or XML that doesn't match the template, is rejected before the batch runs.
+- **Entity-scoped template picker**: each import type only lists enabled templates of the same entity type.
+- **Mass actions**: delete templates or update their status in bulk from the listing.
+- **Error report**: failed rows are listed in the Job Tracker with a downloadable full report.
+- **Change history**: every template change is versioned in the template's **History** tab.
+- **Role-based access control**: separate permissions for create, edit, update, rename, delete, mass update, mass delete, and toggle status.
 
 ## Requirements
 
 | Requirement | Version |
 |---|---|
-| **UnoPim** | 3.0.0 or higher |
-| **PHP** | 8.4 or higher (< 8.5) |
-| **Laravel** | 13.x |
+| **UnoPim** | 3.0.x or 3.1.x (screenshots in this guide are from UnoPim 3.1.3) |
+| **PHP** | 8.4 (the connector supports 8.3 to 8.4.x, but UnoPim 3.1 itself needs 8.4.1 or higher) |
+| **Laravel** | 12 or 13 (as shipped with your UnoPim version) |
+| **Queue worker** | A running `php artisan queue:work` process. Imports run as queued jobs. |
 
 ## In This Guide
 
-- [Installation](./installation)
-- [Mapping Templates](./mapping-templates)
-- [Running an Import Job](./import-job)
+- [Installation](./installation): add the package and run the installer.
+- [Mapping Templates](./mapping-templates): create a template and map XML fields to UnoPim.
+- [Running an Import Job](./import-job): import products, categories, attributes, and options.
 - [Support](./support)

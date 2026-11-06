@@ -2,20 +2,15 @@
   {
     "text": "XML Connector",
     "items": [
-      { "text": "Overview",          "link": "/xml-connector/" },
-      { "text": "Installation",      "link": "/xml-connector/installation" }
+      { "text": "Overview",     "link": "/xml-connector/" },
+      { "text": "Installation", "link": "/xml-connector/installation" }
     ]
   },
   {
-    "text": "Mapping Templates",
+    "text": "Usage",
     "items": [
-      { "text": "Mapping Templates", "link": "/xml-connector/mapping-templates" }
-    ]
-  },
-  {
-    "text": "Import Jobs",
-    "items": [
-      { "text": "XML Product Import", "link": "/xml-connector/import-job" }
+      { "text": "Mapping Templates",    "link": "/xml-connector/mapping-templates" },
+      { "text": "Running an XML Import", "link": "/xml-connector/import-job" }
     ]
   },
   {
