@@ -6,7 +6,7 @@ This is a one-time setup step - once done, you won't need to repeat it.
 
 ## Step 1 - Log in to ERPNext
 
-Log in to your ERPNext / Frappe instance with a user that has permission to manage the doctypes you plan to sync (Item, Item Group, Item Attribute, Brand).
+Log in to your ERPNext / Frappe instance with a user that has permission to manage the doctypes you plan to sync (Item, Item Group, Item Attribute, Brand), plus **File** (product images), **Custom Field** (if you use [Custom Attribute Mapping](./other-mappings.md#custom-attribute-mapping)), and **GST HSN Code** on India-localized sites.
 
 > **Tip:** It's good practice to create a dedicated **integration user** for UnoPim so the sync activity is easy to audit and the credentials can be revoked independently.
 
@@ -34,7 +34,7 @@ ERPNext will generate:
 
 ## Step 4 - Note Your Base URL
 
-The connector also needs the **Base URL** of your ERPNext instance - the address you use to open ERPNext in the browser, for example:
+The connector also needs the **Base URL** of your ERPNext instance - the site root you use to open ERPNext in the browser, without `/app` or any other path, for example:
 
 ```
 https://your-company.erpnext.com

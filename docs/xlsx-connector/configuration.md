@@ -8,25 +8,25 @@ The Custom XLSX Connector has no dedicated settings page. Configuration is split
 
 ## Permissions
 
-The connector adds a **Custom XLSX Connector** section inside **Settings → Roles**. Expand it to control what each admin user can do with templates:
+The connector adds an **XLSX Connector** section inside **Settings → Roles**. Expand it to control what each admin user can do with templates:
 
 | Permission | What the user can do |
 |---|---|
-| **View** | See the Templates listing page |
+| **Templates** | See the Templates listing page |
 | **Create** | Create a new template |
 | **Edit** | Open, modify, and save a template; also toggle its status |
 | **Delete** | Delete a single template |
-| **Bulk Enable / Disable** | Change the status of multiple templates at once |
-| **Bulk Delete** | Delete multiple templates at once |
+| **Mass Update** | Change the status of multiple templates at once |
+| **Mass Delete** | Delete multiple templates at once |
 
 To grant access:
 
 1. Go to **Settings → Roles** and open or create the relevant role.
-2. Expand **Custom XLSX Connector → Templates** and tick the permissions you want to grant.
+2. Expand **XLSX Connector → Templates** and tick the permissions you want to grant.
 3. Assign the role to the admin user.
 
 ::: warning
-There is no separate "use template in a job" permission. Any user who can run an import or export job can select any **Enabled** template. To hide a template from job dropdowns without deleting it, set its status to **Disabled**.
+There is no separate "use template in a job" permission. Any user who can run an import or export job can select any **Enabled** template. To hide a template from job dropdowns without deleting it, set its status to **Disabled**. Jobs that were already saved with that template keep using it.
 :::
 
 ## Prerequisites
@@ -64,6 +64,8 @@ Each template has a `status` flag (default: enabled). Disabled templates:
 - remain visible in the **Templates** listing
 - do **not** appear in the import/export job template picker
 - can be re-enabled at any time from the listing or the edit page
+
+Jobs store only the template ID. The template's mapping is read each time a job runs, so saving changes to a template affects the next run of every import and export job that uses it, and disabling a template does not stop jobs that already reference it.
 
 Use the toggle on the listing row, or the **Mass Update** action, to change status in bulk without editing each template.
 

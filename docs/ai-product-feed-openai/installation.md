@@ -73,24 +73,20 @@ php artisan optimize:clear
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the newly added namespace. |
 | `php artisan migrate` | Creates the `openai_feeds` and `openai_feed_logs` database tables. |
-| `php artisan openai-feed:install` | Publishes assets, initialises the feed record, and generates a default security token. |
+| `php artisan openai-feed:install` | Publishes assets, runs migrations (skip with `--skip-migrate`), links storage, initialises the feed record, and generates a default security token. |
 | `php artisan optimize:clear` | Clears all cached files (bootstrap, config, routes, views) to load the new extension. |
 
 ---
 
-## Step 5 — Build front-end assets
+## Step 5 — Publish front-end assets
 
-If UI elements or icons are missing, build the package assets from inside the package directory:
+The package ships precompiled assets. `php artisan openai-feed:install` publishes them. If UI elements or icons are missing, publish them again:
 
 ```bash
-cd packages/Webkul/OpenAIFeed
-npm install && npm run build
+php artisan vendor:publish --tag=openai-feed-assets --force
 ```
 
-| Command | Purpose |
-|---|---|
-| `npm install` | Installs the front-end build dependencies for the OpenAI Feed package. |
-| `npm run build` | Compiles the Vite/Vue assets and copies them to the public directory. |
+The assets are copied to `public/themes/ai-feed-connector/build`.
 
 ---
 

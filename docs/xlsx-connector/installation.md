@@ -4,10 +4,10 @@
 
 | Item | Value |
 |---|---|
-| UnoPim | 3.1.3 |
+| UnoPim | 3.1.x (tested on 3.1.3) |
 | PHP | ^8.4.1 |
 | Laravel | ^13.0 |
-| Database | MySQL with JSON column support |
+| Database | MySQL or PostgreSQL 16 (JSON column support) |
 
 ## Steps
 

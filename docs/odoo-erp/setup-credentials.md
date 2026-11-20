@@ -25,7 +25,10 @@ Click **Save**. UnoPim checks the connection before saving.
 
 ![Create Credential dialog](./assets/odoo-credentials/create-credential.webp)
 
-> **Note:** Each credential must use a unique database name. If the database name is already used by another credential, or Odoo rejects the login, UnoPim shows an error and the credential is not saved.
+> **Note:** Each credential must use a unique **Store URL**. If the Store URL is already used by another credential, or Odoo rejects the login, UnoPim shows an error and the credential is not saved.
+
+> [!WARNING]
+> Enter only the server root, e.g. `https://mystore.odoo.com`. Do not add `/odoo`, `/web` or any other path - the connector appends `/xmlrpc/2` itself. A trailing `/` is removed automatically. The Store URL cannot be changed later, so a wrong URL means deleting the credential and creating a new one.
 
 
 ## Step 3 - Review the Credential

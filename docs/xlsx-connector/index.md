@@ -33,7 +33,7 @@ Templates store separate `import_mapping` and `export_mapping` payloads, so the 
 - **Formula-injection protection** - exported values are escaped so Excel does not interpret them as formulas.
 - **Attribute value separator** - choose the separator used for multiselect option codes (default `,`).
 - **Status toggle and mass actions** - enable/disable or delete templates individually or in bulk.
-- **Permission-based access** - ACL keys control who can view, create, edit, delete, and mass-update templates.
+- **Permission-based access** - role permissions control who can view, create, edit, delete, mass-update, and mass-delete templates.
 - **30+ locale translations** - the admin UI ships translated for every locale UnoPim supports.
 
 ## Attribute types supported
@@ -52,6 +52,7 @@ Templates store separate `import_mapping` and `export_mapping` payloads, so the 
 | File | File path; file is copied when **Include Media** is on |
 | Image | Image path; file is copied when **Include Media** is on |
 | Gallery | Comma-separated image paths; files are copied when **Include Media** is on |
+| Asset (DAM) | Stored asset path; asset files are bundled when **Include Media** is on. On import, paths are resolved back to DAM assets |
 
 ## Supported product types
 
@@ -75,10 +76,10 @@ One user can hold both roles depending on their permissions.
 
 | Item | Value |
 |---|---|
-| UnoPim | 3.1.3 |
+| UnoPim | 3.1.x (tested on 3.1.3) |
 | PHP | ^8.4.1 |
 | Laravel | ^13.0 |
-| Database | MySQL with JSON column support |
+| Database | MySQL or PostgreSQL 16 (JSON column support) |
 | Data Transfer module | Included in UnoPim core |
 | Queue driver | Required for background job processing |
 
@@ -86,7 +87,8 @@ One user can hold both roles depending on their permissions.
 
 | Connector | UnoPim | PHP | Laravel |
 |---|---|---|---|
-| `2.0.0` | 3.1.3 | ^8.4.1 | ^13.0 |
+| `2.1.x` | 3.1.x | ^8.4.1 | ^13.0 |
+| `2.0.x` | 3.0.x | ^8.4.1 | ^13.0 |
 | `1.2.x` | 2.1.x | ^8.3 | 12.x |
 | `1.1.x` | 2.0+ | ^8.3 | - |
 

@@ -30,9 +30,15 @@ Click **Create Export**, then enter a unique **Code** and **Label** for the job.
 
 Select **ERPNext: Attributes → Item Attribute** as the export type.
 
-### Step 5: Choose the Credential
+### Step 5: Set the Filters
 
-In the job filters, select the **ERPNext Credential** that points to the site you want to export to.
+In the job filters, set:
+
+| Filter | What it does |
+| --- | --- |
+| **Credential** | The ERPNext site to export to. *(required)* |
+| **Channel** | The UnoPim channel to read data from. *(required)* |
+| **Locale** | The UnoPim locale used for labels sent to ERPNext. *(required)* |
 
 ### Step 6: Save
 

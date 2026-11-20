@@ -17,7 +17,7 @@ Navigate to **Data Transfer → Exports → Create**.
 Set the following fields in the job form:
 
 - **Type** - choose **XLSX Products**
-- **Filters** - narrow by channel, locale, family, category, or status as needed
+- **Filters** - narrow by Channels, Locales, Currencies, Attributes, Attribute Families, Categories, Completeness, Time Condition, Status, SKUs, and attribute conditions as needed
 - **With Media** - include mapped file, image, gallery, and asset values as media resources
 - **With Associations** - include association columns
 - **Date Format** and **File Name** - set date output and the generated filename pattern
@@ -29,10 +29,10 @@ Set the following fields in the job form:
 
 ## Step 3 - Save and run
 
-Save and click **Run**. The export is dispatched to the queue:
+Save and click **Export Now**. The export is dispatched to the queue:
 
 ```
-Operator clicks Run
+Operator clicks Export Now
         ↓
 Job dispatched to the queue
         ↓

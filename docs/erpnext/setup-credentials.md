@@ -14,26 +14,31 @@ Fill in the following fields to establish the connection:
 
 | Field | What to enter |
 |---|---|
-| **Name** | A unique label for this connection (e.g., `Production ERPNext`). Must be unique across credentials. |
-| **Base URL** | The full URL of your ERPNext instance (e.g., `https://your-company.erpnext.com`). |
+| **Base URL** | The root URL of your ERPNext site (e.g., `https://your-company.erpnext.com`). Must be unique across credentials. |
 | **API Key** | The API Key generated for your ERPNext user. |
 | **API Secret** | The API Secret generated alongside the API Key. |
-| **UnoPim Channel** | The UnoPim channel this credential is scoped to. |
-| **UnoPim Locale** | The UnoPim locale used for this connection. |
-| **Currency** | The default currency used for this connection. |
-| **Active** | Toggle to enable or disable this credential. |
+| **Active** | Only active credentials are listed in the **Credential** dropdown of export and import jobs (shown by Base URL). Jobs already saved with this credential still run when it is inactive. |
+
+> [!WARNING]
+> Enter only the site root. Do not add `/app`, `/desk`, or `/api` - the connector appends `/api/resource` and `/api/method` itself, so a URL with a path fails with **ERPNext API not found at this URL.** A trailing `/` is removed automatically.
+
+> [!NOTE]
+> The channel, locale, and currency are not part of the credential. You choose them on each export or import job.
 
 > **Note:** Don't have your API Key and Secret yet? See [ERPNext Setup](./erpnext-setup.md) for how to generate them in ERPNext.
 
-## Step 3 - Test the Connection
+## Step 3 - Save and Verify the Connection
 
-Before saving, click **Test Connection**. UnoPim pings your ERPNext instance using the details you entered.
+Click **Save**. UnoPim calls your ERPNext site with the details you entered before it stores them. The credential is saved only if the call succeeds. Otherwise one of these errors is shown and nothing is saved:
 
-- ✅ **Connection to ERPNext succeeded.** - your details are correct, go ahead and save.
-- ❌ **Unable to reach ERPNext** - double-check the Base URL, API Key, and API Secret, then try again.
+| Error | Likely cause |
+|---|---|
+| **Invalid API key or secret.** | Wrong key or secret, or the keys were regenerated in ERPNext. |
+| **ERPNext site is suspended.** | The ERPNext / Frappe Cloud plan has expired. |
+| **ERPNext API not found at this URL.** | The Base URL is wrong or contains a path. |
+| **Cannot reach ERPNext.** | The site is offline or not reachable from the UnoPim server. |
+| **ERPNext is unavailable.** | ERPNext returned a server error. Try again later. |
 
-## Step 4 - Save Your Credentials
+Once saved, your ERPNext instance is connected to UnoPim and ready for export and import jobs.
 
-Once the test passes, click **Save**. Your ERPNext instance is now connected to UnoPim and ready for export and import jobs.
-
-> **Tip:** When editing an existing credential, leave the **API Secret** field blank to keep the previously saved value.
+> **Tip:** When editing an existing credential, leave the **API Secret** field blank to keep the previously saved value. The connection is verified again on every save.

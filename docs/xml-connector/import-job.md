@@ -56,7 +56,7 @@ All filters are required - the import will not validate without all of them set.
 These types require only the **Template** filter. Locale, channel, and other values come from the fields mapped in the template.
 
 > [!NOTE]
-> The **Template** dropdown only shows **active** templates that match the selected import type. If your template is not listed, confirm it is the right entity type and go to **XML Connector → Mapping Templates** to activate it.
+> The **Template** dropdown only shows **active** templates that match the selected import type. If your template is not listed, confirm it is the right entity type and go to **XML → Mapping Templates** to activate it.
 
 ## Upload the XML File
 
@@ -64,7 +64,7 @@ After configuring the filters, upload the XML file containing the full product d
 
 ## Save and Run
 
-Click **Save Import** to create the job. Then click **Run** to start the import.
+Click **Save Import** to create the job. Then click **Import Now** to start the import.
 
 You can monitor the job's progress from the **Job Tracker** - navigate to `Data Transfer → Job Tracker` to see the status, number of processed records, and any errors.
 
@@ -77,7 +77,9 @@ If some records fail to import (e.g. missing required attributes, invalid values
 A sample XML file for each entity type can be downloaded from the **Create Template** dialog (it updates when you change the selected entity type). Sample files also ship inside the package, e.g.:
 
 ```
-data-transfer/samples/products.xml
+packages/Webkul/XmlConnector/src/Resources/samples/products.xml
 ```
+
+On first boot the connector copies each sample to the `public` storage disk (`storage/app/public/data-transfer/samples/<entity>.xml`), which is what the download links serve. An existing copy there is never overwritten.
 
 Use the sample for your entity type as a starting point to understand the expected XML structure when building your Mapping Template.

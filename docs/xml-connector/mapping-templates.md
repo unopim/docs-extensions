@@ -13,7 +13,7 @@ The connector maps four entity types, each with its own template:
 
 A template belongs to one entity type (chosen at creation) and only appears in the matching import job's dropdown.
 
-Navigate to **XML Connector → Mapping Templates** in the sidebar to manage your templates.
+Navigate to **XML → Mapping Templates** in the sidebar to manage your templates.
 
 ## Create a New Template
 
@@ -64,6 +64,9 @@ The mapping editor shows every XML field found in your sample file on the left, 
 Required fields must be mapped before you can save - the connector displays an error listing any required fields that are still unmapped.
 
 The available UnoPim fields depend on the template's entity type.
+
+> [!NOTE]
+> Import jobs store only a reference to the template. The mapping is read each time a job runs, so saving changes here affects the next run of every import job that uses this template.
 
 ### XML Products
 

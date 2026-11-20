@@ -74,6 +74,20 @@ php artisan optimize:clear
 | `php artisan optimize:clear` | Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes. |
 
 
+## Enable Queue Operations
+
+Export and import jobs run in the background, so a queue worker must be running to execute them:
+
+```bash
+php artisan queue:work --queue=system,default
+```
+
+If the worker is managed by a process manager like **Supervisor**, restart it after installing or upgrading the connector so it loads the new code:
+
+```bash
+php artisan queue:restart
+```
+
 ## Verify the Installation
 
 Once all commands have run successfully, log in to your UnoPim dashboard. You should see an **Odoo** menu in the left sidebar - this confirms the connector has been installed correctly.
@@ -93,6 +107,7 @@ composer dump-autoload
 php artisan migrate
 php artisan vendor:publish --tag=unopim-odoo-connector --force
 php artisan optimize:clear
+php artisan queue:restart
 ```
 
 `php artisan migrate` moves your existing attribute and category mappings into each credential and updates saved export filters to the new filter names. If an export job shows an *"old filter names"* error, the migration has not run yet.

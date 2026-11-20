@@ -35,14 +35,17 @@ Navigate to **Data Transfer → Exports → Create** and choose **Google Shoppin
 | **Attributes** | No | Limit the export to specific attributes. With a connection selected, only that connection's mapped attributes are offered. |
 | **Families** | No | Limit to products in the selected attribute families. |
 | **Status** | No | Limit to enabled or disabled products. |
-| **Completeness** | No | Limit by product completeness. |
+| **Completeness** | No | Shown on the form, but currently ignored by this exporter - products are exported whatever their completeness. Use **Status**, **Families**, **Categories** or **SKUs** to narrow the set. |
 | **Categories** | No | Limit to products in the selected UnoPim categories. |
 | **SKUs** | No | Limit to specific SKUs. Leave empty to export all. |
 | **Time Condition** | No | Export only products changed in the last N days, between two dates, or since the last export. |
 
+> [!NOTE]
+> The form also shows UnoPim's generic export fields **With Media**, **With Associations**, **Use Labels** and **Date Format**. This exporter ignores them. Product images are sent from the **Image Links** and **Additional Image Links** fields of the [Attribute Mapping](./attribute-mapping).
+
 ### Step 4 - Save and run
 
-Save the job, then click **Run**. A queue worker then processes it:
+Save the job, then click **Export Now**. A queue worker then processes it:
 
 - Products are read in batches. Each variant is exported as its own offer under its parent (`itemGroupId`), and a configurable parent's own values are merged into its variants.
 - A SKU longer than Google's 50-character limit is skipped with a reason before any request is sent.

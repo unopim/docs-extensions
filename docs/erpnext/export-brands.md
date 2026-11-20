@@ -33,7 +33,7 @@ Select **ERPNext: Brand options → Brand** as the export type.
 
 ### Step 5: Choose the Credential
 
-In the job filters, select the **ERPNext Credential** that points to the site you want to export to.
+In the job filters, select the **Credential** that points to the site you want to export to.
 
 ### Step 6: Save
 

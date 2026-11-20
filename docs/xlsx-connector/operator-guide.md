@@ -36,10 +36,10 @@ Attach the `.xlsx`, `.xls`, or `.csv` file whose headers match the selected impo
 
 ### Step 6 - Save and run
 
-Save the job, then click **Run**. The job is dispatched to the queue:
+Save the job, then click **Import Now**. The job is dispatched to the queue:
 
 ```
-Operator clicks Run
+Operator clicks Import Now
         ↓
 Job dispatched to the queue
         ↓
@@ -86,7 +86,7 @@ The XLSX exporter fixes the file format to XLSX and includes these options:
 | **Date Format** | No | Selects the output format for dates. |
 | **File Name** | No | Sets the generated file-name pattern. |
 
-Standard product filters (channel, locale, family, category, status) are inherited from UnoPim's product source and can also be applied.
+The standard product filters (Channels, Locales, Currencies, Attributes, Attribute Families, Categories, Completeness, Time Condition, Status, SKUs, and attribute conditions) can also be applied.
 
 Category and product-status scope from the selected template are **also** applied on top of any job-level filters.
 
@@ -105,10 +105,10 @@ An enabled template is required for XLSX product jobs. If its export mapping has
 
 ### Step 5 - Save and run
 
-Save and click **Run**. The export is dispatched to the queue:
+Save and click **Export Now**. The export is dispatched to the queue:
 
 ```
-Operator clicks Run
+Operator clicks Export Now
         ↓
 Job dispatched to the queue
         ↓
