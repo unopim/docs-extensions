@@ -7,7 +7,7 @@ UnoPim DAM is a powerful, open-source digital asset management solution designed
 If your DAM installation also uses the **UnoPim AWS Integration**, you can migrate locally stored DAM files to Amazon S3 by following [DAM Asset Migration to AWS S3](./dam-asset-migration-to-aws-s3.md).
 
 <div align="center">
-  <img src="./assets/overview/DAM-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
+  <img src="./assets/overview/DAM-banner.png" alt="UnoPim DAM" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
 </div>
 
 
@@ -76,8 +76,8 @@ Executable and script files (`.php`, `.js`, `.exe`, `.html`, and similar) are bl
 
 | Requirement | Version |
 |---|---|
-| **DAM** | v3.0.1 |
-| **UnoPim** | v3.0.x |
+| **DAM** | v3.1.x |
+| **UnoPim** | v3.x |
 | **PHP** | 8.4.1 or higher |
 
 **Optional, but recommended:**

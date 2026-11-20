@@ -9,7 +9,7 @@ Instead of storing media files on your local server, everything gets uploaded to
 <br>
 
 <div align="center">
-  <img src="./assets/overview/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
+  <img src="./assets/overview/intro-banner.png" alt="UnoPim AWS S3 Integration" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
 </div>
 
 <br> 
@@ -20,7 +20,7 @@ Once connected, the integration handles your media in two ways:
 
 - **New files** - any image or PDF you add to UnoPim is automatically synced to Amazon S3 without any manual action.
 
-The integration also includes a **cache refresh mechanism** - it refreshes cached images at regular intervals so your storefront and product pages always display the latest version of any updated asset. If no custom refresh time is set, a sensible default kicks in automatically to keep everything current.
+Files uploaded to S3 are sent with a `Cache-Control: max-age` header. When **Environment Update Time** is empty, the default is `604800` seconds (7 days).
 
 
 ## Key Features
@@ -30,15 +30,14 @@ The integration also includes a **cache refresh mechanism** - it refreshes cache
 - Enjoy **unlimited, scalable storage** - no capacity limits, no need to manage server disk space.
 
 ### Easy Setup
-- Get connected quickly by entering just four details: **Access Key ID**, **Secret Key**, **Region**, and **Bucket Name**.
+- Get connected quickly by entering four details: **Access Key**, **Secret Key**, **Region**, and **Bucket Name**. The keys are stored encrypted.
 
 ### Automatic Media Sync
 - All new images and PDFs added to UnoPim are **automatically uploaded to S3** - no manual uploads needed.
 
 ### Cache Management
-- Set a custom **environment refresh time** to control how often cached images are updated.
-- Enable **automatic cache refresh** to minimise repeated requests to AWS and ensure faster media loading.
-- If no refresh time is configured, a **default interval** is applied automatically so updates still happen without any manual intervention.
+- Uploaded files carry a `Cache-Control: max-age` header (7 days by default), so browsers and CDNs can cache them.
+- With **File Visibility** set to private, images are served through short-lived presigned URLs, so the bucket does not need to be public.
 
 ### DAM Integration *(requires UnoPim DAM)*
 If you have the **UnoPim Digital Asset Management (DAM)** extension installed, the AWS integration extends its capabilities further:
@@ -51,6 +50,6 @@ If you have the **UnoPim Digital Asset Management (DAM)** extension installed, t
 
 | Requirement | Details |
 |---|---|
-| **UnoPim** | v2.0.0 or higher |
-| **PHP** | v8.2 or higher |
-| **AWS S3 Bucket** | Active bucket with API credentials (Access Key ID, Secret Key, Region, and Bucket Name) |
+| **UnoPim** | 3.0.x |
+| **PHP** | 8.4 or higher |
+| **AWS S3 Bucket** | Active bucket with API credentials (Access Key, Secret Key, Region, and Bucket Name) |

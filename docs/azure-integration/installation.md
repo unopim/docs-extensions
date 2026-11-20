@@ -61,14 +61,14 @@ php artisan optimize:clear
 | Command | Purpose |
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the newly added namespace. |
-| `php artisan azure-blob-package:install` | Installs the Azure Blob SDK dependencies, runs database migrations, and publishes package assets. |
+| `php artisan azure-blob-package:install` | Runs `composer require` for `league/flysystem-azure-blob-storage` and `microsoft/azure-storage-blob`, runs database migrations, and publishes the admin assets to `public/themes/azure`. |
 | `php artisan optimize:clear` | Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes. |
 
 ---
 
 ## Verify the Installation
 
-Once all commands have completed successfully, log in to your UnoPim dashboard. If the integration is installed correctly, you'll find the Azure Blob configuration options available in the admin settings.
+Once all commands have completed successfully, log in to your UnoPim dashboard. If the integration is installed correctly, an **Azure Integration** item appears in the left sidebar, with **Documentation** and **Credential** pages.
 
 If something doesn't look right, run `php artisan optimize:clear` again and refresh the page.
 

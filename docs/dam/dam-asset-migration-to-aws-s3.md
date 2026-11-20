@@ -29,6 +29,11 @@ Before running the command, make sure:
 
 If needed, complete the AWS setup first from the AWS Integration section.
 
+> [!IMPORTANT]
+> DAM stores and reads asset files on S3 whenever the AWS Integration is enabled (it makes `s3` the default filesystem disk). From that moment, DAM looks for **every** asset on S3 — assets that are still only on the local disk show as missing until this command has copied them. Run the migration right after enabling the integration.
+>
+> Queue workers apply the AWS settings only when they start. After enabling, disabling, or changing the AWS Integration, run `php artisan queue:restart` so uploads, thumbnails, and other DAM jobs use the same storage as the admin panel.
+
 ## Admin Authentication
 
 The command does not run anonymously.
@@ -84,7 +89,9 @@ Use this option when:
 - you only want to move recently uploaded DAM assets,
 - you want a safer incremental migration.
 
-If you choose **No**, the command checks the broader DAM asset set instead of limiting the run to newly uploaded files.
+If you choose **No**, the command uploads every DAM asset found on the local disk, overwriting any copy already on S3.
+
+With **Yes**, assets that already exist on S3 are skipped entirely — their local files are not deleted, even if you also answer **Yes** to the delete question.
 
 ### 2. Delete Files from Local Disk After Upload?
 
@@ -109,6 +116,8 @@ For the first migration, this is the safest approach:
 4. Choose **not** to delete local files yet.
 5. Open a few migrated assets in DAM and confirm they work correctly.
 6. If everything looks correct, run the command again later and allow local cleanup if required.
+
+Assets whose local file cannot be found are skipped. The per-asset results are not printed in the terminal; they are written to `storage/logs/laravel.log` in a single `User data:` log entry when the run finishes.
 
 ## What to Verify After Migration
 

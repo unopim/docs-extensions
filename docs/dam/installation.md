@@ -19,8 +19,8 @@ Choose the method that best fits your project setup.
 
 | Requirement | Version |
 |---|---|
-| **DAM** | v3.0.1 |
-| **UnoPim** | v3.0.x |
+| **DAM** | v3.1.x |
+| **UnoPim** | v3.x |
 | **PHP** | 8.4.1 or higher |
 
 > [!IMPORTANT]

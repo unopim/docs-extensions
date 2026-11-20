@@ -44,6 +44,8 @@ User permissions control what actions each user can perform within UnoPim DAM.
 | **Embedded Meta Info** | Controls whether the [Metadata tab](./asset-preview.md#metadata) is visible |
 | **Linked Resources** | View the products and categories an asset is used on |
 | **Directory** | View, Create, Rename, Delete, Copy Directory Structure, Download Zip, Move, Share |
+| **Assign Asset** | Required to assign assets from the asset picker on products and categories |
+| **Assets** | Shows the **DAM → Assets** menu entry |
 | **Shared Links** | View, Revoke, Delete — see [Shared Links](./shared-links.md) |
 | **Tags** | Create, Update, Delete — see [Managing Tags](./tags.md) |
 | **DAM Configuration** | View, Edit — see [Configuration](./configuration.md) |

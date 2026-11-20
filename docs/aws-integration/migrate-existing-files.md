@@ -29,7 +29,7 @@ To move existing UnoPim media files to Amazon S3, run:
 php artisan aws_integration:move_existing_files
 ```
 
-This command uploads the existing media from local storage to your configured S3 bucket.
+This command uploads the existing media under `storage/app/public` to your configured S3 bucket, using the saved **File Visibility**. It covers these folders: `product`, `category`, `admins`, `attribute_option`, `configuration`, `tinymce`, `ai-agent/images` and `ai-agent/files` (the `media_directories` list in the package's `Config/aws_integration.php`). It asks for confirmation first; add `--force` to skip the prompt.
 
 > [!NOTE]
 > Run this command only after your AWS configuration has been saved correctly in UnoPim.
@@ -41,6 +41,8 @@ After confirming that the files are successfully available in Amazon S3, you can
 ```bash
 php artisan aws_integration:remove_media_files
 ```
+
+Only files in the same folders that already exist in S3 are deleted; files not found in S3 are listed and kept. It asks for confirmation first; add `--force` to skip the prompt.
 
 This helps free up storage space on your server after migration.
 
@@ -71,6 +73,7 @@ You can use the following options with the visibility command:
 | `--visibility=public or private` | Overrides the default visibility stored in the database. |
 | `--path=folder/path` | Applies the visibility update only to a specific folder or prefix. |
 | `--dry-run` | Shows what would change without actually updating any files. |
+| `--force` | Skips the confirmation prompt. |
 
 ## Command Examples
 

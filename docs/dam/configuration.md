@@ -44,11 +44,24 @@ If you try to leave with changes still pending, you are asked to confirm first, 
 | **Show Directory Tree** | On | Shows the folder hierarchy in the left sidebar. |
 | **Show Assets in Directory Tree** | Off | Assets appear as leaf nodes inside the tree, not just folders. *This row only appears while Show Directory Tree is on.* |
 
+## AI Tagging
+
+*Automatically suggest tags for uploaded images using your configured Magic AI platform.*
+
+| Setting | Default | What it does |
+|---|---|---|
+| **Auto-tag assets with AI** | Off | Tags newly uploaded images automatically. |
+| **Platform** | Use default platform | The Magic AI platform used for tagging. Only active platforms whose provider supports images are listed. The field is disabled until one exists — add it under **Settings → Magic AI → Platforms**. |
+| **Max tags** | `8` | Maximum tags suggested per image (1–20). |
+| **AI tagging rate limit** | `60` | Maximum AI tagging requests per minute (1–120). Lower it to match your AI provider's limit. |
+
+Tagging runs as a separate queued job after the upload finishes, so a queue worker must be running. It applies only to images, and only when the uploading user has both **Asset → Update** and **Tags → Create** permissions (for REST API uploads, the API key needs the matching asset update and tag create scopes). Images larger than `DAM_AI_TAGGING_MAX_FILE_SIZE` (10 MB by default) are skipped. If the AI call fails, the upload still succeeds without tags.
+
 ---
 
 ## How the Toggles Affect Each Other
 
-These four switches are interdependent, which is why some of them appear, disappear, or move on their own as you click. The rules are:
+The four Interface and Directory switches are interdependent, which is why some of them appear, disappear, or move on their own as you click. The rules are:
 
 | What you do | What happens automatically |
 |---|---|
@@ -74,7 +87,7 @@ When enabled, assets load **lazily** — DAM fetches directories in batches of *
 
 ## Environment Variables
 
-The four settings above can also be set in `.env`. They map like this:
+The four Interface and Directory settings can also be set in `.env`. They map like this:
 
 | Env var | Setting | Default |
 |---|---|---|
@@ -83,10 +96,12 @@ The four settings above can also be set in `.env`. They map like this:
 | `DAM_EXPLORER_BOOKMARKS_ENABLED` | Show Bookmark Panel | `false` |
 | `DAM_EXPLORER_SHOW_TREE` | Show Directory Tree | `true` |
 
+The AI Tagging settings map to `DAM_AI_TAGGING_ENABLED`, `DAM_AI_TAGGING_PLATFORM_ID`, `DAM_AI_TAGGING_MAX_TAGS`, and `DAM_AI_TAGGING_RATE_LIMIT_PER_MINUTE`. `DAM_AI_TAGGING_MAX_FILE_SIZE` (bytes, default `10485760`) has no UI.
+
 > [!IMPORTANT]
-> **The Configuration page wins over `.env`.** These four values are read from the database on every DAM request and override whatever `.env` says. If you set `DAM_EXPLORER_ENABLED=true` in `.env` but the toggle is off on the Configuration page, Explorer stays **off**.
+> **The Configuration page wins over `.env`.** Once saved, these values are read from the database on every DAM request and override whatever `.env` says. If you set `DAM_EXPLORER_ENABLED=true` in `.env` but the toggle is off on the Configuration page, Explorer stays **off**.
 >
-> Treat the Configuration page as the source of truth and use `.env` only for the upload settings below, which have no UI.
+> Treat the Configuration page as the source of truth and use `.env` only for the settings below, which have no UI.
 
 ### Upload tuning (env only)
 
@@ -105,6 +120,25 @@ DAM_UPLOAD_RESUME_ENABLED=true
 DAM_UPLOAD_RESUME_MAX_BYTES=524288000
 DAM_UPLOAD_RESUME_STALE_HOURS=24
 ```
+
+### Queue routing (env only)
+
+By default every DAM job goes to the `default` queue, so a plain `php artisan queue:work` processes them. To split DAM work onto dedicated queues, set:
+
+| Env var | Default | Jobs on this queue |
+|---|---|---|
+| `DAM_QUEUE_DAM` | `default` | Directory permission sync, orphaned-mapping cleanup |
+| `DAM_QUEUE_BULK` | `default` | Directory delete, copy, move, copy structure, mass move, mass copy |
+| `DAM_QUEUE_MEDIA` | `default` | Upload processing (metadata), PDF and video thumbnails, AI tagging |
+
+```ini
+DAM_QUEUE_DAM=dam
+DAM_QUEUE_BULK=dam-bulk
+DAM_QUEUE_MEDIA=dam-media
+```
+
+> [!WARNING]
+> A worker only processes the queues it listens on. After setting these, start your workers with the new queue names, for example `php artisan queue:work --queue=dam,dam-bulk,dam-media,default`. Otherwise DAM jobs wait in those queues and never run. Running workers keep the old configuration until you run `php artisan queue:restart`.
 
 ### Asset bundle imports (env only)
 

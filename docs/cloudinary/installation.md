@@ -84,9 +84,12 @@ To allow admin users to access and manage the connector:
 3. Edit the desired user role (e.g., Administrator).
 4. Under the **Permissions** tree, ensure the **Cloudinary** permissions are checked:
    - **Cloudinary** - Base permission to view the Cloudinary navigation section.
-   - **Credentials** - View and update Cloudinary API credentials.
-   - **Settings** - View and update image transformation and optimization settings.
-   - **Products** - Sync product media with Cloudinary.
+     - **Credentials** - View the Cloudinary credentials page.
+       - **Update credentials** - Save credentials and run **Sync all media to Cloudinary** / **Pull all media to local**.
+     - **Settings** - View the image transformation settings page.
+       - **Update settings** - Save transformation settings.
+     - **Products** - Parent of the product sync permission.
+       - **Sync product media** - Sync a single product's media with Cloudinary.
 5. Click **Save Role**.
 
 <!-- ============================================================ -->

@@ -7,7 +7,7 @@ Store Link: [View on Webkul Store](https://store.webkul.com/unopim-azure-integra
 The **UnoPim Azure Integration** connects your UnoPim product catalog with **Microsoft Azure Blob Storage** - Microsoft's cloud-based storage service designed to handle large volumes of media like images, videos, and documents.
 <br>
 <div align="center">
-  <img src="./assets/overview/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
+  <img src="./assets/overview/intro-banner.png" alt="UnoPim Azure Integration" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
 </div>
 <br>
 Instead of storing your product images and PDFs on your local server, this integration lets you move everything to the cloud - keeping your assets secure, accessible, and easy to manage no matter how large your catalog grows.
@@ -34,7 +34,9 @@ Instead of storing your product images and PDFs on your local server, this integ
 | **Remove Local Files** | Option to delete local media after successful migration to save server space |
 | **Azure Blob URLs on Product Page** | View and access asset URLs directly from the product page |
 | **Export with Public URLs** | Export product data with image URLs in CSV, XLS, or XLSX format |
-| **UnoPim Compatible** | Fully compatible with the latest version of UnoPim |
+| **Public or Private Serving** | Serve files through public URLs, or through signed, time-limited SAS URLs for a private container |
+| **DAM Support** | With the UnoPim DAM extension, DAM assets are stored on Azure (requires the bundled DAM patch, see [Migrating Existing Media Files](./move-existing-files#dam-assets)) |
+| **UnoPim Compatible** | UnoPim 3.1.x. On UnoPim 3.0.x use version 1.2.0 of the extension |
 
 
 ## Prerequisites
@@ -43,7 +45,7 @@ Before you begin, make sure the following are in place:
 
 | Requirement | Detail |
 |---|---|
-| **UnoPim** | Installed and running on your system |
+| **UnoPim** | 3.1.x (Laravel 13, PHP 8.4.1+). On UnoPim 3.0.x, use version 1.2.0 of the extension |
 | **Microsoft Azure Account** | An active Azure account with Blob Storage enabled |
 | **Azure Storage Credentials** | Your Azure **Storage Account Name** and **Access Key** - available from your Azure portal |
 

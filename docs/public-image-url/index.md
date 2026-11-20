@@ -7,7 +7,7 @@ The **UnoPim Public Image URL** extension simplifies product media management by
 <br>
 
 <div align="center">
-  <img src="./assets/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
+  <img src="./assets/intro-banner.png" alt="UnoPim Public Image URL" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
 </div>
 
 <br> 
@@ -30,6 +30,7 @@ This helps businesses speed up catalog updates, reduce manual work, and keep pro
 - **Retrieve product media as public URLs through the API** for easier external integration.
 - **Handle bulk image uploads through CSV/XLSX files** for faster catalog management.
 - **Access image, file, asset, and gallery URLs through API integration** where supported by the module.
+- **Send public URLs in product webhooks** instead of storage paths for media and asset attributes.
 
 ## Why It Is Useful
 
@@ -42,12 +43,16 @@ You can also explore these UnoPim modules:
 - **UnoPim Shopify Connector** to connect your Shopify store with UnoPim and manage data transfer more easily.
 - **UnoPim DAM (Digital Asset Management)** to organise and manage digital assets such as images, videos, and documents in one place.
 
-> **Note:** This module also supports returning the product media type `image` attribute value as a public URL through the API.
+> **Note:** The product REST API returns `image`, `file`, `gallery`, and DAM `asset` attribute values as public URLs.
 
 ## Requirements
 
 | Requirement | Details |
 |---|---|
-| **Version** | 1.2.0 |
-| **Compatible with UnoPim** | v2.0.0 |
+| **Version** | 1.5.0 |
+| **Compatible with UnoPim** | v3.x (tested on v3.1.3) |
+| **PHP** | 8.4 or higher |
+
+> [!NOTE]
+> UnoPim 2.1.x needs version 1.3.0 of this extension, and UnoPim 2.0.0 needs version 1.2.0.
 
