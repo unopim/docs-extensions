@@ -21,6 +21,7 @@ You can map the following BigCommerce product fields with UnoPim attributes:
 - `Model Price`
 - `Product Type`
 - `Inventory Level`
+- `Inventory Tracking` (Simple Select with options `none`, `product`, `variant`)
 - `Meta Title`
 - `Meta Keywords`
 - `Meta Description`
@@ -93,10 +94,8 @@ At minimum, map these to run a product export:
 | **Name** | `name` |
 | **SKU** | `sku` |
 | **Price** | `price` |
-| **Weight** | `weight` (or fixed value `0`) |
-| **Type** | `physical` or `digital` - usually a fixed value attribute. |
 
-The rest are optional. BigCommerce uses default values for any unmapped optional field.
+The rest are optional. When a new product is created and **Weight** is not mapped, the connector sends `0` (or the field's **Default Value**); when **Product Type** is not mapped, it sends `physical`. If **Inventory Tracking** is not mapped but **Inventory Level** is, tracking is set to `product` (simple) or `variant` (configurable).
 
 
 

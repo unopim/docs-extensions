@@ -5,9 +5,9 @@ This add-on requires the UnoPim **WooCommerce Connector** to already be installe
 
 **WooCommerce Connector setup:**
 
-1. [Install the WooCommerce Connector](/woocommerce/installation)
-2. [Generate WooCommerce API Credentials](/woocommerce/api-credentials)
-3. [Setup Credentials in UnoPim](/woocommerce/setup-credentials)
+1. [Install the WooCommerce Connector](../woocommerce/installation)
+2. [Generate WooCommerce API Credentials](../woocommerce/api-credentials)
+3. [Setup Credentials in UnoPim](../woocommerce/setup-credentials)
 
 Return to this page only after the WooCommerce Connector is working end-to-end.
 :::
@@ -17,7 +17,7 @@ The WooCommerce WPML add-on is installed **on top of** an already-working Unopim
 ## Requirements
 
 - Unopim v3.1.*
-- PHP 8.3+, Laravel 12.x
+- PHP 8.4.1+, Laravel 13.x
 - Unopim WooCommerce connector already installed
 - WPML plugin installed and configured in WordPress
 - Latest stable WooCommerce
@@ -28,7 +28,7 @@ The WooCommerce WPML add-on is installed **on top of** an already-working Unopim
 
 Unzip the extension package and merge the `packages/` folder into the Unopim project root, so the add-on lands at `packages/Webkul/WooCommerceWPML/`.
 
-### 3. Register the service provider
+### 2. Register the service provider
 
 Add the add-on's provider to `bootstrap/providers.php` (or `config/app.php` providers array on older Unopim builds):
 
@@ -41,7 +41,7 @@ return [
 ];
 ```
 
-### 4. Update Composer autoload
+### 3. Update Composer autoload
 
 In `composer.json`, add under `autoload.psr-4`:
 
@@ -49,7 +49,7 @@ In `composer.json`, add under `autoload.psr-4`:
 "Webkul\\WooCommerceWPML\\": "packages/Webkul/WooCommerceWPML/src"
 ```
 
-### 5. Run installation commands
+### 4. Run installation commands
 
 Run these in order:
 
@@ -73,7 +73,7 @@ The migration creates the `wk_wpml_data_mapping` table:
 | `jobInstanceId`   | Job that produced the row                    |
 | `apiUrl`          | WooCommerce API base used at the time        |
 
-### 6. Restart the queue worker
+### 5. Restart the queue worker
 
 After any add-on install or upgrade, restart workers so they pick up the new code:
 
@@ -87,6 +87,6 @@ Then make sure a worker is running:
 php artisan queue:work
 ```
 
-### 7. Verify
+### 6. Verify
 
-Open **Data Transfer → Exports → Create** and confirm the **Locale** filter on WooCommerce Category / Attribute / Product jobs is now a **multiselect** (you can pick more than one language). Same on the import side. That multiselect is what the add-on installs — if you still see a single-select, the provider is not registered or autoload was not refreshed.
+Open **Data Transfer → Exports → Create**, choose **WooCommerce Category Export**, and confirm the **Locales** filter is now a **multiselect** (you can pick more than one language). On the import side, the **Locale** field of the WooCommerce Category, Attribute and Product imports becomes a multiselect. Also open a WooCommerce credential's **Attribute Mapping** tab and check that the **Enable Export in WPML** section appears at the bottom. If not, the provider is not registered or autoload was not refreshed.

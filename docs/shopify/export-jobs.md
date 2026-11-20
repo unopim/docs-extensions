@@ -8,11 +8,14 @@ Go to **Data Transfer → Exports → Create Export**.
 
 ![Export Job Form](./images/create-export.png)
 
-There are three types of export jobs available:
+There are four types of export jobs available:
 
 - **Shopify Category** - exports UnoPim categories to Shopify as Collections
 - **Shopify Product** - exports simple or configurable products to Shopify
-- **Shopify Metafield Definitions** - exports your metafield definitions to Shopify
+- **Shopify Metafields Definition** - exports your metafield definitions to Shopify
+- **Shopify Metaobjects** - exports metaobject definitions and entries (see [Metaobjects](./metaobjects#exporting-importing-metaobjects))
+
+Jobs run on the queue, so a queue worker (`php artisan queue:work`) must be running.
 
 ---
 
@@ -61,10 +64,13 @@ This job handles both simple products and configurable products with variants.
 
 | Filter | What to do |
 |---|---|
-| **Store Credentials** | If you have multiple Shopify stores, select which store to export to |
+| **Shopify Credential** | Select which store to export to |
 | **Channel** | Select the channel your products belong to |
 | **Currency** | Choose the currency for the exported product prices |
-| **SKU** *(optional)* | Enter a specific SKU if you only want to export one product |
+| **Identifiers** *(optional)* | Enter one or more SKUs to export only those products |
+| **Status** *(optional)* | Export only enabled products, only disabled products, or all |
+
+Other filters on this form (locales, attributes, families, categories, completeness, dates, attribute conditions, media and associations, schedule) are marked **Pro** and need [Shopify Connector Pro](./pro).
 
 5. Click **Save Export**.
 
@@ -93,7 +99,7 @@ If you've set up metafield definitions in UnoPim and want to push them to Shopif
 ![Export Job Form](./images/create-export.png)
 
 
-2. Enter a unique **Code** (e.g., `shopify-metafields-export`), set the **Type** to `Shopify Metafield Definitions` & Select your **Store Credentials**.
+2. Enter a unique **Code** (e.g., `shopify-metafields-export`), set the **Type** to `Shopify Metafields Definition` & Select your **Shopify Credential**.
 
 ![Metafield Export Form](./images/export-meta-fields.png)
 

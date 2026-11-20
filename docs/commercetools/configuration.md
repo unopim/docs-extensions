@@ -10,7 +10,7 @@ You can change these values in your UnoPim `.env` file. Run `php artisan optimiz
 
 | Setting | Default | What it does |
 |---|---|---|
-| `COMMERCETOOLS_ENABLED` | `true` | Set to `false` to switch the connector off without uninstalling it. |
+| `COMMERCETOOLS_ENABLED` | `true` | Reserved. The current version does not read this value, so setting it to `false` does **not** switch the connector off. To stop using a connection, set it to inactive. |
 | `COMMERCETOOLS_API_TIMEOUT` | `30` | How many seconds to wait for commercetools to answer a request. |
 | `COMMERCETOOLS_API_RETRIES` | `3` | How many times a failed request is tried again. |
 | `COMMERCETOOLS_API_RETRY_DELAY_MS` | `1000` | How long to wait between retries, in milliseconds. |
@@ -37,7 +37,10 @@ You can decide which admin users may manage commercetools connections.
 | **Mass Delete Connections** | Delete several connections at once |
 | **Mass Update Connections** | Switch several connections on or off at once |
 | **Test Connection** | Use the **Test** action |
-| **Update System Fields Mapping** | Save the attribute mapping |
+| **Import Product Types** | Pull commercetools product types into the connection |
+| **Import Categories** | Pull the commercetools category tree into the connection |
+| **Update System Fields Mapping** | Save the **Attribute Mapping** and **Category Mapping** tabs (the label appears twice in the tree, once for each tab) |
+| **List Connection Options** | Load the connection, channel, locale and attribute dropdowns used by the connector screens and job filters |
 
 > **Note:** Running export and import jobs is controlled by the standard UnoPim **Data Transfer** permissions.
 

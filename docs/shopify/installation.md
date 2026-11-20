@@ -54,10 +54,15 @@ packages/Webkul/Shopify
 
 **Step 2 - Register the service provider**
 
-Open the `config/app.php` file and add the following line inside the `providers` array:
+Open the `bootstrap/providers.php` file and add the provider to the returned array:
 
 ```php
-Webkul\Shopify\Providers\ShopifyServiceProvider::class,
+use Webkul\Shopify\Providers\ShopifyServiceProvider;
+
+return [
+    // ...existing providers...
+    ShopifyServiceProvider::class,
+];
 ```
 
 > [!NOTE]
@@ -96,4 +101,28 @@ Once either installation method is complete, log in to your UnoPim dashboard. Yo
 ![Shopify icon in UnoPim sidebar](./images/verify-installation.png)
 
 If the icon doesn't appear, try running `php artisan optimize:clear` again and refresh the page.
+
+The installer runs the migrations, seeds the default export settings, publishes the assets, and creates a `shopify_taxonomy` attribute if it does not exist.
+
+---
+
+## Start the Queue Worker
+
+Exports, imports and the polling of Shopify bulk operations run on the Laravel queue. Keep a worker running:
+
+```bash
+php artisan queue:work
+```
+
+After updating the connector, run `php artisan queue:restart` so running workers load the new code.
+
+---
+
+## Console Commands
+
+| Command | Purpose |
+|---|---|
+| `php artisan shopify-package:install` | Runs migrations, seeds settings, publishes assets and creates the `shopify_taxonomy` attribute. |
+| `php artisan shopify-mapping:products {shopUrl} [--onlynew=true]` | Links products that already exist in Shopify to UnoPim products with the same SKU, so the next export updates them instead of creating duplicates. `shopUrl` must match the credential's Shopify URL exactly, e.g. `https://your-store.myshopify.com`. With `--onlynew=true`, existing links are kept and only unlinked products are added. |
+| `php artisan shopify:bulk-operations:poll {operationId?}` | Checks pending Shopify bulk operations and finishes the product sync for completed ones. Normally run automatically by queued jobs; use it to recover a stuck export. |
 

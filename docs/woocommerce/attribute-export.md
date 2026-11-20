@@ -26,7 +26,9 @@ While creating the export job, the user needs to:
 After selecting the attribute export job type, configure the following options under **Output**:
 
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
-- **Additional Attributes from mapping**: Select the additional attributes (configured in the credential's attribute mapping) that should also be exported.
+- **Additional Attributes from mapping**: Optional. Limit the export to some of the attributes listed under **Attributes to be used as Custom Attributes** in the credential's [attribute mapping](./attribute-mapping#other-mappings).
+
+When the filter is empty, the job exports every attribute listed under **Attributes to be used as Custom Attributes**, with its options as WooCommerce attribute terms. If that list is empty, it exports the attributes used as variant axes on configurable products. Other attributes are not exported.
 
 ![Attribute Export Filters](assets/jobs/save-attribute-export.png)
 

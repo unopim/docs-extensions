@@ -35,7 +35,9 @@ While creating the export job:
 
 | Filter | Description |
 |---|---|
-| **Shopware Credential** | Select the Shopware store connection to export to. |
+| **Shopware Credential** | Required. Select the Shopware store connection to export to. Only active credentials appear in this list. |
+| **Channel** / **Locale** | Shown on the form, but not used by this job in the current version. Translations are sent for every locale in the credential's Locale Mapping. |
+| **Filter By Code** | Optional. Export only the listed codes. |
 
 ---
 
@@ -51,7 +53,7 @@ Monitor progress in the **Job Tracker** — it will report how many options were
 
 ## What Gets Exported
 
-Each UnoPim attribute option is pushed to Shopware as a **property-group option** linked to its parent property group (attribute). The option label is translated per each mapped locale.
+Each UnoPim attribute option is pushed to Shopware as a **property-group option** linked to its parent property group (attribute). The option label is translated per each mapped locale. Only options of attributes already exported to this credential's store by the **Shopware Attributes** job are sent.
 
 > [!NOTE]
-> Product export jobs that use properties will fail if the corresponding attribute options have not been exported first. Run this job before the **Shopware Simple Products and Variants** or **Shopware Configurable Products** export when properties are configured in [Other Mapping](./other-mapping).
+> Product export jobs that use properties will fail if the corresponding attribute options have not been exported first. Run this job before the **Shopware Products** export when properties are configured in [Other Mapping](./other-mapping).

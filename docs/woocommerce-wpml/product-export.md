@@ -53,12 +53,12 @@ You can also limit the export to specific products using **Identifiers** (SKUs),
 
 
 ::: warning
-Make sure each locale you select has a corresponding WPML language configured in WordPress. Exporting to a locale with no matching WPML language will fail.
+Make sure each locale you select has a corresponding WPML language configured in WordPress. The language code is the part of the locale before `_` (`de_DE` → `de`); see [Configuration](./configuration#_1-wpml-in-wordpress). Exporting to a locale with no matching WPML language will fail.
 :::
 
 ## Step 4 — How Variants Are Exported
 
-For products that have variants (configurable products), each variation is exported per locale with a language suffix appended to its SKU. For example, a variant with SKU `shirt-red-large` exported for the `de_DE` locale will be created in WooCommerce with SKU `shirt-red-large-de-de`.
+Translations get their own SKU in WooCommerce, because WooCommerce requires unique SKUs. A translated product gets the two-letter language code appended when it is first created: `shirt` exported for `de_DE` becomes `shirt-de`. A translated variation gets the full locale appended: `shirt-red-large` exported for `de_DE` becomes `shirt-red-large-de-de`.
 
 Each translated variation is exported with its WPML `translation_of` field set to the corresponding default-locale variation. This tells WPML that the translated variation is a language copy of the base variation, keeping them correctly linked across all languages.
 

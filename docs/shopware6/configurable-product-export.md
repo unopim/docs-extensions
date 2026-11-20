@@ -1,6 +1,6 @@
 # Configurable Product Export
 
-The **Shopware Configurable Products** export job pushes configurable (parent) products from UnoPim to Shopware. It creates the parent product, sets up the **configurator settings** (variant axes), and links each variant to the parent with its selected option values.
+Configurable products are exported by the **Shopware Products** job (see [Product Export](./product-export)). It creates the parent product, sets up the **configurator settings** (variant axes), and links each variant to the parent with its selected option values. Leave **Product Type** empty (or select both types) to export parents and variants together. Variants have the **Simple** type, so **Configurable** alone exports only the parent products.
 
 ---
 
@@ -48,7 +48,8 @@ Click **Create Export** in the top-right corner.
 ## Create a Configurable Product Export Job
 
 1. Enter a unique **Export Job Code** (e.g. `shopware-configurable-products`).
-2. Select **Shopware Configurable Products** as the export job type.
+2. Select **Shopware Products** as the export job type.
+3. Leave **Product Type** empty, or select both **Simple** and **Configurable**.
 
 ![Configurable Product Export Type](./images/export/export-configurable-product.png)
 
@@ -60,7 +61,10 @@ Click **Create Export** in the top-right corner.
 |---|---|
 | **Shopware Credential** | Select the Shopware store to export to. |
 | **Channel** | Select the UnoPim channel whose product values are used for the export. |
+| **Product Type** | Leave empty or select both types. **Configurable** alone exports only parent products, not variants. |
 | **Indexing Behaviour** | Controls Shopware's post-import indexing strategy. |
+
+The other filters are the same as in [Product Export](./product-export#configure-filters), including **With Media** and **With Association**.
 
 ### Indexing Behaviour Options
 
@@ -105,8 +109,7 @@ For configurable products specifically, follow this sequence:
 2. Shopware Attributes
 3. Shopware Attribute Options
 4. Shopware Product Tags *(if used)*
-5. **Shopware Configurable Products** ← this job
-6. Shopware Simple Products and Variants *(for standalone variants if needed)*
+5. **Shopware Products** ← this job. Parents are sent before their variants in the same run. If you export variants with **Product Type** = **Simple** in a separate job, export the configurable parents first.
 
 > [!WARNING]
 > Running this job without first exporting attributes and attribute options will cause the export to fail for any product that references properties. The error will appear in the Job Tracker log.

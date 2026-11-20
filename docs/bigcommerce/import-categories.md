@@ -22,7 +22,7 @@ Pull your BigCommerce category tree into UnoPim, keeping the parent / child hier
 
 3. **Set the import filters**
 
-BigCommerce imports take a single filter, in the **Settings** panel on the right of the form:
+Pick the store in the **Settings** panel on the right of the form:
 
 | Filter | Required | What it does |
 |--|--|--|
@@ -31,7 +31,7 @@ BigCommerce imports take a single filter, in the **Settings** panel on the right
 ![Import profile filters](./assets/import/category-import-filter.png)
 
 > [!NOTE]
-> Imports have **no other filters** - the job pulls the **whole** category tree from the selected store, keeping the parent / child hierarchy intact.
+> The **Filter** card below the general fields also appears here. **BigCommerce Categories** limits the import to the selected categories (with **Include Sub-categories**, their descendants too); leave it empty to pull the **whole** category tree. **Import with Media** is read only by the product import.
 
 Click **Save Import**.
 

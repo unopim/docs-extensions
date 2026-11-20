@@ -26,16 +26,16 @@ While creating the export job, the user needs to:
 After selecting the product export job type, configure the following options under **Output**:
 
 - **WooCommerce Store URL**: Select the required WooCommerce store credentials.
-- **With Media**: Enable this option if product images should also be exported to WooCommerce.
+- **With Media**: Enable this option if product images should also be exported to WooCommerce. Images come from the image and gallery attributes in the credential's [Other Mappings](./attribute-mapping#other-mappings). To upload them to the WordPress media library, fill in the credential's **Media Settings**.
 - **Date Format**: Select the date format to use for exported date values.
 
 ![Product Export Output](assets/jobs/profuct-export-filter-1.png)
 
 Under **Data to export**, select:
 
-- **Channels**: Select the channel for exporting.
-- **Locales**: Select the required locale.
-- **Currencies**: Select the required currency.
+- **Channels**: Required. Select the channel for exporting.
+- **Locales**: Required. Select the required locale.
+- **Currencies**: Required. Select the required currency.
 - **Attributes**: Select the attributes to export (optional).
 
 ![Product Export Data](assets/jobs/product-export-filter-2.png)
@@ -64,3 +64,6 @@ Once the export job is run, the user can monitor its progress from the **Job Tra
 ![Job Tracker](assets/jobs/Product-export-output.png)
 
 After the export completes successfully, the products will be visible in the connected WooCommerce store.
+
+> [!NOTE]
+> Run the **WooCommerce Attribute Export** (and **WooCommerce Category Export**) first. Mapped attributes that are not yet in WooCommerce are skipped in the product export.

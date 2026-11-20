@@ -90,6 +90,20 @@ Turning **With Media** off is not just cosmetic - no files are uploaded to Shopi
 
 ---
 
+## Category and metaobject exports
+
+Pro also adds filters to two other export types:
+
+| Export type | Filter | What it does |
+|---|---|---|
+| **Shopify Category** | **Locales** | The locales whose translations are sent. |
+| **Shopify Category** | **Categories** | Export only the selected categories. |
+| **Shopify Category** | **With Children** | Off by default. Also sends every child category of the selected categories. |
+| **Shopify Category** | **With Media** | On by default. Turn off to skip collection images. |
+| **Shopify Metaobjects** | **Currency** | The currency used for money fields on metaobject entries. |
+
+---
+
 ## A practical setup
 
 A catalog of any size usually ends up with two or three profiles rather than one:

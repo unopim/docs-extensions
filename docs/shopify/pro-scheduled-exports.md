@@ -13,9 +13,9 @@ Without Pro, an export runs when you click **Export Now**. With Pro, an export p
 |---|:---:|
 | Shopify Product | ✅ |
 | Shopify Category | ✅ |
-| Shopify Metafield Definitions | ✅ |
-| Shopify Metaobject | ✅ |
-| Shopify Catalog | ✅ |
+| Shopify Metafields Definition | ✅ |
+| Shopify Metaobjects | ✅ |
+| Shopify Catalogs | ✅ |
 
 ---
 

@@ -15,12 +15,12 @@ Choose one of the WooCommerce export types:
 | Type | Source | Notes |
 |---|---|---|
 | **WooCommerce Categories** | Category repository | Pushes category trees per language. |
-| **WooCommerce Attributes** | Attribute repository | Pushes global attributes & option values. Optional `attributes` filter to scope to a subset. |
-| **WooCommerce Product** | Product repository | Pushes products and variations. Includes `currency`, `productSKU`, `with_media` filters. |
+| **WooCommerce Attributes** | Attribute repository | Pushes global attributes & option values in the WPML default locale only. Optional **Additional Attributes from mapping** filter to scope to a subset. |
+| **WooCommerce Product** | Product repository | Pushes products and variations. Includes **Currencies**, **Identifiers** (SKUs) and **With Media** filters. |
 
 ### Step 3 — Fill the filters
 
-The add-on overrides the standard WooCommerce filter set so **Locale** is a multiselect. Common filters:
+The add-on overrides the standard WooCommerce filter set so **Locale** is a multiselect on the category and product exports. The attribute export has no locale filter. Common filters:
 
 | Filter | Type | Notes |
 |---|---|---|
@@ -28,8 +28,8 @@ The add-on overrides the standard WooCommerce filter set so **Locale** is a mult
 | **Channel** | select (async) | Drives which Unopim locales appear in the locale dropdown. |
 | **Locale** | **multiselect** (async) | **Key WPML feature** — pick every language you want this run to push. |
 | **Currency** *(product export)* | select (async) | Required for product exports. |
-| **Attributes** *(attribute export)* | multiselect, optional | Limit the export to selected attributes. |
-| **productSKU** *(product export)* | multiselect, optional | Limit to specific products. |
+| **Additional Attributes from mapping** *(attribute export)* | multiselect, optional | Limit the export to selected attributes. |
+| **Identifiers** *(product export)* | tags, optional | Limit to specific product SKUs. |
 | **with_media** *(product export)* | boolean | Include images/files in the push. |
 
 ### Step 4 — Save and run
@@ -68,7 +68,7 @@ Operator clicks Run
 Job dispatched to the queue
         ↓
 For each selected Unopim locale:
-  - locale → WPML language code via credential mapping
+  - locale → WPML language code (the part before `_`, e.g. de_DE → de)
   - one WooCommerce API call per entity per language
   - response IDs saved to wk_wpml_data_mapping
         ↓
@@ -104,11 +104,11 @@ The add-on did not load. Check:
 
 Check, in order:
 
-1. The Unopim locales you selected are mapped to WPML language codes on the credential.
+1. Each Unopim locale you selected matches a WPML language code (the part before `_`, e.g. `de_DE` → `de`).
 2. The WPML languages exist and are **active** in WordPress.
 3. The WCML setup wizard has been completed for the entities being pushed.
 4. The credential's API key has write permission to translated entities.
-5. `wk_wpml_data_mapping` has a row per (entity, language) — if not, the export did not even attempt the secondary language API call (usually a missing credential locale mapping).
+5. `wk_wpml_data_mapping` has a row per (entity, language) — if not, the export did not even attempt the secondary language API call (usually the locale was not selected in the job, or **Enable WPML Export** is off on the credential).
 
 ### Translation is created but values look wrong
 
@@ -129,7 +129,7 @@ Check, in order:
 ## What operators cannot do
 
 - Push to a language that is not configured in WPML — the WooCommerce API rejects the call.
-- Skip the WooCommerce credential mapping — without `Unopim locale → WPML language code`, the add-on does not know which language to send.
+- Use WPML language codes other than the two-letter prefix of the UnoPim locale (for example `pt-br`) — the add-on always sends the part of the locale before `_`.
 - Roll back a translation push automatically — there is no undo. Either run a corrective export with the right values, or remove the translation manually in WordPress.
 
 ## Best practices

@@ -10,8 +10,8 @@ UnoPim supports **Media Mapping** for Shopify, giving you full control over how 
 
 1. Click the **Shopify icon** in the left sidebar.
 2. Go to **Export Mappings** (or **Import Mappings** if you're importing).
-3. Set the **Mapping Type** to **Media Mapping**.
-4. Under the **Media Type** field, choose the option that matches how your images are stored in UnoPim.
+3. Scroll to the **Shopify Media Mapping** section.
+4. Under the **Media Type** field, choose the option that matches how your images are stored in UnoPim, then pick the attributes under **Media Attributes**.
 
 ![Media Mapping Type](./images/media-mapping.png)
 
@@ -52,7 +52,7 @@ If your products have physical measurements - like weight, volume, or dimensions
 
 1. Click the **Shopify icon** in the left sidebar.
 2. Go to **Export Mappings**.
-3. Scroll down to the **Shopify Unit Mapping** section.
+3. Scroll down to the **Shopify unit Mapping** section and pick **Unit Weight**, **Unit Volume** and **Unit Dimension**.
 
 ---
 

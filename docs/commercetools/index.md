@@ -69,7 +69,7 @@ Already exported your products? Just re-run the export job. The connector finds 
 
 | Requirement | Detail |
 |---|---|
-| **UnoPim Version** | v3.0.0 |
+| **UnoPim Version** | v3.1.x (connector v1.1.1); connector v1.1.0 targets v3.0.x |
 | **PHP Version** | 8.4 or higher |
 | **commercetools** | A project with an API client (see [commercetools Setup](./commercetools-setup)) |
 | **Queue Worker** | A running Laravel queue worker, because export and import jobs run in the background |

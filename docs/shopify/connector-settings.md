@@ -14,15 +14,13 @@ To access this, click the **Shopify icon** in the left sidebar and go to **Setti
 
 By default, only the tag **value** is exported - for example, `Cotton`.
 
-If you want the exported tag to also include the **attribute name** it came from, enable the **Named Tags** option. This adds context to your tags so it's clear what each one refers to when you look at them in Shopify admin.
+**Do you want to pull tags as Named Tags** sends each tag as `Attribute label:attribute type:value`, for example `Material:select:Cotton`. It applies only while the next option is off.
 
 ---
 
 ### Pull Attribute Name in Tags
 
-When **Named Tags** is enabled, you'll see this second option appear.
-
-Turn this on if you want the **attribute name and value exported together as a single tag** - for example, instead of just `Cotton`, Shopify would receive `Material: Cotton` or `Material - Cotton`.
+**Do you want to pull through the attribute name as well in tags?** sends the attribute name and value together as a single tag - for example `Material: Cotton` instead of `Cotton`. This option works on its own and takes precedence over **Named Tags**.
 
 This is especially useful if you export tags from multiple attributes and want to easily tell them apart inside Shopify.
 
@@ -30,12 +28,12 @@ This is especially useful if you export tags from multiple attributes and want t
 
 ### Attribute Name Separator
 
-Once the above option is enabled, you'll need to choose how the attribute name and value are joined together. Pick one of the following separators:
+When **Pull Attribute Name in Tags** is on, choose how the attribute name and value are joined:
 
 | Separator | Example output |
 |---|---|
-| **Dash** ( `-` ) | `Material - Cotton` |
-| **Colon** ( `:` ) | `Material: Cotton` |
+| **Colon** ( `:` ) (default) | `Material: Cotton` |
+| **Dash** ( `-` ) | `Material- Cotton` |
 | **Space** ( ` ` ) | `Material Cotton` |
 
 Choose whichever format fits your store's conventions or makes the tags easiest to read in Shopify admin.
@@ -44,3 +42,8 @@ Choose whichever format fits your store's conventions or makes the tags easiest 
 
 > **Tip:** The colon format (`Material: Cotton`) tends to be the most readable at a glance, especially when browsing tags across a large product catalog.
 
+---
+
+## Other Settings
+
+**Value for Option Name as Attribute Label (By Default Attribute Code)** - for configurable products, Shopify variant option names are the variant attribute codes (for example `color`). Turn this on to send the attribute label instead (for example `Color`), in the UnoPim locale mapped to the store's primary Shopify locale.

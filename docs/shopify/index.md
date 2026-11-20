@@ -119,6 +119,8 @@ The connector is not just for exporting. You can also pull data **from Shopify i
 | **Shopify Metafield Definitions** | Imports existing Shopify metafield definitions into UnoPim |
 | **Shopify Metaobject** | Imports Shopify metaobject definitions and their entries into UnoPim |
 
+The matching export job types are **Shopify Category**, **Shopify Product**, **Shopify Metafields Definition** and **Shopify Metaobjects**.
+
 ---
 
 ## Requirements
@@ -127,11 +129,13 @@ Before you begin, make sure the following are in place:
 
 | Requirement | Detail |
 |---|---|
-| **UnoPim Version** | v3.0.0 |
-| **Shopify API Version** | 2026-07 |
+| **UnoPim Version** | 3.1.x |
+| **PHP** | 8.4 or higher |
+| **Shopify API Version** | 2026-10 (2026-07, 2026-04 and 2026-01 can also be selected) |
 | **Shopify Plan** | Any plan with Admin API access |
 | **Shopify Admin Access** | Needed to create a custom app and generate API credentials |
 | **Terminal / Server Access** | Required to run installation commands |
+| **Queue worker** | A running `php artisan queue:work` process. Exports, imports and Shopify bulk-operation polling run on the queue. |
 
 
 

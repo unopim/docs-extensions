@@ -46,4 +46,4 @@ For other locales, another credential, or filters, use a full [export profile](.
 |--|--|
 | *None of the credentials are set as default for quick export.* | Switch on **Default for quick Export** on a credential. |
 | *Quick export settings are not configured in the default credential set for quick export.* | Set channel, locale, and currency under **Quick Export Settings**. |
-| **CS-Cart Product Export** is missing from the format list | Your role needs the **Export to CS-Cart** permission. |
+| *This action is unauthorized* (or the export does not start) after you click **Quick Export** | Your role needs the **Export to CS-Cart** permission. The format is listed for every user, but only that permission can launch it. |

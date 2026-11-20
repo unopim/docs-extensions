@@ -2,7 +2,7 @@
 
 Follow the steps below to install the UnoPim Shopware 6 Connector. You will need terminal (SSH) access to your UnoPim server.
 
-> **Note:** UnoPim 2.x uses the **Laravel 12 bootstrap architecture**. Service providers are registered in `bootstrap/providers.php`, not `config/app.php`.
+> **Note:** UnoPim 3.x uses the **Laravel 13 bootstrap architecture**. Service providers are registered in `bootstrap/providers.php`, not `config/app.php`.
 
 ---
 
@@ -53,7 +53,12 @@ composer dump-autoload
 ```bash
 php artisan shopware-package:install
 ```
-This command runs the database migrations, seeds the initial mapping configuration, and publishes the package assets.
+This command runs the database migrations, creates the mapping sections each saved credential is missing, and publishes the package assets. Existing mappings are left untouched, so the command is safe to re-run.
+
+> [!NOTE]
+> When upgrading from a version with separate simple and configurable product exports, the migrations merge those profiles into the single **Shopware Products** job, with the original product type pre-selected in the **Product Type** filter. Review the migrated profiles once.
+>
+> The same upgrade copies your existing global mappings onto every saved credential, so each credential starts with its own copy. The migration stops with an error if mappings exist but no Shopware credential does; create a credential first, then run it again.
 
 **Clear the application cache**
 ```bash
@@ -70,7 +75,7 @@ php artisan queue:work
 | Command | Purpose |
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader so the new `Webkul\Shopware` namespace is recognised. |
-| `php artisan shopware-package:install` | Runs database migrations, seeds mapping data, and publishes package assets. |
+| `php artisan shopware-package:install` | Runs database migrations, creates missing mapping sections per credential, and publishes package assets. |
 | `php artisan optimize:clear` | Clears all cached files (bootstrap, config, routes, views) so the new connector loads correctly. |
 | `php artisan queue:work` | Starts a background worker that processes export jobs dispatched to the queue. |
 

@@ -61,14 +61,14 @@ You'll paste these into UnoPim next.
 
 In UnoPim, click **+ Create Credential** in the top-right corner.
 
-<!-- TODO: capture screenshot - bigcommerce-add-credential.png - Create BigCommerce credential form -->
+![Create credential form](./assets/cred/cred.png)
 
 Fill in:
 
 | Field | What goes here |
 |--|--|
 | **Label** | Any name you want, e.g. *Production Store*. Used to identify this credential everywhere. |
-| **API URL** | The BigCommerce API path, e.g. `https://api.bigcommerce.com/stores/<store-hash>/`. Copy this from the BigCommerce API account screen. |
+| **API URL** | The BigCommerce API path, e.g. `https://api.bigcommerce.com/stores/<store-hash>/v3/`. Copy this from the BigCommerce API account screen. A trailing `/v3` or `/v2` is ignored; the connector adds the version itself. |
 | **Access Token** | Access Token from the API account. |
 
 ![credential form](./assets/cred/cred-field.png)
@@ -76,6 +76,9 @@ Fill in:
 Click **Save Credential**.
 
 > The connector verifies the credentials against BigCommerce before saving. If the API URL or access token is wrong you see a clear error and nothing is stored.
+
+> [!WARNING]
+> Use the **API path**, not your storefront or control panel URL (`https://<store>.mybigcommerce.com`). The connector reads the store hash from the `/stores/<store-hash>` part of the URL, and each API URL can be added only once.
 
 A new credential is **active** by default. After saving, you land on its edit page, where each of the credential's mapping screens is available as a tab.
 

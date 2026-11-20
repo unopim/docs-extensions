@@ -75,13 +75,15 @@ In production use Supervisor / systemd / Horizon. Every export and import is a b
 
 ### 6. Give your role permission
 
-Open **Settings → Roles**, edit the role, and tick the BigCommerce permissions you want them to have:
+Open **Settings → Roles**, edit the role, and tick the BigCommerce permissions you want them to have. The tree on the Roles screen is:
 
-- **Credentials** - create, edit, delete BigCommerce credentials.
-- **Attribute Mapping** - open and update the attribute (standard) mapping.
-- **Custom Mapping** - open and update the BigCommerce custom-fields mapping.
-- **Other Mapping** - images, brand, and product-visibility mapping.
-- **Association Mapping** - map UnoPim associations to BigCommerce related products.
+- **BigCommerce**
+  - **Credentials** - **Create**, **Edit**, **Delete** BigCommerce credentials.
+  - **Attribute Mapping** - also grants access to the credentials list, so the user can open the mapping tabs below.
+    - **Standard Attribute Mapping** - **Edit**: update the attribute (standard) mapping and additional attributes.
+    - **Custom Attribute Mapping** - **Edit**: update the custom-fields mapping.
+    - **Other Attribute Mapping** - **Edit**: update the image, brand and flag mapping.
+    - **Association Mapping** - **Edit**: map UnoPim associations to BigCommerce related products.
 
 <!-- TODO: capture screenshot - bigcommerce-acl.png - BigCommerce permissions in Settings → Roles -->
 

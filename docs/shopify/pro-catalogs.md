@@ -98,10 +98,10 @@ This is the decision that matters most, so it is worth being explicit:
 
 ## Sending catalogs to Shopify
 
-Catalogs reach Shopify through an export job of type **Shopify Catalog**.
+Catalogs reach Shopify through an export job of type **Shopify Catalogs**.
 
 1. Go to **Data Transfer → Exports → Create Export**.
-2. Enter a **Code** (for example `shopify-catalog-export`) and set **Type** to `Shopify Catalog`.
+2. Enter a **Code** (for example `shopify-catalog-export`) and set **Type** to `Shopify Catalogs`.
 3. Pick the **Shopify credentials** for the store whose catalogs you want to publish.
 4. Click **Save Export**, then **Export Now**.
 
@@ -133,7 +133,7 @@ A catalog using a **percentage adjustment** needs no price phase at all - Shopif
 If the catalogs already exist in Shopify, you can pull them into UnoPim instead of re-entering them.
 
 1. Go to **Data Transfer → Imports → Create Import**.
-2. Set **Type** to `Shopify Catalog` and pick the credential.
+2. Set **Type** to `Shopify Catalogs` and pick the credential.
 3. Save and run the import.
 
 Each Shopify catalog lands in the Catalogs tab of that credential, already marked as synced.
@@ -142,11 +142,12 @@ Each Shopify catalog lands in the Catalogs tab of that credential, already marke
 
 ## Importing catalog prices
 
-The **Shopify Catalog Price** import type pulls the prices out of a catalog's price list and writes them onto your UnoPim products.
+The **Shopify Catalog Prices** import type pulls the prices out of a catalog's price list and writes them onto your UnoPim products.
 
 | Field | What to do |
 |---|---|
 | **Shopify credentials** | The store to read from. |
+| **Channel** / **Locale** | The UnoPim channel and locale the prices are written to. |
 | **On Existing Price** | `Keep the UnoPim price` leaves a product alone if it already has a value in that currency. `Overwrite with the Shopify price` replaces it. |
 
 The import needs a price attribute on the **import mapping** - without one it is skipped and the log says:

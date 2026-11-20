@@ -2,13 +2,16 @@
 
 The **Other Mapping** screen controls how product images, cover images, properties, product tags, and configurable listing attributes are exported to Shopware.
 
-Go to **Shopware → Export Mapping → Other Mapping** in the UnoPim sidebar.
+Go to **Shopware → Credentials**, edit a credential, and open its **Other Mapping** tab. Each credential has its own mapping.
 
 ---
 
 ## Product Images
 
 Map one or more UnoPim **image** attributes to the product gallery in Shopware. Each mapped attribute's value is uploaded to Shopware as a media item and attached to the product.
+
+> [!IMPORTANT]
+> Images are exported only when **With Media** is enabled on the **Shopware Products** export job. It is off by default.
 
 - Select the UnoPim image attribute(s) you want to export as product gallery images.
 - Multi-value image attributes are exported as a gallery (multiple images per product).
@@ -36,7 +39,7 @@ Map UnoPim `select` or `multiselect` attributes to Shopware **properties** (prop
 > **Supported attribute types:** Select, Multiselect
 
 > [!NOTE]
-> Attributes must be exported as **Shopware Attribute Options** first before they can be used as product properties. Run the **Shopware Attribute Options** export job before the product export.
+> The **Shopware Attributes** export only sends the attributes selected here (plus variant attributes). Run **Shopware Attributes** and then **Shopware Attribute Options** before the product export, and again after adding attributes here.
 
 ---
 
@@ -48,10 +51,10 @@ Map UnoPim attributes whose values will be exported as Shopware **product tags**
 - Boolean attributes (the label of the attribute is exported when the value is `true`)
 - Attribute-family names (the family name is added as a tag)
 
-> **Supported attribute types:** Text, Select, Multiselect, Boolean, Price, Date, Datetime
+> **Supported attribute types:** Attribute families, Text, Select, Multiselect, Checkbox, Boolean, Price, Date, Datetime
 
 > [!NOTE]
-> Run the **Shopware Product Tags** export job to push the configured tag values to Shopware. Tags must exist in Shopware before products can reference them.
+> Run the **Shopware Product Tags** export job to push the configured tag values to Shopware. Tag values not yet in Shopware are not attached to products, and the product export logs a warning.
 
 ---
 
@@ -65,4 +68,4 @@ For **configurable products**, map the UnoPim `select` attributes that control w
 
 ## Saving
 
-After configuring all sections, click **Save**. The settings apply to all relevant export jobs (product, configurable product, and tag jobs).
+After configuring all sections, click **Save**. The settings apply to the attribute, product and tag export jobs that use this credential.

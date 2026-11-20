@@ -41,17 +41,20 @@ Configure the following filters to customize your product export:
 
 - **Bagisto Credentials** - Select the Bagisto store credential to export to
 - **Select Mapping Template** - Choose the mapping template for attribute mapping
-- **Channel** - Select the required sales channel
-- **Locale** - Choose the necessary locale/language
+- **Channel** - Select one or more UnoPim channels. Only channels mapped on the credential's [Channel Mapping](./credentials-setup#step-4-map-channels-locales-and-filterable-attributes) are exported
+- **Locale** - Select one or more UnoPim locales. Only locales mapped on the credential are exported
 - **Family** - Select the product family or leave blank for all families
 - **Product Type** - Specify the type of products to export
-- **Product Status** - Filter by product status (active, inactive, draft, etc.)
+- **Product Status** - **All**, **Enabled (True)** or **Disabled (False)**
 - **With Media** - Enable or disable media export (images, attachments, etc.)
-- **Filter by SKU** - Search and filter products by specific SKU(s)
+- **Filter By SKU** - Comma-separated list of SKUs to export
 - **Start Page** - Specify the starting page number for pagination
 - **End Page** - Specify the ending page number for pagination
 
 ![Product Export Filters](assets/Data-Transfer/filters.png)
+
+> [!WARNING]
+> The credential, channel/locale filters and mapping template of the last run are cached. When you switch store or mapping template between runs, re-save the export job and run `php artisan cache:clear` first. See [Multiple Store Support](./credentials-setup#multiple-store-support).
 
 ## Saving and Running the Export Job
 

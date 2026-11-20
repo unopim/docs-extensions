@@ -22,7 +22,7 @@ Pull BigCommerce products into UnoPim - both **simple products** and **configura
 
 3. **Set the import filters**
 
-BigCommerce imports take a single filter, in the **Settings** panel on the right of the form:
+Pick the store in the **Settings** panel on the right of the form:
 
 | Filter | Required | What it does |
 |--|--|--|
@@ -30,8 +30,18 @@ BigCommerce imports take a single filter, in the **Settings** panel on the right
 
 ![Import profile filters](./assets/import/product-imprt-filter.png)
 
+The **Filter** card below the general fields adds:
+
+| Filter | Default | What it does |
+|--|--|--|
+| **BigCommerce Categories** | empty | Import only products BigCommerce files under the selected categories. Empty imports every product. |
+| **Include Sub-categories** | off | Also import products filed under any category beneath the selected ones. |
+| **Import with Media** | on | Download product images. Off leaves images out. |
+
+![Import Filter card](./assets/import/import-filters.png)
+
 > [!NOTE]
-> Unlike the [product export](./export-products#2-choose-what-to-export), imports have **no field, category, status, or date filters**. The job pulls **every** product from the selected store - both **simple** and **configurable** (variable) products - through this one job. Curate what you keep in UnoPim after the import.
+> The category picker shows UnoPim categories. Each selected category is matched to its BigCommerce category through the category already imported or exported, or by name. A category that cannot be matched is named in the job log and ignored. There are no field, status, or date filters; both **simple** and **configurable** (variable) products come in through this one job.
 
 Click **Save Import**.
 

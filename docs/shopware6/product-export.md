@@ -1,18 +1,17 @@
-# Simple Product Export
+# Product Export
 
-The **Shopware Simple Products and Variants** export job pushes standalone products and product variants from UnoPim to Shopware.
+The **Shopware Products** export job pushes simple products, configurable (parent) products and their variants from UnoPim to Shopware in one run. Configurable parents are sent before the variants that reference them. Use the **Product Type** filter to limit a job to simple or configurable products.
 
-Use this job for:
-- Products that have no configurable (parent) relationship — simple products sold as-is.
-- Variant products that are children of a configurable product already exported via the **Shopware Configurable Products** job.
+> [!NOTE]
+> Earlier versions had separate **Shopware Simple Products and Variants** and **Shopware Configurable Products** jobs. Both are replaced by **Shopware Products**; existing profiles are migrated automatically.
 
 ---
 
 ## Prerequisites
 
-Before running a simple product export:
+Before running a product export:
 
-- [Attribute Mapping](./attribute-mapping) must be configured — **Name**, **Product Number**, **Tax ID**, **Net Price**, **Gross Price**, and **Stock** must all have a mapped attribute or default value.
+- [Attribute Mapping](./attribute-mapping) must be configured — **Product Number** must be mapped to an attribute, and **Name**, **Tax ID**, **Net Price**, **Gross Price**, and **Stock Quantity** must each have a mapped attribute or default value.
 - Run [Shopware Categories](./category-export), [Shopware Attributes](./attribute-export), and [Shopware Attribute Options](./attribute-options-export) first if products reference categories or properties.
 - Run [Shopware Product Tags](./product-tags-export) first if the product mapping uses tags.
 - At least one active [credential](./credentials) must exist with locale and currency mappings configured.
@@ -33,12 +32,12 @@ Click **Create Export** in the top-right corner.
 
 ---
 
-## Create a Simple Product Export Job
+## Create a Product Export Job
 
 While creating the export job:
 
-1. Enter a unique **Export Job Code** (e.g. `shopware-simple-products`).
-2. Select **Shopware Simple Products and Variants** as the export job type.
+1. Enter a unique **Export Job Code** (e.g. `shopware-products`).
+2. Select **Shopware Products** as the export job type.
 
 ![Simple Product Export Job Type](./images/export/export-simple-product.png)
 
@@ -48,9 +47,16 @@ While creating the export job:
 
 | Filter | Description |
 |---|---|
-| **Shopware Credential** | Select the Shopware store connection to export to. |
-| **Channel** | Select the UnoPim channel whose product values should be read during export. |
-| **Indexing Behaviour** | Controls how Shopware indexes the imported products after the bulk write. |
+| **Shopware Credential** | Required. Select the Shopware store connection to export to. Only active credentials appear in this list. Pick it first: Currency and Attributes depend on it. |
+| **Channel** | The UnoPim channel whose product values are read. Defaults to the default channel. |
+| **Locale** | Optional. Limits the export to the selected locales of the channel. |
+| **Currency** | Optional. Lists only the currencies mapped on the credential. A chosen currency is used for prices in place of the credential's default. |
+| **Attributes** | Optional. Lists only attributes mapped on the credential. Narrows the export to the chosen attributes; leave empty to send all mapped attributes. |
+| **Attribute Families**, **Status**, **Completeness**, **Time Condition**, **Categories**, **Filter By SKU**, attribute conditions | Standard UnoPim product filters that narrow which products are exported. |
+| **Product Type** | Optional. **Simple** (includes variants) and/or **Configurable**. Leave empty to export both. |
+| **Indexing Behaviour** | Required. Controls how Shopware indexes the imported products after the bulk write. |
+| **With Media** | Off by default. When on, sends the images mapped under the credential's [Other Mapping](./other-mapping). When off, no images are sent. |
+| **With Association** | Off by default. When on, sends related, up-sell and cross-sell products as Shopware cross-selling, one entry per section. Referenced products not yet in Shopware are left out and named in the job log. |
 
 ### Indexing Behaviour Options
 
@@ -82,8 +88,8 @@ Monitor progress in the **Job Tracker**. The tracker reports:
 For each eligible product, the connector sends:
 
 - All fields configured in [Attribute Mapping](./attribute-mapping) (name, product number, tax, prices, stock, description, etc.).
-- **Images** — uploaded to Shopware and attached as a media gallery.
-- **Cover image** — set as the product's main thumbnail.
+- **Images** — uploaded to Shopware and attached as a media gallery (only with **With Media** on).
+- **Cover image** — set as the product's main thumbnail (only with **With Media** on).
 - **Properties** — attribute values for mapped `select` / `multiselect` attributes.
 - **Custom fields** — values for any pairs configured in [Custom Fields Mapping](./custom-mapping).
 - **Translations** — field values in every mapped locale.

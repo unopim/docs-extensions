@@ -87,12 +87,27 @@ Open **Settings → Roles**, edit the role, and tick what it may do under **CS-C
 | **Credentials → Locale Mapping** | Update the locale mapping. |
 | **Credentials → History View** | See the change history of a credential. |
 | **Data Transfer Mappings** | Create, Delete, and Mass Delete [data transfer mappings](./data-transfer-mappings). |
-| **Export to CS-Cart** | Run export profiles and quick export. |
-| **Import from CS-Cart** | Run import profiles and quick import. |
+| **Export to CS-Cart** | Run quick export from the product grid. |
+| **Import from CS-Cart** | Run quick import from the product grid. |
+
+Export and import profiles under **Data Transfer** are controlled by the standard UnoPim **Data Transfer** permissions, not by these two.
 
 ![CS-Cart Connector permissions in Settings → Roles](./assets/installation/cscart-acl.png)
 
 Without these, the menu and buttons stay hidden.
+
+## Optional settings
+
+These `.env` values are read from `config/cscart.php`. Run `php artisan optimize:clear` and `php artisan queue:restart` after changing them, so web requests and queue workers both pick them up.
+
+| Setting | Default | What it does |
+|---|---|---|
+| `CSCART_ALLOW_LOOPBACK` | `false` | Allows a Shop URL on `localhost` or a private network. For local testing only. |
+| `CSCART_OPTION_LIMIT` | `50` | Maximum number of options returned per page by the connector's dropdowns. |
+| `CSCART_IMAGE_MAX_BYTES` | `10485760` | Largest image, in bytes, downloaded from CS-Cart during an import. Bigger files are skipped. |
+| `CSCART_IMAGE_TIMEOUT` | `30` | Seconds to wait for an image download. |
+| `CSCART_IMAGE_CONNECT_TIMEOUT` | `10` | Seconds to wait for the image host to accept the connection. |
+| `CSCART_IMAGE_CHECK_TIMEOUT` | `5` | Seconds to wait when checking that an image URL is reachable. |
 
 ## Check it worked
 

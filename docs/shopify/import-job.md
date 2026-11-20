@@ -8,7 +8,7 @@ To create an import job, go to **Data Transfer → Imports** and click **Create 
 
 ![Import Job Form](./images/create-import.png)
 
-Five import job types are available:
+Six import job types are available: Shopify Product, Shopify Attribute, Shopify Category, Shopify Family Variant Attribute Assignment, Shopify Metafield Definitions and Shopify Metaobject (see [Metaobjects](./metaobjects#exporting-importing-metaobjects)). Jobs run on the queue, so a queue worker must be running.
 
 ---
 
@@ -23,6 +23,7 @@ Imports products from your Shopify store into UnoPim.
    - **Channel** - choose the UnoPim channel to assign the products to
    - **Locale** - select the language/locale for the imported data
    - **Currency** - choose the currency for product pricing
+   - **Status** *(optional)* - import only Shopify products with this status: Active, Draft, Archived or Unlisted
 
 ![Product Import Settings](./images/import-fields.png)
 
@@ -60,7 +61,7 @@ Imports product attributes from Shopify into UnoPim. Run this before importing p
 Imports Shopify collections into UnoPim as categories.
 
 1. Enter a unique **Code**.
-2. Set **Type** to `Shopify Category Import`.
+2. Set **Type** to `Shopify Category`.
 3. Under **Settings**, select:
    - **Shopify Credentials**
    - **Locale**
@@ -81,11 +82,11 @@ Imports Shopify collections into UnoPim as categories.
 This job maps Shopify variant attributes to the correct product families in UnoPim. It's needed when importing configurable products that have variants like size or colour.
 
 1. Enter a unique **Code**.
-2. Set **Type** to `Shopify Family Variant Attribute Assignment Import`.
+2. Set **Type** to `Shopify Family Variant Attribute Assignment`.
 3. Under **Settings**, select:
    - **Shopify Credentials**
    - **Locale**
-   - **Attribute Group** - choose the group the variant attributes should be assigned to
+   - **Attribute Groups** - choose the group the variant attributes should be assigned to
 
 ![Family Variant Attribute Assignment Import Settings](./images/shopify-family-fields.png)
 

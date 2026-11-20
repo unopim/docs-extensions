@@ -43,6 +43,7 @@ If you prefer tighter access, select only these scopes:
 | `manage_products` / `view_products` | Export and import products |
 | `manage_categories` / `view_categories` | Export and import categories |
 | `manage_product_types` / `view_product_types` | Export attribute families and import product types |
+| `manage_types` | Only if you send category custom fields from the [Category Mapping](./setup#category-mapping) tab |
 
 > **Note:** If you only plan to export, the `manage_*` scopes are enough. If you only plan to import, the `view_*` scopes are enough.
 

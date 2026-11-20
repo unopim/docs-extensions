@@ -3,9 +3,9 @@
 ::: warning Prerequisite — WooCommerce Connector Required
 This add-on **extends** the UnoPim WooCommerce Connector. You must install and fully configure the WooCommerce Connector before installing this add-on.
 
-- [WooCommerce Connector — Overview](/woocommerce/)
-- [WooCommerce Connector — Installation](/woocommerce/installation)
-- [WooCommerce Connector — Setup Credentials](/woocommerce/setup-credentials)
+- [WooCommerce Connector — Overview](../woocommerce/)
+- [WooCommerce Connector — Installation](../woocommerce/installation)
+- [WooCommerce Connector — Setup Credentials](../woocommerce/setup-credentials)
 
 Do not proceed with this add-on until your WooCommerce Connector is connected and working.
 :::
@@ -15,7 +15,7 @@ The **WooCommerce WPML** add-on extends the existing Unopim WooCommerce connecto
 ## Key features
 
 - **Seamless WooCommerce + WPML integration** — works with the standard Unopim WooCommerce connector; no separate admin section.
-- **Multilingual exports** — `locale` is a **multiselect** on every WooCommerce export filter, so a single job can push a product, category, or attribute in many languages.
+- **Multilingual exports** — **Locales** is a **multiselect** on the WooCommerce category and product exports, so a single job can push a product or category in many languages. The attribute export has no locale filter and sends the WPML default locale only.
 - **Multilingual imports** — same multi-locale support on the import side for categories, attributes, and products.
 - **Categories, attributes, products, variations** — full coverage of the WooCommerce data model.
 - **Compatibility with WPML String Translation** — translated labels and option values land where WPML expects them.
@@ -34,9 +34,9 @@ A user can hold both roles depending on team setup.
 | Requirement                     | Details                                                                                                             |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **UnoPim**                | v3.1.*                                                                                                              |
-| **PHP**                   | 8.3 or higher                                                                                                       |
+| **PHP**                   | 8.4.1 or higher                                                                                                     |
 | **Laravel**               | 13.x                                                                                                                |
-| **WooCommerce Connector** | Must be installed, credentials configured, and connection tested —[see setup guide](/woocommerce/setup-credentials) |
+| **WooCommerce Connector** | Must be installed, credentials configured, and connection tested —[see setup guide](../woocommerce/setup-credentials) |
 | **WPML plugin**           | Installed and configured in WordPress with all target languages added                                               |
 | **WooCommerce**           | Latest stable version                                                                                               |
 | **Queue worker**          | Must be running — export/import jobs are queued                                                                    |
