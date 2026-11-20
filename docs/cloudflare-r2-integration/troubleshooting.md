@@ -10,7 +10,7 @@ Save runs a live `ListObjects` against your bucket. The error message tells you 
 Walk through this list:
 
 1. Is **Enable Cloudflare R2** on?
-2. **Public** bucket → is **Bucket URL** set to the R2 public endpoint or custom domain (e.g. `https://pub-xxxx.r2.dev`)?
+2. **Public** bucket → is **Bucket URL** set to the R2 public address or a custom domain (e.g. `https://pub-xxxx.r2.dev`), and **not** the `r2.cloudflarestorage.com` endpoint?
 3. **Private** bucket → leave **Bucket URL** blank. Presigned URLs are generated automatically.
 4. Is your bucket's **CORS** policy allowing your UnoPim domain?
 
@@ -23,8 +23,14 @@ The background worker isn't running. Start it (`php artisan queue:work`) or chec
 **A file uploaded but the URL 404s.**
 Check the bucket's **Public Access** setting on Cloudflare. A public bucket needs Public Access switched on; otherwise the public URL won't resolve even if the file is there.
 
+**The preview shows an `Authorization` error.**
+The file URL starts with `https://<account_id>.r2.cloudflarestorage.com`, the private S3 API. Set **Bucket URL** to the bucket's public address or custom domain, then follow [Change the Bucket URL later](./credentials#change-the-bucket-url-later) so existing files get the new address too.
+
+**File URLs still use the old address after changing the Bucket URL.**
+Saving the form does not rewrite the URLs of files already on R2, and running queue workers keep the old address until restarted. Follow [Change the Bucket URL later](./credentials#change-the-bucket-url-later). Changing **Environment Update Time** has no effect on URLs.
+
 **Cache rule didn't apply to old files.**
-Cache rules apply to **new** uploads. Re-run **Synchronize Media** to push them onto existing files.
+Cache rules apply to **new** uploads. Re-run **Synchronize Media** to push them onto existing files. This only works while the local copies still exist.
 
 **The credential page won't open.**
 Check that the package is registered in `bootstrap/providers.php` and that `composer dump-autoload` ran. See [Installation](./installation).
@@ -37,8 +43,10 @@ If the menu is missing, the role needs these ticked in **Settings → Roles**:
 
 - **Cloudflare R2** (master)
 - **Credential** (view)
-- **Save Credential**
-- **Sync Media**
+- **Save Cloudflare R2 Credential**
+- **Validate Cloudflare R2 Credential**
+- **Synchronize Cloudflare R2 Media**
+- **View Cloudflare R2 Credential History**
 
 ## Audit logs
 

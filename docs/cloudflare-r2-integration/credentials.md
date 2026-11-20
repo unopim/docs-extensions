@@ -47,8 +47,11 @@ A **General** tab and a **History** tab sit at the top. **Save** is in the top-r
 | Field | What it is |
 |---|---|
 | **Bucket Name** | The bucket you created. Required. |
-| **Bucket URL** | Public CDN URL or custom domain. Required for **public** buckets. |
-| **Environment Update Time** | Optional `YYYY-MM-DD HH:MM:SS` — bumps the cache key when you swap buckets. |
+| **Bucket URL** | The **public** address of the bucket. Required for **public** buckets, blank for **private** ones. Use the R2 public development URL (`https://pub-xxxx.r2.dev`) or a custom domain connected to the bucket in Cloudflare (e.g. `https://cdn.example.com`). |
+| **Environment Update Time** | Optional `YYYY-MM-DD HH:MM:SS`. Informational only — it does not change file URLs or clear any cache. |
+
+> [!WARNING]
+> Never put the **Endpoint** (`https://<account_id>.r2.cloudflarestorage.com`) in **Bucket URL**. That address is the private S3 API: uploads still work, but every image preview fails with an `Authorization` error.
 
 ### Connector Status (right column)
 
@@ -57,8 +60,8 @@ A **General** tab and a **History** tab sit at the top. **Save** is in the top-r
 | Toggle | What it does |
 |---|---|
 | **Enable Cloudflare R2** | Master switch. New uploads go to R2 only when this is on. |
-| **Re-Synchronize Without Uploading** | Skip the upload step on **Synchronize Media** — only verifies the file exists on R2 and writes the mapping row. Use this when files are already on R2. |
-| **Default File Visibility** | On = **Public** (CDN URL). Off = **Private** (short-lived presigned URLs). |
+| **Re-Synchronize Without Uploading** | Skip the upload step — only verifies the file exists on R2 and writes the mapping row. Use this when files are already on R2. Applies to `php artisan cloudflare_r2:export-media`; see [Re-map without re-uploading](./migration#re-map-without-re-uploading). |
+| **Default File Visibility** | On = **Public** (served from the **Bucket URL**). Off = **Private** (signed links that expire after 30 minutes; leave **Bucket URL** blank). |
 
 ### Cache Control Rules
 
@@ -91,6 +94,38 @@ The next time you open the page:
 - **Secret Key** shows fully masked (`********************`).
 
 Leave both blank to keep the stored values. Type a new value to replace one.
+
+---
+
+## Change the Bucket URL later
+
+Moving from the `r2.dev` address to your own domain, or correcting a wrong **Bucket URL**, takes more than **Save**. Each file's public URL is stored when it is uploaded, and running queue workers keep the settings they started with.
+
+1. Make sure the new address serves files: open one existing file on the new host in a browser.
+2. Save the new **Bucket URL**.
+3. Restart the queue workers so new uploads use the new address:
+
+   ```bash
+   php artisan queue:restart
+   ```
+
+   With Supervisor, also run `sudo supervisorctl restart all`.
+4. Point the URLs of already uploaded files to the new address. Replace both values with your own:
+
+   ```bash
+   php artisan tinker --execute="\$old = 'https://pub-xxxx.r2.dev'; \$new = 'https://cdn.example.com'; DB::table('cloudflare_r2_media_mappings')->where('cdn_url', 'like', \$old.'/%')->update(['cdn_url' => DB::raw(\"REPLACE(cdn_url, '\$old', '\$new')\")]);"
+   ```
+
+5. Clear the cache:
+
+   ```bash
+   php artisan cache:clear
+   ```
+
+6. Switch off the old address in Cloudflare only after previews load from the new one.
+
+> [!NOTE]
+> A new import or **Re-Synchronize Without Uploading** does not update the URLs of files that are already on R2. Without server access, [contact support](./contact-support) and we will run steps 3–5 for you.
 
 ---
 
