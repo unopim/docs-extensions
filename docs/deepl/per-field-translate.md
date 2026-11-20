@@ -44,9 +44,12 @@ Each target language shows the translated text in a box you can edit. Tweak anyt
 
 - **← Back** — go back a step.
 - **Cancel** — discard.
-- **Apply** — save into the product.
+- **Apply** — queue a background job that saves the translations into the product.
 
-You'll see *Translation saved.*
+You'll see *Translation saved.* The values appear once the queue worker has run the job.
+
+> [!NOTE]
+> Apply only fills target languages that are empty. A target that already has a value is left unchanged, even if you edited the preview.
 
 ## If the button isn't showing
 

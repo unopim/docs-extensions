@@ -21,8 +21,8 @@ Translate your product content into other languages with one click.
 
 | Requirement | Details |
 |---|---|
-| **UnoPim** | 2.0.0 or higher |
-| **PHP** | 8.2 or higher |
+| **UnoPim** | 3.0.x |
+| **PHP** | 8.4.1 or higher |
 | **DeepL API** | Active DeepL API key (Free or Pro) |  
 
 ## Before you start

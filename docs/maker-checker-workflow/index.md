@@ -21,7 +21,10 @@ Checker reviews (side-by-side diff)
  Publish → Goes Live
 ```
 
-Each step is tracked in a visual workflow, and all participants receive real-time and email notifications at every stage.
+Each step is tracked in a visual workflow. When **Send Notifications** is enabled, the maker and all active checker users receive an in-app notification and an email when a request is sent for approval, approved, rejected, published, or commented on.
+
+> [!WARNING]
+> The approval workflow applies only to product and asset changes made in the admin panel. Changes made through the REST API or data imports are written to the live product directly, without a draft or approval. Deleting products from the product grid is also not subject to approval.
 
 ## Key features
 
@@ -47,6 +50,7 @@ A user can hold both roles depending on their permissions.
 
 ## Requirements
 
-- **UnoPim**: 2.0.0
-- **PHP**: 8.3+
-- **Laravel**: 12.x
+- **UnoPim**: 3.x (v1.2.0 and later)
+- **PHP**: 8.4.1+ (required by UnoPim 3.x)
+- **Laravel**: 13.x (bundled with UnoPim 3.x)
+- **UnoPim DAM** (optional): required only for asset approvals. See [Compatible with UnoPim DAM](./compatible-with-unopim-dam).

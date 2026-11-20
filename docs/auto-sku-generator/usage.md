@@ -20,9 +20,11 @@ When you create a simple product with an empty SKU field, the extension generate
 
 **Example:**
 - Prefix: `APPAREL`
-- Attribute: Color = Red, Size = M
 - Sequence: 1001
-- Generated SKU: `APPAREL-Red-M-1001`
+- Generated SKU: `APPAREL-1001`
+
+> [!NOTE]
+> The **Create Product** form only sends the type, family and SKU, so attribute values selected in **Auto Generator Options** are not part of a simple product's SKU when it is created in the admin. They are used for variants and imports.
 
 ### Steps to Create a Simple Product
 
@@ -36,7 +38,9 @@ When you create a simple product with an empty SKU field, the extension generate
 5. The SKU is automatically generated and displayed in real-time as you complete the form
 6. Click **Save Product**
 
-**Result:** Your product is saved with the auto-generated SKU. The next simple product created will receive the next sequential number (e.g., `sku-3`).
+**Result:** Your product is saved with the auto-generated SKU. The next simple product created will receive the next sequential number (e.g., `APPAREL-1002`).
+
+SKUs are also generated for products created through the REST API (product and configurable product create endpoints) when the SKU is empty.
 
 ---
 
@@ -52,10 +56,10 @@ When you add a variant to a configurable product with an empty SKU field, the ex
 [Prefix] + [Color] + [Size] + [Sequence Number] + [Suffix]
 ```
 
-**Example with Multiple Variants:**
-- Variant 1 (Red, Small): `TSH-Red-Small-2000`
-- Variant 2 (Red, Medium): `TSH-Red-Medium-2001`
-- Variant 3 (Blue, Small): `TSH-Blue-Small-2002`
+**Example with Multiple Variants** (option codes `red`, `blue`, `small`, `medium`):
+- Variant 1 (Red, Small): `TSH-red-small-2000`
+- Variant 2 (Red, Medium): `TSH-red-medium-2001`
+- Variant 3 (Blue, Small): `TSH-blue-small-2002`
 
 Each variant gets its own unique sequence number, ensuring no duplicate SKUs.
 
@@ -153,9 +157,9 @@ This is the recommended approach when you want the Auto SKU Generator to automat
 
 ---
 
-### Scenario B: Import With SKU (Not Supported Directly)
+### Scenario B: Import With SKU
 
-When your import file contains pre-defined SKU values, the standard import process does not import those products.
+Rows that already have a SKU keep it. They are not changed by the extension and are imported by UnoPim's normal import rules: a new SKU creates a product, an existing SKU updates that product. Only rows with an empty SKU cell receive a generated SKU, so a file can mix both.
 
 
 **Example:**
@@ -163,9 +167,9 @@ When your import file contains pre-defined SKU values, the standard import proce
 ![Import File with SKU](./assets/usage/sku-exists.png)
 
 
-#### Workaround: Remove SKUs and Re-Import
+#### Replace File SKUs With Generated SKUs
 
-If you need to import products that have existing SKU data:
+If you want generated SKUs instead of the ones in the file:
 
 **Step 1: Modify Your Import File**
 
@@ -201,4 +205,7 @@ Blue Shirt   |   |29.99 | Blue
 | Create Simple Product | Filled | No | Custom SKU preserved |
 | Add Configurable Variant | Empty | Yes | Variant SKU auto-generated |
 | Import Without SKU | Empty | Yes | Product imported with auto-generated SKU |
-| Import With SKU | Filled | No | Product **not imported** |
+| Import With SKU | Filled | No | Product imported with the SKU from the file |
+
+> [!NOTE]
+> SKU numbers for an import are reserved when the file is validated. If you validate a file and then do not run it, or the import fails, those numbers are skipped.

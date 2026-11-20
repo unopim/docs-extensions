@@ -10,7 +10,9 @@ Open the portal URL your contact sent you (it ends in `/supplier/login`) and sig
 
 ![Supplier portal sign-in page](./assets/supplier/login.png)
 
-Forgot your password? Click **Forget Password?**, enter your email, and follow the link in the reset email.
+Forgot your password? Click **Forget Password?**, enter your email, and follow the link in the reset email. The link is valid for 60 minutes.
+
+After 5 failed sign-in attempts in a minute for the same email, wait one minute before you try again.
 
 ---
 
@@ -59,9 +61,11 @@ Click **Create Product**, choose:
 
 - **Type**: **Simple**, or **Configurable** for a product with variants
 - **Family**: one of the attribute families assigned to you
-- **SKU**: a unique product code
+- **SKU**: a unique product code. Use letters, numbers and single hyphens only (for example `lens-50mm-f18`); spaces, underscores and dots are rejected.
 
 Click **Save Product**. The product's edit page opens, where you fill in its attributes, categories and images.
+
+A **Configurable** product needs a family with a variant structure. If the family has none, saving shows an error; ask your contact to add one. If the family has more than one, you are asked to choose one.
 
 ![Create New Product dialog](./assets/supplier/create-product.png)
 
@@ -73,7 +77,7 @@ To add many products at once, open **Data Transfer → Imports** (or click **Imp
 
 ![Create Import form](./assets/supplier/import-create.png)
 
-1. Enter a **Code** and keep **Type** set to **Products**.
+1. Enter a **Code** and keep **Type** set to **Products**. The code must be unique across the whole portal, so a code used by another supplier is rejected.
 2. Upload your file in **CSV**, **XLS** or **XLSX** format. Use **Download Products Sample CSV**, or one of the other samples (variants, multi-locale, delete, images ZIP), as a template.
 3. To import images, click **Upload Images to set Path** and upload a ZIP of your images, or enter the path where they are stored.
 4. Under **Settings**, choose the **Action** (**Create/Update** or **Delete**), the **Validation Strategy** and the number of **Allowed Errors**. For CSV files, set the **Field Separator**.
@@ -95,9 +99,10 @@ Open **Data Transfer → Exports** (or click **Export Data** on the dashboard) a
 
 ![Create Export form](./assets/supplier/export-create.png)
 
-- **Output**: choose **CSV**, **XLS** or **XLSX**, and whether to include media, associations, a header row, and attribute labels instead of codes.
-- **Data to export**: choose the channels, locales, currencies and attributes.
-- **Data Filters**: limit the export by attribute family, **Status** (enabled or disabled), time condition, or **Review Status** (pending, approved or rejected).
+- **Output**: choose **CSV**, **XLS** or **XLSX**, whether to include media, a header row, and attribute labels instead of codes, and an optional file path.
+- **Data Filters**: limit the export by attribute family, **Status** (all, enabled or disabled), or a list of SKUs in **Identifiers**.
+
+The export always contains every channel, locale, currency and attribute. It has no filter for the review status (pending, approved or rejected).
 
 Save the export and run it. Download the file from the export or from the **Job Tracker**.
 
@@ -133,6 +138,6 @@ An approved product is copied into the main UnoPim catalog, and your dashboard c
 
 ## Your account
 
-Click your avatar in the top right and open **My Account** to change your name, profile image, portal language (**UI Locale**), timezone or password. To change your password, enter your current password first.
+Click your avatar in the top right and open **My Account** to change your name, profile image, portal language (**UI Locale**), timezone or password. To change your password, enter your current password first. The new password needs at least 8 characters. A profile image can be up to 2 MB.
 
 ![My Account page](./assets/supplier/account.png)

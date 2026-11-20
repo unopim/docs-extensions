@@ -7,7 +7,7 @@ The **UnoPim Job Scheduler** lets you automate your import and export jobs so th
 <br>
 
 <div align="center">
-  <img src="./assets/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
+  <img src="./assets/intro-banner.png" alt="UnoPim Job Scheduler" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
 </div>
 
 <br> 
@@ -30,10 +30,10 @@ Instead of logging in and running export or import jobs by hand, you define when
 | **Automated Scheduling** | Run import and export jobs automatically based on a configured schedule |
 | **Cron Expression Support** | Create custom schedules using standard cron syntax for precise timing control |
 | **Admin Panel Management** | Create, edit, and manage all scheduled jobs directly from the UnoPim admin panel |
-| **Retry Attempts** | Set how many times a job should retry automatically if it fails |
-| **Cancel Running Jobs** | Stop all active jobs instantly when needed |
+| **Max Retries** | Set how many attempts a job gets automatically if it fails |
+| **Cancel Executions** | Mark queued or running executions as cancelled |
 | **Job History & Logs** | View a full history of past job executions and download logs for each run |
-| **Notifications** | Get notified when a job completes successfully or fails |
+| **Notifications** | Get an email when a job completes successfully or fails |
 | **Role-Based Access** | Control who can create or manage scheduled jobs using UnoPim's permission system |
 | **Multi-Job Management** | Manage multiple scheduled jobs from one centralised place |
 | **Simple Interface** | Easy to set up and use - no technical expertise required for common schedules |
@@ -56,10 +56,32 @@ The Job Scheduler is ideal when:
 
 | Requirement | Version |
 |---|---|
-| **PHP** | ^8.3 |
-| **UnoPim** | 2.0.1 or newer |
+| **PHP** | ^8.4.1 |
+| **UnoPim** | 3.0.0 or newer |
 | **webkul/data-transfer** | Bundled with UnoPim core |
 | **Queue Driver** | Any (database, redis, sqs, etc.) |
+| **Cron** | `php artisan schedule:run` every minute |
+| **Queue Worker** | A worker on the `job-scheduler` queue |
+
+> [!NOTE]
+> UnoPim 2.x installs must use Job Scheduler 1.1.x. Version 1.2.0 and later need UnoPim 3.x and PHP 8.4.
+
+---
+
+## Permissions
+
+Access is controlled under **Settings → Roles**. The Job Scheduler permission tree is:
+
+| Permission | Allows |
+|---|---|
+| **Job Scheduler → Scheduled Jobs** | View the scheduled job list |
+| ↳ **Create** | Create scheduled jobs |
+| ↳ **Edit** | Edit jobs and change their status (including the **Update Status** mass action) |
+| ↳ **Job Execute** | Run Now and Dry Run (no button for these in the current admin UI) |
+| ↳ **Delete** | Delete jobs, single or in bulk |
+| **Job Scheduler → Execution History** | View execution history and execution details |
+| ↳ **Cancel** | **Cancel Execution**, **Cancel Selected**, and **Cancel All Running** |
+| **Job Scheduler → Execution Logs** | View execution logs |
 
 ---
 

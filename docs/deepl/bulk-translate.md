@@ -37,6 +37,9 @@ Click **Bulk Translate**.
 
 You'll see *X product(s) queued for DeepL translation.*
 
+> [!NOTE]
+> Bulk translate fills empty target values. Existing values are overwritten only when **Replace Existing Value** is on for the default key (see [Credentials](./credentials)).
+
 ## Watch the progress
 
-Open **Settings → Data Transfer → Tracker**. The job appears with a progress counter. See [Watch progress](./tracker) for details.
+Open **Data Transfer → Job Tracker**. The job appears with a progress counter. See [Watch progress](./tracker) for details.

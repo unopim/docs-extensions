@@ -2,7 +2,7 @@
 
 If your UnoPim has the **AI Agent** extension installed, you can ask the agent to translate products in chat.
 
-> **Before you start.** AI Agent installed, a [DeepL key](./credentials), **AI Translate** ticked on every field (see [Mark fields](./attribute-setup)), and your role needs **translate** permission.
+> **Before you start.** AI Agent installed, an active [DeepL key](./credentials), and your role needs the **DeepL → Translate** permission to see the tile.
 
 ![DeepL Translate tile in the AI chat Capabilities tab](./images/ai-agent-translate.png)
 
@@ -22,10 +22,10 @@ Example:
 The agent can:
 
 - Translate one product by SKU or by ID.
-- Pick which fields to translate (or every text field by default).
+- Pick which fields to translate. By default it translates every locale-specific text value that has content in the source locale — the **AI Translate** flag is not checked here.
 - **Preview only** — return a preview without saving.
 
-The agent never overwrites text that's already there — it only fills empty translations.
+When saving, the agent never overwrites text that's already there — it only fills empty translations. Saving runs as a queued job.
 
 ## If the agent says *No translatable source content found*
 

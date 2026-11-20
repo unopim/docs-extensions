@@ -7,17 +7,17 @@ A dedicated Approval Requests section is available for users to review and take 
 
 **Entity Type:** This field mentions whether the approval request is for a "Product" or "Asset".
 
-**Request Title:** This field shows the comment added by maker at the time of sending approval request.
+**Request Comment:** This field shows the comment added by maker at the time of sending approval request.
 
 **Entity Code:** This field shows the SKU for the product or asset file name.
 
-**Status:** This field shows whether the request has been Approved, Rejected or Waiting for Approval.
+**Status:** This field shows whether the request is Waiting for Approval, Approved, Rejected or Published. Users see only the statuses their role can act on: Approve shows Approved requests, Reject shows Rejected requests, and Publish shows Published requests. Users without any of these permissions see only their own requests that are Waiting for Approval.
 
 **Requested By:** This field mentions the user name who has created the approval request.
 
 **Approval By:** This field mentions the checker name who approves or rejects the approval requests.
 
-**Creation Date:** This field shows the date and time when the approval requests are generated.
+**Creation Date:** This field shows the date and time the request was last updated (for example, by an approval or rejection), not when it was first created. The list is sorted by this column.
 
 **Actions:** This tab needs to be clicked by checkers to view and take actions on approval requests.
 

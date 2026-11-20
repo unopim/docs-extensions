@@ -87,7 +87,7 @@ values.channel_locale_specific.default.en_US.price  ->  price__default__en_US
 The key order is always **`attribute__channel__locale`**.
 
 > [!NOTE]
-> The **Test trigger** step in the Zap editor returns the identity fields only - `id`, `entity`, `reference`, `event` and the timestamps. Attribute values are left out there because a sample record and the record a live event carries rarely hold the same attributes, and Zapier rejects a sample that offers fields a real delivery may not have.
+> The **Test trigger** step in the Zap editor returns the fixed fields only: `id`, `entity`, `reference`, `event`, the timestamps, and the core fields of the record (`product_id`, `sku`, `type`, `status`, `family`, `parent`, `categories`, `changes`, `_truncated` for products; `entity_id`, `code`, `type`, `parent` for the others). **Changed Catalog Record** returns only `id`, `entity`, `reference`, `event` and the timestamps. Attribute values and `label__<locale>` keys are left out because a sample record and the record a live event carries rarely hold the same attributes, and Zapier rejects a sample that offers fields a real delivery may not have.
 >
 > A live delivery carries the full flattened set. To map an attribute the test step did not list, type the key by hand in the field - for example `description__en_US` - or run the Zap once and map from the real run.
 
@@ -152,10 +152,13 @@ The timestamp alone is not enough. `updated_at` is second-precision, so two edit
 | `X-Unopim-Subscription-Id` | The subscription row id |
 | `X-Unopim-Signature` | `sha256=<hex>` - **only when the subscription carries a secret** |
 | Timeout | 15 seconds by default |
-| Retries | 3 attempts, 30 second backoff, on the dedicated `zapier` queue |
+| Retries | 3 attempts, 30 second backoff, on the dedicated `zapier` queue - only after a connection error or timeout. A non-2xx answer is logged as **Failed** and not retried. |
 
 > [!NOTE]
 > **Zap deliveries are not signed.** The Zapier app never sends a secret when it subscribes, so `X-Unopim-Signature` is absent from every delivery a Zap receives. This is by design - the hook URL Zapier issues is itself unguessable, and it is the only party holding it. The signature header exists for other clients that subscribe to the same endpoint with a secret of their own.
+
+> [!WARNING]
+> All subscriptions for one event are delivered by **one job**, one after the other. If one hook URL times out or cannot be reached, the job stops there and retries from the start: subscriptions earlier in the list receive the record again, and subscriptions after it receive nothing until the retry. After the third failed attempt the remaining subscriptions never get that record.
 
 Every target URL passes an **SSRF guard** twice - once before the subscription is stored and again before each delivery. Loopback, private, link-local and cloud-metadata addresses are refused, and a delivery blocked this way is logged with the status **Blocked**.
 
@@ -171,6 +174,8 @@ Zapier answers a webhook whose Zap is off with **HTTP 410 Gone**. That is the on
 
 **Bulk edits fire nothing.** A product saved through UnoPim's bulk-edit flow does **not** emit `product.updated`, so no Zap runs for it. This is deliberate - a bulk edit touching hundreds of rows would otherwise cost one Zap task per row. Use an exporter when you need those changes to leave UnoPim.
 
+**Imports fire nothing.** Products, categories, attributes and families created or changed by a UnoPim import job do not emit any of these events, so no Zap runs for them.
+
 **One API product create emits two events.** UnoPim writes the product row and then saves its values, so a single create through the REST API fires **both** `product.created` and `product.updated`. With both triggers switched on you get two Zap runs for one new product. If that matters, keep one of the two triggers off, or add a Filter step on `event`.
 
 **Subscriptions are scoped per API key.** Listing and deleting subscriptions through the API only ever sees rows created with the same API key. Two Zapier accounts connected with two different keys cannot see or remove each other's Zaps. The admin **Connected Zaps** page shows all of them.
@@ -181,7 +186,7 @@ Zapier's *Test trigger* step calls a sample endpoint that runs your **real recor
 
 The integration then trims the sample down to the fields every delivery is guaranteed to carry, because Zapier rejects a sample that offers fields a real delivery may not have. Attribute values are therefore absent from the test step but present in a live delivery - see the note under [Payload shape](#payload-shape).
 
-`catalog.any` returns at least four records so more than one entity shape is visible. Products are drawn first, so a catalogue with few recent category, attribute or family changes may show mostly products. Map on `entity` and `reference` rather than assuming a shape.
+`catalog.any` returns up to four records (or up to `ZAPIER_SAMPLE_SIZE` if that is higher). Products are taken first, then categories, attributes and families, so with the defaults the sample is usually three products and one category. Map on `entity` and `reference` rather than assuming a shape.
 
 ## Example Zaps
 

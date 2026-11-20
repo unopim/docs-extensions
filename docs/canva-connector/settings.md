@@ -65,6 +65,13 @@ CANVA_APP_JWKS_CACHE_SECONDS=3600
 # Optional
 CANVA_STOREFRONT_URL=https://shop.example.com/p/{url_key}
 
+# HTTP timeouts and file download retries
+CANVA_HTTP_TIMEOUT=30
+CANVA_HTTP_CONNECT_TIMEOUT=10
+CANVA_HTTP_DOWNLOAD_TIMEOUT=180
+CANVA_HTTP_DOWNLOAD_ATTEMPTS=3
+CANVA_HTTP_DOWNLOAD_RETRY_DELAY_MS=1000
+
 # Endpoint overrides - for testing, or a future Canva API change
 CANVA_AUTHORIZE_URL=https://www.canva.com/api/oauth/authorize
 CANVA_TOKEN_URL=https://api.canva.com/rest/v1/oauth/token
@@ -112,4 +119,4 @@ In `packages/Webkul/CanvaConnector/src/Config/`:
 
 ## Localization
 
-English (`en_US`) only.
+Translated into all 33 UnoPim locales.

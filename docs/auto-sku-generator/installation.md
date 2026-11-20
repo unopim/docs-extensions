@@ -45,7 +45,14 @@ Run these commands in order:
 
 ```bash
 composer dump-autoload
+php artisan auto-sku-generator:install
+```
+
+`auto-sku-generator:install` runs the migrations, publishes the admin assets, and clears the caches. If you prefer to run the steps yourself:
+
+```bash
 php artisan migrate
+php artisan vendor:publish --tag=autosku --force
 php artisan optimize:clear
 ```
 
@@ -56,9 +63,9 @@ php artisan optimize:clear
 | `php artisan optimize:clear` | Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes. |
 
 
-### 5. Publish assets (optional)
+### 5. Publish assets
 
-If you need to publish views or config files for customization:
+The installer already publishes the admin assets (stylesheet and menu icon font) to `public/themes`. Publish them again if the menu icon or styles are missing:
 
 ```bash
 php artisan vendor:publish --provider="Webkul\AutoSkuGenerator\Providers\AutoSkuGeneratorServiceProvider"
@@ -66,7 +73,7 @@ php artisan vendor:publish --provider="Webkul\AutoSkuGenerator\Providers\AutoSku
 
 | Command | Purpose |
 |---|---|
-| `php artisan vendor:publish --provider="Webkul\AutoSkuGenerator\Providers\AutoSkuGeneratorServiceProvider"` | Publishes Auto SKU Generator package resources (such as config/views) for customization. |
+| `php artisan vendor:publish --provider="Webkul\AutoSkuGenerator\Providers\AutoSkuGeneratorServiceProvider"` | Publishes the compiled Auto SKU Generator admin assets to `public/themes`. No config or view files are published. |
 
 ### 6. Verify
 

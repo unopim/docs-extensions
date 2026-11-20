@@ -32,6 +32,9 @@ Go to **Settings → Roles → Create Role**, keep **Permissions** set to **Cust
 
 Also grant **Dashboard** and **Catalog** if the handler should see the UnoPim dashboard and the products that end up in the catalog. Enter a **Name**, then click **Save Role**.
 
+> [!NOTE]
+> The **edit** (pencil) action on **Product Approval** is shown only to roles with the **All** permission. No permission in the tree turns it on for a custom role, so a handler with a custom role sees only **reject** and **approve** in the list.
+
 ---
 
 ## Step 2: Assign the role to a handler user
@@ -60,15 +63,21 @@ Fill in the form:
 |---|---|
 | **Name** | The supplier's company or contact name |
 | **Email** | The email address the supplier signs in with |
-| **Password** / **Confirm Password** | The supplier's first password. They can change it later from **My Account**. |
+| **Password** / **Confirm Password** | The supplier's first password, at least 8 characters. The form accepts 6, but saving fails below 8. They can change it later from **My Account**. |
 | **UI Locale** | The language of the supplier portal for this supplier |
 | **Timezone** | The supplier's timezone |
-| **Attribute Families** | One or more families the supplier can create products in |
+| **Attribute Families** | One or more families the supplier can create products in. For **Configurable** products, the family needs a variant structure. |
 | **Status** | Turn on to let the supplier sign in. A disabled supplier cannot sign in. |
 
 ![Create Supplier form](./assets/admin/create-supplier.png)
 
 Click **Save Supplier**. To change a supplier later, click the edit icon in the list. Leave the password fields empty to keep the current password.
+
+> [!NOTE]
+> The assigned families limit the **Family** list in the supplier's **Create Product** dialog. Imports do not check them: a supplier's import file can use any family code that exists in UnoPim.
+
+> [!WARNING]
+> Deleting a supplier also deletes all of that supplier's portal products, including pending ones. Products already approved into **Catalog → Products** stay there.
 
 ![Edit Supplier form with two assigned attribute families](./assets/admin/edit-supplier.png)
 
@@ -92,7 +101,7 @@ Go to **Supplier → Product Approval**. The page lists every product with the *
 
 ![Product Approval page with pending products](./assets/admin/product-approval.png)
 
-Each row has three actions: **edit** (pencil), **reject** (cross) and **approve** (tick).
+Each row has three actions: **edit** (pencil), **reject** (cross) and **approve** (tick). Custom roles do not see **edit**; see the [note in Step 1](#step-1-create-a-supplier-handler-role).
 
 ### Review and approve one product
 
@@ -101,6 +110,9 @@ Click the edit icon to open the product. You can check every attribute, switch c
 ![Reviewing a supplier product with Approve and Reject buttons](./assets/admin/review-product.png)
 
 When you approve a product, it is copied into the UnoPim catalog (**Catalog → Products**). For a configurable product, its variants are copied too.
+
+> [!WARNING]
+> The catalog product is matched by **SKU**. If **Catalog → Products** already has a product with the same SKU, approving replaces its type, family, status and all attribute values with the supplier's data. Check the SKU before you approve.
 
 ### Reject with a message
 
@@ -123,5 +135,7 @@ Select several products with the checkboxes, open **Select Action**, and choose 
 - **Approved** products are in the UnoPim catalog and leave the **Product Approval** list.
 - **Rejected** products also leave the list until the supplier fixes and saves them.
 - When a supplier saves any change, including a fix to a rejected product or an update to an approved one, the product returns to **Pending** and appears on **Product Approval** again. An approved product's catalog copy is updated when you approve it again.
+- Rejecting a product that was approved before does not remove it from the catalog. Only its DAM asset values are cleared from the catalog copy.
+- When a supplier deletes a product, its catalog copy is not deleted.
 
 > **Tip:** Check **Product Approval** regularly, or after a supplier tells you an import has finished.

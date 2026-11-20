@@ -11,8 +11,8 @@ Each row in the grid represents one job execution. The following details are ava
 | Column | Description |
 |---|---|
 | **Job Name** | Displays the name of the scheduled job, such as `Product Export` or `Category Export`. |
-| **State** | Shows the current job status, such as **Running**, **Completed**, or **Failed**. |
-| **Trigger** | Indicates how the job was started, such as a scheduled run. |
+| **State** | Shows the execution status: **Pending**, **Queued**, **Running**, **Retrying**, **Completed**, **Failed**, **Cancelled**, or **Timed Out**. |
+| **Trigger** | Indicates how the job was started: **Scheduled** (cron, including automatic retries), **Manual** (`php artisan job-scheduler:run --job=<code>`), **API**, or **Dependency**. |
 | **Processed** | Shows how many records were processed during the execution. |
 | **Failed** | Shows how many records failed during processing. |
 | **Duration** | Displays how long the job took to complete. |
@@ -34,15 +34,17 @@ This opens the **Job Execution History Details** page, where you can review more
 
 ![Job Execution Details](./assets/history/job-scheduler-history-details.png)
 
-## Cancel Running Jobs
+## Cancel Executions
 
-If one or more jobs are still in progress, you can stop them directly from the execution details page.
+You can cancel executions that are **Pending**, **Queued**, **Running**, or **Retrying**:
 
-1. Open the required job execution from **Execution History**.
-2. Click **Cancel All Running**.
+- **Cancel All Running** - button at the top of the **Execution History** list. Cancels every non-finished execution of every job.
+- **Cancel Selected** - mass action on the selected rows of the list.
+- **Cancel Execution** - button on the execution details page, shown only while that execution is not finished.
 
 ![Cancel All Running Button](./assets/history/cancel-all-running-jobs.png)
 
-Use this action when a job is stuck, taking too long, or needs to be stopped before completion.
+These actions need the **Execution History → Cancel** permission.
 
-> **Note:** Only jobs that are currently in the **Running** state can be cancelled.
+> [!WARNING]
+> Cancelling only changes the execution record to **Cancelled**. It does not stop an import or export that is already processing, and an execution that is still waiting in the queue is not skipped when the worker picks it up. To stop a run that is processing, stop or restart the `job-scheduler` queue worker.

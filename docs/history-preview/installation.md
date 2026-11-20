@@ -61,14 +61,14 @@ php artisan optimize:clear
 Open **Settings → Roles**, edit the relevant role, and enable the History permissions:
 
 - **History** — view the History tab on any record.
-- **History → Restore** — click the Restore button.
+- **History → Restore History** — click the Restore button.
 
 See [Permissions](./permissions) for full details.
 
 ## Check it worked
 
 1. Open any product (or category, attribute, etc.) and navigate to its **History** tab.
-2. If the record has audit rows, each row should now show a **Restore** button and inline file thumbnails where applicable.
+2. If the record has audit rows, each row after the first version should now show a **Restore** button and inline file thumbnails where applicable.
 3. Click **Restore** on any row — a confirmation dialog should appear.
 
 If the History tab is missing or the Restore button does not appear, see that the service provider is registered and that the role has the correct permissions.

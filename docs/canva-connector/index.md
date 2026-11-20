@@ -50,7 +50,7 @@ These shape how the extension behaves, and explain most of its edge cases.
 | **UnoPim** | 3.1.x |
 | **PHP** | 8.4 or higher |
 | **Laravel** | 13.x |
-| **Database** | MySQL (UnoPim default) |
+| **Database** | MySQL 8.0 or PostgreSQL 16 |
 | **Canva** | A Canva account; the free plan is sufficient |
 | **UnoPim DAM package** | Required for DAM asset editing |
 | **`intervention/image` v4 + GD** | Required to return WebP, BMP, TIFF and AVIF in their original format |

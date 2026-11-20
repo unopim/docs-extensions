@@ -35,7 +35,7 @@ SKUs entered manually by a user are **never overwritten** — auto-generation on
 - **Automated SKU generation** — fires on product creation when the SKU field is blank.
 - **Live SKU preview** — see the generated SKU in real time on the configuration page and in the product creation form before saving.
 - **Prefix & suffix** — prepend or append fixed strings to every generated SKU.
-- **Attribute-based parts** — include values from any `select` or `multiselect` attribute (e.g., color, size, category).
+- **Attribute-based parts** — include values from any `select` or `multiselect` attribute (e.g., color, size).
 - **Separator** — choose underscore (`_`) or hyphen (`-`) between parts.
 - **Auto-incrementing sequence** — each SKU gets a unique number; the start value is configurable.
 - **Variant support** — automatically generates SKUs for new configurable product variants when their SKU field is empty.
@@ -45,4 +45,4 @@ SKUs entered manually by a user are **never overwritten** — auto-generation on
 ## Requirements
 
 - Unopim v3.1.3 or higher
-- PHP 8.4+
+- PHP 8.4.1+
