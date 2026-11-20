@@ -26,8 +26,8 @@
       { "text": "Attribute Options Export", "link": "/shopware6/attribute-options-export" },
       { "text": "Category Export", "link": "/shopware6/category-export" },
       { "text": "Product Tags Export", "link": "/shopware6/product-tags-export" },
-      { "text": "Simple Product Export", "link": "/shopware6/product-export" },
-      { "text": "Configurable Product Export", "link": "/shopware6/configurable-product-export" }
+      { "text": "Product Export", "link": "/shopware6/product-export" },
+      { "text": "Configurable Products", "link": "/shopware6/configurable-product-export" }
     ]
   },
 

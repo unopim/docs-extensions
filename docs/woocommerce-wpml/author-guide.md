@@ -17,7 +17,7 @@ A **WordPress Admin** (the "author" role for this add-on) sets up the WPML side 
 
 Open **WPML → Languages**:
 
-1. Pick the **default language** — this is the "original" the storefront falls back to and matches Unopim's primary locale on the credential mapping.
+1. Pick the **default language** — this is the "original" the storefront falls back to and matches the **Default locale for WPML export** on the UnoPim credential.
 2. Add the **secondary languages** you intend to translate into. Each language entry has:
    - A **language code** (`en`, `de`, `fr`, …) — used in the WooCommerce API URLs.
    - A **language label** (`English`, `Deutsch`, `Français`, …) — recorded on every Unopim mapping row.
@@ -55,8 +55,8 @@ If that manual translation works end-to-end, the WPML side is ready for Unopim t
 
 Before the operator runs the first multilingual job, confirm with them:
 
-- [ ] WPML default language matches the Unopim primary locale on the credential.
-- [ ] Every Unopim locale that will be exported has a matching WPML language code (e.g., `en_US` → `en`).
+- [ ] WPML default language matches the **Default locale for WPML export** on the UnoPim credential.
+- [ ] Every Unopim locale that will be exported has a matching WPML language code — the part before `_` (e.g., `en_US` → `en`). Region codes such as `pt-br` are not supported.
 - [ ] Each WPML language is **active** (not just configured but disabled).
 - [ ] The WCML setup wizard has been completed.
 - [ ] A manual product translation works on WordPress without errors.
@@ -67,4 +67,4 @@ Before the operator runs the first multilingual job, confirm with them:
 1. Decide the language list **before** any production export — adding a new language later means re-running every entity through Unopim to seed the new translations.
 2. Keep WPML language codes lowercase and stable (`en`, `de`, `fr`); Unopim mapping is case-sensitive.
 3. Translate one entity manually first to flush out WPML configuration issues — debugging via Unopim's queue logs is slower than debugging in the WordPress admin.
-4. Document the locale → WPML language code mapping in your team's runbook; the Unopim Operator needs it on day one.
+4. Document which Unopim locales are exported to which WPML languages in your team's runbook; the Unopim Operator needs it on day one.

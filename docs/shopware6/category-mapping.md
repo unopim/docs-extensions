@@ -2,7 +2,7 @@
 
 The **Category Field Mapping** screen controls how UnoPim category fields are exported to the corresponding Shopware category fields.
 
-Go to **Shopware → Export Mapping → Category Field Mapping** in the UnoPim sidebar.
+Go to **Shopware → Credentials**, edit a credential, and open its **Category Field Mapping** tab.
 
 ---
 
@@ -39,8 +39,11 @@ The connector resolves category field values per locale. When a locale mapping i
 
 Once all fields are mapped, click **Save**. The mapping applies to the **Shopware Categories** export job.
 
+> [!WARNING]
+> In the current version the **Shopware Categories** export reads the Category Field Mapping of the first credential that has one, whichever credential the job exports to. If you use several credentials, keep their Category Field Mappings identical.
+
 > [!NOTE]
 > At minimum, the **Name** field must be mapped before the category export job will run successfully.
 
 > [!TIP]
-> Mapping changes are tracked in history. Go to **Shopware → Export Mapping → Category Field Mapping → History** to review past changes.
+> Mapping changes are tracked in the credential **History**.

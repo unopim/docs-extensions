@@ -16,8 +16,8 @@ Pro does not replace the connector. It is installed **alongside** it and quietly
 | **Catalogs & catalog prices** | Sell the same product at a different price per market or per B2B company location, using Shopify catalogs and price lists. | [Catalogs](./pro-catalogs) |
 | **Scheduled exports** | Run an export automatically - every 15 minutes, hourly, daily, or on your own cron expression. | [Scheduled Exports](./pro-scheduled-exports) |
 | **Real-time sync** | Push a product to Shopify within seconds of it being saved in UnoPim, without running an export. | [Real-Time Sync](./pro-realtime-sync) |
-| **Advanced export filters** | Narrow an export by locale, attribute, family, category, completeness, time window, or attribute conditions. | [Export Filters](./pro-export-filters) |
-| **Advanced mapping** | Money and measurement metafield types, association mapping, and external image/video URL attributes. | [Advanced Mapping](./pro-mapping) |
+| **Advanced export filters** | Narrow a product export by locale, attribute, family, category, completeness, time window, or attribute conditions; choose locales and categories on the category export. | [Export Filters](./pro-export-filters) |
+| **Advanced mapping** | Money and the extra measurement metafield types, association mapping, and external image/video URL attributes. | [Advanced Mapping](./pro-mapping) |
 
 ---
 
@@ -34,8 +34,8 @@ The connector shows a shorter version of this table inside UnoPim under **Shopif
 | Metafield definitions and values | ✅ | ✅ |
 | Metaobject definitions and entries | ✅ | ✅ |
 | Attribute and family import | ✅ | ✅ |
-| **Shopify Catalog** export job | ❌ | ✅ |
-| **Shopify Catalog** and **Shopify Catalog Price** import jobs | ❌ | ✅ |
+| **Shopify Catalogs** export job | ❌ | ✅ |
+| **Shopify Catalogs** and **Shopify Catalog Prices** import jobs | ❌ | ✅ |
 
 ### Export Filters
 
@@ -50,7 +50,8 @@ The connector shows a shorter version of this table inside UnoPim under **Shopif
 | Feature | Community | Pro |
 |---|:---:|:---:|
 | Attribute to Shopify field mapping | ✅ | ✅ |
-| Money and measurement metafield types | ❌ | ✅ |
+| Weight, Volume and Dimension metafield types | ✅ | ✅ |
+| Money and other measurement metafield types | ❌ | ✅ |
 | Association mapping | ❌ | ✅ |
 | External media mapping | ❌ | ✅ |
 
@@ -85,9 +86,10 @@ Once Pro is installed, three things change in the admin panel:
 
 | Requirement | Detail |
 |---|---|
-| **UnoPim Version** | v3.0.0 or later |
+| **UnoPim Version** | 3.1.x |
+| **PHP** | 8.4 or higher |
 | **Shopify Connector** | Installed and connected to at least one store |
-| **Shopify API Version** | 2026-07 |
+| **Shopify API Version** | 2026-10 |
 | **Credential type** | **Manual** (custom app) or **SaaS** credentials for catalogs and price lists |
 | **Queue worker** | Required - every export, import and real-time push runs as a background job |
 | **Server scheduler** | Required for scheduled exports (`php artisan schedule:run` every minute) |
@@ -96,7 +98,7 @@ Once Pro is installed, three things change in the admin panel:
 
 ## Access scopes for catalogs and prices
 
-Set these additional scopes on the Shopify custom app used by the credential. Open **Settings -> Apps -> Develop apps**, select the app, then open **Configuration -> Admin API integration**.
+Add these scopes to the access scopes of the Shopify app used by the credential, the same way as in [Shopify Setup](./shopify-setup#step-7-configure-api-scopes).
 
 <ScopeTable :scopes="[
   { name: 'Markets', permissions: ['read_markets'] },

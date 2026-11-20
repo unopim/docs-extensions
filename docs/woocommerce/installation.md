@@ -50,6 +50,11 @@ php artisan woocommerce-package:install
 
 This runs the database migrations and publishes the package assets automatically.
 
+> [!WARNING]
+> This command also overwrites two core UnoPim files with the connector's versions, so the WooCommerce filters appear on the export create and edit pages:
+> `packages/Webkul/Admin/src/Resources/views/settings/data-transfer/exports/create.blade.php` and `edit.blade.php`.
+> Any local changes to those files are lost. After updating UnoPim, run `php artisan woocommerce-package:install` again, or the WooCommerce export filters disappear.
+
 **Build the frontend assets**
 
 ```bash
@@ -71,7 +76,7 @@ php artisan optimize:clear
 php artisan queue:restart
 ```
 
-> The queue worker must be restarted whenever application code changes. This command sends a safe restart signal  it waits for the current job to finish before restarting, so no jobs are lost.
+> Imports, exports and Auto Sync run on the queue, so a worker (`php artisan queue:work`) must be running. The queue worker must be restarted whenever application code changes. This command sends a safe restart signal  it waits for the current job to finish before restarting, so no jobs are lost.
 
 | Command                                     | Purpose                                                                                        |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------- |

@@ -38,4 +38,8 @@ To run the job, open it from the Exports list and click **Run**. You can monitor
 
 ![Job Tracker](assets/exports/attribute-export-completed.png)
 
-After the export completes successfully, the selected attributes and their WPML translations will be available in the connected WooCommerce store under **Products → Attributes**, with each language entry linked through WPML.
+After the export completes successfully, the selected attributes will be available in the connected WooCommerce store under **Products → Attributes**.
+
+::: warning Default locale only
+The attribute export has no **Locale** filter, so it sends attribute names and terms in the **Default locale for WPML export** only (`en_US` if that setting is empty). Translations of attribute names and terms are not exported by this job in the current version.
+:::

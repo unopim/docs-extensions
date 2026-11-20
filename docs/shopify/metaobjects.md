@@ -72,7 +72,7 @@ Click **Add Field** for each additional field, then **Save**. A definition must 
 | **Date** / **Date & time** | A calendar date or timestamp |
 | **Color** | A hex colour value |
 | **Rating** | A rating with a min/max scale |
-| **Money** | A monetary amount |
+| **Money** | A monetary amount. Requires [Shopify Pro](./pro-mapping); without Pro it is shown but cannot be selected. |
 | **Dimension** / **Volume** / **Weight** | A measurement with its unit |
 | **Link** | A text-and-URL pair |
 | **JSON** / **ID** | Structured data or a formatted identifier |

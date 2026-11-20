@@ -25,7 +25,7 @@ The connector supports the following sources for tag values:
 | **Date / Datetime attribute** | The date string is exported as a tag. |
 | **Attribute family name** | The name of the UnoPim product family is exported as a tag. |
 
-Configure which attributes and families contribute to tags in **Shopware → Export Mapping → Other Mapping → Tags**.
+Configure which attributes and families contribute to tags in the credential's **Other Mapping** tab, under **Attributes to be used as Tags**.
 
 ---
 
@@ -56,8 +56,9 @@ Click **Create Export** in the top-right corner.
 
 | Filter | Description |
 |---|---|
-| **Shopware Credential** | Select the Shopware store to export to. |
+| **Shopware Credential** | Required. Select the Shopware store to export to. Only active credentials appear in this list. |
 | **Channel** | Select the UnoPim channel whose product values are read for tag export. |
+| **Locale** / **Filter By SKU** | Shown on the form, but not applied in the current version: the job reads every product. |
 
 
 ---
@@ -69,7 +70,7 @@ Click **Save Export**, then click **Export Now**.
 Monitor progress in the **Job Tracker**.
 
 > [!NOTE]
-> The **Other Mapping → Tags** section must be configured before this job will export any tag data. If no tag attributes are mapped, the job will complete without sending any tags.
+> The **Other Mapping → Attributes to be used as Tags** field must be set for the credential. If no tag attributes are mapped, the job fails with "The Tag Field Mappings are not configured".
 
 ---
 

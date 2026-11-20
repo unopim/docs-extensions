@@ -16,11 +16,13 @@ Enter the following details:
 
 | Field | Description |
 |---|---|
-| **WooCommerce URL** | Full URL of your WooCommerce store (e.g. `https://mystore.com`) |
+| **WooCommerce URL** | Base URL of your WordPress site, starting with `http://` or `https://` (e.g. `https://mystore.com`). Do not add `/wp-json` or `/wp-admin`. |
 | **Consumer Key** | The key generated from WooCommerce → Settings → Advanced → REST API |
 | **Consumer Secret** | The secret generated alongside the Consumer Key |
 
-> **Need the API keys?** See [Generating WooCommerce API Credentials](/woocommerce/api-credentials) for step-by-step instructions on creating them in WordPress.
+> **Need the API keys?** See [Generating WooCommerce API Credentials](../woocommerce/api-credentials) for step-by-step instructions on creating them in WordPress.
+
+![WooCommerce REST API keys](assets/credential/generate-woocommerce-api-key-api-key.png)
 
 ![Credential Form](assets/credential/cred.png)
 

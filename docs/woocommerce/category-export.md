@@ -33,6 +33,8 @@ After selecting the category export job type, configure the following options:
 Under **Data to export** and **Data Filters**, select:
 
 - **Locales**: Select the locale to export.
+
+Category names, descriptions and images are taken from the credential's [Category Attribute Mappings](./attribute-mapping#category-attribute-mappings).
 - **Categories**: Select the categories to export from the category tree. You can search by name or code.
 
 ![Category Export Filters](assets/jobs/category-filter-2.png)

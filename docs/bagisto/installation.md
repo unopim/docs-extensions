@@ -35,7 +35,7 @@ Here's what each command does:
 | Command | Purpose |
 |---|---|
 | `php artisan migrate` | Runs database migrations to set up necessary tables |
-| `php artisan vendor:publish --tag=unopim-bagisto-connector` | Publishes configuration files and assets for the connector |
+| `php artisan vendor:publish --tag=unopim-bagisto-connector` | Publishes the connector's built CSS and font assets to `public/themes` |
 | `php artisan optimize:clear` | Clears the application cache to reflect new changes |
 
 ### Step 3 - Enable Queue Operations
@@ -101,31 +101,9 @@ return [
 > [!NOTE]
 > This registers `BagistoServiceProvider` in Laravel so the connector can bootstrap its services, routes, and package configuration during application startup.
 
-### Step 4 - Choose Your Setup Method
+### Step 4 - Run Setup Commands
 
-You have two options to complete the installation:
-
-#### **Option A: Quick Setup with Installer Command (Recommended)**
-
-This single command handles all setup steps automatically:
-
-```bash
-composer dump-autoload
-php artisan bagisto-package:install
-php artisan optimize:clear
-```
-
-The installer will run database migrations, publish configuration files, and clear the cache.
-
-| Command | Purpose |
-|---|---|
-| `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the newly added namespace. |
-| `php artisan bagisto-package:install` | Runs the Bagisto connector installer and required setup tasks. |
-| `php artisan optimize:clear` | Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes. |
-
-#### **Option B: Manual Setup (Fine-Grained Control)**
-
-If you prefer to run each step individually, execute these commands:
+The connector does not ship an installer command. Run each step yourself:
 
 ```bash
 composer dump-autoload
@@ -140,7 +118,7 @@ Here's what each command does:
 |---|---|
 | `composer dump-autoload` | Refreshes the Composer autoloader to recognize the new package |
 | `php artisan migrate` | Runs database migrations to set up necessary tables |
-| `php artisan vendor:publish --tag=unopim-bagisto-connector` | Publishes configuration files and assets for the connector |
+| `php artisan vendor:publish --tag=unopim-bagisto-connector` | Publishes the connector's built CSS and font assets to `public/themes` |
 | `php artisan optimize:clear` | Clears the application cache to reflect new changes |
 
 ### Step 5 - (Optional) Install as a Path Repository

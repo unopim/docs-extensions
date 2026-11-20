@@ -10,7 +10,7 @@ It is deliberately narrow in scope: it **updates products that are already in Sh
 
 | Action in UnoPim | Pushed |
 |---|:---:|
-| Create a product | ✅ |
+| Create a product | ❌ *(a new product has no Shopify link yet; export it once)* |
 | Edit and save a product | ✅ |
 | Bulk edit products | ✅ |
 | Edit a variant of a configurable product | ✅ *(the whole product is re-sent)* |
@@ -47,7 +47,7 @@ Go to **Shopify → Credentials**, edit the credential, and open the **Real-Time
 
 ![Real-Time Sync tab on a credential](./images/pro-realtime-credential.png)
 
-Switch on **Sync products to this store as they are saved** and click **Save**.
+Switch on **Sync products to this store as they are saved** and click **Save**. Turning this switch needs the credential **Edit** permission; the channel and currency settings in Step 1 need the **Export Mappings** permission.
 
 The page then confirms the state:
 

@@ -16,6 +16,9 @@ Skip to [Install the Connector in UnoPim](#install-the-connector-in-unopim) if y
 
 Extract the `Magento2Plugin` package. Move the `app` folder from inside its `src` directory into the root folder of your Magento installation.
 
+> [!NOTE]
+> The connector ships module version 4.1.1. When you upgrade the connector, copy the module from the same package again and rerun Steps 2 and 3. The CSV export sends only changed per-store-view values when the module reports version 4.1.0 or later; with an older module it sends full store view rows.
+
 ### Step 2: Enable the Module
 
 Run these commands in the Magento root folder:
@@ -93,6 +96,20 @@ php artisan optimize:clear
 Sign in to the UnoPim admin. You should see **Magento2** in the sidebar with **Credentials** under it. If it is missing, run `php artisan optimize:clear` again and reload the page.
 
 Your admin role also needs the Magento2 permissions. Open **Settings > Roles**, edit the role, and tick the Magento2 entries. Next, [set up your credentials](./setup-credentials).
+
+## Optional Settings
+
+These `.env` values are read from the connector's `magento2` config. Run `php artisan optimize:clear` and `php artisan queue:restart` after changing them, so web requests and queue workers both use the new values.
+
+| Setting | Default | What it does |
+|---|---|---|
+| `MAGENTO2_ALLOW_PRIVATE_HOSTS` | `false` | Allows a Store URL that resolves to a private, loopback or link-local address. For local or internal Magento only. |
+| `MAGENTO2_VERIFY_TLS` | `true` | Verifies the Magento HTTPS certificate on API calls and image downloads. Turn off only for a test store with a self-signed certificate. |
+| `MAGENTO2_HTTP_TIMEOUT` | `120` | Seconds a Magento API request may take. |
+| `MAGENTO2_TOKEN_TTL_MINUTES` | `230` | Minutes UnoPim caches the admin token of a **Login Based** credential. Keep it below Magento's admin token lifetime (4 hours by default). |
+| `MAGENTO2_IMAGE_MAX_BYTES` | `20971520` | Largest image, in bytes, downloaded during product import. Bigger files are skipped. |
+| `MAGENTO2_IMAGE_CONCURRENCY` | `6` | Number of images downloaded in parallel during product import. |
+| `MAGENTO2_IMAGE_PREFETCH_ITEMS` | `20` | Number of products whose images are fetched and held in memory together during import. |
 
 ## Upgrading
 

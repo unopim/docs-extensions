@@ -7,7 +7,7 @@ The **UnoPim WooCommerce Connector** links your **WooCommerce store** with **Uno
 <br>
 
 <div align="center">
-  <img src="./assets/overview/hero-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
+  <img src="./assets/overview/hero-banner.png" alt="UnoPim WooCommerce Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
 </div>
 
 <br>
@@ -20,7 +20,7 @@ The connector works in **both directions**:
 
 - **Export (UnoPim → WooCommerce)**  push your product catalog from UnoPim to your WooCommerce store.
 - **Import (WooCommerce → UnoPim)**  pull existing WooCommerce data into UnoPim to centralise your catalog management.
-- **Auto Sync**  any product you create, update, or delete in UnoPim is automatically reflected in WooCommerce in real time  no manual export needed.
+- **Auto Sync**  when enabled, products you create, update, or delete in UnoPim are pushed to WooCommerce by a queued job  no manual export needed. Auto Sync uses only the credential marked **Default for Quick Export**.
 
 ## Features
 
@@ -36,10 +36,11 @@ The connector works in **both directions**:
 - Import **categories** from WooCommerce into UnoPim.
 - Import **attributes** and **attribute terms** from WooCommerce into UnoPim.
 - Import **products** from WooCommerce into UnoPim.
+- Import **brands** from WooCommerce as options of a UnoPim select attribute.
 
 ### Sync & Credentials
 
-- **Auto Sync**  product creates, updates, and deletes in UnoPim are automatically pushed to WooCommerce.
+- **Auto Sync**  product creates, updates, and deletes in UnoPim are pushed to the WooCommerce store of the credential marked **Default for Quick Export**, when **Auto Sync Products** is enabled on that credential. Deleting a product in UnoPim deletes it in WooCommerce.
 - **Multiple credentials**  connect more than one WooCommerce store to the same UnoPim instance.
 
 ## Requirements
@@ -47,5 +48,6 @@ The connector works in **both directions**:
 | Requirement       | Version       |
 | ----------------- | ------------- |
 | **UnoPim**  | 3.1.x         |
-| **PHP**     | 8.3 or higher |
+| **PHP**     | 8.4 or higher |
 | **Laravel** | 13.x          |
+| **Queue worker** | A running `php artisan queue:work` process. Import, export and Auto Sync jobs run on the queue. |

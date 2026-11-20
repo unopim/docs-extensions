@@ -39,6 +39,7 @@ Under **Settings**, configure the following fields:
 | Currency | Select | Yes | The currency to use when importing product pricing data. |
 | Family | Select | Yes | The UnoPim product family to assign to all imported products. |
 | With Media | Boolean | No | Enable this option if product images should also be imported from WooCommerce. |
+| WooCommerce Product SKUs (comma separated) | Text | No | Import only the products with these SKUs. Leave empty to import all products. |
 
 
 ## Step 4 — Save and Run the Import Job

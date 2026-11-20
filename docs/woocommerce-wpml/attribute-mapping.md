@@ -19,7 +19,7 @@ Map each WooCommerce field to the matching UnoPim attribute:
 | **Short Description** `[short_description]` | Brief product summary |
 | **Weight** `[weight]` | Used for shipping |
 | **Length / Width / Height** | Dimensions for packaging |
-| **Quantity** `[stock_quantity]` | Available stock (map to a text attribute) |
+| **Quantity** `[stock_quantity]` | Available stock (map to a number attribute) |
 | **Slug** `[slug]` | URL-friendly product name |
 
 ## Additional Meta Keys
@@ -51,22 +51,25 @@ Configure default values used by quick export jobs:
 | Field | Description |
 |---|---|
 | **Default Channel** | Channel used when quick-exporting products |
-| **Default locale for WPML export** | Locale used for quick exports |
+| **Default locale for quick export** | Locale used for quick exports and Auto Sync. When WPML export is enabled, **Default locale for WPML export** is used instead. |
 | **Default Currency** | Currency used for quick exports |
 | **Include media in quick export** | Also export product media during quick export |
-| **Auto Sync Products** | When enabled, product creates, updates, and deletes in UnoPim are automatically pushed to WooCommerce |
+| **Auto Sync Products** | When enabled, product creates, updates, and deletes in UnoPim are pushed to WooCommerce by a queued job. Works only on the credential marked **Default for quick Export**. |
 
 ![Quick Export Settings](assets/mapping/Quick-Export-Settings.png)
 
+> [!NOTE]
+> Quick export and Auto Sync send a single locale. With WPML export enabled they update only the default-language product, not its translations. Run a **WooCommerce Product Export** with all locales to update translations.
+
 ## WPML Export Settings
 
-This section is added by the WooCommerce WPML add-on. It appears at the bottom of the Attribute Mapping tab.
+This section, titled **Enable Export in WPML**, is added by the WooCommerce WPML add-on. It appears at the bottom of the Attribute Mapping tab.
 
 
 | Setting | Description |
 |---|---|
 | **Enable WPML Export** | Toggle **on** to activate multi-locale WPML mode for this credential. When off, exports use standard single-locale WooCommerce behaviour. |
-| **Default locale for WPML export** | The UnoPim locale treated as the original language. All other locales selected in an export job become WPML translations of it. Must match the default language configured in WPML on WordPress. |
+| **Default locale for WPML export** | The UnoPim locale treated as the original language. All other locales selected in an export job become WPML translations of it. Must match the default language configured in WPML on WordPress. If empty, the first locale selected in the job is used. |
 
 ![WPML Export Settings](assets/mapping/WPML-setting.png)
 

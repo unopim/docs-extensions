@@ -73,3 +73,5 @@ Under **Settings → Roles**, the connector adds a **Prestashop** group:
 | **Credentials** → Create / Edit / Delete | Managing credentials and their Shop Mapping |
 | **Attribute Mapping** | The Attribute Mapping and Other Mapping tabs |
 | **Category Mapping** | The Category Mapping tab |
+
+The **History** tab uses UnoPim's core **History** permission. The **History** row action in the credentials list checks a `prestashop.credentials.history` permission that the connector does not register, so only roles with **All** permissions see that action; other roles open **History** from the credential's edit page.

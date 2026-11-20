@@ -30,7 +30,7 @@ In your project's root `composer.json`, under `autoload > psr-4`:
 
 **Step 3 - Register the service provider**
 
-In `bootstrap/providers.php` (UnoPim 2.0+):
+In `bootstrap/providers.php`:
 
 ```php
 use Webkul\ShopifyPro\Providers\ShopifyProServiceProvider;
@@ -44,14 +44,6 @@ return [
 > [!NOTE]
 > `ShopifyProServiceProvider` must be registered **after** `ShopifyServiceProvider`. Pro replaces several of the connector's own services, and it can only do that once the connector has registered them.
 
-> [!TIP]
-> **For UnoPim < 2.0**, add the provider to the `providers` array in `config/app.php` instead:
-> ```php
-> 'providers' => [
->     // ...
->     Webkul\ShopifyPro\Providers\ShopifyProServiceProvider::class,
-> ],
-> ```
 
 **Step 4 - Run the setup commands**
 
@@ -65,7 +57,7 @@ php artisan queue:restart
 | Command | Purpose |
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader so the new namespace is found. |
-| `php artisan migrate` | Creates the `wk_shopify_catalogs` table. |
+| `php artisan migrate` | Creates the `wk_shopify_catalogs` table and adds its compare-at price column. |
 | `php artisan optimize:clear` | Clears all cached files so the new screens load. |
 | `php artisan queue:restart` | Reloads queue workers with the new code. |
 
@@ -101,7 +93,7 @@ php artisan schedule:list
 
 ## Give your role permission
 
-Open **Settings → Roles**, edit the role, and tick the Pro permissions you want it to have:
+Open **Settings → Roles**, edit the role, and tick the Pro permissions you want it to have. They sit under **Shopify → Credentials → Catalogs**:
 
 - **Create Catalog** - add a catalog to a Shopify credential.
 - **Edit Catalog** - open and update an existing catalog.
@@ -121,6 +113,6 @@ Log in to the admin panel and check these four things:
 
 3. **Schedule fields are live.** Open **Data Transfer → Exports → Create Export**, pick a Shopify export type - the **Schedule** card now shows **Cron Expression**, **Timezone** and **Schedule Type** beside the preset dropdown, instead of the preset alone.
 
-4. **New job types appear.** In the export type dropdown you now see **Shopify Catalog**, and in the import type dropdown **Shopify Catalog** and **Shopify Catalog Price**.
+4. **New job types appear.** In the export type dropdown you now see **Shopify Catalogs**, and in the import type dropdown **Shopify Catalogs** and **Shopify Catalog Prices**.
 
 If any of these are missing, run `php artisan optimize:clear` again, confirm the provider is registered, and check that the package files are present in `packages/Webkul/ShopifyPro/`.

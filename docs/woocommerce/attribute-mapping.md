@@ -28,7 +28,9 @@ By default, the following WooCommerce fields can be mapped with UnoPim attribute
 - **Reviews Allowed `[reviews_allowed]`**: Defines whether customers can leave reviews for the product.
 - **Backorders Allowed `[backorders_allowed]`**: Defines whether the product can be ordered when it is out of stock.
 
-> **Note:** For the WooCommerce **Quantity `[stock_quantity]`** field, map a UnoPim **text-type attribute**.
+> **Note:** For the WooCommerce **Quantity `[stock_quantity]`** field, map a UnoPim **number-type attribute**. **Weight**, **Length**, **Width** and **Height** accept measurement, number or text attributes. **SKU** and **Slug** must be unique text attributes; when **SKU**, **Slug** or **Product Name** are not mapped, the product SKU is sent.
+
+All fields except **SKU** and **Slug** also have a **Fixed Value** column. Use it to send the same value for every product instead of an attribute value.
 
 ## Add Additional Meta Keys
 
@@ -51,7 +53,7 @@ Under **Other Mappings**, the admin can configure the following options:
 
 ![Other Mappings](assets/mapping/Other-Mappings.png)
 
-> **Note:** Attributes must be exported (or imported) via the WooCommerce Attributes job before they take effect in product exports. An attribute mapped here that has not been synced yet will be silently skipped during export.
+> **Note:** Attributes must be exported (or imported) via the WooCommerce Attributes job before they take effect in product exports. An attribute mapped here that has not been synced yet will be silently skipped during export. The read-only **Variation Attributes** table on this tab shows which mapped or variant-axis attributes are **Synced** or **Not yet exported**.
 
 ## Quick Export Settings
 
@@ -61,7 +63,7 @@ Under **Quick Export Settings**, the admin needs to configure the following defa
 - Select the default **locale**.
 - Select the default **currency**.
 - Enable **Include media in quick export** if product media should also be exported during quick export.
-- Enable **Auto Sync Products** if products should be synced automatically from UnoPim to WooCommerce when they are created, updated, or deleted.
+- Enable **Auto Sync Products** if products should be synced automatically from UnoPim to WooCommerce when they are created, updated, or deleted. Auto Sync works only on the credential marked **Default for Quick Export**, uses the default channel, locale and currency above, and runs through the queue worker. With Auto Sync on, deleting a product in UnoPim also deletes it in WooCommerce.
 
 For **Quick Export**, enabling auto sync is not required. The admin only needs to assign the default values for **channel**, **locale**, and **currency** in the attribute mapping, and then enable **Quick Export** in the credential settings.
 

@@ -7,7 +7,7 @@ Sync your **BigCommerce** storefront with UnoPim. Push enriched products and cat
 <br>
 
 <div align="center">
-  <img src="./assets/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
+  <img src="./assets/intro-banner.png" alt="UnoPim BigCommerce Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
 </div>
 
 <br> 

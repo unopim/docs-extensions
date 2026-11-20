@@ -42,7 +42,7 @@ Exporting categories before products means products can be placed in the right c
 
 Parent categories are always created before their children, so the category tree in commercetools matches the one in UnoPim.
 
-> **Note:** A category's **slug** in commercetools is its UnoPim category **code** (e.g. `audio_electronics`), the same in every locale. UnoPim categories have no slug field of their own.
+> **Note:** The category name, slug, description and custom fields come from the connection's [Category Mapping](./setup#category-mapping) tab. When no slug is mapped and the category has no `slug` field value, the slug is the UnoPim category **code** (e.g. `audio_electronics`) in every locale.
 
 ---
 

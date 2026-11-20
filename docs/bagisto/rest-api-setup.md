@@ -136,12 +136,13 @@ Once installed and configured, you can test the API endpoints:
 
 ### Admin API Example
 
-To authenticate and access admin endpoints:
+The connector logs in with the same request. If this returns a `token`, the Shop URL and admin credentials will work in UnoPim:
 
 ```bash
-curl -X POST http://localhost/public/api/admin/auth/login \
+curl -X POST http://localhost/public/api/v1/admin/login \
+  -H "Accept: application/json" \
   -H "Content-Type: application/json" \
-  -d '{"email":"admin@example.com","password":"password"}'
+  -d '{"email":"admin@example.com","password":"password","device_name":"api"}'
 ```
 
 ### Shop API Example

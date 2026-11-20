@@ -7,7 +7,7 @@ Store Link: [View on Webkul Store](https://store.webkul.com/unopim-bagisto-conne
 The UnoPim Bagisto Connector seamlessly integrates your UnoPim product information management system with your Bagisto e-commerce store. This powerful extension enables you to efficiently manage and synchronize product data, categories, attributes, and media files all from a centralized location.
 
 <div align="center">
-  <img src="./assets/overview/intro-banner.png" alt="UnoPim Shopify Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
+  <img src="./assets/overview/intro-banner.png" alt="UnoPim Bagisto Connector" width="100%" style="max-height:330px; object-fit:cover; border-radius:8px;" />
 </div>
 
 With this connector, you can keep your Bagisto store up-to-date with the latest product information from UnoPim without switching between multiple platforms.

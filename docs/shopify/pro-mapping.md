@@ -1,10 +1,10 @@
 # Advanced Mapping
 
-Shopify Pro extends the mapping screens the connector already ships. Nothing moves - the same **Export Mapping**, **Import Mapping** and **Metafield** screens simply gain fields that were greyed out with a *Pro* badge before.
+Shopify Pro extends the mapping screens the connector already ships. Nothing moves - the same **Export Mappings**, **Import Mappings** and **Metafield Definitions** screens simply gain fields that were greyed out with a *Pro* badge before.
 
 Three things are added:
 
-- **Money and measurement metafield types**
+- **Money and the extra measurement metafield types**
 - **Association mapping** - related, complementary and bundle products
 - **External media mapping** - image and video URL attributes
 
@@ -12,7 +12,7 @@ Three things are added:
 
 ## Money and measurement metafield types
 
-Go to **Shopify → Meta Fields → Create** (or edit an existing definition). The **Type** dropdown now offers two more Shopify metafield types.
+Go to **Shopify → Metafield Definitions → Create** (or edit an existing definition). The **Type** dropdown now unlocks **Money** and the measurement types beyond Weight, Volume and Dimension.
 
 ### Money
 
@@ -24,7 +24,7 @@ Use it for things like a recommended retail price, a dealer price, or a deposit 
 
 ### Measurement
 
-A **measurement** metafield stores a value with a unit - weight, volume or dimension.
+A **measurement** metafield stores a value with a unit. **Weight**, **Volume** and **Dimension** are available without Pro. Pro unlocks the other Shopify measurement types, such as area, distance, duration, energy, power, speed, temperature and voltage.
 
 Pick **Measurement** as the type and choose a UnoPim measurement attribute. The unit, the minimum and the maximum are read from the attribute, so the definition exported to Shopify carries the same validation you set in UnoPim.
 
@@ -85,7 +85,7 @@ The URL has to be reachable from the public internet - Shopify fetches it itself
 
 | Setting | Screen |
 |---|---|
-| Money / measurement metafield types | **Shopify → Meta Fields** |
+| Money / measurement metafield types | **Shopify → Metafield Definitions** |
 | Association mapping | **Shopify → Export Mappings** |
 | External image / video attributes | **Shopify → Export Mappings** |
 | Import-side association handling | **Shopify → Import Mappings** |

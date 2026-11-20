@@ -1,6 +1,6 @@
 # Attribute Export
 
-The **Shopware Attributes** export job pushes UnoPim attributes to Shopware as **property groups**. This includes both regular attributes and the super-attributes used to define configurable product variants.
+The **Shopware Attributes** export job pushes UnoPim attributes to Shopware as **property groups**. It exports only the attributes selected under **Attributes to be used as Product Properties** in the credential's [Other Mapping](./other-mapping), plus every attribute used as a variant (super) attribute by a configurable product. Other attributes are not exported.
 
 Export attributes before exporting attribute options, and before running product export jobs that rely on property values.
 
@@ -33,11 +33,13 @@ While creating the export job:
 
 ## Configure Filters
 
-After selecting the job type, configure the required filter:
+After selecting the job type, configure the filters:
 
 | Filter | Description |
 |---|---|
-| **Shopware Credential** | Select the Shopware store connection to export to. Only active credentials appear in this list. |
+| **Shopware Credential** | Required. Select the Shopware store connection to export to. Only active credentials appear in this list. |
+| **Channel** / **Locale** | Shown on the form, but not used by this job in the current version. Translations are sent for every locale in the credential's Locale Mapping. |
+| **Filter By Code** | Optional. Export only the listed attribute codes. |
 
 
 ---

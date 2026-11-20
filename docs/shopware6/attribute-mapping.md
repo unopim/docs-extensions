@@ -2,7 +2,7 @@
 
 The **Attribute Mapping** screen lets you map UnoPim attributes to the standard Shopware product fields. Once configured, every export job reads these mappings to know which UnoPim value to push into each Shopware field.
 
-Go to **Shopware → Export Mapping → Attribute Mapping** in the UnoPim sidebar.
+Go to **Shopware → Credentials**, edit a credential, and open its **Attribute Mapping** tab. Each credential has its own mapping.
 
 
 ---
@@ -51,6 +51,8 @@ Each row on the mapping screen represents one Shopware product field. Use the dr
 | **Product Length** | Physical product length (text attribute with numeric value). |
 | **Purchase Unit** | Purchase quantity step (text attribute with numeric value). |
 
+**Product Number** must be mapped to an attribute. **Name**, **Tax ID**, **Net Price**, **Gross Price** and **Stock Quantity** need either a mapped attribute or a default value; the page will not save otherwise. Default values for **Free Shipping**, **Closeout Status** and **Mark as Topseller** must be `true` or `false`.
+
 ---
 
 ## Using Default Values
@@ -72,7 +74,7 @@ Enter the Shopware field code, select the UnoPim attribute type it expects, and 
 
 ## Saving
 
-After completing the mapping, click **Save** at the top of the page. The mapping is applied globally — all export jobs that send products to Shopware use this configuration.
+After completing the mapping, click **Save** at the top of the page. The mapping applies only to this credential — export jobs that use this credential read it.
 
 > [!TIP]
-> Mapping changes are tracked in **Shopware → Export Mapping → Attribute Mapping → History**, so you can see what changed and when.
+> Mapping changes are tracked in the credential **History**, so you can see what changed and when.

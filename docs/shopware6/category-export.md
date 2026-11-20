@@ -44,7 +44,9 @@ While creating the export job:
 
 | Filter | Description |
 |---|---|
-| **Shopware Credential** | Select the Shopware store connection to export to. |
+| **Shopware Credential** | Required. Select the Shopware store connection to export to. Only active credentials appear in this list. |
+| **Channel** / **Locale** | Shown on the form, but not used by this job in the current version. Translations are sent for every locale in the credential's Locale Mapping. |
+| **Filter By Code** | Optional. Export only the listed category codes. |
 
 
 ---

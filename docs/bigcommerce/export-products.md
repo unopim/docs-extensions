@@ -40,7 +40,7 @@ Controls *which values* are sent for each product.
 ![Data to export](./assets/export/data-export.png)
 
 > [!NOTE]
-> If you don't pick a channel or locale, the job falls back to the store's **default channel and locale**.
+> If you don't pick a channel or locale, the job falls back to UnoPim's **default channel** and that channel's **default locale**.
 
 #### Data filters
 

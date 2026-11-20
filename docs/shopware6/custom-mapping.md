@@ -2,7 +2,7 @@
 
 The **Custom Fields Mapping** screen lets you map UnoPim attributes to Shopware **custom fields** — arbitrary fields defined in your Shopware store that go beyond the standard product data model.
 
-Go to **Shopware → Export Mapping → Custom Fields Mapping** in the UnoPim sidebar.
+Go to **Shopware → Credentials**, edit a credential, and open its **Custom Field Mapping** tab. Each credential has its own mapping.
 
 ---
 
@@ -41,10 +41,10 @@ You can map UnoPim attributes of the following types to Shopware custom fields:
 |---|---|
 | **Text** | String value |
 | **Textarea** | Multi-line string |
-| **Number (text with number validation)** | Numeric value |
 | **Select** | Single option value |
 | **Multiselect** | Array of option values |
 | **Date** | Date string |
+| **Datetime** | Date-time string |
 | **Boolean** | `true` / `false` |
 
 ---
@@ -57,4 +57,4 @@ To remove a pair, click the **Delete** icon next to the row. The custom field wi
 
 ## Saving
 
-Click **Save** once all pairs are configured. The mapping is stored globally and applied to all product export jobs.
+Click **Save** once all pairs are configured. The mapping applies to product export jobs that use this credential.
