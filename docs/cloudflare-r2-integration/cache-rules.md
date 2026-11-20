@@ -26,6 +26,6 @@ With no rules, every uploaded object gets `max-age=604800` (7 days).
 
 ## Notes
 
-- Rules apply to **new** uploads. To re-apply rules to existing files, run **Synchronize Media** again.
+- Rules apply to **new** uploads. To re-apply rules to existing files, run **Synchronize Media** again. This only works while the local copies still exist.
 - Use the **Remove** link next to a row to delete it.
 - Extensions are normalized to lowercase. `.JPG`, `JPG`, and `jpg` all match the `jpg` rule.

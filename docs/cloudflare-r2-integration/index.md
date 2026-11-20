@@ -5,7 +5,7 @@ Store and deliver your UnoPim media faster with secure, scalable Cloudflare R2 c
 <br>
 
 <div align="center">
-  <img src="./images/intro-banner.png" alt="UnoPim Auto SKU Generator" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
+  <img src="./images/intro-banner.png" alt="UnoPim Cloudflare R2 Integration" width="100%" style="max-height:330px; object-fit:cover; border-radius:18px;" />
 </div>
 
 <br> 
@@ -25,19 +25,23 @@ Store and deliver your UnoPim media faster with secure, scalable Cloudflare R2 c
 
 | Requirement | Details |
 |---|---|
-| **UnoPim** | 2.0.0 or higher |
-| **PHP** | 8.2 or higher |
+| **UnoPim** | 3.0 or higher (extension 2.1.0 is tested on 3.1.x) |
+| **PHP** | 8.4 or higher |
 | **Cloudflare R2** | Active R2 bucket and an R2 API token (Access Key + Secret Key) |
-    
+| **Queue worker** | A running `php artisan queue:work` (Supervisor, systemd or Horizon in production) |
 
 ## Before You Start
 
 Make sure you have:
 
-1. A working UnoPim 2.0 installation.
+1. A working UnoPim 3.x installation.
 2. An active Cloudflare account with R2 enabled.
 3. An R2 bucket created in your Cloudflare dashboard.
 4. An R2 API token with **Edit** access to the bucket.
-5. The Cloudflare R2 Integration extension installed. See [Installation](./installation).
+5. For a **public** bucket: public access switched on in Cloudflare, either the `r2.dev` development URL or a custom domain connected to the bucket. You enter this address as the **Bucket URL**.
+6. The Cloudflare R2 Integration extension installed. See [Installation](./installation).
+
+> [!TIP]
+> Decide on your final public address (your own domain) before the first upload. Changing the **Bucket URL** later needs extra steps — see [Change the Bucket URL later](./credentials#change-the-bucket-url-later).
 
 

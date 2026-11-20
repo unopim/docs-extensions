@@ -68,8 +68,10 @@ Open **Settings → Roles**, edit the role, and tick the Cloudflare R2 permissio
 
 - **Cloudflare R2** - master node, shows the menu.
 - **Credential** - view the credential page.
-- **Save Credential** - save credential changes.
-- **Sync Media** - run the *Synchronize Media* button.
+- **Save Cloudflare R2 Credential** - save credential changes.
+- **Validate Cloudflare R2 Credential** - test the keys against the bucket.
+- **Synchronize Cloudflare R2 Media** - run the *Synchronize Media* button.
+- **View Cloudflare R2 Credential History** - open the **History** tab.
 
 Without these the menu and buttons stay hidden.
 
