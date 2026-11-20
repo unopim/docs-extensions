@@ -45,6 +45,9 @@ Translations are grouped by language. Each language shows every selected field i
 - **Cancel**
 - **Apply** — saves and runs each target channel as a background job. Watch them in [Watch progress](./tracker).
 
+> [!NOTE]
+> Apply only fills target values that are empty. Fields that already have a value in a target language are skipped.
+
 ## Heads-up
 
 If the same channel + language appears in both source and target, that pair is skipped — you never translate a language to itself.

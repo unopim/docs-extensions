@@ -39,7 +39,7 @@ There are two kinds of templates:
 
 | Requirement | Version |
 |---|---|
-| **UnoPim** | 3.1.3 |
+| **UnoPim** | 3.1.x |
 | **PHP** | 8.4 or higher |
 | **Laravel** | 13.x |
 | **Database** | PostgreSQL (tested on 14 and 16) |

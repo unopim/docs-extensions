@@ -147,11 +147,19 @@ The integration now appears in your Zapier account as a private app.
 
 4. **The worker is alive.** `php artisan queue:work --queue=zapier` is running and stays running.
 
-5. **Log pruning is scheduled.** `php artisan zapier:logs:prune` is registered to run daily. Confirm your scheduler is wired up:
+5. **Log pruning is scheduled.** `php artisan zapier:logs:prune` is registered to run daily. Check it is listed:
 
    ```bash
    php artisan schedule:list
    ```
+
+   The listing does not prove it runs. Laravel's scheduler only runs when cron calls it, so make sure the server has this cron entry:
+
+   ```bash
+   * * * * * cd /var/www/unopim && php artisan schedule:run >> /dev/null 2>&1
+   ```
+
+   Without it, delivery logs are never pruned.
 
 ## Give your role permission
 

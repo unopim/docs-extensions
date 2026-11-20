@@ -100,9 +100,11 @@ Regenerating the Secret Key or the API Password invalidates the stored token and
 
 | What Zapier says | What it means |
 |---|---|
-| *Those credentials were rejected...* | One of the four values is wrong, or the Username is a human admin login. Copy all four from one row of the API Keys screen. |
+| *Those credentials were rejected...* | One of the four values is wrong, or the Username is a human admin login. Copy all four from one row of the API Keys screen. The same message appears when Zapier cannot reach the URL at all (DNS failure, firewall, TLS error), so check the address too. |
 | *The UnoPim URL must start with `https://`* | You entered an `http://` address. |
-| *"…" is not a valid UnoPim host* | The URL is not a resolvable public hostname. |
+| *The UnoPim URL is not a valid address* | The value cannot be parsed as a URL. |
+| *"…" is not a valid UnoPim host* | The host is not a domain name with at least one dot, for example `localhost`. This is a format check only - it does not check that the name resolves. |
+| *UnoPim Zapier Connector (packages/Webkul/Zapier) is not installed* | The connection test got a 404 from `/api/v1/rest/zapier/me`. The API keys work, but the package is not installed on that instance. See [Installation](./installation). |
 | *UnoPim did not return an access token* | The URL does not point at the application root, or `/oauth/token` is not reachable there. |
 | *This API key is not permitted to perform that action* | The connection works but the key lacks a permission. Grant it on the key under **Configuration → Integrations**. |
 

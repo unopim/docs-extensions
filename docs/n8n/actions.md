@@ -108,9 +108,9 @@ You can build the body with an expression from an earlier node:
 {{ JSON.stringify({ values: { common: { name: $json.title } } }) }}
 ```
 
-## Dropdowns load from your instance
+## Identifiers and bodies are typed in
 
-Locales, channels, families, attributes and categories are fetched from the instance the credential points at. The lists always match that catalog, so there is nothing to keep in sync by hand.
+The UnoPim node has no dropdowns for locales, channels, families, attributes or categories. Type the code into **Data**, **Filters (JSON)** or the identifier field, or set it with an expression. The only dropdowns loaded from your instance are on the [UnoPim Trigger](./triggers) node: **Event**, **Locale** and **Channel**.
 
 ## Using it with an AI agent
 

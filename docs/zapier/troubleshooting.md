@@ -37,7 +37,11 @@ Confirm by opening **Connected Zaps** - if the Zap is not listed there, it never
 
 Products saved through UnoPim's bulk-edit flow do **not** emit `product.updated`, so no Zap runs. Edit a single product to confirm the trigger works, and use an exporter when you need bulk changes to leave UnoPim.
 
-### 4. No subscription exists for that event
+### 4. The change came from an import
+
+Import jobs do not emit product, category, attribute or family events, so no Zap runs for records an import creates or changes.
+
+### 5. No subscription exists for that event
 
 Nothing is queued when no subscription matches, so a Zap on `product.created` will not react to a category change. Check what is actually subscribed:
 
@@ -64,7 +68,8 @@ If the connection succeeds but one operation returns **403 This action is unauth
 | Message | Cause |
 |---|---|
 | *The UnoPim URL must start with `https://`* | Plain HTTP is refused rather than sending your Client Secret and password in the clear. |
-| *"…" is not a valid UnoPim host* | The address is not a resolvable public hostname. |
+| *The UnoPim URL is not a valid address* | The value cannot be parsed as a URL. |
+| *"…" is not a valid UnoPim host* | The host is not a domain name with at least one dot, for example `localhost`. This is a format check only. |
 | *Remove the username and password from the UnoPim URL* | You pasted `https://user:pass@host`. Put them in the fields below instead. |
 | *The UnoPim URL must not contain a query string or fragment* | Paste just the address. |
 | *UnoPim did not return an access token* | The URL does not point at the application root, or `/oauth/token` is not reachable there. |
@@ -170,7 +175,7 @@ The last delivery to that subscription failed, and the message is kept on the ro
 |---|---|
 | Is a worker running on the `zapier` queue? | See the top of this page. |
 | Is `ZAPIER_LOGGING` set to `false`? | Deliveries still happen, but nothing is recorded. |
-| Have the rows been pruned? | The default window is 30 days. Widen the overview with `?days=30`, and check `ZAPIER_LOG_RETENTION_DAYS`. |
+| Have the rows been pruned? | Rows are kept for 30 days by default (`ZAPIER_LOG_RETENTION_DAYS`). The overview strip only counts the last 7 days; widen it with `?days=30`. |
 | Does any subscription exist? | Nothing is queued when nothing is listening. |
 
 ---

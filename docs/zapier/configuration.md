@@ -26,7 +26,7 @@ ZAPIER_LOG_RETENTION_DAYS=30
 ZAPIER_LOG_MAX_PAYLOAD_KEYS=60
 ```
 
-Run `php artisan optimize:clear` after changing any of them, and restart the queue worker.
+Run `php artisan optimize:clear` after changing any of them, then `php artisan queue:restart`. Queue workers read config once at startup and keep the old values until they restart.
 
 ---
 
@@ -36,8 +36,10 @@ Deliveries run on their own queue so a slow or unresponsive Zap endpoint cannot 
 
 > [!CAUTION]
 > If you change this, **change your worker command to match**. A worker on `--queue=zapier` will not pick up jobs from a queue you renamed, and the failure is silent - no trigger fires and nothing on screen says why.
+>
+> Jobs already queued under the old name stay there. Run one worker on the old queue until it is empty, or they are never delivered.
 
-Queue behaviour is fixed at **3 attempts** with a **30 second backoff**. Nothing is queued at all when no subscription exists for an event, so an instance with no Zaps connected pays nothing for having the package installed.
+Queue behaviour is fixed at **3 attempts** with a **30 second backoff**. Only a connection error or timeout is retried. A non-2xx answer from the hook URL is logged as **Failed** once and not retried. Nothing is queued at all when no subscription exists for an event, so an instance with no Zaps connected pays nothing for having the package installed.
 
 ---
 
@@ -55,7 +57,7 @@ If you are hitting the cap, the better fix is usually to set a **Channel** and *
 
 How many real records the sample endpoint returns for Zapier's *Test trigger* step. Three is enough to show the field shape without pulling a page of products on every test.
 
-The `catalog.any` sample returns at least four records, drawn from products first and then the other entity types, so it can exceed this value.
+The `catalog.any` sample returns up to four records, or up to this value if it is higher. Products are taken first, then categories, attributes and families, so with the default of `3` the sample is usually three products and one category.
 
 ---
 
@@ -95,7 +97,7 @@ This affects only the stored copy. The delivery itself always carries the full p
 
 | Behaviour | Value |
 |---|---|
-| Retry attempts | 3 |
+| Retry attempts | 3, only after a connection error or timeout. A non-2xx answer is not retried. |
 | Retry backoff | 30 seconds |
 | Delivery body | A JSON array containing exactly one record |
 | Signing | HMAC-SHA256, and only when a subscription carries a secret. The Zapier app never sends one. |

@@ -141,11 +141,14 @@ n8n runs on your own infrastructure, so an unreachable webhook usually means the
 
 A failed delivery is counted, not acted on. Each delivery is retried twice before it counts, and the subscription only stops being delivered to after five consecutive failures. It is switched back on by itself after a cool down, 15 minutes by default, so a subscription that an outage disabled comes back without you doing anything. Switching the workflow on again in n8n also clears the count.
 
-If n8n answers **404** or **410**, the webhook no longer exists there, and the subscription is paused at once and not revived. See [Configuration](./configuration).
+If n8n answers **404** or **410** on the last retry of a delivery, the webhook no longer exists there, and the subscription is paused straight away and not revived. See [Configuration](./configuration).
 
 ## If UnoPim cannot reach your n8n
 
 Deliveries are pushed from UnoPim to n8n. If your n8n has no address UnoPim can reach, for example it runs on a laptop or behind NAT with no port forwarding, the trigger will register but no delivery will ever arrive.
+
+> [!WARNING]
+> If the n8n webhook URL resolves to a private, loopback or link local address, such as a Docker service name or a LAN IP, UnoPim refuses to register it and the workflow cannot be switched on. See [Troubleshooting](./troubleshooting#a-delivery-is-marked-blocked).
 
 Options:
 

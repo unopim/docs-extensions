@@ -15,7 +15,7 @@ The **History Preview & Restore** extension adds inline file thumbnails and one-
 - **Roll back parent + translations + pivots together** — one Restore action covers the entire record across all related audit rows.
 - **Revive soft-deleted records** — trashed records are automatically un-trashed during restore.
 - **Keep an audit trail of every restore** — who clicked Restore, when, and from which version is recorded.
-- **Purge old history rows** — a built-in Artisan command keeps the `audits` table bounded without losing the most recent version.
+- **Purge old history rows** — a built-in Artisan command, or an optional daily auto-purge set in System Settings, keeps the `audits` table bounded without losing the most recent version.
 
 ## Key features
 
@@ -27,7 +27,7 @@ The **History Preview & Restore** extension adds inline file thumbnails and one-
 - **Soft-delete revival** — trashed records are automatically un-trashed before old values are applied.
 - **Asset file preservation** — re-uploading a DAM asset keeps the previous file with a unique suffix (`photo (1).jpg`, …) so any prior binary can be restored.
 - **Restore lineage** — every revert stamps the audit row with `restored_from_version_id`, `restored_by`, and `restored_at`.
-- **ACL-gated** — two permissions control who can view history and who can click Restore.
+- **ACL-gated** — separate permissions control who can view history, who can restore, and who can change the History system settings.
 - **33 locales** — translated into all major European, Asian, and RTL admin locales.
 - **DAM optional** — installs and works without the DAM module.
 
@@ -35,8 +35,8 @@ The **History Preview & Restore** extension adds inline file thumbnails and one-
 
 | Requirement | Details |
 |---|---|
-| **UnoPim** | 2.0.0 or higher (with `HistoryControl`) |
-| **PHP** | 8.3 or higher |
+| **UnoPim** | 2.1.x or 3.0.x (with `HistoryControl`) |
+| **PHP** | 8.3 or higher (8.4 for UnoPim 3.x) |
 | **Database** | MySQL or PostgreSQL with JSON column support |
 | **ffmpeg** | Optional — required for video frame thumbnail extraction |
 | **pdftoppm / poppler-utils** | Optional — required for PDF first-page thumbnail rendering |

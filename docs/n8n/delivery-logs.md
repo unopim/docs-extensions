@@ -21,6 +21,7 @@ Every workflow that has subscribed to an event. Rows appear on their own when so
 | **Workflow** | n8n's own identifier for the workflow |
 | **Status** | **Listening**, or **Unreachable** once repeated failures have paused it |
 | **Failures** | Consecutive failed deliveries. Reset to zero on the next success |
+| **Last Error** | The error of the most recent failed attempt, for example `HTTP 404`. Cleared on the next success |
 | **Last Delivered** | When a delivery last succeeded |
 | **Connected** | When the subscription was created |
 
@@ -36,7 +37,7 @@ Disconnecting here removes the subscription only. Delivery history is kept.
 
 ### What Unreachable means
 
-A subscription is marked Unreachable after **five consecutive failed deliveries**, or at once if n8n answers 404 or 410. It is not deleted, and its history stays.
+A subscription is marked Unreachable after **five consecutive failed deliveries** (`N8N_FAILURE_THRESHOLD`), or as soon as one delivery's last retry gets 404 or 410 from n8n. It is not deleted, and its history stays.
 
 This is deliberate. n8n runs on your own infrastructure, so a webhook that stops answering is far more often a stopped container than a deleted workflow. An Unreachable subscription is switched back on by itself after a cool down, 15 minutes by default, unless n8n said the webhook is gone. Switching the workflow on again in n8n re registers it and clears the failure count in either case.
 
@@ -99,13 +100,14 @@ This stops a workflow from being pointed at something inside your network. The c
 
 ### Retention
 
-Old rows are cleared automatically. The window defaults to 30 days and is configurable, including keeping rows forever.
+Old rows are cleared by the `n8n:logs:prune` command. The window defaults to 30 days and is configurable, including keeping rows forever.
 
 ```bash
 php artisan n8n:logs:prune
 ```
 
-Run it on a schedule, or let your existing task scheduler call it.
+> [!WARNING]
+> The package does not schedule this command. Rows are only removed when you run it, so add it to cron or your task scheduler. Otherwise the log table keeps growing.
 
 See [Configuration](./configuration) for the retention setting and the rest.
 

@@ -37,17 +37,7 @@ Webkul\DeepLTranslation\Providers\DeepLTranslationServiceProvider::class,
 > [!NOTE]
 > This registers `DeepLTranslationServiceProvider` in Laravel so the extension can bootstrap its services, routes, and package configuration during application startup.
 
-### 4. Install the DeepL SDK
-
-```bash
-composer require deeplcom/deepl-php:^1.18
-```
-
-| Command | Purpose |
-|---|---|
-| `composer require deeplcom/deepl-php:^1.18` | Installs the official DeepL PHP SDK dependency required by the extension. |
-
-### 5. Run the install command
+### 4. Run the install command
 
 ```bash
 composer dump-autoload
@@ -57,9 +47,12 @@ php artisan deepl:install
 | Command | Purpose |
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the newly added namespace. |
-| `php artisan deepl:install` | Runs the DeepL package installer and required setup tasks. |
+| `php artisan deepl:install` | Installs the DeepL PHP SDK (`deeplcom/deepl-php`) through Composer if it is missing, runs migrations, and clears the view, route and config caches. |
 
-### 6. Keep a queue worker running
+> [!NOTE]
+> If the SDK install fails (for example `composer` is not on the `PATH`), run `composer require deeplcom/deepl-php:^1.18` manually and run `php artisan deepl:install` again.
+
+### 5. Keep a queue worker running
 
 ```bash
 php artisan queue:work
@@ -67,17 +60,18 @@ php artisan queue:work
 
 | Command | Purpose |
 |---|---|
-| `php artisan queue:work` | Starts a queue worker to process DeepL translation jobs in the background. |
+| `php artisan queue:work` | Starts a queue worker to process DeepL translation jobs in the background. Every Apply, bulk and auto-translate save runs as a queued job. |
 
 In production use Supervisor / systemd / Horizon.
 
-### 7. Give your role permission
+### 6. Give your role permission
 
 Open **Settings → Roles**, edit the role, and tick the DeepL permissions you want them to have:
 
-- **Manage credentials** - add / edit / delete DeepL keys.
-- **Translate fields** - use the per-field button and the product wizard.
-- **Bulk translate** - translate many products at once.
+- **DeepL → Credentials** - view DeepL keys, with **Create**, **Edit** (includes Test Connection and Set Default) and **Delete**.
+- **DeepL → Translate** - use the per-field button, the product wizard, and the AI agent tile.
+- **DeepL → Manual translate** - access to the manual translate endpoints. There is no menu entry for a manual translate page in this version.
+- **DeepL → Bulk translate** - translate many products at once.
 
 ![DeepL permissions in Settings → Roles](./images/deepl-acl-image.png)
 

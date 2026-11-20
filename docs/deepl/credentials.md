@@ -76,7 +76,10 @@ If you only want auto-translate to touch a few of those attributes, pick them in
 
 This only narrows the list — it can't add attributes that aren't flagged **AI Translate**.
 
-Click **Save** when done.
+Click **Save changes** in the save bar at the bottom of the page. The edit page has no Save button of its own; the save bar appears as soon as you change a field.
+
+> [!NOTE]
+> Auto-translate uses the settings of the default key. If no active key is marked default, the first active key's settings are used.
 
 ---
 
@@ -90,7 +93,7 @@ The edit page has a **Test Connection** button. Click it any time to check the k
 
 Click the trash icon on a row and confirm.
 
-> You can't delete the only working default key. Mark another key as default first.
+> You can't delete the default key while it is the only active key. Add or turn on another key first.
 
 ---
 

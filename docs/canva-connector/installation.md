@@ -5,10 +5,11 @@
 ```bash
 composer require unopim/canva-connector
 php artisan canva-connector:install
+php artisan migrate
 php artisan optimize:clear
 ```
 
-Composer registers the service provider and the namespace for you, and `canva-connector:install` runs the migrations and publishes the assets. See [what the install command creates](#what-the-install-command-creates), then [Verify](#verify).
+Composer registers the service provider and the namespace for you, and `canva-connector:install` publishes the assets. Run `php artisan migrate` as well: the install command only migrates from `packages/Webkul/CanvaConnector/src/Database/Migrations`, which does not exist in a Composer install, so it creates no tables there. See [what the install command creates](#what-the-install-command-creates), then [Verify](#verify).
 
 ## Install manually
 
@@ -75,7 +76,7 @@ The publish step ships the stylesheet holding the sidebar entry's icon font. Wit
 
 ## What the install command creates
 
-`php artisan canva-connector:install` runs both routes' migrations, so the tables below appear whether you installed with Composer or by hand. Three tables, all owned by the extension:
+On a manual install, `php artisan canva-connector:install` creates the tables below. On a Composer install, `php artisan migrate` creates them. Three tables, all owned by the extension:
 
 | Table | Holds | Key constraint |
 |---|---|---|

@@ -41,7 +41,7 @@ Press **Escape** or click outside the modal to close it.
 
 ## Thumbnail generation
 
-Thumbnails for PDFs and video frames are generated lazily on first access and then cached on disk. Subsequent loads of the same file are served from cache with no additional processing.
+Thumbnails for images, PDFs and video frames are generated lazily on first access and then cached on the `local` disk under `history-preview-restore/thumbnails/`, even when media is stored on S3. Subsequent loads of the same file are served from cache with no additional processing.
 
 ### Optional binaries
 
@@ -61,7 +61,7 @@ PDFTOPPM_PATH=/usr/bin/pdftoppm
 
 ## Multi-disk support
 
-The extension checks both the DAM `private` disk and the standard `public` disk when resolving file URLs. DAM assets and non-DAM product images work side by side without any extra configuration.
+The extension looks for a file on the disk set by `HISTORY_PREVIEW_DISK` (default `public`), the default filesystem disk, the DAM `private` disk and the `public` disk, checking local disks before remote ones. DAM assets, non-DAM product images and files uploaded after switching the default disk to S3 work side by side without any extra configuration.
 
 ## Overriding field rendering
 

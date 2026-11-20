@@ -45,20 +45,28 @@ Command purpose:
 - `composer dump-autoload`: Regenerates Composer's autoloader mapping to include the newly added namespace.
 - `php artisan optimize:clear`: Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes.
 - `php artisan migrate`: Runs pending database migrations required by the package.
-- `php artisan vendor:publish --provider="Webkul\MakerChecker\Providers\MakerCheckerServiceProvider"`: Publishes Maker Checker package resources and configuration.
-- `php artisan db:seed --class="Webkul\MakerChecker\Database\Seeders\MakerCheckerStagesSeeder"`: Seeds default Maker Checker workflow stages into the database.
+- `php artisan vendor:publish --provider="Webkul\MakerChecker\Providers\MakerCheckerServiceProvider"`: Copies the pre-built Maker Checker CSS, JS and icon font to `public/themes/maker_checker/build`. The package has no publishable config file.
+- `php artisan db:seed --class="Webkul\MakerChecker\Database\Seeders\MakerCheckerStagesSeeder"`: Seeds the five workflow stages (Draft, Waiting for Approval, Approved, Rejected, Published) into the `makerchecker_stages` table.
 
-### 5. Build front-end assets
+> [!WARNING]
+> Do not skip the seeder. Without the stages, no request appears in **Maker Checker > Approval Requests**, because the list filters requests by stage name.
+
+### 5. Build front-end assets (only if you change the package)
+
+The package ships pre-built assets, and `vendor:publish` in step 4 already copies them to `public/themes/maker_checker/build`. The root UnoPim `npm run build` does not build Maker Checker assets.
+
+Rebuild only if you modify the package's Vue or CSS sources. Run the build inside the package folder:
 
 ```bash
+cd packages/Webkul/MakerChecker
 npm install
 npm run build
 ```
 
 | Command | Purpose |
 |---|---|
-| `npm install` | Installs frontend dependencies required by the Maker Checker package UI. |
-| `npm run build` | Builds Maker Checker frontend assets for production/admin usage. |
+| `npm install` | Installs the package's frontend build dependencies. |
+| `npm run build` | Builds the Maker Checker assets into `public/themes/maker_checker/build`. |
 
 ### 6. Start the queue worker
 
@@ -72,6 +80,9 @@ php artisan queue:work
 |---|---|
 | `php artisan queue:work` | Starts a queue worker to process Maker Checker background jobs (including notifications). |
 
+> [!NOTE]
+> Without a running worker, notification emails stay in the queue and are never sent (unless `QUEUE_CONNECTION=sync`). In-app notifications are not queued.
+
 ### 7. Configure email notifications
 
 Add your mail settings to `.env`:
@@ -84,6 +95,11 @@ MAIL_USERNAME=your_username
 MAIL_PASSWORD=your_password
 MAIL_ENCRYPTION=tls
 ```
+
+> [!NOTE]
+> Queue workers keep the mail settings they started with. After you change mail settings in `.env`, run `php artisan config:clear` (or `php artisan config:cache` if you cache config) and `php artisan queue:restart`.
+
+Emails are sent only when **Send Notifications** is enabled in the Maker Checker configuration. See [Checker End](./checker-end).
 
 ### 8. Verify
 

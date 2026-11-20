@@ -4,13 +4,13 @@ The extension declares its own ACL keys under the areas it extends. They are man
 
 ## The keys
 
-| Key | Grants |
-|---|---|
-| `catalog.products.canva_connector` | *Group* |
-| `catalog.products.canva_connector.edit_image` | Edit, create and sync product `image` attributes |
-| `catalog.products.canva_connector.edit_gallery` | Edit gallery items, and import designs into a gallery |
-| `dam.asset.canva_connector` | *Group* |
-| `dam.asset.canva_connector.edit` | Edit DAM assets and save the result back |
+| Label on the Roles screen | Key | Grants |
+|---|---|---|
+| **Canva Connector** | `catalog.products.canva_connector` | *Group* |
+| **Edit Images with Canva** | `catalog.products.canva_connector.edit_image` | Edit, create and sync product `image` attributes |
+| **Edit Gallery Images with Canva** | `catalog.products.canva_connector.edit_gallery` | Edit gallery items, and import designs into a gallery |
+| **Edit DAM Assets with Canva** | `dam.asset.canva_connector` | *Group* |
+| **Edit DAM Assets with Canva** | `dam.asset.canva_connector.edit` | Edit DAM assets and save the result back |
 
 ## Enforcement happens twice
 

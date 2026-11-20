@@ -11,7 +11,7 @@ Everything lives in `config/n8n.php` and every setting can be overridden with an
 | `N8N_FAILURE_THRESHOLD` | `5` | Consecutive failures before a subscription is paused |
 | `N8N_REVIVE_AFTER` | `15` | Minutes before a paused subscription is switched back on. `0` turns this off |
 | `N8N_MAX_PAYLOAD_KEYS` | `1000` | Cap on a flattened payload |
-| `N8N_SAMPLE_SIZE` | `3` | Example records offered to the workflow editor |
+| `N8N_SAMPLE_SIZE` | `3` | Records returned by the sample endpoint `GET /api/v1/rest/n8n/triggers/{event}/sample`. The n8n node 1.0.5 does not call this endpoint |
 | `N8N_LOGGING` | `true` | Delivery logging on or off |
 | `N8N_LOG_RETENTION_DAYS` | `30` | How long log rows are kept. `0` keeps them forever |
 | `N8N_LOG_MAX_PAYLOAD_KEYS` | `60` | Cap on the payload copy stored per log row |
@@ -25,7 +25,7 @@ N8N_FAILURE_THRESHOLD=5
 N8N_LOG_RETENTION_DAYS=30
 ```
 
-Run `php artisan optimize:clear` after changing any of them.
+Run `php artisan optimize:clear` after changing any of them, then `php artisan queue:restart`. Queue workers read the config once at startup, so a running worker keeps the old queue name, timeout, threshold and logging settings until it restarts.
 
 ## The queue
 
@@ -50,7 +50,7 @@ Raise it if your n8n is often briefly unavailable. Lower it if you would rather 
 
 Re registering the workflow, which happens whenever you switch it on in n8n, clears the count.
 
-A **404** or **410** from n8n means the webhook no longer exists there, so the subscription is paused at once instead of waiting for the threshold.
+A **404** or **410** from n8n means the webhook no longer exists there. The delivery is still retried twice, but if its last attempt also gets 404 or 410 the subscription is paused straight away instead of waiting for the threshold.
 
 ## Reviving paused subscriptions
 
@@ -86,31 +86,38 @@ php artisan n8n:logs:prune
 
 Set the value to `0` to keep everything.
 
+> [!WARNING]
+> The package does **not** schedule this command. Only `n8n:subscriptions:revive` is scheduled. Without a cron entry or your own scheduler entry for `n8n:logs:prune`, log rows are never deleted and the table keeps growing. For example, run it daily from cron:
+>
+> ```
+> 0 3 * * * cd /path/to/unopim && php artisan n8n:logs:prune >> /dev/null 2>&1
+> ```
+
 ## Permissions
 
-The package adds its own permissions, so you can give a role access to the logs without giving it the ability to disconnect workflows.
+The package adds its own permissions, so you can give a role access to the logs without giving it the ability to disconnect workflows. The **Label** column is what the Roles and API Keys screens show.
 
 Admin permissions:
 
-| Key | Grants |
-|---|---|
-| `n8n` | The section itself |
-| `n8n.subscriptions` | The Connected Workflows area |
-| `n8n.subscriptions.index` | Viewing the list |
-| `n8n.subscriptions.delete` | Disconnecting a workflow |
-| `n8n.logs` | The Delivery Logs area |
-| `n8n.logs.index` | Viewing the list |
-| `n8n.logs.view` | Opening a payload |
+| Label | Key | Grants |
+|---|---|---|
+| **n8n** | `n8n` | The section itself |
+| **Connected Workflows** | `n8n.subscriptions` | The Connected Workflows area |
+| **View** | `n8n.subscriptions.index` | Viewing the list |
+| **Disconnect** | `n8n.subscriptions.delete` | Disconnecting a workflow |
+| **Delivery Logs** | `n8n.logs` | The Delivery Logs area |
+| **View** | `n8n.logs.index` | Viewing the list |
+| **View Payload** | `n8n.logs.view` | Opening a payload |
 
 API key permissions:
 
-| Key | Grants |
-|---|---|
-| `api.n8n` | The connection test |
-| `api.n8n.subscriptions` | Listing subscriptions |
-| `api.n8n.subscriptions.create` | Registering a webhook |
-| `api.n8n.subscriptions.delete` | Removing a webhook |
-| `api.n8n.triggers` | Fetching example records |
+| Label | Key | Grants |
+|---|---|---|
+| **n8n** | `api.n8n` | The connection test and the trigger's event list (`GET /api/v1/rest/n8n/me`) |
+| **Connected Workflows** | `api.n8n.subscriptions` | Listing subscriptions (`GET /api/v1/rest/n8n/subscriptions`). The trigger uses it to check whether its webhook is registered |
+| **Create** | `api.n8n.subscriptions.create` | Registering a webhook (`POST /api/v1/rest/n8n/subscriptions`) |
+| **Delete** | `api.n8n.subscriptions.delete` | Removing a webhook (`DELETE /api/v1/rest/n8n/subscriptions/{id}`) |
+| **Trigger Samples** | `api.n8n.triggers` | Fetching example records (`GET /api/v1/rest/n8n/triggers/{event}/sample`). Not used by the n8n node 1.0.5 |
 
 A key with **Permission Type: All** has all of these.
 

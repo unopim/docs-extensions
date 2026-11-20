@@ -21,7 +21,7 @@ All the UnoPim values come from a **single row** on the API Keys screen.
    | Permission Type | When to use it |
    |---|---|
    | **All** | Simplest. The key can reach every API route, which is what a general purpose n8n connection needs. |
-   | **Custom** | Tick the individual permissions instead. For n8n you need **n8n**, **Subscriptions**, **Create**, **Delete** and **Trigger Samples**, plus the permissions for whichever resources your workflows read or write. |
+   | **Custom** | Tick the individual permissions instead. For n8n you need the n8n group: **n8n**, **Connected Workflows**, **Create** and **Delete**. **Trigger Samples** is not used by the n8n node 1.0.5. Add the permissions for whichever resources your workflows read or write. |
 
 4. Save. UnoPim generates the credentials and shows the **API Password once**. Copy it now.
 
@@ -89,6 +89,7 @@ The credential is strict about the URL, because a malformed one fails later in w
 | No trailing slash | A trailing slash produces `host//api/...`, which UnoPim will not route |
 | No username or password in the URL | Credentials belong in the fields below, not the address |
 | No query string or fragment | The node appends its own paths to this value |
+| No `/admin` on the end | The field takes the application root, not the admin panel address |
 
 The credential trims a trailing slash for you and rejects the rest with a message explaining what to fix.
 

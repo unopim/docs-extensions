@@ -95,4 +95,4 @@ The module reads images from wherever UnoPim keeps them. You do not need to chan
 To keep PDFs small and fast, UnoPim makes a print-size copy of each image (longest side 1400 px) and reuses it next time. PNG, GIF and WebP images keep their transparency. On S3, image details are fetched in batches and remembered for 24 hours, so big catalogues do not wait on hundreds of separate requests.
 
 > [!NOTE]
-> Want a fallback picture when a product image cannot be read? Set `images.placeholder` in `config/pdftemplate.php` to the path of that image.
+> Want a fallback picture when a product image cannot be read? Copy `packages/Webkul/PdfTemplate/src/Config/pdftemplate.php` to `config/pdftemplate.php` and set `images.placeholder` to the path of that image. Copy the whole file, not just this key: a partial `images` block replaces the package defaults. Then run `php artisan config:clear` and `php artisan queue:restart`, because queue workers keep the old config until they restart.

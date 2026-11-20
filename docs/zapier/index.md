@@ -83,3 +83,4 @@ You need:
 | **Node** | 22+ and npm 10+, only if you deploy the Zapier app yourself |
 | **Network** | UnoPim reachable at a public `https://` address; plain HTTP is refused |
 | **Queue** | A worker running `php artisan queue:work --queue=zapier` |
+| **Scheduler** | Cron running `php artisan schedule:run` every minute, for the daily log pruning |

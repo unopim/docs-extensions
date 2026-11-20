@@ -54,7 +54,7 @@ The window defaults to the **last 7 days**. Widen it with a query parameter:
 /admin/zapier/logs?days=30
 ```
 
-Below it, **Deliveries by Event** breaks the same window down per event key - total, delivered, failed and success rate - so you can see which trigger is actually busy and which one is failing.
+Below it, **Deliveries by Event** breaks the same window down per event key - total, delivered, failed and success rate - so you can see which trigger is actually busy and which one is failing. In this table **Failed** counts every delivery that was not Delivered, including **Zap Turned Off** and **Blocked**.
 
 ### The history grid
 
@@ -70,14 +70,14 @@ Below it, **Deliveries by Event** breaks the same window down per event key - to
 | **Error** | The first 60 characters of the error, or `-`. |
 | **Delivered At** | Timestamp, filterable as a date range. |
 
-Search on event, record or target. Filter on event, status, HTTP code or date range.
+Search on event, record or target. Filter on event, record, status, HTTP code or date range.
 
 ### Statuses
 
 | Status | Meaning |
 |---|---|
 | **Delivered** | Zapier accepted it and answered 2xx. |
-| **Failed** | The endpoint errored, returned a non-2xx that was not 410, or timed out. The job retries. |
+| **Failed** | The endpoint returned a non-2xx that was not 410, could not be reached, or timed out. Only a timeout or connection error is retried (3 attempts in total); a non-2xx answer is not. |
 | **Zap Turned Off** | Zapier answered **410 Gone**. The Zap is off, so the subscription was removed - the log row stays. |
 | **Blocked** | The SSRF guard refused the target, so nothing left your server. |
 

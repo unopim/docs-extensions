@@ -124,6 +124,8 @@ The destination failed the safety check. A URL that resolves to a private, loopb
 
 The reason is in the error field on the log row.
 
+The same check runs when the workflow is switched on. If the n8n webhook URL resolves to a private, loopback or link local address, UnoPim refuses the registration with a validation error on `target_url`, the workflow cannot be activated in n8n, and no row appears under **Connected Workflows**. This is common when n8n and UnoPim share a Docker network or a LAN. Give n8n a public address, for example with a reverse proxy, and set its webhook URL to it.
+
 This is usually a local n8n. During development you can allow loopback destinations, but never do this on a production instance:
 
 ```
@@ -158,7 +160,7 @@ Some managed plans do not allow them. If the **Community nodes** section is miss
 
 ## The trigger registers but deliveries return 404
 
-The webhook URL n8n gave UnoPim is not one n8n serves. UnoPim pauses the subscription on the first 404 and does not revive it.
+The webhook URL n8n gave UnoPim is not one n8n serves. The delivery is retried twice, and if the last retry also gets 404, UnoPim pauses the subscription and does not revive it.
 
 This happens when a workflow was imported from a JSON file whose trigger node has no `webhookId`. n8n then builds a test style path that is not registered in production.
 

@@ -145,7 +145,7 @@ Create a Supervisor config file (e.g., `/etc/supervisor/conf.d/job-scheduler-wor
 ```ini
 [program:job-scheduler-worker]
 process_name=%(program_name)s_%(process_num)02d
-command=php /path/to/your/unopim/artisan queue:work --queue=job-scheduler --sleep=3 --tries=3 --max-time=3600
+command=php /path/to/your/unopim/artisan queue:work --queue=job-scheduler --sleep=3 --timeout=7200 --max-time=3600
 autostart=true
 autorestart=true
 stopasgroup=true
@@ -160,7 +160,7 @@ Key settings explained:
 | Setting | What it does |
 |---|---|
 | `numprocs=2` | Runs two worker processes in parallel |
-| `--tries=3` | Retries each failed job up to 3 times |
+| `--timeout=7200` | Maximum seconds one scheduled run may take before the worker kills it. Set it above your longest import/export. |
 | `--max-time=3600` | Restarts workers after 1 hour to prevent memory leaks |
 | `autostart / autorestart` | Supervisor starts and restarts the worker automatically |
 | `stdout_logfile` | Worker logs are saved to your UnoPim storage/logs folder |
@@ -179,6 +179,15 @@ sudo supervisorctl start job-scheduler-worker:*
 | `sudo supervisorctl update` | Applies newly added or changed Supervisor program definitions. |
 | `sudo supervisorctl start job-scheduler-worker:*` | Starts all configured Job Scheduler worker processes under Supervisor. |
 
+> [!WARNING]
+> The whole UnoPim import or export runs inside the `job-scheduler` worker. Without `--timeout`, `queue:work` uses its 60-second default and long exports are killed. Keep `--timeout` lower than `retry_after` of your queue connection (`DB_QUEUE_RETRY_AFTER` or `REDIS_QUEUE_RETRY_AFTER` in `.env`, default `90`), otherwise Laravel releases the job again while it is still running and marks it failed. After changing `.env`, run `php artisan optimize:clear` and `php artisan queue:restart`.
+
+> [!NOTE]
+> Retries are not controlled by the worker `--tries` flag. Each run is attempted once by the worker; the job's **Max Retries** and **Retry Delay** settings decide the retries. See [Execution Settings](./setup#execution-settings).
+
+> [!TIP]
+> After updating the extension code, run `php artisan queue:restart` so running workers load the new code. Changes to scheduled jobs made in the admin panel do not need a restart; `schedule:run` reads them from the database every minute.
+
 ---
 
 ## Verify the Installation
@@ -187,3 +196,18 @@ Once all steps are complete, log in to your UnoPim dashboard. You should see the
 
 ![Job Scheduler Menu](./assets/job-schedular.png)
 
+---
+
+## Artisan Commands
+
+| Command | Purpose |
+|---|---|
+| `php artisan job-scheduler:install` | Runs the Job Scheduler migrations. |
+| `php artisan job-scheduler:run --list` | Lists active, non-paused scheduled jobs with their next run time. |
+| `php artisan job-scheduler:run --job=<code>` | Dispatches one job by its **Code** right now. Add `--dry-run` to only print what would be dispatched. |
+| `php artisan job-scheduler:health` | Shows job and execution counts, including executions stuck in **Running** for more than 2 hours. |
+| `php artisan job-scheduler:health --fix` | Dispatches a cleanup job that marks those stuck executions as **Timed Out**. It runs on the default queue, so a default queue worker must be running. |
+| `php artisan job-scheduler:cleanup` | Deletes logs and finished executions older than 30 days. Options: `--days=N`, `--logs-only`, `--dry-run`. |
+
+> [!NOTE]
+> `job-scheduler:cleanup` and `job-scheduler:health --fix` are not scheduled automatically. Run them by hand or add them to your own cron.

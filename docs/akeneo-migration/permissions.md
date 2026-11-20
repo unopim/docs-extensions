@@ -18,14 +18,14 @@ Tick the permissions you want the role to have, then use **Save changes** on the
 
 | Group | Permission | Allows the user to… |
 |-------|-----------|---------------------|
-| **Connections** | View | Open the Akeneo Migration section and view connections. |
+| **Connections** | *(the Connections checkbox itself)* | Open the Akeneo Migration section and view connections. |
 | | Create | Create a new connection. |
 | | Edit | Open and edit an existing connection, including its **Migration History** and **History** tabs. |
 | | Delete | Delete a connection. |
 | | Test Connection | Validate a connection's credentials against Akeneo. |
 | | Import Filters | Open the **Import Filters** tab, load its options from Akeneo, and save filters. Needs **Edit** to reach the connection page. |
 | **Migration** | Run | Start a migration for a connection. |
-| | Migration Runs | View the migration history. |
+| | Migration Runs | Groups **Delete Migration Run**. It grants nothing on its own: the **Migration History** tab is shown to anyone with **Connections → Edit**. |
 | | Delete Migration Run | Delete one or more migration runs. |
 
 > [!TIP]
@@ -35,7 +35,7 @@ Tick the permissions you want the role to have, then use **Save changes** on the
 
 Permissions shape the interface, not just the API:
 
-- Without **Connections → View**, the Akeneo Migration entry does not appear in the sidebar at all.
+- Without **Connections**, the Akeneo Migration entry does not appear in the sidebar at all.
 - Without **Connections → Create**, the **Create Connection** button is hidden on the listing.
 - Without **Connections → Import Filters**, the **Import Filters** tab is hidden from the connection editor, and opening it by URL shows the **Connection** tab instead. Runs still apply any filters already saved on the connection.
 - Without **Migration → Run**, the entity selection and **Start Migration** controls are hidden from the connection editor.

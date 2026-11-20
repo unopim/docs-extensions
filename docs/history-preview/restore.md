@@ -19,12 +19,14 @@ The Restore feature lets you revert any record to exactly the state it was in at
 
 ![Restore confirmation dialog](./images/restore-confirm.png)
 
-6. A toast notification confirms the outcome:
+7. A toast notification confirms the outcome:
    - **Restored** — the record was reverted successfully.
    - **No changes** — the selected version is identical to the current state.
    - **Failed** — an error occurred (details appear in the notification).
 
 ## What gets restored
+
+The first version of a record (its creation) has no Restore button.
 
 Restoring a version reverts every audit row that shares the same `version_id` as the row you clicked. A typical save might produce several rows — a parent column change, a translated name, and a pivot relation — all grouped under one version ID. Clicking Restore on any one of them rolls back the entire group together.
 
@@ -72,19 +74,17 @@ By default, any version in history can be restored regardless of how old it is. 
 
 ### One-step undo (opt-in)
 
-To allow restoring only the single most-recent version, set this in `.env`:
+To allow restoring only the single most-recent version, go to **Configuration → System Settings → History** and turn off **Allow Restoring Any Version**, then save.
+
+Until this setting is saved once, the default comes from `.env`:
 
 ```ini
 HISTORY_PREVIEW_ANY_VERSION=false
 ```
 
-Or publish the config and set:
+After the setting is saved, the `.env` value is ignored.
 
-```php
-'allow_restore_any_version' => false,
-```
-
-In this mode the Restore button only appears on the latest version row. All previous rows remain visible for reference but cannot be restored directly.
+In this mode the Restore button still shows on older rows, but restoring any version other than the latest fails with the message *"Only the latest version can be restored"*. Restore again after each undo to walk further back.
 
 > [!TIP]
 > The default any-version mode is recommended for most teams. One-step undo is useful if you want to limit restores to a simple "undo last save" workflow.

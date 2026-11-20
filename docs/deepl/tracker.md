@@ -1,6 +1,6 @@
 # Watch progress
 
-Background translation jobs show up in **Settings → Data Transfer → Tracker**.
+Background translation jobs show up in **Data Transfer → Job Tracker**.
 
 ![Watch progress on the Tracker page](./images/watch-progress.png)
 
@@ -16,8 +16,10 @@ Each row shows:
 |--|--|
 | [Translate many products](./bulk-translate) | One row for the whole run. |
 | [Translate one product](./product-wizard) | One row per target channel. |
-| [After import](./auto-translate) | One row per imported product. |
-| [AI agent](./agentic-pim) | One row per source field. |
+| [After import](./auto-translate) | One row per import. |
+| [After saving a product](./auto-translate#after-saving-a-product) | One row per save. |
+| [Translate one field](./per-field-translate) | None. |
+| [AI agent](./agentic-pim) | None. |
 
 ## Notifications
 

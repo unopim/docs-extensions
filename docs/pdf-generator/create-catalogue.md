@@ -91,7 +91,7 @@ When the job is done, open it in **Data Transfer > Job Tracker** and click **Dow
 
 ## Limits and tips
 
-- A catalogue can hold up to **1000 products**. UnoPim renders them in batches of 150 and joins the parts into one PDF.
+- A catalogue can hold up to **1000 products**. If you select or filter more, only the first 1000 are used. UnoPim renders them in batches of 150 and joins the parts into one PDF.
 - A queue worker must be running. If the job stays in **Queued**, start `php artisan queue:work`.
 - Large catalogues with many images take longer the first time. Image copies are reused, so the next run is much faster.
 - The **Generate Catalogue PDF** action only shows when at least one catalogue template exists and you have the **Catalogues > Generate** permission.
