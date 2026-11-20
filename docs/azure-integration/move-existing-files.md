@@ -22,7 +22,9 @@ Open your terminal, navigate to your UnoPim project root, and run:
 php artisan azure_integration:move_existing_files
 ```
 
-This command will scan all existing media files in your UnoPim local storage and transfer them to the Azure Blob container you configured in your credentials.
+The command asks for confirmation, then copies every file under these folders of the public disk (`storage/app/public`) to the Azure container, keeping the same path: `product`, `category`, `attribute_option`, `admins`, `tinymce`, `configuration`, `locales`. Local files are not deleted.
+
+DAM assets are not covered by this command; see [DAM Assets](#dam-assets) below.
 
 ---
 
@@ -37,3 +39,29 @@ Once the command completes:
 ---
 
 > **Tip:** Run this command during off-peak hours if you have a large media library, as migrating a high volume of files may take some time to complete.
+
+---
+
+## DAM Assets
+
+With the UnoPim DAM extension installed, DAM assets are only stored on Azure after you apply the DAM patch shipped with this extension (`patch/dam-remote-disk-support.patch`, cut against `unopim/dam` 3.0.1). Without it, DAM keeps writing assets to the local private disk. Follow the instructions in `patch/README.md`. If DAM is installed through Composer (`vendor/unopim/dam`), re-apply the patch after every `composer update`.
+
+Then copy existing DAM assets, with their covers and thumbnails, from the local private disk to Azure:
+
+```bash
+# Preview what would be copied
+php artisan azure_integration:move_dam_assets --dry-run
+
+# Copy
+php artisan azure_integration:move_dam_assets
+
+# Copy and delete each local file once its upload is verified
+php artisan azure_integration:move_dam_assets --delete-local
+```
+
+| Option | Description |
+|---|---|
+| `--dry-run` | Reports what would be copied without writing anything. |
+| `--delete-local` | Deletes each file from the local private disk once its upload is verified. Without it, nothing is deleted locally. |
+
+The command is safe to re-run. Assets missing from the asset disk show a placeholder icon in DAM without any error, so check that the copy finished without failures.

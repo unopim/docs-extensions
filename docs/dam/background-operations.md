@@ -11,14 +11,14 @@ Instead these run as **queued background jobs**. DAM starts the job, returns imm
 | Action | Where you trigger it |
 |---|---|
 | **Delete directory** | Tree right-click, Explorer context menu, API |
-| **Rename directory** | Tree right-click, Explorer |
 | **Copy directory** | Tree right-click, Explorer clipboard paste |
 | **Copy directory structure** | *Copy Directory Structure* / *Copy structure to…* |
 | **Move directory structure** | Dragging a folder to a new parent |
 | **Mass move** | Explorer → *Move to…* |
 | **Mass copy** | Explorer → *Copy to…* |
+| **Upload processing** — metadata extraction, PDF/video thumbnails, AI tagging | After every upload or re-upload, including REST API uploads |
 
-Everything else — uploading a handful of files, renaming an asset, tagging — happens immediately in the request.
+Everything else — renaming an asset or directory, tagging by hand — happens immediately in the request. The uploaded file itself is stored during the request; only the processing listed above is queued.
 
 ---
 
@@ -59,6 +59,8 @@ In production, run it under a process supervisor so it restarts automatically:
 ```bash
 sudo supervisorctl status unopim-worker
 ```
+
+If you route DAM jobs to dedicated queues with `DAM_QUEUE_*`, the worker must listen on those queues — see [Queue routing](./configuration.md#queue-routing-env-only). After deploying new DAM code or changing `.env`, run `php artisan queue:restart` so running workers pick up the change.
 
 See [Artisan Commands](./commands.md) for the wider command reference and [Installation](./installation.md) for the recommended queue setup.
 

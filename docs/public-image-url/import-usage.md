@@ -55,6 +55,29 @@ When the import runs successfully:
 - assigns them to the correct product media attributes,
 - and saves them with the related product data.
 
+The downloaded file is saved to UnoPim's default filesystem disk, and the product stores that local path, not the source URL. Changing or deleting the file at the source URL later does not update the product; import the row again to replace it.
+
+Cells that contain a file name instead of a URL are still read from the import's images directory, as in a normal UnoPim import.
+
+## URL Restrictions
+
+URLs are downloaded by the UnoPim server, so the extension only fetches what is safe:
+
+- Only `http` and `https` URLs on public addresses are fetched. Redirects to internal hosts are not followed.
+- Image URLs must answer with an image `Content-Type` (JPEG, PNG, GIF, BMP, WebP, TIFF, SVG, or ICO). Otherwise the row fails with a *"... is not a valid or accessible URL"* error.
+- URLs whose file name ends in an HTML, JavaScript, or PHP extension are refused.
+
+To import from a server on your own network, set this in `.env`:
+
+```env
+PUBLIC_URL_ALLOW_PRIVATE_NETWORK=true
+```
+
+Link-local and cloud-metadata addresses (such as `169.254.169.254`) stay blocked even then.
+
+> [!NOTE]
+> Imports run in the queue worker. If configuration is cached, run `php artisan config:cache` after changing `.env`, then `php artisan queue:restart` so running workers load the new value.
+
 ## Result After Import
 
 Once the product import is completed successfully, you can open the imported product in UnoPim and verify that the media has been added correctly.

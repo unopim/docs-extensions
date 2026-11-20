@@ -18,6 +18,8 @@ Access is controlled by three things:
 - an optional **expiry date**, after which the link stops working;
 - **revocation**, which lets you switch a link off at any moment.
 
+Only the token is stored. The full URL is built from your UnoPim address each time it is shown, so a link already sent keeps working only while that address (for example `APP_URL`) still points to your UnoPim instance.
+
 > [!IMPORTANT]
 > Shared links are **not password-protected**. Anyone holding the URL can open it until it expires or you revoke it. Treat a share URL as a secret, and set an expiry on anything sensitive.
 

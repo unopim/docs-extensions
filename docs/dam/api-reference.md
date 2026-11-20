@@ -138,7 +138,7 @@ Two independent layers decide what a request can do.
 | Assets | `api.dam.assets`, `.getById`, `.metadata`, `.upload`, `.re-upload`, `.edit`, `.update`, `.download`, `.delete` |
 | Directories | `api.dam.directory`, `.getById`, `.create`, `.edit`, `.delete` |
 | Comments | `api.dam.comment`, `.getById`, `.create`, `.edit`, `.delete` |
-| Properties | `api.dam.property`, `.create`, `.edit`, `.delete` |
+| Properties | `api.dam.property`, `.getById`, `.create`, `.edit`, `.delete` |
 | Tags | `api.dam.tags`, `.all`, `.create`, `.delete`, `.bulk-assign`, `.destroy` |
 | Shares | `api.dam.shares`, `.get`, `.getById`, `.create`, `.update`, `.revoke`, `.reauthorize`, `.delete` |
 | Linked Resources | `api.dam.linked-resource`, `.get` |
@@ -155,5 +155,3 @@ To interact with Unopim DAM's API, you can use our official Postman collection:
 
 - **[UnoPim DAM APIs Documentation](https://documenter.getpostman.com/view/4385199/2sBXVhEWjQ)** - Detailed information about all available API endpoints, parameters, and response formats
 - **[UnoPim DAM APIs on Postman](https://www.postman.com/unopim/unopim-apis/collection/4385199-086948c4-9e81-4271-abb7-6d6995a67304?ctx=info)** - Official Postman collection with ready-to-use API requests
-
-The collection ships with the package at `packages/Webkul/DAM/postman/Unopim-DAM-API.postman_collection.json` — import it into Postman and set the `url` and `token` collection variables to start testing straight away.

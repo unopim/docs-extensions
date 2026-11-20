@@ -56,16 +56,16 @@ php artisan optimize:clear
 | Command | Purpose |
 |---|---|
 | `composer dump-autoload` | Regenerates Composer's autoloader mapping to include the newly added namespace. |
-| `php artisan aws-s3-package:install` | Installs the AWS SDK dependencies (`league/flysystem-aws-s3-v3` and `aws/aws-sdk-php`), runs database migrations, and publishes package assets. |
+| `php artisan aws-s3-package:install` | Installs the AWS SDK dependencies (`league/flysystem-aws-s3-v3` and `aws/aws-sdk-php`) with `composer require` if they are missing, runs database migrations, and publishes package assets. |
 | `php artisan optimize:clear` | Clears all cached files (bootstrap, configuration, routes, and views) to load the new changes. |
 
 > [!NOTE]
 > The installer automatically pulls in the required AWS libraries - you don't need to install them separately.
 
 
-## Step 5 - Publish Config *(Only if using a custom theme)*
+## Step 5 - Publish Assets *(Only if the AWS S3 menu icon or styles are missing)*
 
-If your UnoPim instance uses a custom published theme, run this additional command:
+The installer already publishes the admin assets. Run this command again only if the menu icon or styles are missing, for example after clearing `public/themes`:
 
 ```bash
 php artisan vendor:publish --tag=aws-s3-config --force
@@ -73,9 +73,9 @@ php artisan vendor:publish --tag=aws-s3-config --force
 
 | Command | Purpose |
 |---|---|
-| `php artisan vendor:publish --tag=aws-s3-config --force` | Publishes the AWS integration config files and overwrites existing published copies for custom-theme setups. |
+| `php artisan vendor:publish --tag=aws-s3-config --force` | Publishes the compiled AWS integration admin assets to `public/themes/aws`. No config file is published. `aws-s3-package:install` already runs this. |
 
-You can skip this step if you're using the default UnoPim theme.
+You can skip this step if the AWS S3 menu shows its icon.
 
 
 ## Step 6 - Build Frontend Assets *(Only if using a custom theme)*

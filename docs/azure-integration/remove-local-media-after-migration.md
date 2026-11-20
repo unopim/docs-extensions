@@ -10,7 +10,7 @@ php artisan azure_integration:remove_media_files
 
 ## What This Command Does
 
-This command removes the local copies of media files that have already been migrated to Azure.
+This command asks for confirmation, then deletes each local file in the same folders the migration command copies (`product`, `category`, `attribute_option`, `admins`, `tinymce`, `configuration`, `locales`) if a file with the same path exists in the Azure container. Files not found in Azure are kept. It does nothing if the Azure credential is disabled. DAM assets are not touched; use `azure_integration:move_dam_assets --delete-local` for those.
 
 Use it when:
 

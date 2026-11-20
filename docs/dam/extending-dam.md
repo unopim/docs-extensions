@@ -114,7 +114,7 @@ Separate from the asset library, DAM exposes three endpoints for the plain file 
 | Endpoint | Permission required |
 |---|---|
 | `POST /admin/dam/file/create` | `dam.asset.upload` |
-| `POST /admin/dam/file/update` | `dam.asset.re_upload` |
+| `PUT /admin/dam/file/update` | `dam.asset.re_upload` |
 | `DELETE /admin/dam/file/delete` | `dam.asset.destroy` |
 
 > [!WARNING]

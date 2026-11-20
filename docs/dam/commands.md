@@ -7,6 +7,7 @@ DAM ships a set of Artisan commands for installation, maintenance, and migration
 | [`dam-package:install`](#dam-packageinstall) | Installs DAM — migrations, seed data, published assets |
 | [`dam:demo-data`](#damdemo-data) | Seeds sample directories and assets |
 | [`dam:backfill-thumbnails`](#dambackfill-thumbnails) | Generates thumbnails for existing PDFs and videos |
+| [`dam:cleanup-orphaned-asset-mappings`](#damcleanup-orphaned-asset-mappings) | Removes asset links left by deleted attributes or category fields |
 | [`dam:version`](#damversion) | Prints the installed DAM version |
 | [`dam:update`](#damupdate) | Runs the post-upgrade migration with a backup |
 | [`dam:update:restore`](#damupdaterestore) | Restores from a backup taken by `dam:update` |
@@ -45,7 +46,7 @@ The command is idempotent: running it again will not duplicate the demo content.
 |---|---|
 | `--force` | Wipes existing assets and re-seeds from scratch. |
 
-> [!DANGER]
+> [!CAUTION]
 > `--force` deletes **all** assets under `assets/Root/` — not just the demo ones. On a library with real content this destroys your assets. The command asks for explicit confirmation (defaulting to **No**) before it proceeds. Never run it on production.
 
 ---
@@ -79,6 +80,22 @@ Use `--sync` if you have no queue worker available — but be aware it will bloc
 
 ---
 
+## `dam:cleanup-orphaned-asset-mappings`
+
+Removes product and category asset links that still point at an attribute or category field that was deleted. These leftover links block the linked assets from being deleted.
+
+```bash
+php artisan dam:cleanup-orphaned-asset-mappings
+```
+
+| Option | Effect |
+|---|---|
+| `--sync` | Runs the cleanup immediately, in-process, instead of queueing it. |
+
+Without `--sync` the cleanup is queued, so a queue worker must be running.
+
+---
+
 ## `dam:version`
 
 Prints the installed DAM version.
@@ -100,7 +117,7 @@ php artisan dam:update
 It performs the following, in order:
 
 1. Counts the rows in every DAM table, to compare against later.
-2. **Backs up** the DAM database tables and asset files to `storage/dam-backups/<timestamp>`.
+2. **Backs up** the DAM database tables and asset files to `storage/dam-backups/<timestamp>` (for example `2026-07-13_10-45-00`).
 3. Runs the new migrations.
 4. Publishes updated assets.
 5. Clears caches.
@@ -113,6 +130,9 @@ It performs the following, in order:
 
 > [!WARNING]
 > Do not use `--skip-backup` unless you have your own database and file backup. The backup is what makes the upgrade reversible.
+
+> [!NOTE]
+> The backup runs `mysqldump` (MySQL/MariaDB) or `pg_dump` (PostgreSQL) and `tar`, so these must be installed on the server where you run the command. If the dump fails, `dam:update` stops before migrating. When assets are stored on AWS S3, only the database tables are backed up — the asset files are not.
 
 ---
 
@@ -129,7 +149,7 @@ php artisan dam:update:restore
 Restore a specific one, using the folder name from `storage/dam-backups`:
 
 ```bash
-php artisan dam:update:restore 2026-07-13-104500
+php artisan dam:update:restore 2026-07-13_10-45-00
 ```
 
 It asks for confirmation, then overwrites the DAM tables and asset files with the backup's contents.
@@ -164,7 +184,7 @@ Seeds a large synthetic library so you can see how DAM behaves at scale — how 
 php artisan dam:generate-scale-data
 ```
 
-> [!DANGER]
+> [!CAUTION]
 > This is a **development and testing tool**. It writes an enormous amount of data directly into your DAM tables. Never run it against production, or against any database whose contents you care about. Start with `--dry-run`.
 
 ### Options

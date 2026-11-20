@@ -15,7 +15,7 @@ DAM **3.0** is the release that moves the module onto **UnoPim v3.0**, and it is
 |---|---|---|
 | **UnoPim** | v2.1.x | v3.0.x |
 | **PHP** | 8.3 | 8.4.1+ |
-| **DAM** | 2.x | 3.0.1 |
+| **DAM** | 2.x | 3.x (latest) |
 
 The sequence:
 
@@ -27,7 +27,7 @@ The sequence:
 Check where you landed:
 
 ```bash
-php artisan dam:version   # expect 3.0.1
+php artisan dam:version   # expect 3.x
 ```
 
 ### What changes for you in 3.0
@@ -47,6 +47,7 @@ Nothing in your library moves — directories, assets, permissions, shares, and 
 - Take your own database backup. The upgrade takes one too, but a second copy costs nothing.
 - Put the site in maintenance mode if you cannot tolerate a brief interruption.
 - Make sure `php`, `curl`, and `unzip` are available on the server — the script requires all three.
+- Make sure `mysqldump` (MySQL/MariaDB) or `pg_dump` (PostgreSQL) and `tar` are available — `dam:update` uses them for its backup and stops before migrating if the dump fails.
 
 ---
 
@@ -96,10 +97,10 @@ php artisan dam:update:restore
 To roll back to one:
 
 ```bash
-php artisan dam:update:restore 2026-07-13-104500
+php artisan dam:update:restore 2026-07-13_10-45-00
 ```
 
-Backups live in `storage/dam-backups/<timestamp>` and contain both the DAM database tables and the asset files.
+Backups live in `storage/dam-backups/<timestamp>` and contain the DAM database tables and, for local storage, the asset files. When assets are stored on AWS S3, the asset files are not included in the backup.
 
 ---
 

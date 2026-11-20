@@ -122,11 +122,16 @@ post_max_size = 256M
 
 ## Blocked File Types
 
-For security, DAM refuses to store files that could be executed by the server or run script in your browser. There is **no allowlist** — anything not on the blocklist below is accepted (images, PDF, CSV, XLSX, DOCX, audio, video, and so on).
+For security, DAM refuses to store files that could be executed by the server or run script in your browser. There is **no allowlist** — anything not blocked below is accepted (images, PDF, CSV, XLSX, DOCX, audio, video, and so on).
 
 **Blocked extensions:**
 
-`php`, `phtml`, `phar`, `js`, `py`, `sh`, `bat`, `pl`, `cgi`, `asp`, `aspx`, `jsp`, `exe`, `rb`, `jar`, `html`, `htm`, `xhtml`, `shtml`, `hta`
+- Server scripts: `php`, `php3`–`php8`, `phps`, `pht`, `phtm`, `phtml`, `phar`, `inc`, `py`, `pl`, `cgi`, `rb`, `asp`, `aspx`, `asa`, `asax`, `ascx`, `ashx`, `asmx`, `cfm`, `cfml`, `jsp`, `jspx`, `jspf`
+- Scripts and executables: `js`, `mjs`, `cjs`, `sh`, `bash`, `bat`, `cmd`, `ps1`, `psm1`, `vbs`, `vbe`, `wsf`, `wsh`, `jse`, `reg`, `lnk`, `exe`, `msi`, `com`, `scr`, `dll`, `so`, `dylib`, `jar`, `war`
+- Web pages: `html`, `htm`, `xhtml`, `shtml`, `hta`
+- Archives: `zip`, `rar`, `7z`, `tar`, `gz`, `tgz`, `bz2`, `xz`, `iso`, `dmg`, `cab`, `svgz`
+
+A file is also rejected when its detected content type is one of these kinds, when its content does not match its extension (for example a script renamed to `.jpg`), or when a PDF, SVG, CSV, RTF, or Office document contains active content such as scripts or macros.
 
 **Blocked operating-system junk files:**
 

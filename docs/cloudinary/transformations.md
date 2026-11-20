@@ -112,14 +112,15 @@ The Cloudinary Connector integrates deeply into UnoPim's core media subsystem to
   - `large_image_url`
   - `original_image_url`
 - Each variant dynamically receives the Cloudinary CDN URL equipped with your active transformation string (`f_auto,q_auto,g_auto,c_fill,w_800,h_800`).
+- The transformation string is added when the URL is generated, not stored. Saving new settings changes the URLs of all already-uploaded images immediately, with no re-upload.
 
 ---
 
-### Cache Busting with Asset Versioning (`_cb=v...`)
+### Cache Busting with Asset Versioning (`_cb=...`)
 
 When a product image is updated or re-uploaded with the same filename:
 - The connector retrieves the asset version assigned by Cloudinary.
-- Appends a cache-busting query parameter (e.g., `?_cb=v1712345678`) to the delivery URL.
+- Appends a cache-busting query parameter (e.g., `?_cb=1712345678`) to the delivery URL.
 - This ensures web browsers and CDN edge caches immediately display the newly uploaded asset without waiting for HTTP cache expiration.
 
 ---
@@ -131,6 +132,9 @@ When exporting catalog data from UnoPim to downstream ecommerce channels:
 - **Full Catalog Exports**: The connector's `ProductExporter` intercepts media columns (`image`, `gallery`, `file`, and DAM `asset` types) during standard export jobs.
 - **Quick Export from DataGrid**: When performing quick exports directly from the Product DataGrid, `ProductDataGrid` automatically replaces local file paths with active Cloudinary URLs.
 - **Omnichannel Compatibility**: Channels such as Shopify, Magento 2, WooCommerce, and BigCommerce receive direct, publicly accessible CDN links without requiring manual file uploads.
+
+> [!NOTE]
+> Exports and quick exports use the stored Cloudinary URL as uploaded. The transformation settings on this page and the `_cb` cache buster are not added to exported URLs; they apply only to images shown through UnoPim's `ProductImage` service.
 
 ---
 
@@ -161,10 +165,10 @@ The table below illustrates how the connector constructs dynamic Cloudinary URLs
 
 | Active Settings | Generated Delivery URL Pattern |
 |---|---|
-| **Default Optimization Only** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,g_auto/v1/unopim/products/item.jpg?_cb=v1` |
-| **Optimization + Square Crop (800x800)** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,g_auto,c_fill,w_800,h_800/v1/unopim/products/item.jpg?_cb=v1` |
-| **Proportional Bounding Box (1200x900)** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,c_fit,w_1200,h_900/v1/unopim/products/item.jpg?_cb=v1` |
-| **Padded Canvas with Transparent Border** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,c_pad,w_1000,h_1000/v1/unopim/products/item.jpg?_cb=v1` |
+| **Default Optimization Only** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,g_auto/v1712345678/unopim/products/item.jpg?_cb=1712345678` |
+| **Optimization + Square Crop (800x800)** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,g_auto,c_fill,w_800,h_800/v1712345678/unopim/products/item.jpg?_cb=1712345678` |
+| **Proportional Bounding Box (1200x900)** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,c_fit,w_1200,h_900/v1712345678/unopim/products/item.jpg?_cb=1712345678` |
+| **Padded Canvas with Transparent Border** | `https://res.cloudinary.com/<cloud>/image/upload/f_auto,q_auto,c_pad,w_1000,h_1000/v1712345678/unopim/products/item.jpg?_cb=1712345678` |
 
 ---
 
