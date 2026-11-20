@@ -89,6 +89,21 @@ If your queue is managed by a process manager like **Supervisor**, restart it af
 sudo service supervisor restart
 ```
 
+## Optional Configuration
+
+The connector reads these optional `.env` values (defaults shown):
+
+| Variable | Default | What it does |
+|---|---|---|
+| `ERPNEXT_RETRY_MAX_ATTEMPTS` | `3` | How many times an ERPNext API call is tried before it fails. |
+| `ERPNEXT_RETRY_BASE_DELAY_MS` | `1000` | Base delay in milliseconds between retries. |
+| `ERPNEXT_API_PAGE_SIZE` | `100` | Records fetched per ERPNext API page during imports. |
+| `ERPNEXT_DEFAULT_ITEM_GROUP` | `All Item Groups` | Name of the ERPNext root Item Group. Also used as the Item Group for products whose first category has not been exported yet, or that have no category. Must exist in ERPNext. |
+| `ERPNEXT_DEFAULT_STOCK_UOM` | `Nos` | Stock UOM set on exported Items. Must exist in ERPNext. |
+
+> [!NOTE]
+> After changing any of these values, run `php artisan optimize:clear` and then `php artisan queue:restart`. Running queue workers keep the old values until they restart.
+
 ## Verify the Installation
 
 Once all commands have run successfully, log in to your UnoPim dashboard. You should see an **ERPNext** entry in the left sidebar - this confirms the connector has been installed correctly.

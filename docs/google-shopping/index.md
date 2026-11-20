@@ -52,7 +52,7 @@ Available on the [Webkul Store](https://store.webkul.com/unopim-google-shopping-
 - **AI category mapping** - a queued AI job proposes Google taxonomy matches for your UnoPim categories, which the author reviews and confirms.
 - **Image handling** - product images are resolved (including from the DAM) and converted to Google-accepted formats before being sent.
 - **OAuth 2.0 with offline access** - each connection authorizes through Google's consent screen; access tokens auto-refresh ahead of expiry with a one-shot 401 retry.
-- **Wizard export** - run filtered exports through UnoPim's Data Transfer pipeline (connection, channel, locale, currency, status, completeness, category, family, SKU, time condition).
+- **Wizard export** - run filtered exports through UnoPim's Data Transfer pipeline (connection, channel, locale, currency, status, category, family, SKU, time condition).
 - **Quick Export** - a per-connection one-click button that exports with sensible defaults, no wizard.
 - **Encrypted, audit-safe credentials** - secrets are stored with Laravel's `encrypted` cast and excluded from history audit rows.
 
@@ -69,7 +69,7 @@ A single admin user can hold both roles, depending on the ACL permissions assign
 
 - UnoPim v3.1.3 or higher
 - PHP 8.4+, Laravel 13.x
-- A **Google Merchant Center** account with API access
+- A **Google Merchant Center** account with API access, a verified and claimed homepage, and (for Merchant API) the Cloud project registered with the account - see [Google Prerequisites](./prerequisites#merchant-api-requirements)
 - A **Google Cloud OAuth client** (Client ID + Secret) with the `content` scope and a configured redirect URI
 
 ## In this guide
@@ -80,3 +80,7 @@ A single admin user can hold both roles, depending on the ACL permissions assign
 - [Create & Authorize a Connection](./connection-setup)
 - [Required Settings](./required-settings), [Attribute Mapping](./attribute-mapping), [Category Mapping](./category-mapping)
 - [Wizard Export](./wizard-export), [Quick Export](./quick-export)
+
+## REST API
+
+The connector also exposes REST endpoints under `/api/v1/rest/google-shopping` (connections, per-connection attribute mapping, category mapping and required settings, exports, sync status, option lists and taxonomy search). They use UnoPim's API authentication and are guarded by the **Google Shopping** permissions of the API integration's role. A Postman collection (`google-shopping-api.postman_collection.json`) ships with the package.

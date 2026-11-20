@@ -13,6 +13,7 @@ The dashboard shows:
 - **File Size** — size of the currently live feed file.
 - **Last Run** — timestamp of the last generation attempt (success or failure).
 - **Recent Generation History** — the last 5 generation runs with status, rows exported, duration, file size, and trigger source.
+- **Public Feed URL** — with **Copy URL**, **Open** (the public link OpenAI reads) and **Download** (saves the file through the admin panel).
 
 The status updates automatically via polling — you can watch a generation in progress without refreshing the page.
 
@@ -23,6 +24,12 @@ The status updates automatically via polling — you can watch a generation in p
 ### Manual generation
 
 Click **Generate Now** on the dashboard. The job is dispatched to the queue and the history table updates in real time as it runs.
+
+Only one generation runs at a time: **Generate Now** is refused while a run started in the last 35 minutes is still running.
+
+### Stopping a generation
+
+Click **Stop** on the dashboard to end a running or queued generation. The run is marked as failed with a "stopped" message, the half-written file is discarded and the last good feed is kept. A running job stops at the next batch boundary. Requires the **Generate Feed** permission.
 
 > [!NOTE]
 > Make sure a queue worker is running before triggering a manual generation (see [Installation → Step 6](./installation#step-6-start-the-queue-worker)). If the queue driver is set to `sync`, the generation runs inline and may time out on large catalogs.
@@ -37,7 +44,7 @@ The extension registers a scheduled task automatically. To enable it, add the fo
 * * * * * cd /path-to-your-unopim && php artisan schedule:run >> /dev/null 2>&1
 ```
 
-The scheduler runs every minute and triggers feed regeneration at the interval you configured in **Configuration → Cron Interval**. The cron task uses `withoutOverlapping()` so a slow generation on a large catalog will never trigger a second run before the first finishes.
+The extension's task is checked hourly and regenerates the feed when the last successful generation is older than the interval configured in **Feed Settings → Auto-Update Interval (Hours)**. The task is only registered while **Feed Enabled** is on. The cron task uses `withoutOverlapping()` so a slow generation on a large catalog will never trigger a second run before the first finishes.
 
 ---
 
@@ -57,6 +64,9 @@ php artisan openai-feed:generate --dry-run
 
 # Generate and print the public feed URL
 php artisan openai-feed:generate --show-url
+
+# Record the run with a different trigger source
+php artisan openai-feed:generate --source=api
 ```
 
 | Option | Description |
@@ -64,7 +74,10 @@ php artisan openai-feed:generate --show-url
 | *(none)* | Runs feed generation synchronously in the terminal. |
 | `--queue` | Dispatches the generation job to the queue and returns immediately. |
 | `--dry-run` | Prints a 5-row preview table without writing the feed file. Useful for verifying attribute mapping before a full run. |
-| `--show-url` | After generation, prints the full public feed URL with your security token. |
+| `--show-url` | After an inline generation, prints the full public feed URL with your security token. Ignored with `--queue` and `--dry-run`. |
+| `--source=` | Trigger source recorded in the generation history: `manual` (default), `cron` or `api`. |
+
+If the feed is disabled, the command prints a warning and exits without generating.
 
 ---
 
@@ -79,7 +92,7 @@ The preview datagrid shows each product row with its mapped values — Item ID, 
 Use the preview to verify your attribute mapping is correct before submitting the feed URL to ChatGPT.
 
 > [!TIP]
-> If products are missing from the preview, check **Configuration → Product Filters**. Products with no price in any selected currency are silently excluded, as are disabled products when **Only Enabled Products** is turned on.
+> If products are missing from the preview, check **Configuration → Product Filters**. Products with no price (or a zero price) in any selected currency are silently excluded, as are disabled products when **Only Enabled Products** is turned on.
 
 ---
 
@@ -96,6 +109,8 @@ Navigate to **Admin Panel → OpenAI Feed → General → View All** to see the 
 | **Duration** | Steady growth over time = catalog is growing. A spike = database slowdown. |
 | **File Size** | Useful to confirm the feed file was not truncated. |
 | **Triggered By** | `manual`, `cron`, or `api`. |
+
+A failed SFTP upload is shown as a failed run even though the local feed file was written.
 
 ---
 
@@ -117,7 +132,7 @@ Once the feed has been generated successfully:
 4. ChatGPT will fetch and index your products. Indexing may take some time after the initial submission.
 
 > [!NOTE]
-> The token in the URL is the same token shown in **Configuration → Feed Security Token**. If you regenerate the token in settings, update the URL in the ChatGPT Merchant Portal immediately — the old URL will stop working.
+> The token in the URL is the same token shown in **Feed Settings → Feed Security Token**. If you regenerate the token in settings, update the URL in the ChatGPT Merchant Portal immediately — the old URL will stop working.
 
 ---
 
@@ -129,23 +144,31 @@ A lightweight status endpoint is available for uptime monitoring or integration 
 GET /openai-feed/status
 ```
 
-Returns JSON with the feed's enabled state, last generation time, file size, format, channel, and locale. No token is required.
+Returns JSON with the feed's enabled state, last generation time, file size, format, channel, and locale. When a feed token is set, this endpoint requires the same token as the feed URL.
+
+Both `/openai-feed/products` and `/openai-feed/status` accept the token either as `?token=<token>` or as an `Authorization: Bearer <token>` header. The header keeps the token out of web server and proxy access logs. Both endpoints are rate-limited to 120 requests per minute.
 
 ---
 
 ## Troubleshooting
 
 **Generate Now button does nothing / generation stays in "Running" indefinitely**
-Check that a queue worker is running: `php artisan queue:work --queue=system,completeness,default`. Check the Laravel log at `storage/logs/laravel.log` for job errors.
+Check that a queue worker is running: `php artisan queue:work --queue=system,completeness,default`. Check the Laravel log at `storage/logs/laravel.log` for job errors. Use **Stop** to clear a run that is stuck in "Running".
+
+**Generation runs twice or restarts on large catalogs**
+The job allows up to 30 minutes and retries 3 times on failure. The queue connection's `retry_after` (`DB_QUEUE_RETRY_AFTER` / `REDIS_QUEUE_RETRY_AFTER`, default 90 seconds) must be longer than the generation time, otherwise the worker starts the same job again while it is still running. After changing it, run `php artisan config:cache` (if config is cached) and `php artisan queue:restart`.
 
 **Feed URL returns 403**
-The feed is either disabled in settings, or the token in the URL does not match the one saved in **Configuration → Feed Security Token**.
+The token in the URL does not match the one saved in **Feed Settings → Feed Security Token**.
+
+**Feed URL returns 404 or 503**
+404: the feed is disabled in settings. 503: the feed is enabled but no file has been generated yet.
 
 **Products are missing from the feed or preview**
-Check **Configuration → Product Filters**: disabled products are excluded when *Only Enabled Products* is on; products without a price in any selected currency are always excluded; the *Product Limit* may be cutting the catalog short.
+Check **Feed Settings → Product Filters**: disabled products are excluded when *Only Enabled Products* is on; products without a price in any selected currency are always excluded; the *Product Limit* may be cutting the catalog short.
 
 **Attribute values are empty in the preview**
-Open **Configuration → Attribute Mapping** and confirm each field points to an attribute that has data for your products. Use the **dry-run** CLI option to inspect a small sample without generating the full file.
+Open **Feed Settings → Attribute Mapping** and confirm each field points to an attribute that has data for your products. Use the **dry-run** CLI option to inspect a small sample without generating the full file.
 
 **Memory errors during generation on large catalogs**
-Lower the **Batch Size** in **Configuration → Performance & Schedule**. Try 100–200 for catalogs over 50,000 SKUs, and make sure the job runs via `--queue` with a worker that has a sufficient `--memory` limit.
+Lower the **Batch Size** in **Feed Settings → Performance & Schedule**. Try 100–200 for catalogs over 50,000 SKUs, and make sure the job runs via `--queue` with a worker that has a sufficient `--memory` limit.

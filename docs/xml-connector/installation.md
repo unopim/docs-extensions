@@ -50,6 +50,9 @@ php artisan migrate
 
 This creates the `template_configuration` table that stores all mapping templates.
 
+> [!TIP]
+> `php artisan xml-connector:install` runs `migrate`, publishes the prebuilt admin assets (`vendor:publish --tag=xml-connector-package --force`) to `public/themes/xml-connector/build`, and runs `optimize:clear` in one step. If you use it, you can skip the migrate, build and cache steps below. Build the assets with npm only if you change them.
+
 **Build the frontend assets**
 ```bash
 cd packages/Webkul/XmlConnector
@@ -81,6 +84,6 @@ php artisan queue:restart
 
 ## Verify the Installation
 
-Once all commands have completed, log in to your UnoPim dashboard. You should see an **XML Connector** entry in the left sidebar with a **Mapping Templates** sub-link - this confirms the connector is installed and ready to use.
+Once all commands have completed, log in to your UnoPim dashboard. You should see an **XML** entry in the left sidebar with a **Mapping Templates** sub-link - this confirms the connector is installed and ready to use.
 
 If it doesn't appear, run `php artisan optimize:clear` again and refresh the page.

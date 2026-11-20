@@ -23,3 +23,23 @@ Have the following ready from the Google side before creating a connection in Un
 - An **OAuth 2.0 Client** (*Web application*) - note the **Client ID** and **Client Secret**.
 - An authorized **redirect URI** on that client matching the connector callback: `https://<your-unopim-host>/<admin-url>/google-shopping/oauth/callback` (`<admin-url>` is your `app.admin_url`, e.g. `admin`).
 - The **content** scope (`https://www.googleapis.com/auth/content`) allowed on the client - the connector requests it during authorization.
+
+> [!WARNING]
+> The redirect URI must match exactly what UnoPim sends - scheme, host, port and admin path. UnoPim builds it from the URL you open the admin panel with. If you reach UnoPim over `https` but a proxy forwards it as `http`, Google rejects the login with `redirect_uri_mismatch`.
+
+## Merchant API requirements
+
+The connector uses **Merchant API v1** by default (see [Package Configuration](./package-configuration#environment-variables)). Merchant API needs two extra one-off steps on the Google side. The connector does not do them for you:
+
+1. **Verify and claim your homepage** in Merchant Center. The site must be public over HTTPS (not `localhost` or a private IP) and not claimed by another Merchant Center account. Without it, products are disapproved and step 2 fails with `400 FAILED_PRECONDITION ... has an unverified homepage`.
+2. **Register the Cloud project with the Merchant Center account.** Until this is done, every API call fails with `401 UNAUTHENTICATED - GCP project ... is not registered with the merchant account`. Most accounts have no button for this; call the API once with the access token of a connection you have authenticated in UnoPim:
+
+```bash
+curl -X POST \
+  "https://merchantapi.googleapis.com/accounts/v1/accounts/<MERCHANT_ID>/developerRegistration:registerGcp" \
+  -H "Authorization: Bearer <ACCESS_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"developerEmail": "<ADMIN_EMAIL>"}'
+```
+
+The Google account must be an **Admin** on the merchant account. Wait about 5 minutes after a successful call before running an export.

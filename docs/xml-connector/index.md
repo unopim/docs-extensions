@@ -47,7 +47,7 @@ The XML file is uploaded during the import job itself, not stored on the templat
 - **Mass actions** - mass activate/deactivate and mass delete templates from the listing grid.
 - **Error report** - failed rows are collected into a downloadable XLSX report with a per-row error message.
 - **Change history** - full audit trail of template mapping changes.
-- **Role-based access control** - granular permissions for create, edit, update, rename, delete, mass update, mass delete, and toggle status.
+- **Role-based access control** - under **XML → Mapping Templates** on the Roles screen: **Create**, **Edit**, **Update**, **Update Template Name**, **Delete**, **Mass Update**, **Mass Delete**, and **Toggle Status**.
 
 ## Requirements
 

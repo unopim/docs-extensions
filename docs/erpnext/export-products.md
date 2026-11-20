@@ -13,7 +13,7 @@ The job type is listed as **ERPNext: Products → Item**.
 Before exporting products, complete the following:
 
 1. [Set up your ERPNext credentials](./setup-credentials.md).
-2. Configure [Attribute Mapping](./attribute-mapping.md) so product data lands in the right ERPNext Item fields.
+2. Configure [Attribute Mapping](./attribute-mapping.md) so product data lands in the right ERPNext Item fields. The job fails if no attribute mapping is saved.
 3. (Recommended) Run the [Export Attributes](./export-attributes.md) and [Export Categories](./export-categories.md) jobs first, so variant attributes and Item Groups already exist in ERPNext.
 
 ## How to Export Products
@@ -40,15 +40,15 @@ The product export gives you fine-grained control over what gets exported:
 
 | Filter | What it does |
 | --- | --- |
-| **ERPNext Credential** | Select which ERPNext site to export to. *(required)* |
+| **Credential** | Select which ERPNext site to export to. *(required)* |
 | **Channel** | Export products from a specific channel. *(required)* |
 | **Locale** | Export product data in a specific language. *(required)* |
 | **Currency** | Currency used for exported pricing. *(required)* |
-| **Product Filter (SKU)** | Optional. Export only specific products by entering their SKUs. Leave blank to export the full catalog. |
+| **Product Filter (SKU)** | Optional. Export only specific products by entering their SKUs, separated by commas (e.g. `SKU-1,SKU-2`). Leave blank to export the full catalog. |
 
 #### Targeted export by SKU
 
-To export only a few products, enter their **SKUs** in the **Product Filter (SKU)** field. This is useful for pushing a single new product or a small batch of updates without running a full catalog export.
+To export only a few products, enter their **SKUs**, separated by commas, in the **Product Filter (SKU)** field. SKUs that do not exist are ignored; the job log shows how many SKUs were entered and how many matched. This is useful for pushing a single new product or a small batch of updates without running a full catalog export.
 
 ### Step 6: Save
 
@@ -73,4 +73,4 @@ Make sure the relevant variant attributes have been exported first (see [Export 
 
 ## Re-running an Export
 
-You can re-run a product export at any time to push the latest changes. Sync mappings keep each product's identity across runs, so re-syncs **update** existing ERPNext Items instead of creating duplicates. On conflicting updates, the connector uses a **last-write-wins** rule based on the `modified` timestamps on each side.
+You can re-run a product export at any time to push the latest changes. Sync mappings keep each product's identity across runs, so re-syncs **update** existing ERPNext Items instead of creating duplicates. Products that have not changed in UnoPim since the last sync, and whose mapped data is the same, are skipped. Changed products overwrite the mapped fields on the ERPNext Item, even if the Item was edited in ERPNext in the meantime.

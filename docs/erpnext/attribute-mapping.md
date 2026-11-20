@@ -20,6 +20,9 @@ The attribute mapping screen has three columns:
 
 A **required** ERPNext field is satisfied when **either** an attribute is mapped **or** a fixed value is provided - the two are interchangeable sources for the same field. Required fields are listed first on the screen.
 
+> [!WARNING]
+> **Item Code** and **Item Name** must be mapped to an attribute. A fixed value is ignored for these two fields, because every Item needs its own code and name.
+
 ## Mappable Item fields
 
 The following ERPNext Item fields can be mapped to UnoPim attributes out of the box:
@@ -38,12 +41,13 @@ The following ERPNext Item fields can be mapped to UnoPim attributes out of the 
 | **Is Stock Item** | Boolean | | Whether stock is tracked for this item. |
 | **Is Sales Item** | Boolean | | Eligible to appear on Sales Orders / Invoices. |
 | **Is Purchase Item** | Boolean | | Eligible to appear on Purchase Orders / Invoices. |
-| **Has Variants** | Boolean | | True if this is a template with variants. |
 | **Minimum Order Qty** | Number | | Smallest quantity that can be ordered. |
 | **Safety Stock** | Number | | Minimum stock kept on hand. |
 | **Lead Time (days)** | Number | | Days needed to procure / produce. |
 | **Shelf Life (days)** | Number | | Days before expiry for perishable items. |
 | **Country of Origin** | Text, Select | | Country of origin code (ISO). |
+
+> **Note:** **Has Variants** is not mappable. It is set automatically for configurable products (see [Export Products](./export-products.md#exporting-products-with-variations)).
 
 > **Note:** The **Item Group** is normally resolved from the product's first category via the category sync mappings - you don't map it here. A fallback Item Group (`All Item Groups` by default) is used when no category is set.
 
@@ -63,5 +67,8 @@ For each ERPNext Item field you want to export:
 
 ### Step 3 - Save the mapping
 
-Click **Save Mapping** to store your configuration. New product exports will use this mapping.
+Click **Save** to store your configuration. New product exports will use this mapping.
+
+> [!NOTE]
+> A product export fails with an error if no attribute mapping has been saved.
 

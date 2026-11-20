@@ -28,10 +28,10 @@ Attach a `.xlsx`, `.xls`, or `.csv` file whose headers match the selected templa
 
 ## Step 4 - Save and run
 
-Save the job, then click **Run**. The job is dispatched to the queue:
+Save the job, then click **Import Now**. The job is dispatched to the queue:
 
 ```
-Operator clicks Run
+Operator clicks Import Now
         ↓
 Job dispatched to the queue
         ↓

@@ -10,12 +10,14 @@ Open **Google Shopping → Connections**, edit a connection and open its **Attri
 
 For each Google field you want to send:
 
-- **Pick one or more UnoPim attributes.** For a single-value field, several attributes form a **fallback chain** - the first one that has a value wins, so you can map a preferred attribute and a backup.
-- **Or use a static value** - toggle it on and enter a constant that is sent for every product (for example `condition = new` or `identifierExists = yes`).
+- **Pick a UnoPim attribute.** Only **Image Links**, **Additional Image Links** and **Color** accept more than one attribute; every other field takes one.
+- **Or enter a static value** - type a constant in the value column and it is sent for every product (for example `condition = new` or `identifierExists = yes`). While a static value is filled in, the attribute picker for that field is disabled.
 
 Leave a field unmapped to omit it from the feed. Values are coerced to the shape Google expects automatically - prices become `Money` objects, weights and dimensions become `{value, unit}`, booleans are normalised, and image URLs are made absolute.
 
-Click **Save**. Saving merges with the existing rules, so a field you do not touch keeps its current mapping.
+The **Currency** select on this tab sets the currency used by [Quick Export](./quick-export). Leave it empty to use the channel's currency.
+
+Click **Save**. Saving merges with the existing rules, so a field you do not touch keeps its current mapping. The mapping is read when an export runs, so changes apply to the next export only.
 
 ## Images
 

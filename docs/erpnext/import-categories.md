@@ -34,7 +34,7 @@ Select **ERPNext: Item Group → Categories** as the import type.
 
 ### Step 5: Choose the Credential
 
-In the job settings, select the **ERPNext Credential** to import from. *(required)*
+In the job settings, select the **Credential** to import from. *(required)*
 
 ### Step 6: Save Import
 

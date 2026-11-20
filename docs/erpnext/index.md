@@ -52,17 +52,40 @@ Every export and import is a tracked Data Transfer job. The **Job Tracker** surf
 
 ### Conflict Resolution
 
-- **Last-write-wins** - local and remote `modified` timestamps decide which side wins on conflicting updates.
+- **Skip unchanged records** - a product export skips an Item when the UnoPim product has not changed since its last sync; a product import skips an Item when its ERPNext `modified` timestamp has not changed since the last import.
+- There is no two-way merge. When a record changed on both sides, the job you run wins: an export overwrites the mapped ERPNext fields, an import overwrites the UnoPim values.
 - Sync mappings persist identity across runs, so re-syncs update existing records instead of creating duplicates.
 
 ## Requirements
 
 | Requirement | Version |
 |---|---|
-| **UnoPim** | Version 2.1.0 or later |
+| **UnoPim** | 3.x (3.0.0 or later) |
+| **PHP** | 8.4.1 or later |
 | **ERPNext / Frappe** | Any instance reachable over HTTPS with API access |
 
 > **Please Note:**
 > - The connector authenticates with ERPNext using an **API Key** and **API Secret** (token-based auth).
 > - Brand sync requires a UnoPim **select / multiselect** attribute chosen in Brand Mapping.
 > - The `HSN/SAC Code` (`gst_hsn_code`) field is mandatory on India-localized ERPNext instances and is a required field in attribute mapping.
+
+## REST API
+
+The connector also registers REST endpoints under `/api/erpnext`, authenticated with a UnoPim API (OAuth) access token:
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET`, `POST` | `/api/erpnext/credentials` | List or create credentials. |
+| `GET`, `PUT`, `DELETE` | `/api/erpnext/credentials/{id}` | Show, update, or delete a credential. |
+| `POST` | `/api/erpnext/credentials/{id}/test` | Test the connection. |
+| `GET`, `POST` | `/api/erpnext/attribute-mappings` | List or create attribute mappings. |
+| `PUT`, `DELETE` | `/api/erpnext/attribute-mappings/{id}` | Update or delete an attribute mapping. |
+| `GET`, `POST` | `/api/erpnext/custom-attribute-mappings` | List or create custom attribute mappings. |
+| `DELETE` | `/api/erpnext/custom-attribute-mappings/{id}` | Delete a custom attribute mapping. |
+| `GET`, `POST` | `/api/erpnext/brand-mappings` | List or create brand mappings. |
+| `PUT`, `DELETE` | `/api/erpnext/brand-mappings/{id}` | Update or delete a brand mapping. |
+| `POST` | `/api/erpnext/sync/{entity}` | Start an export job. `{entity}` is `categories`, `attributes`, `brands`, or `products`. |
+| `POST` | `/api/erpnext/import/{entity}` | Start an import job for the same entities. |
+| `GET` | `/api/erpnext/jobs/{jobId}` | Job status. |
+| `GET` | `/api/erpnext/sync/products/{sku}/status` | Sync status of one product. |
+| `GET` | `/api/erpnext/logs/products` | Product sync logs. |

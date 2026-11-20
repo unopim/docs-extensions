@@ -41,9 +41,10 @@ In the job settings, configure the following:
 
 | Setting | What it does |
 | --- | --- |
-| **ERPNext Credential** | Select which ERPNext site to import from. *(required)* |
-| **Channel** | The UnoPim channel imported product data is assigned to. |
-| **Locale** | The language / locale imported product data is stored under. |
+| **Credential** | Select which ERPNext site to import from. *(required)* |
+| **Channel** | The UnoPim channel imported product data is assigned to. Defaults to the default channel. |
+| **Locale** | The language / locale imported product data is stored under. Defaults to the default channel's default locale. |
+| **Currency** | The currency imported prices are stored under. Defaults to the base currency. |
 
 ### Step 6: Save Import
 
@@ -59,4 +60,4 @@ Track the job in the **Job Tracker**. Live **Created / Updated / Skipped** count
 
 ## Re-running an Import
 
-You can re-run a product import at any time. Sync mappings keep each product's identity across runs, so re-syncs **update** existing UnoPim products instead of creating duplicates. On conflicting updates, the connector uses a **last-write-wins** rule based on the `modified` timestamps on each side.
+You can re-run a product import at any time. Sync mappings keep each product's identity across runs, so re-syncs **update** existing UnoPim products instead of creating duplicates. Items whose ERPNext `modified` timestamp has not changed since the last import are skipped. Changed Items overwrite the imported values in UnoPim, even if the product was edited in UnoPim in the meantime.
