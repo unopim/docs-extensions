@@ -80,3 +80,7 @@ In `.github/workflows/deploy.yml`, add a step to checkout the module repo and co
 ### 5. Verify and open a PR
 
 Run `npm run docs:dev` (confirm the route loads) and `npm run docs:build` (no errors), then submit a PR with the placeholder, `config.ts` change, and workflow change.
+
+## License
+
+The UnoPim extensions documentation is open-source software licensed under the [MIT License](LICENSE).
